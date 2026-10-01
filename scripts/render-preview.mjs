@@ -6,7 +6,7 @@ await fs.mkdir("preview", { recursive: true });
 const browser = await chromium.launch({ headless: true });
 
 async function capture(name, viewport) {
-  const page = await browser.newPage({ viewportSize: viewport });
+  const page = await browser.newPage({ viewport });
   await page.goto("http://127.0.0.1:4173", { waitUntil: "networkidle", timeout: 120000 });
   await page.waitForTimeout(2500);
   await page.screenshot({
