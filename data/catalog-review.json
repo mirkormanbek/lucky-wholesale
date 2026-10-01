@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-10-01T19:23:11.081Z",
+  "generatedAt": "2026-10-01T19:26:20.645Z",
   "summary": {
-    "generatedAt": "2026-10-01T19:23:11.081Z",
+    "generatedAt": "2026-10-01T19:26:20.645Z",
     "wbCardsIncluded": 289,
     "wbCardsHidden": 0,
     "manualProducts": 0,
@@ -10,23 +10,11 @@
     "productsWithColors": 287,
     "productsWithPrice": 0,
     "productsWithoutPrice": 289,
-    "categoryReviewCount": 1,
+    "categoryReviewCount": 0,
     "duplicateCandidateGroups": 59,
     "fxEffectiveDate": "02.10.2026"
   },
-  "needsCategoryReview": [
-    {
-      "id": "wb-274837992",
-      "sourceNmIDs": [
-        274837992
-      ],
-      "title": "Комплект защиты для скейтборда роликов и самоката",
-      "brand": "Lucky Sport",
-      "categoryIds": [
-        "protection-unclassified"
-      ]
-    }
-  ],
+  "needsCategoryReview": [],
   "duplicateCandidates": [
     {
       "fingerprint": "lucky sport|venum перчатки для бокса",
