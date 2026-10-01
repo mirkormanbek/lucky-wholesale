@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "displayMode": "from",
+  "baseCurrency": "KZT",
+  "publicCurrencies": [
+    "KZT",
+    "RUB",
+    "USD"
+  ],
+  "showApproximateSymbolForConverted": true,
+  "rounding": {
+    "KZT": {
+      "increment": 100,
+      "mode": "nearest"
+    },
+    "RUB": {
+      "increment": 10,
+      "mode": "nearest"
+    },
+    "USD": {
+      "increment": 1,
+      "mode": "nearest"
+    }
+  },
+  "publicFields": [
+    "priceFrom"
+  ],
+  "keepPriceTiersPrivate": true
+}
