@@ -1,0 +1,53 @@
+[
+  {
+    "id": "manual-boxing-gloves-pu-example",
+    "title": "Боксерские перчатки PU",
+    "brand": "Lucky Sport",
+    "categoryIds": [
+      "boxing-gloves"
+    ],
+    "article": "PU-EXAMPLE",
+    "description": "Пример структуры ручного товара. Этот файл не попадает в каталог.",
+    "colors": [
+      "Черный",
+      "Красный",
+      "Синий"
+    ],
+    "sizes": [
+      "6 oz",
+      "8 oz",
+      "10 oz",
+      "12 oz",
+      "14 oz",
+      "16 oz"
+    ],
+    "priceFromKzt": 2400,
+    "minOrderQuantity": 10,
+    "photos": [
+      "https://example.com/photo-1.webp"
+    ]
+  },
+  {
+    "id": "manual-boxing-gloves-dx-example",
+    "title": "Боксерские перчатки DX-кожа",
+    "brand": "Lucky Sport",
+    "categoryIds": [
+      "boxing-gloves"
+    ],
+    "article": "DX-EXAMPLE",
+    "colors": [
+      "Черный",
+      "Красный"
+    ],
+    "sizes": [
+      "8 oz",
+      "10 oz",
+      "12 oz",
+      "14 oz",
+      "16 oz"
+    ],
+    "priceFromKzt": 4500,
+    "minOrderQuantity": 10,
+    "photos": []
+  }
+]
