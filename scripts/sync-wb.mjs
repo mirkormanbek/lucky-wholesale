@@ -1,13 +1,12 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 
-const API_URL = "https://content-api.wildberries.ru/content/v2/get/cards/list";
+const CARDS_URL = "https://content-api.wildberries.ru/content/v2/get/cards/list";
+const SUBJECTS_URL = "https://content-api.wildberries.ru/content/v2/object/all";
 const LIMIT = 100;
-const token = process.env.WB_API_TOKEN?.trim();
 
-if (!token) {
-  throw new Error("WB_API_TOKEN is not set");
-}
+const token = process.env.WB_API_TOKEN?.trim();
+if (!token) throw new Error("WB_API_TOKEN is not set");
 
 const authHeader = token.toLowerCase().startsWith("bearer ")
   ? token
@@ -25,9 +24,7 @@ async function requestJson(url, options = {}, attempt = 0) {
     },
   });
 
-  if (response.ok) {
-    return response.json();
-  }
+  if (response.ok) return response.json();
 
   const body = await response.text();
   const retryable = response.status === 429 || response.status >= 500;
@@ -71,7 +68,7 @@ async function getAllCards() {
 
     console.log(`Loading WB cards page ${page}...`);
 
-    const data = await requestJson(API_URL, {
+    const data = await requestJson(CARDS_URL, {
       method: "POST",
       body: JSON.stringify(payload),
     });
@@ -86,9 +83,7 @@ async function getAllCards() {
       `Page ${page}: ${batch.length} cards; accumulated: ${cards.length}`
     );
 
-    if (total < LIMIT || batch.length < LIMIT) {
-      break;
-    }
+    if (total < LIMIT || batch.length < LIMIT) break;
 
     if (!nextCursor.updatedAt || !nextCursor.nmID) {
       throw new Error(
@@ -101,17 +96,14 @@ async function getAllCards() {
       nmID: nextCursor.nmID,
     };
 
-    if (
-      next.updatedAt === cursor.updatedAt &&
-      next.nmID === cursor.nmID
-    ) {
-      throw new Error("WB API cursor did not advance; stopping to avoid an infinite loop");
+    if (next.updatedAt === cursor.updatedAt && next.nmID === cursor.nmID) {
+      throw new Error(
+        "WB API cursor did not advance; stopping to avoid an infinite loop"
+      );
     }
 
     cursor = next;
     page += 1;
-
-    // Content API limit is much higher, but a small pause keeps the sync gentle.
     await sleep(700);
   }
 
@@ -123,9 +115,33 @@ async function getAllCards() {
   return [...unique.values()];
 }
 
+async function getSubjectMeta(subjectID, subjectName) {
+  if (!subjectID || !subjectName) return null;
+
+  const url =
+    `${SUBJECTS_URL}?name=${encodeURIComponent(subjectName)}&limit=1000&locale=ru`;
+
+  try {
+    const data = await requestJson(url, { method: "GET" });
+    const rows = Array.isArray(data.data) ? data.data : [];
+
+    return (
+      rows.find((row) => Number(row.subjectID) === Number(subjectID)) ||
+      rows.find((row) => row.subjectName === subjectName) ||
+      null
+    );
+  } catch (error) {
+    console.warn(
+      `Could not enrich subject ${subjectID} (${subjectName}): ${error.message}`
+    );
+    return null;
+  }
+}
+
 function firstPhoto(card) {
   const photo = Array.isArray(card.photos) ? card.photos[0] : null;
   if (!photo) return null;
+
   return (
     photo.big ||
     photo.c516x688 ||
@@ -139,19 +155,22 @@ function firstPhoto(card) {
 function csvCell(value) {
   if (value == null) return "";
   const text = String(value);
-  return /[",\n\r;]/.test(text) ? `"${text.replaceAll('"', '""')}"` : text;
+  return /[",\n\r;]/.test(text)
+    ? `"${text.replaceAll('"', '""')}"`
+    : text;
 }
 
 function toCsv(rows, columns) {
-  const lines = [
-    columns.map((column) => csvCell(column.label)).join(","),
-    ...rows.map((row) =>
-      columns.map((column) => csvCell(row[column.key])).join(",")
-    ),
-  ];
-
-  // BOM helps Excel open UTF-8 Cyrillic correctly.
-  return "\uFEFF" + lines.join("\n") + "\n";
+  return (
+    "\uFEFF" +
+    [
+      columns.map((column) => csvCell(column.label)).join(","),
+      ...rows.map((row) =>
+        columns.map((column) => csvCell(row[column.key])).join(",")
+      ),
+    ].join("\n") +
+    "\n"
+  );
 }
 
 const cards = await getAllCards();
@@ -169,7 +188,9 @@ const products = cards
     description: card.description ?? "",
     needKiz: card.needKiz ?? null,
     dimensions: card.dimensions ?? null,
-    characteristics: Array.isArray(card.characteristics) ? card.characteristics : [],
+    characteristics: Array.isArray(card.characteristics)
+      ? card.characteristics
+      : [],
     sizes: Array.isArray(card.sizes) ? card.sizes : [],
     photos: Array.isArray(card.photos) ? card.photos : [],
     firstPhoto: firstPhoto(card),
@@ -177,13 +198,15 @@ const products = cards
     createdAt: card.createdAt ?? null,
     updatedAt: card.updatedAt ?? null,
   }))
-  .sort((a, b) =>
-    (a.subjectName || "").localeCompare(b.subjectName || "", "ru") ||
-    (a.title || "").localeCompare(b.title || "", "ru") ||
-    Number(a.nmID || 0) - Number(b.nmID || 0)
+  .sort(
+    (a, b) =>
+      (a.subjectName || "").localeCompare(b.subjectName || "", "ru") ||
+      (a.title || "").localeCompare(b.title || "", "ru") ||
+      Number(a.nmID || 0) - Number(b.nmID || 0)
   );
 
 const skuRows = [];
+
 for (const product of products) {
   const sizes = Array.isArray(product.sizes) ? product.sizes : [];
 
@@ -205,7 +228,8 @@ for (const product of products) {
   }
 
   for (const size of sizes) {
-    const skus = Array.isArray(size.skus) && size.skus.length ? size.skus : [""];
+    const skus =
+      Array.isArray(size.skus) && size.skus.length > 0 ? size.skus : [""];
 
     for (const sku of skus) {
       skuRows.push({
@@ -243,7 +267,6 @@ for (const product of products) {
 
   const category = categoryMap.get(key);
   category.productCount += 1;
-
   if (product.brand) category.brands.add(product.brand);
 
   const sizes = Array.isArray(product.sizes) ? product.sizes : [];
@@ -254,27 +277,57 @@ for (const product of products) {
   }
 }
 
-const categories = [...categoryMap.values()]
-  .map((category) => ({
+const categories = [];
+
+for (const category of categoryMap.values()) {
+  const meta = await getSubjectMeta(category.subjectID, category.subjectName);
+
+  categories.push({
+    parentID: meta?.parentID ?? null,
+    parentName: meta?.parentName ?? "",
     subjectID: category.subjectID,
     subjectName: category.subjectName,
     productCount: category.productCount,
     sizeVariantCount: category.sizeVariantCount,
     skuCount: category.skuCount,
     brands: [...category.brands].sort((a, b) => a.localeCompare(b, "ru")),
-  }))
-  .sort(
-    (a, b) =>
-      b.productCount - a.productCount ||
-      a.subjectName.localeCompare(b.subjectName, "ru")
-  );
+  });
+
+  await sleep(650);
+}
+
+categories.sort(
+  (a, b) =>
+    (a.parentName || "").localeCompare(b.parentName || "", "ru") ||
+    b.productCount - a.productCount ||
+    a.subjectName.localeCompare(b.subjectName, "ru")
+);
+
+const categoryBySubject = new Map(
+  categories.map((category) => [String(category.subjectID), category])
+);
+
+for (const product of products) {
+  const category = categoryBySubject.get(String(product.subjectID));
+  product.parentID = category?.parentID ?? null;
+  product.parentName = category?.parentName ?? "";
+}
+
+for (const row of skuRows) {
+  const category = categoryBySubject.get(String(row.subjectID));
+  row.parentID = category?.parentID ?? null;
+  row.parentName = category?.parentName ?? "";
+}
 
 const actualSkuCount = skuRows.filter((row) => row.sku).length;
 
 const summary = {
   generatedAt: new Date().toISOString(),
   productCardCount: products.length,
-  categoryCount: categories.length,
+  parentCategoryCount: new Set(
+    categories.map((category) => category.parentID).filter(Boolean)
+  ).size,
+  subjectCount: categories.length,
   sizeVariantCount: products.reduce(
     (sum, product) => sum + (product.sizes?.length || 0),
     0
@@ -288,6 +341,11 @@ const summary = {
   ).length,
   cardsWithoutPhoto: products.filter((product) => !product.firstPhoto).length,
 };
+
+const categoryCsvRows = categories.map((category) => ({
+  ...category,
+  brandsText: category.brands.join(" | "),
+}));
 
 const outDir = path.resolve("data");
 await fs.mkdir(outDir, { recursive: true });
@@ -307,24 +365,24 @@ await Promise.all([
   ),
   fs.writeFile(
     path.join(outDir, "categories.csv"),
-    toCsv(categories, [
+    toCsv(categoryCsvRows, [
+      { key: "parentID", label: "parentID" },
+      { key: "parentName", label: "Родительская категория WB" },
       { key: "subjectID", label: "subjectID" },
-      { key: "subjectName", label: "Категория WB" },
+      { key: "subjectName", label: "Категория / предмет WB" },
       { key: "productCount", label: "Карточек" },
       { key: "sizeVariantCount", label: "Размерных вариантов" },
       { key: "skuCount", label: "SKU / штрихкодов" },
-      { key: "brands", label: "Бренды" },
-    ].map((column) =>
-      column.key === "brands"
-        ? { ...column, key: "brandsText" }
-        : column
-    )),
+      { key: "brandsText", label: "Бренды" },
+    ])
   ),
   fs.writeFile(
     path.join(outDir, "skus.csv"),
     toCsv(skuRows, [
+      { key: "parentID", label: "parentID" },
+      { key: "parentName", label: "Родительская категория WB" },
       { key: "subjectID", label: "subjectID" },
-      { key: "subjectName", label: "Категория WB" },
+      { key: "subjectName", label: "Категория / предмет WB" },
       { key: "nmID", label: "Артикул WB" },
       { key: "vendorCode", label: "Артикул продавца" },
       { key: "title", label: "Название" },
@@ -337,24 +395,6 @@ await Promise.all([
     ])
   ),
 ]);
-
-// Rewrite categories.csv with brands flattened for CSV after JSON is ready.
-const categoryCsvRows = categories.map((category) => ({
-  ...category,
-  brandsText: category.brands.join(" | "),
-}));
-
-await fs.writeFile(
-  path.join(outDir, "categories.csv"),
-  toCsv(categoryCsvRows, [
-    { key: "subjectID", label: "subjectID" },
-    { key: "subjectName", label: "Категория WB" },
-    { key: "productCount", label: "Карточек" },
-    { key: "sizeVariantCount", label: "Размерных вариантов" },
-    { key: "skuCount", label: "SKU / штрихкодов" },
-    { key: "brandsText", label: "Бренды" },
-  ])
-);
 
 console.log("WB sync completed:");
 console.log(JSON.stringify(summary, null, 2));
