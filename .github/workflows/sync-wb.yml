@@ -1,12 +1,16 @@
-name: Sync WB catalog
+name: Sync and build wholesale catalog
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: "30 13 * * 1-5"
   push:
     branches:
       - main
     paths:
-      - "scripts/sync-wb.mjs"
+      - "scripts/**"
+      - "config/**"
+      - "catalog/**"
       - ".github/workflows/sync-wb.yml"
 
 permissions:
@@ -15,7 +19,7 @@ permissions:
 jobs:
   sync:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
 
     steps:
       - name: Checkout repository
@@ -31,14 +35,20 @@ jobs:
         env:
           WB_API_TOKEN: ${{ secrets.WB_API_TOKEN }}
 
-      - name: Commit generated catalog data
+      - name: Update KZT RUB USD exchange rates
+        run: node scripts/update-fx.mjs
+
+      - name: Build wholesale catalog
+        run: node scripts/build-catalog.mjs
+
+      - name: Commit generated data
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/
+          git add data/ public/data/
           if git diff --cached --quiet; then
-            echo "No catalog changes"
+            echo "No generated changes"
           else
-            git commit -m "Sync WB catalog data"
+            git commit -m "Build wholesale catalog"
             git push
           fi
