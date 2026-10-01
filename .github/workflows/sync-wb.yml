@@ -13,6 +13,10 @@ on:
       - "catalog/**"
       - ".github/workflows/sync-wb.yml"
 
+concurrency:
+  group: lucky-wholesale-catalog
+  cancel-in-progress: true
+
 permissions:
   contents: write
 
