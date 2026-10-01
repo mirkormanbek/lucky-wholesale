@@ -239,6 +239,75 @@
       "categoryIds": [
         "volleyball-balls"
       ]
+    },
+    {
+      "subjectIDs": [
+        5209
+      ],
+      "matchAny": [
+        "bjj",
+        "джиу",
+        "jiu",
+        "kingz"
+      ],
+      "categoryIds": [
+        "bjj-gi"
+      ]
+    },
+    {
+      "subjectIDs": [
+        240,
+        2021,
+        392,
+        417,
+        569
+      ],
+      "matchAny": [
+        "карат",
+        "киокуш",
+        "kyokush"
+      ],
+      "categoryIds": [
+        "karate-protection"
+      ]
+    },
+    {
+      "subjectIDs": [
+        1302
+      ],
+      "matchAny": [
+        "баскетбол",
+        "basketball"
+      ],
+      "categoryIds": [
+        "basketball-balls"
+      ]
+    },
+    {
+      "subjectIDs": [
+        569
+      ],
+      "matchAny": [
+        "скейт",
+        "ролик",
+        "самокат",
+        "skate"
+      ],
+      "categoryIds": [
+        "action-sports-protection"
+      ]
+    },
+    {
+      "subjectIDs": [
+        417
+      ],
+      "matchAny": [
+        "плаван",
+        "swim"
+      ],
+      "categoryIds": [
+        "swimming-accessories"
+      ]
     }
   ]
 }
