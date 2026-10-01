@@ -344,6 +344,54 @@
       "sort": 20,
       "active": false,
       "internal": true
+    },
+    {
+      "id": "basketball",
+      "name": "Баскетбол",
+      "slug": "basketball",
+      "parentId": null,
+      "sort": 35,
+      "active": true
+    },
+    {
+      "id": "basketball-balls",
+      "name": "Мячи",
+      "slug": "myachi",
+      "parentId": "basketball",
+      "sort": 10,
+      "active": true
+    },
+    {
+      "id": "action-sports",
+      "name": "Ролики / скейт / самокат",
+      "slug": "action-sports",
+      "parentId": null,
+      "sort": 45,
+      "active": true
+    },
+    {
+      "id": "action-sports-protection",
+      "name": "Защита",
+      "slug": "zashchita",
+      "parentId": "action-sports",
+      "sort": 10,
+      "active": true
+    },
+    {
+      "id": "swimming",
+      "name": "Плавание",
+      "slug": "swimming",
+      "parentId": null,
+      "sort": 46,
+      "active": true
+    },
+    {
+      "id": "swimming-accessories",
+      "name": "Аксессуары",
+      "slug": "aksessuary",
+      "parentId": "swimming",
+      "sort": 10,
+      "active": true
     }
   ]
 }
