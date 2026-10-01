@@ -1,0 +1,244 @@
+{
+  "version": 1,
+  "includeParentNames": [
+    "Спортивная обувь",
+    "Спортивная одежда",
+    "Спортивные аксессуары",
+    "Спортивный товар"
+  ],
+  "subjectMap": {
+    "128": [
+      "football-boots"
+    ],
+    "240": [
+      "combat-protection-unclassified"
+    ],
+    "248": [
+      "boxing-helmets"
+    ],
+    "249": [
+      "fitness-expanders"
+    ],
+    "392": [
+      "combat-protection-unclassified"
+    ],
+    "393": [
+      "protection-unclassified"
+    ],
+    "414": [
+      "boxing-wraps"
+    ],
+    "417": [
+      "combat-protection-unclassified"
+    ],
+    "458": [
+      "boxing-mitts"
+    ],
+    "491": [
+      "combat-kimonos-unclassified"
+    ],
+    "569": [
+      "combat-protection-unclassified"
+    ],
+    "921": [
+      "boxing-gloves"
+    ],
+    "1302": [
+      "balls-unclassified"
+    ],
+    "1509": [
+      "volleyball-nets"
+    ],
+    "2021": [
+      "combat-protection-unclassified"
+    ],
+    "2625": [
+      "mma-gloves"
+    ],
+    "2925": [
+      "combat-belts-unclassified"
+    ],
+    "4424": [
+      "fitness-straps"
+    ],
+    "4606": [
+      "karate-protection"
+    ],
+    "5209": [
+      "combat-apparel-unclassified"
+    ],
+    "7640": [
+      "sports-bags"
+    ]
+  },
+  "keywordRules": [
+    {
+      "subjectIDs": [
+        491
+      ],
+      "matchAny": [
+        "дзюдо",
+        "judo",
+        "mizuno",
+        "kusakura",
+        "essimo"
+      ],
+      "categoryIds": [
+        "judo-gi"
+      ]
+    },
+    {
+      "subjectIDs": [
+        491
+      ],
+      "matchAny": [
+        "bjj",
+        "джиу",
+        "jiu",
+        "kingz",
+        "shoyoroll",
+        "manto"
+      ],
+      "categoryIds": [
+        "bjj-gi"
+      ]
+    },
+    {
+      "subjectIDs": [
+        491
+      ],
+      "matchAny": [
+        "карат",
+        "киокуш",
+        "kyokush"
+      ],
+      "categoryIds": [
+        "karate-gi"
+      ]
+    },
+    {
+      "subjectIDs": [
+        2925
+      ],
+      "matchAny": [
+        "дзюдо",
+        "judo",
+        "mizuno"
+      ],
+      "categoryIds": [
+        "judo-belts"
+      ]
+    },
+    {
+      "subjectIDs": [
+        2925
+      ],
+      "matchAny": [
+        "bjj",
+        "джиу",
+        "jiu",
+        "kingz"
+      ],
+      "categoryIds": [
+        "bjj-belts"
+      ]
+    },
+    {
+      "subjectIDs": [
+        2925
+      ],
+      "matchAny": [
+        "карат",
+        "киокуш",
+        "kyokush"
+      ],
+      "categoryIds": [
+        "karate-belts"
+      ]
+    },
+    {
+      "subjectIDs": [
+        2021
+      ],
+      "matchAny": [
+        "карат",
+        "киокуш",
+        "kyokush"
+      ],
+      "categoryIds": [
+        "karate-gloves"
+      ]
+    },
+    {
+      "subjectIDs": [
+        240,
+        2021,
+        392,
+        417,
+        569
+      ],
+      "matchAny": [
+        "mma",
+        "мма",
+        "голен",
+        "shin"
+      ],
+      "categoryIds": [
+        "mma-protection"
+      ]
+    },
+    {
+      "subjectIDs": [
+        240,
+        2021,
+        392,
+        417,
+        569
+      ],
+      "matchAny": [
+        "бокс",
+        "boxing"
+      ],
+      "categoryIds": [
+        "boxing-protection"
+      ]
+    },
+    {
+      "subjectIDs": [
+        393
+      ],
+      "matchAny": [
+        "волейбол",
+        "volleyball"
+      ],
+      "categoryIds": [
+        "volleyball-kneepads"
+      ]
+    },
+    {
+      "subjectIDs": [
+        1302
+      ],
+      "matchAny": [
+        "футбол",
+        "football",
+        "uefa"
+      ],
+      "categoryIds": [
+        "football-balls"
+      ]
+    },
+    {
+      "subjectIDs": [
+        1302
+      ],
+      "matchAny": [
+        "волейбол",
+        "volleyball"
+      ],
+      "categoryIds": [
+        "volleyball-balls"
+      ]
+    }
+  ]
+}
