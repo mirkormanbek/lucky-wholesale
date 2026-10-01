@@ -347,7 +347,7 @@ for (const product of builtProducts.filter((p) => p.source === "wb")) {
   fingerprints.get(key).push(product);
 }
 
-const duplicateCandidates = [...fingerprints.entries()]
+const similarProductCandidates = [...fingerprints.entries()]
   .filter(([, products]) => products.length > 1)
   .map(([fingerprint, products]) => ({
     fingerprint,
@@ -413,7 +413,7 @@ const summary = {
   productsWithPrice: builtProducts.filter((p) => p.priceFromKzt != null).length,
   productsWithoutPrice: builtProducts.filter((p) => p.priceFromKzt == null).length,
   categoryReviewCount: needsCategoryReview.length,
-  duplicateCandidateGroups: duplicateCandidates.length,
+  similarProductGroups: similarProductCandidates.length,
   fxEffectiveDate: fx.effectiveDate || null
 };
 
@@ -421,7 +421,7 @@ const review = {
   generatedAt: summary.generatedAt,
   summary,
   needsCategoryReview,
-  duplicateCandidates
+  similarProductCandidates
 };
 
 await fs.mkdir(path.join(root, "public/data"), { recursive: true });
