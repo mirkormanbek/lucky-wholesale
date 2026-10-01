@@ -1,7 +1,8 @@
 {
-  "generatedAt": "2026-10-01T18:46:10.254Z",
+  "generatedAt": "2026-10-01T18:47:46.900Z",
   "productCardCount": 404,
-  "categoryCount": 47,
+  "parentCategoryCount": 11,
+  "subjectCount": 47,
   "sizeVariantCount": 1477,
   "skuCount": 1477,
   "cardsWithoutSku": 0,

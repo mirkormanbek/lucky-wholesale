@@ -1,30 +1,330 @@
 [
   {
-    "subjectID": 921,
-    "subjectName": "Перчатки боксерские",
-    "productCount": 86,
-    "sizeVariantCount": 320,
-    "skuCount": 320,
+    "parentID": 6943,
+    "parentName": "Все для садоводства",
+    "subjectID": 1763,
+    "subjectName": "Грунты для растений",
+    "productCount": 1,
+    "sizeVariantCount": 1,
+    "skuCount": 1,
     "brands": [
-      "Bad boy",
-      "BadBoy",
-      "Lucky Sport",
-      "RDX",
-      "Venum"
+      "Грунты для растений"
     ]
   },
   {
-    "subjectID": 248,
-    "subjectName": "Шлемы спортивные",
-    "productCount": 40,
-    "sizeVariantCount": 122,
-    "skuCount": 122,
+    "parentID": 6,
+    "parentName": "Головные уборы",
+    "subjectID": 1563,
+    "subjectName": "Балаклавы",
+    "productCount": 2,
+    "sizeVariantCount": 2,
+    "skuCount": 2,
     "brands": [
-      "Everlast",
+      "Nike"
+    ]
+  },
+  {
+    "parentID": 4268,
+    "parentName": "Здоровье",
+    "subjectID": 1938,
+    "subjectName": "Оздоровительная косметика",
+    "productCount": 9,
+    "sizeVariantCount": 9,
+    "skuCount": 9,
+    "brands": [
+      "Chica Cosmetics",
+      "SUMIFUN"
+    ]
+  },
+  {
+    "parentID": 7,
+    "parentName": "Игрушки",
+    "subjectID": 2547,
+    "subjectName": "Игрушки антистресс",
+    "productCount": 3,
+    "sizeVariantCount": 3,
+    "skuCount": 3,
+    "brands": [
+      "Lucky Mall"
+    ]
+  },
+  {
+    "parentID": 7,
+    "parentName": "Игрушки",
+    "subjectID": 120,
+    "subjectName": "Настольные игры для детей",
+    "productCount": 1,
+    "sizeVariantCount": 1,
+    "skuCount": 1,
+    "brands": [
+      "Челюсти"
+    ]
+  },
+  {
+    "parentID": 7,
+    "parentName": "Игрушки",
+    "subjectID": 1036,
+    "subjectName": "Сортеры",
+    "productCount": 1,
+    "sizeVariantCount": 1,
+    "skuCount": 1,
+    "brands": [
+      "Сортер Яйца"
+    ]
+  },
+  {
+    "parentID": 49,
+    "parentName": "Красота",
+    "subjectID": 1250,
+    "subjectName": "Хайлайтеры",
+    "productCount": 13,
+    "sizeVariantCount": 13,
+    "skuCount": 13,
+    "brands": [
+      "CHARLOTTE TILBURY",
+      "Dior",
+      "Rare Beauty"
+    ]
+  },
+  {
+    "parentID": 49,
+    "parentName": "Красота",
+    "subjectID": 355,
+    "subjectName": "Румяна",
+    "productCount": 9,
+    "sizeVariantCount": 9,
+    "skuCount": 9,
+    "brands": [
+      "CHARLOTTE TILBURY",
+      "Dior"
+    ]
+  },
+  {
+    "parentID": 49,
+    "parentName": "Красота",
+    "subjectID": 346,
+    "subjectName": "Тени",
+    "productCount": 7,
+    "sizeVariantCount": 7,
+    "skuCount": 7,
+    "brands": [
+      "CHARLOTTE TILBURY",
+      "Dior"
+    ]
+  },
+  {
+    "parentID": 49,
+    "parentName": "Красота",
+    "subjectID": 1918,
+    "subjectName": "Тинты для губ",
+    "productCount": 7,
+    "sizeVariantCount": 7,
+    "skuCount": 7,
+    "brands": [
+      "LANEIGE"
+    ]
+  },
+  {
+    "parentID": 49,
+    "parentName": "Красота",
+    "subjectID": 349,
+    "subjectName": "Блески",
+    "productCount": 6,
+    "sizeVariantCount": 6,
+    "skuCount": 6,
+    "brands": [
+      "KIKO MILANO"
+    ]
+  },
+  {
+    "parentID": 49,
+    "parentName": "Красота",
+    "subjectID": 357,
+    "subjectName": "Кремы",
+    "productCount": 6,
+    "sizeVariantCount": 6,
+    "skuCount": 6,
+    "brands": [
+      "Beauty of Joseon",
+      "Estee Lauder",
+      "SKIN1004"
+    ]
+  },
+  {
+    "parentID": 49,
+    "parentName": "Красота",
+    "subjectID": 354,
+    "subjectName": "Основы под макияж",
+    "productCount": 6,
+    "sizeVariantCount": 6,
+    "skuCount": 6,
+    "brands": [
+      "CHARLOTTE TILBURY",
+      "e.l.f. Cosmetics"
+    ]
+  },
+  {
+    "parentID": 49,
+    "parentName": "Красота",
+    "subjectID": 344,
+    "subjectName": "Помады",
+    "productCount": 5,
+    "sizeVariantCount": 5,
+    "skuCount": 5,
+    "brands": [
+      "Dior"
+    ]
+  },
+  {
+    "parentID": 49,
+    "parentName": "Красота",
+    "subjectID": 1931,
+    "subjectName": "Бронзеры",
+    "productCount": 4,
+    "sizeVariantCount": 4,
+    "skuCount": 4,
+    "brands": [
+      "Dior"
+    ]
+  },
+  {
+    "parentID": 49,
+    "parentName": "Красота",
+    "subjectID": 6120,
+    "subjectName": "Краски для бровей и ресниц",
+    "productCount": 3,
+    "sizeVariantCount": 3,
+    "skuCount": 3,
+    "brands": [
+      "PUSY"
+    ]
+  },
+  {
+    "parentID": 49,
+    "parentName": "Красота",
+    "subjectID": 352,
+    "subjectName": "Пудры",
+    "productCount": 2,
+    "sizeVariantCount": 2,
+    "skuCount": 2,
+    "brands": [
+      "CHARLOTTE TILBURY"
+    ]
+  },
+  {
+    "parentID": 49,
+    "parentName": "Красота",
+    "subjectID": 436,
+    "subjectName": "Спреи",
+    "productCount": 2,
+    "sizeVariantCount": 2,
+    "skuCount": 2,
+    "brands": [
+      "SPF 50+++"
+    ]
+  },
+  {
+    "parentID": 49,
+    "parentName": "Красота",
+    "subjectID": 372,
+    "subjectName": "Сыворотки",
+    "productCount": 2,
+    "sizeVariantCount": 2,
+    "skuCount": 2,
+    "brands": [
+      "Hoygi",
+      "SKIN1004"
+    ]
+  },
+  {
+    "parentID": 49,
+    "parentName": "Красота",
+    "subjectID": 347,
+    "subjectName": "Туши",
+    "productCount": 2,
+    "sizeVariantCount": 2,
+    "skuCount": 2,
+    "brands": [
+      "Chanel",
+      "VIVIENNE SABO"
+    ]
+  },
+  {
+    "parentID": 49,
+    "parentName": "Красота",
+    "subjectID": 1930,
+    "subjectName": "Фиксаторы макияжа",
+    "productCount": 2,
+    "sizeVariantCount": 2,
+    "skuCount": 2,
+    "brands": [
+      "CHARLOTTE TILBURY",
+      "MAC"
+    ]
+  },
+  {
+    "parentID": 49,
+    "parentName": "Красота",
+    "subjectID": 1928,
+    "subjectName": "BB-кремы",
+    "productCount": 2,
+    "sizeVariantCount": 2,
+    "skuCount": 2,
+    "brands": [
+      "Misha"
+    ]
+  },
+  {
+    "parentID": 49,
+    "parentName": "Красота",
+    "subjectID": 385,
+    "subjectName": "Дезодоранты",
+    "productCount": 1,
+    "sizeVariantCount": 1,
+    "skuCount": 1,
+    "brands": [
+      "JaySuing"
+    ]
+  },
+  {
+    "parentID": 49,
+    "parentName": "Красота",
+    "subjectID": 366,
+    "subjectName": "Тоники",
+    "productCount": 1,
+    "sizeVariantCount": 1,
+    "skuCount": 1,
+    "brands": [
+      "SKIN1004"
+    ]
+  },
+  {
+    "parentID": 3109,
+    "parentName": "Продукты",
+    "subjectID": 406,
+    "subjectName": "Чай",
+    "productCount": 17,
+    "sizeVariantCount": 17,
+    "skuCount": 17,
+    "brands": [
+      "SATTI"
+    ]
+  },
+  {
+    "parentID": 3497,
+    "parentName": "Спортивная обувь",
+    "subjectID": 128,
+    "subjectName": "Бутсы",
+    "productCount": 2,
+    "sizeVariantCount": 10,
+    "skuCount": 10,
+    "brands": [
       "Lucky Sport"
     ]
   },
   {
+    "parentID": 1513,
+    "parentName": "Спортивная одежда",
     "subjectID": 491,
     "subjectName": "Кимоно спортивное",
     "productCount": 31,
@@ -45,6 +345,61 @@
     ]
   },
   {
+    "parentID": 1513,
+    "parentName": "Спортивная одежда",
+    "subjectID": 5209,
+    "subjectName": "Комбинезоны спортивные",
+    "productCount": 4,
+    "sizeVariantCount": 60,
+    "skuCount": 60,
+    "brands": [
+      "Kingz Kimonos"
+    ]
+  },
+  {
+    "parentID": 1513,
+    "parentName": "Спортивная одежда",
+    "subjectID": 4606,
+    "subjectName": "Защита груди женская",
+    "productCount": 1,
+    "sizeVariantCount": 6,
+    "skuCount": 6,
+    "brands": [
+      "Lucky Sport"
+    ]
+  },
+  {
+    "parentID": 1605,
+    "parentName": "Спортивные аксессуары",
+    "subjectID": 921,
+    "subjectName": "Перчатки боксерские",
+    "productCount": 86,
+    "sizeVariantCount": 320,
+    "skuCount": 320,
+    "brands": [
+      "Bad boy",
+      "BadBoy",
+      "Lucky Sport",
+      "RDX",
+      "Venum"
+    ]
+  },
+  {
+    "parentID": 1605,
+    "parentName": "Спортивные аксессуары",
+    "subjectID": 248,
+    "subjectName": "Шлемы спортивные",
+    "productCount": 40,
+    "sizeVariantCount": 122,
+    "skuCount": 122,
+    "brands": [
+      "Everlast",
+      "Lucky Sport"
+    ]
+  },
+  {
+    "parentID": 1605,
+    "parentName": "Спортивные аксессуары",
     "subjectID": 240,
     "subjectName": "Щитки",
     "productCount": 29,
@@ -56,6 +411,8 @@
     ]
   },
   {
+    "parentID": 1605,
+    "parentName": "Спортивные аксессуары",
     "subjectID": 2021,
     "subjectName": "Перчатки спортивные",
     "productCount": 20,
@@ -66,49 +423,8 @@
     ]
   },
   {
-    "subjectID": 1302,
-    "subjectName": "Мячи спортивные",
-    "productCount": 18,
-    "sizeVariantCount": 22,
-    "skuCount": 22,
-    "brands": [
-      "Lucky Sport",
-      "Molten"
-    ]
-  },
-  {
-    "subjectID": 458,
-    "subjectName": "Лапы",
-    "productCount": 17,
-    "sizeVariantCount": 17,
-    "skuCount": 17,
-    "brands": [
-      "Lucky Sport"
-    ]
-  },
-  {
-    "subjectID": 406,
-    "subjectName": "Чай",
-    "productCount": 17,
-    "sizeVariantCount": 17,
-    "skuCount": 17,
-    "brands": [
-      "SATTI"
-    ]
-  },
-  {
-    "subjectID": 1250,
-    "subjectName": "Хайлайтеры",
-    "productCount": 13,
-    "sizeVariantCount": 13,
-    "skuCount": 13,
-    "brands": [
-      "CHARLOTTE TILBURY",
-      "Dior",
-      "Rare Beauty"
-    ]
-  },
-  {
+    "parentID": 1605,
+    "parentName": "Спортивные аксессуары",
     "subjectID": 2925,
     "subjectName": "Пояса для единоборств",
     "productCount": 11,
@@ -120,28 +436,8 @@
     ]
   },
   {
-    "subjectID": 1938,
-    "subjectName": "Оздоровительная косметика",
-    "productCount": 9,
-    "sizeVariantCount": 9,
-    "skuCount": 9,
-    "brands": [
-      "Chica Cosmetics",
-      "SUMIFUN"
-    ]
-  },
-  {
-    "subjectID": 355,
-    "subjectName": "Румяна",
-    "productCount": 9,
-    "sizeVariantCount": 9,
-    "skuCount": 9,
-    "brands": [
-      "CHARLOTTE TILBURY",
-      "Dior"
-    ]
-  },
-  {
+    "parentID": 1605,
+    "parentName": "Спортивные аксессуары",
     "subjectID": 2625,
     "subjectName": "Перчатки ММА",
     "productCount": 7,
@@ -152,162 +448,8 @@
     ]
   },
   {
-    "subjectID": 346,
-    "subjectName": "Тени",
-    "productCount": 7,
-    "sizeVariantCount": 7,
-    "skuCount": 7,
-    "brands": [
-      "CHARLOTTE TILBURY",
-      "Dior"
-    ]
-  },
-  {
-    "subjectID": 1918,
-    "subjectName": "Тинты для губ",
-    "productCount": 7,
-    "sizeVariantCount": 7,
-    "skuCount": 7,
-    "brands": [
-      "LANEIGE"
-    ]
-  },
-  {
-    "subjectID": 349,
-    "subjectName": "Блески",
-    "productCount": 6,
-    "sizeVariantCount": 6,
-    "skuCount": 6,
-    "brands": [
-      "KIKO MILANO"
-    ]
-  },
-  {
-    "subjectID": 357,
-    "subjectName": "Кремы",
-    "productCount": 6,
-    "sizeVariantCount": 6,
-    "skuCount": 6,
-    "brands": [
-      "Beauty of Joseon",
-      "Estee Lauder",
-      "SKIN1004"
-    ]
-  },
-  {
-    "subjectID": 354,
-    "subjectName": "Основы под макияж",
-    "productCount": 6,
-    "sizeVariantCount": 6,
-    "skuCount": 6,
-    "brands": [
-      "CHARLOTTE TILBURY",
-      "e.l.f. Cosmetics"
-    ]
-  },
-  {
-    "subjectID": 1509,
-    "subjectName": "Сетки спортивные",
-    "productCount": 6,
-    "sizeVariantCount": 6,
-    "skuCount": 6,
-    "brands": [
-      "Lucky Sport",
-      "Volleyball.net"
-    ]
-  },
-  {
-    "subjectID": 249,
-    "subjectName": "Эспандеры",
-    "productCount": 6,
-    "sizeVariantCount": 6,
-    "skuCount": 6,
-    "brands": [
-      "Эспандер кистовой",
-      "Lucky Sport"
-    ]
-  },
-  {
-    "subjectID": 344,
-    "subjectName": "Помады",
-    "productCount": 5,
-    "sizeVariantCount": 5,
-    "skuCount": 5,
-    "brands": [
-      "Dior"
-    ]
-  },
-  {
-    "subjectID": 1931,
-    "subjectName": "Бронзеры",
-    "productCount": 4,
-    "sizeVariantCount": 4,
-    "skuCount": 4,
-    "brands": [
-      "Dior"
-    ]
-  },
-  {
-    "subjectID": 5209,
-    "subjectName": "Комбинезоны спортивные",
-    "productCount": 4,
-    "sizeVariantCount": 60,
-    "skuCount": 60,
-    "brands": [
-      "Kingz Kimonos"
-    ]
-  },
-  {
-    "subjectID": 2547,
-    "subjectName": "Игрушки антистресс",
-    "productCount": 3,
-    "sizeVariantCount": 3,
-    "skuCount": 3,
-    "brands": [
-      "Lucky Mall"
-    ]
-  },
-  {
-    "subjectID": 6120,
-    "subjectName": "Краски для бровей и ресниц",
-    "productCount": 3,
-    "sizeVariantCount": 3,
-    "skuCount": 3,
-    "brands": [
-      "PUSY"
-    ]
-  },
-  {
-    "subjectID": 1563,
-    "subjectName": "Балаклавы",
-    "productCount": 2,
-    "sizeVariantCount": 2,
-    "skuCount": 2,
-    "brands": [
-      "Nike"
-    ]
-  },
-  {
-    "subjectID": 414,
-    "subjectName": "Бинты спортивные",
-    "productCount": 2,
-    "sizeVariantCount": 2,
-    "skuCount": 2,
-    "brands": [
-      "Lucky Sport"
-    ]
-  },
-  {
-    "subjectID": 128,
-    "subjectName": "Бутсы",
-    "productCount": 2,
-    "sizeVariantCount": 10,
-    "skuCount": 10,
-    "brands": [
-      "Lucky Sport"
-    ]
-  },
-  {
+    "parentID": 1605,
+    "parentName": "Спортивные аксессуары",
     "subjectID": 393,
     "subjectName": "Наколенники",
     "productCount": 2,
@@ -319,6 +461,8 @@
     ]
   },
   {
+    "parentID": 1605,
+    "parentName": "Спортивные аксессуары",
     "subjectID": 392,
     "subjectName": "Налокотники",
     "productCount": 2,
@@ -329,26 +473,8 @@
     ]
   },
   {
-    "subjectID": 352,
-    "subjectName": "Пудры",
-    "productCount": 2,
-    "sizeVariantCount": 2,
-    "skuCount": 2,
-    "brands": [
-      "CHARLOTTE TILBURY"
-    ]
-  },
-  {
-    "subjectID": 436,
-    "subjectName": "Спреи",
-    "productCount": 2,
-    "sizeVariantCount": 2,
-    "skuCount": 2,
-    "brands": [
-      "SPF 50+++"
-    ]
-  },
-  {
+    "parentID": 1605,
+    "parentName": "Спортивные аксессуары",
     "subjectID": 7640,
     "subjectName": "Сумки спортивные",
     "productCount": 2,
@@ -359,79 +485,8 @@
     ]
   },
   {
-    "subjectID": 372,
-    "subjectName": "Сыворотки",
-    "productCount": 2,
-    "sizeVariantCount": 2,
-    "skuCount": 2,
-    "brands": [
-      "Hoygi",
-      "SKIN1004"
-    ]
-  },
-  {
-    "subjectID": 347,
-    "subjectName": "Туши",
-    "productCount": 2,
-    "sizeVariantCount": 2,
-    "skuCount": 2,
-    "brands": [
-      "Chanel",
-      "VIVIENNE SABO"
-    ]
-  },
-  {
-    "subjectID": 1930,
-    "subjectName": "Фиксаторы макияжа",
-    "productCount": 2,
-    "sizeVariantCount": 2,
-    "skuCount": 2,
-    "brands": [
-      "CHARLOTTE TILBURY",
-      "MAC"
-    ]
-  },
-  {
-    "subjectID": 1928,
-    "subjectName": "BB-кремы",
-    "productCount": 2,
-    "sizeVariantCount": 2,
-    "skuCount": 2,
-    "brands": [
-      "Misha"
-    ]
-  },
-  {
-    "subjectID": 1763,
-    "subjectName": "Грунты для растений",
-    "productCount": 1,
-    "sizeVariantCount": 1,
-    "skuCount": 1,
-    "brands": [
-      "Грунты для растений"
-    ]
-  },
-  {
-    "subjectID": 385,
-    "subjectName": "Дезодоранты",
-    "productCount": 1,
-    "sizeVariantCount": 1,
-    "skuCount": 1,
-    "brands": [
-      "JaySuing"
-    ]
-  },
-  {
-    "subjectID": 4606,
-    "subjectName": "Защита груди женская",
-    "productCount": 1,
-    "sizeVariantCount": 6,
-    "skuCount": 6,
-    "brands": [
-      "Lucky Sport"
-    ]
-  },
-  {
+    "parentID": 1605,
+    "parentName": "Спортивные аксессуары",
     "subjectID": 569,
     "subjectName": "Защитные наборы",
     "productCount": 1,
@@ -440,14 +495,8 @@
     "brands": []
   },
   {
-    "subjectID": 4424,
-    "subjectName": "Лямки спортивные",
-    "productCount": 1,
-    "sizeVariantCount": 1,
-    "skuCount": 1,
-    "brands": []
-  },
-  {
+    "parentID": 1605,
+    "parentName": "Спортивные аксессуары",
     "subjectID": 417,
     "subjectName": "Нарукавники",
     "productCount": 1,
@@ -456,16 +505,81 @@
     "brands": []
   },
   {
-    "subjectID": 120,
-    "subjectName": "Настольные игры для детей",
-    "productCount": 1,
-    "sizeVariantCount": 1,
-    "skuCount": 1,
+    "parentID": 239,
+    "parentName": "Спортивный товар",
+    "subjectID": 1302,
+    "subjectName": "Мячи спортивные",
+    "productCount": 18,
+    "sizeVariantCount": 22,
+    "skuCount": 22,
     "brands": [
-      "Челюсти"
+      "Lucky Sport",
+      "Molten"
     ]
   },
   {
+    "parentID": 239,
+    "parentName": "Спортивный товар",
+    "subjectID": 458,
+    "subjectName": "Лапы",
+    "productCount": 17,
+    "sizeVariantCount": 17,
+    "skuCount": 17,
+    "brands": [
+      "Lucky Sport"
+    ]
+  },
+  {
+    "parentID": 239,
+    "parentName": "Спортивный товар",
+    "subjectID": 1509,
+    "subjectName": "Сетки спортивные",
+    "productCount": 6,
+    "sizeVariantCount": 6,
+    "skuCount": 6,
+    "brands": [
+      "Lucky Sport",
+      "Volleyball.net"
+    ]
+  },
+  {
+    "parentID": 239,
+    "parentName": "Спортивный товар",
+    "subjectID": 249,
+    "subjectName": "Эспандеры",
+    "productCount": 6,
+    "sizeVariantCount": 6,
+    "skuCount": 6,
+    "brands": [
+      "Эспандер кистовой",
+      "Lucky Sport"
+    ]
+  },
+  {
+    "parentID": 239,
+    "parentName": "Спортивный товар",
+    "subjectID": 414,
+    "subjectName": "Бинты спортивные",
+    "productCount": 2,
+    "sizeVariantCount": 2,
+    "skuCount": 2,
+    "brands": [
+      "Lucky Sport"
+    ]
+  },
+  {
+    "parentID": 239,
+    "parentName": "Спортивный товар",
+    "subjectID": 4424,
+    "subjectName": "Лямки спортивные",
+    "productCount": 1,
+    "sizeVariantCount": 1,
+    "skuCount": 1,
+    "brands": []
+  },
+  {
+    "parentID": 1598,
+    "parentName": "Хранение вещей",
     "subjectID": 783,
     "subjectName": "Органайзеры для хранения",
     "productCount": 1,
@@ -473,26 +587,6 @@
     "skuCount": 1,
     "brands": [
       "Lucky Mall"
-    ]
-  },
-  {
-    "subjectID": 1036,
-    "subjectName": "Сортеры",
-    "productCount": 1,
-    "sizeVariantCount": 1,
-    "skuCount": 1,
-    "brands": [
-      "Сортер Яйца"
-    ]
-  },
-  {
-    "subjectID": 366,
-    "subjectName": "Тоники",
-    "productCount": 1,
-    "sizeVariantCount": 1,
-    "skuCount": 1,
-    "brands": [
-      "SKIN1004"
     ]
   }
 ]
