@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-10-01T19:19:11.431Z",
+  "generatedAt": "2026-10-01T19:23:11.081Z",
   "summary": {
-    "generatedAt": "2026-10-01T19:19:11.431Z",
+    "generatedAt": "2026-10-01T19:23:11.081Z",
     "wbCardsIncluded": 289,
     "wbCardsHidden": 0,
     "manualProducts": 0,
@@ -10,176 +10,11 @@
     "productsWithColors": 287,
     "productsWithPrice": 0,
     "productsWithoutPrice": 289,
-    "categoryReviewCount": 17,
+    "categoryReviewCount": 1,
     "duplicateCandidateGroups": 59,
     "fxEffectiveDate": "02.10.2026"
   },
   "needsCategoryReview": [
-    {
-      "id": "wb-370118612",
-      "sourceNmIDs": [
-        370118612
-      ],
-      "title": "Киокушинкай нагрудник женский белый для каратэ и киокушинкай",
-      "brand": "",
-      "categoryIds": [
-        "combat-protection-unclassified"
-      ]
-    },
-    {
-      "id": "wb-659821305",
-      "sourceNmIDs": [
-        659821305
-      ],
-      "title": "Кимоно для джиу-джитсу (бжж)",
-      "brand": "Kingz Kimonos",
-      "categoryIds": [
-        "combat-apparel-unclassified"
-      ]
-    },
-    {
-      "id": "wb-663655687",
-      "sourceNmIDs": [
-        663655687
-      ],
-      "title": "Кимоно для джиу-джитсу (бжж)",
-      "brand": "Kingz Kimonos",
-      "categoryIds": [
-        "combat-apparel-unclassified"
-      ]
-    },
-    {
-      "id": "wb-682350185",
-      "sourceNmIDs": [
-        682350185
-      ],
-      "title": "Кимоно для джиу-джитсу (бжж)",
-      "brand": "Kingz Kimonos",
-      "categoryIds": [
-        "combat-apparel-unclassified"
-      ]
-    },
-    {
-      "id": "wb-682416125",
-      "sourceNmIDs": [
-        682416125
-      ],
-      "title": "Кимоно для джиу-джитсу (бжж)",
-      "brand": "Kingz Kimonos",
-      "categoryIds": [
-        "combat-apparel-unclassified"
-      ]
-    },
-    {
-      "id": "wb-209565556",
-      "sourceNmIDs": [
-        209565556
-      ],
-      "title": "Баскетбольный мяч MARVEL 7 размер",
-      "brand": "Lucky Sport",
-      "categoryIds": [
-        "balls-unclassified"
-      ]
-    },
-    {
-      "id": "wb-209565557",
-      "sourceNmIDs": [
-        209565557
-      ],
-      "title": "Баскетбольный мяч MARVEL 7 размер",
-      "brand": "Lucky Sport",
-      "categoryIds": [
-        "balls-unclassified"
-      ]
-    },
-    {
-      "id": "wb-209565558",
-      "sourceNmIDs": [
-        209565558
-      ],
-      "title": "Баскетбольный мяч MARVEL 7 размер",
-      "brand": "Lucky Sport",
-      "categoryIds": [
-        "balls-unclassified"
-      ]
-    },
-    {
-      "id": "wb-209565559",
-      "sourceNmIDs": [
-        209565559
-      ],
-      "title": "Баскетбольный мяч MARVEL 7 размер",
-      "brand": "Lucky Sport",
-      "categoryIds": [
-        "balls-unclassified"
-      ]
-    },
-    {
-      "id": "wb-209562985",
-      "sourceNmIDs": [
-        209562985
-      ],
-      "title": "Баскетбольный мяч MARVEL 7 размер для улицы",
-      "brand": "Lucky Sport",
-      "categoryIds": [
-        "balls-unclassified"
-      ]
-    },
-    {
-      "id": "wb-209562986",
-      "sourceNmIDs": [
-        209562986
-      ],
-      "title": "Баскетбольный мяч MARVEL 7 размер для улицы",
-      "brand": "Lucky Sport",
-      "categoryIds": [
-        "balls-unclassified"
-      ]
-    },
-    {
-      "id": "wb-209562987",
-      "sourceNmIDs": [
-        209562987
-      ],
-      "title": "Баскетбольный мяч MARVEL 7 размер для улицы",
-      "brand": "Lucky Sport",
-      "categoryIds": [
-        "balls-unclassified"
-      ]
-    },
-    {
-      "id": "wb-209562988",
-      "sourceNmIDs": [
-        209562988
-      ],
-      "title": "Баскетбольный мяч MARVEL 7 размер для улицы",
-      "brand": "Lucky Sport",
-      "categoryIds": [
-        "balls-unclassified"
-      ]
-    },
-    {
-      "id": "wb-208991955",
-      "sourceNmIDs": [
-        208991955
-      ],
-      "title": "Баскетбольный мяч Molten для зала и улицы",
-      "brand": "Lucky Sport",
-      "categoryIds": [
-        "balls-unclassified"
-      ]
-    },
-    {
-      "id": "wb-208993789",
-      "sourceNmIDs": [
-        208993789
-      ],
-      "title": "Мяч баскетбольный для зала и улицы",
-      "brand": "Molten",
-      "categoryIds": [
-        "balls-unclassified"
-      ]
-    },
     {
       "id": "wb-274837992",
       "sourceNmIDs": [
@@ -189,17 +24,6 @@
       "brand": "Lucky Sport",
       "categoryIds": [
         "protection-unclassified"
-      ]
-    },
-    {
-      "id": "wb-429473334",
-      "sourceNmIDs": [
-        429473334
-      ],
-      "title": "Нарукавники для плавания детские",
-      "brand": "",
-      "categoryIds": [
-        "combat-protection-unclassified"
       ]
     }
   ],
