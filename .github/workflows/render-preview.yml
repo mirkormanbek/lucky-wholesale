@@ -1,0 +1,59 @@
+name: Render storefront preview
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "public/**"
+      - "scripts/render-preview.mjs"
+      - ".github/workflows/render-preview.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: lucky-wholesale-preview
+  cancel-in-progress: true
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Playwright
+        run: |
+          npm init -y
+          npm install playwright
+          npx playwright install --with-deps chromium
+
+      - name: Start static server
+        run: |
+          python3 -m http.server 4173 --directory public >/tmp/lucky-preview-server.log 2>&1 &
+          sleep 2
+
+      - name: Render screenshots
+        run: node scripts/render-preview.mjs
+
+      - name: Commit screenshots
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add preview/
+          if git diff --cached --quiet; then
+            echo "No preview changes"
+          else
+            git commit -m "Render storefront preview"
+            git pull --rebase origin main
+            git push origin main
+          fi
