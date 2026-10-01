@@ -12,15 +12,23 @@ const state = {
 const el = {
   productGrid: document.querySelector("#productGrid"),
   categoryTree: document.querySelector("#categoryTree"),
+  topCategoryRail: document.querySelector("#topCategoryRail"),
+  quickCategoryRail: document.querySelector("#quickCategoryRail"),
   productCount: document.querySelector("#productCount"),
   categoryCount: document.querySelector("#categoryCount"),
+  heroCatalogCount: document.querySelector("#heroCatalogCount"),
+  heroImageMain: document.querySelector("#heroImageMain"),
+  heroImageTop: document.querySelector("#heroImageTop"),
+  heroImageBottom: document.querySelector("#heroImageBottom"),
   searchInput: document.querySelector("#searchInput"),
   sortSelect: document.querySelector("#sortSelect"),
   currencySelect: document.querySelector("#currencySelect"),
+  currencyControl: document.querySelector("#currencyControl"),
   resultsMeta: document.querySelector("#resultsMeta"),
   activeCategoryTitle: document.querySelector("#activeCategoryTitle"),
   clearCategory: document.querySelector("#clearCategory"),
   sidebar: document.querySelector("#sidebar"),
+  sidebarClose: document.querySelector("#sidebarClose"),
   filtersToggle: document.querySelector("#filtersToggle"),
   emptyState: document.querySelector("#emptyState"),
   productDialog: document.querySelector("#productDialog"),
@@ -28,6 +36,8 @@ const el = {
   dialogClose: document.querySelector("#dialogClose"),
   requestButton: document.querySelector("#requestButton"),
   requestCount: document.querySelector("#requestCount"),
+  mobileRequestButton: document.querySelector("#mobileRequestButton"),
+  mobileRequestCount: document.querySelector("#mobileRequestCount"),
   requestDialog: document.querySelector("#requestDialog"),
   requestDialogClose: document.querySelector("#requestDialogClose"),
   requestItems: document.querySelector("#requestItems"),
@@ -69,7 +79,6 @@ function money(value, currency) {
 function priceText(product) {
   const currency = state.currency;
   const value = product.priceFrom?.[currency];
-
   if (value == null) return null;
 
   const prefix = currency === "KZT" ? "от " : "≈ от ";
@@ -78,6 +87,7 @@ function priceText(product) {
 
 function selectedCategoryDescendants(id) {
   if (!id) return null;
+
   const ids = new Set([id]);
   let changed = true;
 
@@ -92,6 +102,14 @@ function selectedCategoryDescendants(id) {
   }
 
   return ids;
+}
+
+function productCountForCategory(id) {
+  const ids = selectedCategoryDescendants(id);
+  if (!ids) return state.products.length;
+  return state.products.filter((product) =>
+    (product.categoryIds || []).some((categoryId) => ids.has(categoryId))
+  ).length;
 }
 
 function filteredProducts() {
@@ -123,13 +141,22 @@ function filteredProducts() {
       products.sort((a, b) => (a.title || "").localeCompare(b.title || "", "ru"));
       break;
     case "brand":
-      products.sort((a, b) => (a.brand || "").localeCompare(b.brand || "", "ru") || (a.title || "").localeCompare(b.title || "", "ru"));
+      products.sort((a, b) =>
+        (a.brand || "").localeCompare(b.brand || "", "ru") ||
+        (a.title || "").localeCompare(b.title || "", "ru")
+      );
       break;
     case "priceAsc":
-      products.sort((a, b) => (a.priceFrom?.[state.currency] ?? Infinity) - (b.priceFrom?.[state.currency] ?? Infinity));
+      products.sort((a, b) =>
+        (a.priceFrom?.[state.currency] ?? Infinity) -
+        (b.priceFrom?.[state.currency] ?? Infinity)
+      );
       break;
     case "priceDesc":
-      products.sort((a, b) => (b.priceFrom?.[state.currency] ?? -Infinity) - (a.priceFrom?.[state.currency] ?? -Infinity));
+      products.sort((a, b) =>
+        (b.priceFrom?.[state.currency] ?? -Infinity) -
+        (a.priceFrom?.[state.currency] ?? -Infinity)
+      );
       break;
   }
 
@@ -152,6 +179,7 @@ function categoryDepth(category) {
 
 function categoryPath(id) {
   if (!id) return [];
+
   const path = [];
   let current = state.categoryById.get(id);
   const guard = new Set();
@@ -165,6 +193,16 @@ function categoryPath(id) {
   return path;
 }
 
+function selectCategory(categoryId, options = {}) {
+  state.selectedCategoryId = categoryId || null;
+  closeSidebar();
+  render();
+
+  if (options.scroll !== false) {
+    document.querySelector("#catalog")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}
+
 function renderCategories() {
   el.categoryTree.innerHTML = "";
 
@@ -176,14 +214,82 @@ function renderCategories() {
     button.dataset.categoryId = category.id;
     button.classList.toggle("active", category.id === state.selectedCategoryId);
 
-    button.addEventListener("click", () => {
-      state.selectedCategoryId = category.id;
-      el.sidebar.classList.remove("open");
-      render();
-    });
-
+    button.addEventListener("click", () => selectCategory(category.id));
     el.categoryTree.appendChild(button);
   }
+}
+
+function topLevelCategories() {
+  return state.categories.filter((category) => !category.parentId);
+}
+
+function renderTopCategories() {
+  const categories = topLevelCategories().filter((category) => productCountForCategory(category.id) > 0);
+  el.topCategoryRail.innerHTML = "";
+
+  categories.forEach((category, index) => {
+    const count = productCountForCategory(category.id);
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "sport-card";
+    button.innerHTML = `
+      <span class="sport-index">${String(index + 1).padStart(2, "0")}</span>
+      <span class="sport-name">${escapeHtml(category.name)}</span>
+      <span class="sport-bottom">
+        <span>${count} товаров</span>
+        <span class="sport-arrow">↗</span>
+      </span>
+    `;
+
+    button.addEventListener("click", () => selectCategory(category.id));
+    el.topCategoryRail.appendChild(button);
+  });
+}
+
+function renderQuickCategories() {
+  const categories = topLevelCategories().filter((category) => productCountForCategory(category.id) > 0);
+  el.quickCategoryRail.innerHTML = "";
+
+  const allButton = document.createElement("button");
+  allButton.type = "button";
+  allButton.className = "quick-category-button";
+  allButton.classList.toggle("active", !state.selectedCategoryId);
+  allButton.textContent = "Все";
+  allButton.addEventListener("click", () => selectCategory(null, { scroll: false }));
+  el.quickCategoryRail.appendChild(allButton);
+
+  for (const category of categories) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "quick-category-button";
+    button.classList.toggle("active", category.id === state.selectedCategoryId);
+    button.textContent = category.name;
+    button.addEventListener("click", () => selectCategory(category.id, { scroll: false }));
+    el.quickCategoryRail.appendChild(button);
+  }
+}
+
+function setHeroImages() {
+  const withPhoto = state.products.filter((product) => product.photos?.[0]);
+  if (!withPhoto.length) return;
+
+  const preferred = [
+    withPhoto.find((product) => (product.categoryIds || []).some((id) => id.includes("boxing"))),
+    withPhoto.find((product) => (product.categoryIds || []).some((id) => id.includes("judo") || id.includes("bjj"))),
+    withPhoto.find((product) => (product.categoryIds || []).some((id) => id.includes("football") || id.includes("volleyball")))
+  ].filter(Boolean);
+
+  const unique = [];
+  for (const product of [...preferred, ...withPhoto]) {
+    if (unique.some((item) => item.id === product.id)) continue;
+    unique.push(product);
+    if (unique.length === 3) break;
+  }
+
+  const [main, top, bottom] = unique;
+  if (main) el.heroImageMain.src = main.photos[0];
+  if (top) el.heroImageTop.src = top.photos[0];
+  if (bottom) el.heroImageBottom.src = bottom.photos[0];
 }
 
 function firstColor(product) {
@@ -206,6 +312,8 @@ function renderProductCard(product) {
   const price = fragment.querySelector(".product-price");
   const priceWrap = fragment.querySelector(".price-wrap");
   const addButton = fragment.querySelector(".add-button");
+  const addLabel = fragment.querySelector(".add-label");
+  const addIcon = fragment.querySelector(".add-icon");
 
   const photo = product.photos?.[0];
   if (photo) {
@@ -222,9 +330,9 @@ function renderProductCard(product) {
     });
   }
 
-  brand.textContent = product.brand || "Без бренда";
+  brand.textContent = product.brand || "Lucky";
   title.textContent = product.title || "Без названия";
-  article.textContent = product.article ? `Артикул: ${product.article}` : "";
+  article.textContent = product.article || "";
 
   const priceValue = priceText(product);
   if (priceValue) {
@@ -251,7 +359,8 @@ function renderProductCard(product) {
 
   const isAdded = state.requestIds.has(product.id);
   addButton.classList.toggle("added", isAdded);
-  addButton.textContent = isAdded ? "✓ В заявке" : "+ В заявку";
+  addLabel.textContent = isAdded ? "В заявке" : "В заявку";
+  addIcon.textContent = isAdded ? "✓" : "＋";
   addButton.addEventListener("click", () => toggleRequest(product.id));
 
   card.dataset.productId = product.id;
@@ -272,7 +381,9 @@ function renderProducts() {
   el.resultsMeta.textContent = `${products.length} из ${state.products.length} товаров`;
 
   const path = categoryPath(state.selectedCategoryId);
-  el.activeCategoryTitle.textContent = path.length ? path.map((item) => item.name).join(" / ") : "Все товары";
+  el.activeCategoryTitle.textContent = path.length
+    ? path.map((item) => item.name).join(" / ")
+    : "Все товары";
 }
 
 function openProduct(product) {
@@ -290,7 +401,7 @@ function openProduct(product) {
           : ""}
       </div>
       <div class="dialog-info">
-        <div class="eyebrow">${escapeHtml(product.brand || "Без бренда")}</div>
+        <div class="section-kicker dark">${escapeHtml(product.brand || "Lucky")}</div>
         <h2>${escapeHtml(product.title || "Без названия")}</h2>
         <div class="product-article">Артикул: ${escapeHtml(product.article || "—")}</div>
 
@@ -330,7 +441,7 @@ function openProduct(product) {
         ` : ""}
 
         <div class="info-block">
-          <button id="dialogAddButton" class="primary-button wide" type="button">
+          <button id="dialogAddButton" class="dialog-primary wide" type="button">
             ${state.requestIds.has(product.id) ? "Убрать из заявки" : "Добавить в заявку"}
           </button>
         </div>
@@ -348,7 +459,10 @@ function openProduct(product) {
 
 function saveRequest() {
   localStorage.setItem("lucky-wholesale-request", JSON.stringify([...state.requestIds]));
-  el.requestCount.textContent = state.requestIds.size;
+  const count = state.requestIds.size;
+  el.requestCount.textContent = count;
+  el.mobileRequestCount.textContent = count;
+  el.mobileRequestButton.hidden = count === 0;
 }
 
 function toggleRequest(productId) {
@@ -414,8 +528,24 @@ async function copyRequest() {
   }, 1400);
 }
 
+function openRequest() {
+  renderRequest();
+  el.requestDialog.showModal();
+}
+
+function openSidebar() {
+  el.sidebar.classList.add("open");
+  document.body.classList.add("sidebar-open");
+}
+
+function closeSidebar() {
+  el.sidebar.classList.remove("open");
+  document.body.classList.remove("sidebar-open");
+}
+
 function render() {
   renderCategories();
+  renderQuickCategories();
   renderProducts();
   saveRequest();
 }
@@ -438,10 +568,28 @@ async function init() {
     state.categories = Array.isArray(categories) ? categories : [];
     state.categoryById = new Map(state.categories.map((category) => [category.id, category]));
 
+    const topLevelCount = topLevelCategories()
+      .filter((category) => productCountForCategory(category.id) > 0)
+      .length;
+
     el.productCount.textContent = state.products.length;
-    el.categoryCount.textContent = state.categories.filter((category) => !category.parentId).length;
+    el.categoryCount.textContent = topLevelCount;
+    el.heroCatalogCount.textContent = state.products.length;
     el.currencySelect.value = state.currency;
 
+    const hasAnyPrice = state.products.some((product) => product.priceFrom?.KZT != null);
+    el.currencyControl.hidden = !hasAnyPrice;
+
+    if (!hasAnyPrice) {
+      [...el.sortSelect.options].forEach((option) => {
+        if (option.value === "priceAsc" || option.value === "priceDesc") {
+          option.hidden = true;
+        }
+      });
+    }
+
+    setHeroImages();
+    renderTopCategories();
     render();
   } catch (error) {
     console.error(error);
@@ -449,7 +597,8 @@ async function init() {
     el.productGrid.innerHTML = "";
     el.emptyState.hidden = false;
     el.emptyState.querySelector("strong").textContent = "Каталог не загрузился";
-    el.emptyState.querySelector("span").textContent = "Откройте проект через локальный HTTP-сервер или хостинг, а не напрямую как file://.";
+    el.emptyState.querySelector("span").textContent =
+      "Откройте проект через локальный HTTP-сервер или хостинг.";
   }
 }
 
@@ -469,23 +618,15 @@ el.currencySelect.addEventListener("change", (event) => {
   renderProducts();
 });
 
-el.clearCategory.addEventListener("click", () => {
-  state.selectedCategoryId = null;
-  render();
-});
-
-el.filtersToggle.addEventListener("click", () => {
-  el.sidebar.classList.toggle("open");
-});
+el.clearCategory.addEventListener("click", () => selectCategory(null, { scroll: false }));
+el.filtersToggle.addEventListener("click", openSidebar);
+el.sidebarClose.addEventListener("click", closeSidebar);
 
 el.dialogClose.addEventListener("click", () => el.productDialog.close());
 el.requestDialogClose.addEventListener("click", () => el.requestDialog.close());
 
-el.requestButton.addEventListener("click", () => {
-  renderRequest();
-  el.requestDialog.showModal();
-});
-
+el.requestButton.addEventListener("click", openRequest);
+el.mobileRequestButton.addEventListener("click", openRequest);
 el.copyRequestButton.addEventListener("click", copyRequest);
 
 el.productDialog.addEventListener("click", (event) => {
@@ -494,6 +635,19 @@ el.productDialog.addEventListener("click", (event) => {
 
 el.requestDialog.addEventListener("click", (event) => {
   if (event.target === el.requestDialog) el.requestDialog.close();
+});
+
+document.querySelectorAll("[data-scroll-to-catalog]").forEach((button) => {
+  button.addEventListener("click", () => {
+    document.querySelector("#catalog")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+});
+
+document.querySelectorAll("[data-category-shortcut]").forEach((button) => {
+  button.addEventListener("click", () => {
+    const id = button.dataset.categoryShortcut;
+    if (state.categoryById.has(id)) selectCategory(id);
+  });
 });
 
 init();
