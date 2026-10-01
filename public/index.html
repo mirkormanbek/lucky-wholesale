@@ -3,98 +3,195 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="color-scheme" content="light" />
+  <meta name="theme-color" content="#0b0c0d" />
+  <meta name="color-scheme" content="light dark" />
   <title>Lucky Wholesale — оптовый каталог</title>
+  <meta name="description" content="Оптовый каталог спортивных товаров Lucky." />
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
-  <header class="topbar">
-    <div class="brand">
-      <div class="brand-mark">L</div>
-      <div>
-        <div class="brand-title">Lucky Wholesale</div>
-        <div class="brand-subtitle">Оптовый каталог спортивных товаров</div>
-      </div>
-    </div>
+  <div class="announcement">
+    <span>WHOLESALE / KZ · CIS</span>
+    <span class="announcement-dot"></span>
+    <span>LIVE ASSORTMENT</span>
+  </div>
 
-    <div class="topbar-actions">
-      <label class="currency-select">
-        <span>Валюта</span>
+  <header class="site-header">
+    <a class="brand" href="#" aria-label="Lucky Wholesale">
+      <span class="brand-clover" aria-hidden="true">
+        <i></i><i></i><i></i><i></i>
+      </span>
+      <span class="brand-word">LUCKY</span>
+      <span class="brand-mode">WHOLESALE</span>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Главное меню">
+      <button class="nav-link" data-scroll-to-catalog type="button">Каталог</button>
+      <button class="nav-link" data-category-shortcut="combat" type="button">Единоборства</button>
+      <button class="nav-link" data-category-shortcut="football" type="button">Футбол</button>
+      <button class="nav-link" data-category-shortcut="fitness" type="button">Фитнес</button>
+    </nav>
+
+    <div class="header-actions">
+      <label id="currencyControl" class="currency-select">
+        <span class="sr-only">Валюта</span>
         <select id="currencySelect" aria-label="Валюта">
-          <option value="KZT">₸ KZT</option>
-          <option value="RUB">₽ RUB</option>
-          <option value="USD">$ USD</option>
+          <option value="KZT">KZT ₸</option>
+          <option value="RUB">RUB ₽</option>
+          <option value="USD">USD $</option>
         </select>
       </label>
-      <button id="requestButton" class="primary-button" type="button">
-        Заявка <span id="requestCount">0</span>
+
+      <button id="requestButton" class="request-button" type="button">
+        <span>Заявка</span>
+        <b id="requestCount">0</b>
       </button>
     </div>
   </header>
 
-  <main class="page-shell">
+  <main>
     <section class="hero">
-      <div>
-        <div class="eyebrow">B2B каталог</div>
-        <h1>Спортивный инвентарь оптом</h1>
-        <p>Актуальный ассортимент с Wildberries и товары, добавленные вручную. Цвета и карточки пока отображаются отдельно.</p>
-      </div>
-
-      <div class="hero-stats">
-        <div class="stat-card">
-          <div class="stat-value" id="productCount">—</div>
-          <div class="stat-label">товаров</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value" id="categoryCount">—</div>
-          <div class="stat-label">категорий</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="controls">
-      <div class="search-wrap">
-        <input id="searchInput" type="search" placeholder="Поиск по названию, бренду, артикулу, цвету…" autocomplete="off" />
-      </div>
-      <button id="filtersToggle" class="secondary-button filters-toggle" type="button">Категории</button>
-    </section>
-
-    <div class="catalog-layout">
-      <aside id="sidebar" class="sidebar">
-        <div class="sidebar-head">
-          <strong>Категории</strong>
-          <button id="clearCategory" class="text-button" type="button">Сбросить</button>
-        </div>
-        <nav id="categoryTree" class="category-tree" aria-label="Категории"></nav>
-      </aside>
-
-      <section class="catalog-content">
-        <div class="catalog-toolbar">
-          <div>
-            <div id="activeCategoryTitle" class="catalog-title">Все товары</div>
-            <div id="resultsMeta" class="catalog-meta">Загрузка…</div>
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <div class="hero-kicker">
+            <span class="kicker-dot"></span>
+            SPORT GOODS / B2B
           </div>
-          <label class="sort-select">
-            <span>Сортировка</span>
-            <select id="sortSelect">
-              <option value="default">По умолчанию</option>
-              <option value="title">По названию</option>
-              <option value="brand">По бренду</option>
-              <option value="priceAsc">Цена: сначала ниже</option>
-              <option value="priceDesc">Цена: сначала выше</option>
-            </select>
-          </label>
+          <h1>
+            GEAR FOR
+            <span>FIGHT.</span>
+            MOVE. PLAY.
+          </h1>
+          <p>
+            Оптовый каталог Lucky для клубов, магазинов и спортивных команд.
+            Актуальный ассортимент, размеры и цвета — в одном месте.
+          </p>
+
+          <div class="hero-actions">
+            <button class="hero-primary" data-scroll-to-catalog type="button">
+              Смотреть каталог
+              <span aria-hidden="true">↘</span>
+            </button>
+            <div class="hero-stats">
+              <div><strong id="productCount">—</strong><span>товаров</span></div>
+              <div><strong id="categoryCount">—</strong><span>направлений</span></div>
+            </div>
+          </div>
         </div>
 
-        <div id="productGrid" class="product-grid"></div>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="hero-orbit orbit-one"></div>
+          <div class="hero-orbit orbit-two"></div>
+          <div class="hero-glow"></div>
 
-        <div id="emptyState" class="empty-state" hidden>
-          <strong>Ничего не найдено</strong>
-          <span>Попробуйте изменить категорию или поисковый запрос.</span>
+          <figure class="hero-product hero-product-main">
+            <img id="heroImageMain" alt="" />
+          </figure>
+
+          <figure class="hero-product hero-product-small hero-product-top">
+            <img id="heroImageTop" alt="" />
+          </figure>
+
+          <figure class="hero-product hero-product-small hero-product-bottom">
+            <img id="heroImageBottom" alt="" />
+          </figure>
+
+          <div class="hero-badge">
+            <span>CATALOG</span>
+            <strong id="heroCatalogCount">—</strong>
+          </div>
         </div>
-      </section>
-    </div>
+      </div>
+
+      <div class="hero-marquee" aria-hidden="true">
+        <div>
+          JUDO <i>✦</i> BJJ <i>✦</i> BOXING <i>✦</i> MMA <i>✦</i> KARATE
+          <i>✦</i> FOOTBALL <i>✦</i> VOLLEYBALL <i>✦</i> FITNESS <i>✦</i>
+        </div>
+      </div>
+    </section>
+
+    <section class="shop-by" aria-labelledby="shopByTitle">
+      <div class="section-heading">
+        <div>
+          <div class="section-kicker">SHOP BY SPORT</div>
+          <h2 id="shopByTitle">Выберите направление</h2>
+        </div>
+        <button class="text-link" data-scroll-to-catalog type="button">
+          Все товары <span>→</span>
+        </button>
+      </div>
+
+      <div id="topCategoryRail" class="sport-grid"></div>
+    </section>
+
+    <section id="catalog" class="catalog-shell">
+      <div class="catalog-intro">
+        <div>
+          <div class="section-kicker dark">WHOLESALE CATALOG</div>
+          <h2 id="activeCategoryTitle">Все товары</h2>
+          <div id="resultsMeta" class="catalog-meta">Загрузка…</div>
+        </div>
+
+        <div class="catalog-intro-actions">
+          <div class="search-wrap">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 21-4.35-4.35m2.35-5.15a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z"/></svg>
+            <input id="searchInput" type="search" placeholder="Поиск по названию, бренду, артикулу…" autocomplete="off" />
+          </div>
+          <button id="filtersToggle" class="filter-button filters-toggle" type="button">
+            Фильтры <span>＋</span>
+          </button>
+        </div>
+      </div>
+
+      <div id="quickCategoryRail" class="quick-category-rail"></div>
+
+      <div class="catalog-layout">
+        <aside id="sidebar" class="sidebar">
+          <div class="sidebar-mobile-head">
+            <strong>Категории</strong>
+            <button id="sidebarClose" class="icon-button" type="button" aria-label="Закрыть">×</button>
+          </div>
+
+          <div class="sidebar-head">
+            <span>Фильтр по спорту</span>
+            <button id="clearCategory" class="text-button" type="button">Очистить</button>
+          </div>
+
+          <nav id="categoryTree" class="category-tree" aria-label="Категории"></nav>
+        </aside>
+
+        <section class="catalog-content">
+          <div class="catalog-toolbar">
+            <div class="catalog-view-label">PRODUCTS</div>
+            <label class="sort-select">
+              <span>Сортировка</span>
+              <select id="sortSelect">
+                <option value="default">По умолчанию</option>
+                <option value="title">По названию</option>
+                <option value="brand">По бренду</option>
+                <option value="priceAsc">Цена: ниже</option>
+                <option value="priceDesc">Цена: выше</option>
+              </select>
+            </label>
+          </div>
+
+          <div id="productGrid" class="product-grid"></div>
+
+          <div id="emptyState" class="empty-state" hidden>
+            <div class="empty-icon">↗</div>
+            <strong>Ничего не найдено</strong>
+            <span>Измените категорию или поисковый запрос.</span>
+          </div>
+        </section>
+      </div>
+    </section>
   </main>
+
+  <button id="mobileRequestButton" class="mobile-request-button" type="button" hidden>
+    <span>Открыть заявку</span>
+    <b id="mobileRequestCount">0</b>
+  </button>
 
   <dialog id="productDialog" class="product-dialog">
     <button id="dialogClose" class="dialog-close" aria-label="Закрыть">×</button>
@@ -104,38 +201,54 @@
   <dialog id="requestDialog" class="request-dialog">
     <button id="requestDialogClose" class="dialog-close" aria-label="Закрыть">×</button>
     <div class="dialog-section">
-      <div class="eyebrow">Оптовая заявка</div>
-      <h2>Выбранные товары</h2>
+      <div class="section-kicker dark">WHOLESALE REQUEST</div>
+      <h2>Ваша заявка</h2>
       <div id="requestItems" class="request-items"></div>
       <div id="requestEmpty" class="empty-state">
+        <div class="empty-icon">＋</div>
         <strong>Заявка пока пустая</strong>
         <span>Добавьте товары из каталога.</span>
       </div>
-      <button id="copyRequestButton" class="primary-button wide" type="button" hidden>Скопировать список</button>
-      <p class="helper-text">Пока заявка работает локально в браузере. На этапе хостинга подключим отправку менеджеру.</p>
+      <button id="copyRequestButton" class="dialog-primary wide" type="button" hidden>
+        Скопировать список
+      </button>
+      <p class="helper-text">
+        Пока список сохраняется в этом браузере. На этапе хостинга подключим отправку менеджеру.
+      </p>
     </div>
   </dialog>
 
   <template id="productCardTemplate">
     <article class="product-card">
       <button class="product-image-button" type="button">
+        <div class="product-image-bg"></div>
         <img class="product-image" loading="lazy" alt="" />
-        <div class="image-placeholder">Нет фото</div>
+        <div class="image-placeholder">NO IMAGE</div>
+        <span class="product-open-icon" aria-hidden="true">↗</span>
       </button>
+
       <div class="product-body">
-        <div class="product-brand"></div>
+        <div class="product-topline">
+          <div class="product-brand"></div>
+          <div class="product-article"></div>
+        </div>
+
         <button class="product-title" type="button"></button>
+
         <div class="product-meta-row">
           <span class="product-color"></span>
           <span class="product-size-count"></span>
         </div>
-        <div class="product-article"></div>
+
         <div class="product-bottom">
           <div class="price-wrap">
-            <div class="price-label">Оптовая цена</div>
-            <div class="product-price">По запросу</div>
+            <div class="price-label">ОПТОМ ОТ</div>
+            <div class="product-price"></div>
           </div>
-          <button class="add-button" type="button">+ В заявку</button>
+          <button class="add-button" type="button">
+            <span class="add-label">В заявку</span>
+            <span class="add-icon">＋</span>
+          </button>
         </div>
       </div>
     </article>
