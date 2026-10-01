@@ -1,0 +1,349 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "id": "combat",
+      "name": "Единоборства",
+      "slug": "edinoborstva",
+      "parentId": null,
+      "sort": 10,
+      "active": true
+    },
+    {
+      "id": "boxing",
+      "name": "Бокс",
+      "slug": "boks",
+      "parentId": "combat",
+      "sort": 10,
+      "active": true
+    },
+    {
+      "id": "boxing-gloves",
+      "name": "Боксерские перчатки",
+      "slug": "perchatki",
+      "parentId": "boxing",
+      "sort": 10,
+      "active": true
+    },
+    {
+      "id": "boxing-helmets",
+      "name": "Шлемы",
+      "slug": "shlemy",
+      "parentId": "boxing",
+      "sort": 20,
+      "active": true
+    },
+    {
+      "id": "boxing-mitts",
+      "name": "Лапы и пады",
+      "slug": "lapy",
+      "parentId": "boxing",
+      "sort": 30,
+      "active": true
+    },
+    {
+      "id": "boxing-wraps",
+      "name": "Бинты",
+      "slug": "binty",
+      "parentId": "boxing",
+      "sort": 40,
+      "active": true
+    },
+    {
+      "id": "boxing-protection",
+      "name": "Защита",
+      "slug": "zashchita",
+      "parentId": "boxing",
+      "sort": 50,
+      "active": true
+    },
+    {
+      "id": "judo",
+      "name": "Дзюдо",
+      "slug": "judo",
+      "parentId": "combat",
+      "sort": 20,
+      "active": true
+    },
+    {
+      "id": "judo-gi",
+      "name": "Кимоно",
+      "slug": "kimono",
+      "parentId": "judo",
+      "sort": 10,
+      "active": true
+    },
+    {
+      "id": "judo-belts",
+      "name": "Пояса",
+      "slug": "poyasa",
+      "parentId": "judo",
+      "sort": 20,
+      "active": true
+    },
+    {
+      "id": "bjj",
+      "name": "BJJ / Джиу-джитсу",
+      "slug": "bjj",
+      "parentId": "combat",
+      "sort": 30,
+      "active": true
+    },
+    {
+      "id": "bjj-gi",
+      "name": "Ги",
+      "slug": "gi",
+      "parentId": "bjj",
+      "sort": 10,
+      "active": true
+    },
+    {
+      "id": "bjj-belts",
+      "name": "Пояса",
+      "slug": "poyasa",
+      "parentId": "bjj",
+      "sort": 20,
+      "active": true
+    },
+    {
+      "id": "bjj-apparel",
+      "name": "Одежда",
+      "slug": "odezhda",
+      "parentId": "bjj",
+      "sort": 30,
+      "active": true
+    },
+    {
+      "id": "karate",
+      "name": "Карате / Киокушинкай",
+      "slug": "karate",
+      "parentId": "combat",
+      "sort": 40,
+      "active": true
+    },
+    {
+      "id": "karate-gi",
+      "name": "Кимоно",
+      "slug": "kimono",
+      "parentId": "karate",
+      "sort": 10,
+      "active": true
+    },
+    {
+      "id": "karate-gloves",
+      "name": "Перчатки и накладки",
+      "slug": "perchatki",
+      "parentId": "karate",
+      "sort": 20,
+      "active": true
+    },
+    {
+      "id": "karate-protection",
+      "name": "Защита",
+      "slug": "zashchita",
+      "parentId": "karate",
+      "sort": 30,
+      "active": true
+    },
+    {
+      "id": "karate-belts",
+      "name": "Пояса",
+      "slug": "poyasa",
+      "parentId": "karate",
+      "sort": 40,
+      "active": true
+    },
+    {
+      "id": "mma",
+      "name": "MMA",
+      "slug": "mma",
+      "parentId": "combat",
+      "sort": 50,
+      "active": true
+    },
+    {
+      "id": "mma-gloves",
+      "name": "Перчатки MMA",
+      "slug": "perchatki",
+      "parentId": "mma",
+      "sort": 10,
+      "active": true
+    },
+    {
+      "id": "mma-protection",
+      "name": "Защита",
+      "slug": "zashchita",
+      "parentId": "mma",
+      "sort": 20,
+      "active": true
+    },
+    {
+      "id": "combat-unclassified",
+      "name": "Единоборства — требуется разбор",
+      "slug": "razbor",
+      "parentId": "combat",
+      "sort": 99,
+      "active": false,
+      "internal": true
+    },
+    {
+      "id": "combat-kimonos-unclassified",
+      "name": "Кимоно — требуется разбор",
+      "slug": "kimono",
+      "parentId": "combat-unclassified",
+      "sort": 10,
+      "active": false,
+      "internal": true
+    },
+    {
+      "id": "combat-belts-unclassified",
+      "name": "Пояса — требуется разбор",
+      "slug": "poyasa",
+      "parentId": "combat-unclassified",
+      "sort": 20,
+      "active": false,
+      "internal": true
+    },
+    {
+      "id": "combat-protection-unclassified",
+      "name": "Защита — требуется разбор",
+      "slug": "zashchita",
+      "parentId": "combat-unclassified",
+      "sort": 30,
+      "active": false,
+      "internal": true
+    },
+    {
+      "id": "combat-apparel-unclassified",
+      "name": "Одежда — требуется разбор",
+      "slug": "odezhda",
+      "parentId": "combat-unclassified",
+      "sort": 40,
+      "active": false,
+      "internal": true
+    },
+    {
+      "id": "football",
+      "name": "Футбол",
+      "slug": "football",
+      "parentId": null,
+      "sort": 20,
+      "active": true
+    },
+    {
+      "id": "football-balls",
+      "name": "Мячи",
+      "slug": "myachi",
+      "parentId": "football",
+      "sort": 10,
+      "active": true
+    },
+    {
+      "id": "football-boots",
+      "name": "Бутсы",
+      "slug": "butsy",
+      "parentId": "football",
+      "sort": 20,
+      "active": true
+    },
+    {
+      "id": "volleyball",
+      "name": "Волейбол",
+      "slug": "volleyball",
+      "parentId": null,
+      "sort": 30,
+      "active": true
+    },
+    {
+      "id": "volleyball-balls",
+      "name": "Мячи",
+      "slug": "myachi",
+      "parentId": "volleyball",
+      "sort": 10,
+      "active": true
+    },
+    {
+      "id": "volleyball-nets",
+      "name": "Сетки",
+      "slug": "setki",
+      "parentId": "volleyball",
+      "sort": 20,
+      "active": true
+    },
+    {
+      "id": "volleyball-kneepads",
+      "name": "Наколенники",
+      "slug": "nakolenniki",
+      "parentId": "volleyball",
+      "sort": 30,
+      "active": true
+    },
+    {
+      "id": "fitness",
+      "name": "Фитнес",
+      "slug": "fitness",
+      "parentId": null,
+      "sort": 40,
+      "active": true
+    },
+    {
+      "id": "fitness-expanders",
+      "name": "Эспандеры",
+      "slug": "espandery",
+      "parentId": "fitness",
+      "sort": 10,
+      "active": true
+    },
+    {
+      "id": "fitness-straps",
+      "name": "Лямки",
+      "slug": "lyamki",
+      "parentId": "fitness",
+      "sort": 20,
+      "active": true
+    },
+    {
+      "id": "accessories",
+      "name": "Аксессуары",
+      "slug": "aksessuary",
+      "parentId": null,
+      "sort": 50,
+      "active": true
+    },
+    {
+      "id": "sports-bags",
+      "name": "Спортивные сумки",
+      "slug": "sumki",
+      "parentId": "accessories",
+      "sort": 10,
+      "active": true
+    },
+    {
+      "id": "sports-unclassified",
+      "name": "Спорт — требуется разбор",
+      "slug": "razbor-sport",
+      "parentId": null,
+      "sort": 99,
+      "active": false,
+      "internal": true
+    },
+    {
+      "id": "balls-unclassified",
+      "name": "Мячи — требуется разбор",
+      "slug": "myachi",
+      "parentId": "sports-unclassified",
+      "sort": 10,
+      "active": false,
+      "internal": true
+    },
+    {
+      "id": "protection-unclassified",
+      "name": "Защита — требуется разбор",
+      "slug": "zashchita",
+      "parentId": "sports-unclassified",
+      "sort": 20,
+      "active": false,
+      "internal": true
+    }
+  ]
+}
