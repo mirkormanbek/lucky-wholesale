@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light" />
+  <title>Lucky Wholesale — оптовый каталог</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark">L</div>
+      <div>
+        <div class="brand-title">Lucky Wholesale</div>
+        <div class="brand-subtitle">Оптовый каталог спортивных товаров</div>
+      </div>
+    </div>
+
+    <div class="topbar-actions">
+      <label class="currency-select">
+        <span>Валюта</span>
+        <select id="currencySelect" aria-label="Валюта">
+          <option value="KZT">₸ KZT</option>
+          <option value="RUB">₽ RUB</option>
+          <option value="USD">$ USD</option>
+        </select>
+      </label>
+      <button id="requestButton" class="primary-button" type="button">
+        Заявка <span id="requestCount">0</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <section class="hero">
+      <div>
+        <div class="eyebrow">B2B каталог</div>
+        <h1>Спортивный инвентарь оптом</h1>
+        <p>Актуальный ассортимент с Wildberries и товары, добавленные вручную. Цвета и карточки пока отображаются отдельно.</p>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-card">
+          <div class="stat-value" id="productCount">—</div>
+          <div class="stat-label">товаров</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="categoryCount">—</div>
+          <div class="stat-label">категорий</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="controls">
+      <div class="search-wrap">
+        <input id="searchInput" type="search" placeholder="Поиск по названию, бренду, артикулу, цвету…" autocomplete="off" />
+      </div>
+      <button id="filtersToggle" class="secondary-button filters-toggle" type="button">Категории</button>
+    </section>
+
+    <div class="catalog-layout">
+      <aside id="sidebar" class="sidebar">
+        <div class="sidebar-head">
+          <strong>Категории</strong>
+          <button id="clearCategory" class="text-button" type="button">Сбросить</button>
+        </div>
+        <nav id="categoryTree" class="category-tree" aria-label="Категории"></nav>
+      </aside>
+
+      <section class="catalog-content">
+        <div class="catalog-toolbar">
+          <div>
+            <div id="activeCategoryTitle" class="catalog-title">Все товары</div>
+            <div id="resultsMeta" class="catalog-meta">Загрузка…</div>
+          </div>
+          <label class="sort-select">
+            <span>Сортировка</span>
+            <select id="sortSelect">
+              <option value="default">По умолчанию</option>
+              <option value="title">По названию</option>
+              <option value="brand">По бренду</option>
+              <option value="priceAsc">Цена: сначала ниже</option>
+              <option value="priceDesc">Цена: сначала выше</option>
+            </select>
+          </label>
+        </div>
+
+        <div id="productGrid" class="product-grid"></div>
+
+        <div id="emptyState" class="empty-state" hidden>
+          <strong>Ничего не найдено</strong>
+          <span>Попробуйте изменить категорию или поисковый запрос.</span>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <dialog id="productDialog" class="product-dialog">
+    <button id="dialogClose" class="dialog-close" aria-label="Закрыть">×</button>
+    <div id="dialogContent"></div>
+  </dialog>
+
+  <dialog id="requestDialog" class="request-dialog">
+    <button id="requestDialogClose" class="dialog-close" aria-label="Закрыть">×</button>
+    <div class="dialog-section">
+      <div class="eyebrow">Оптовая заявка</div>
+      <h2>Выбранные товары</h2>
+      <div id="requestItems" class="request-items"></div>
+      <div id="requestEmpty" class="empty-state">
+        <strong>Заявка пока пустая</strong>
+        <span>Добавьте товары из каталога.</span>
+      </div>
+      <button id="copyRequestButton" class="primary-button wide" type="button" hidden>Скопировать список</button>
+      <p class="helper-text">Пока заявка работает локально в браузере. На этапе хостинга подключим отправку менеджеру.</p>
+    </div>
+  </dialog>
+
+  <template id="productCardTemplate">
+    <article class="product-card">
+      <button class="product-image-button" type="button">
+        <img class="product-image" loading="lazy" alt="" />
+        <div class="image-placeholder">Нет фото</div>
+      </button>
+      <div class="product-body">
+        <div class="product-brand"></div>
+        <button class="product-title" type="button"></button>
+        <div class="product-meta-row">
+          <span class="product-color"></span>
+          <span class="product-size-count"></span>
+        </div>
+        <div class="product-article"></div>
+        <div class="product-bottom">
+          <div class="price-wrap">
+            <div class="price-label">Оптовая цена</div>
+            <div class="product-price">По запросу</div>
+          </div>
+          <button class="add-button" type="button">+ В заявку</button>
+        </div>
+      </div>
+    </article>
+  </template>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
