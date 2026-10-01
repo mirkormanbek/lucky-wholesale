@@ -308,6 +308,20 @@
       "categoryIds": [
         "swimming-accessories"
       ]
+    },
+    {
+      "subjectIDs": [
+        393
+      ],
+      "matchAny": [
+        "скейт",
+        "ролик",
+        "самокат",
+        "skate"
+      ],
+      "categoryIds": [
+        "action-sports-protection"
+      ]
     }
   ]
 }
