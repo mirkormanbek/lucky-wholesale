@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "productCardPolicy": "source-card",
+  "colorDisplayPolicy": "separate-product-cards",
+  "mergePolicy": "manual-only",
+  "similarProductDetection": {
+    "enabled": true,
+    "action": "report-only",
+    "neverAutoMerge": true
+  },
+  "notes": [
+    "Каждая карточка WB остается отдельным товаром в публичном каталоге.",
+    "Разные цвета не объединяются автоматически.",
+    "Похожие названия считаются только кандидатами на проверку, а не дублями.",
+    "Объединение возможно только после явного ручного подтверждения."
+  ]
+}
