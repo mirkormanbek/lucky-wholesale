@@ -21,6 +21,7 @@ const overridesConfig = await readJson(path.join(root, "catalog/product-override
   overrides: {}
 });
 const manualProducts = await readJson(path.join(root, "catalog/manual-products.json"), []);
+const pricesConfig = await readJson(path.join(root, "catalog/prices.json"), { byProductId: {}, byNmID: {} });
 const fx = await readJson(path.join(root, "data/fx.json"));
 
 const categories = categoryConfig.categories || [];
@@ -285,6 +286,48 @@ function validateCategories(product) {
   return valid.length ? valid : ["sports-unclassified"];
 }
 
+function normalizePriceEntry(entry) {
+  if (entry == null || entry === "") return null;
+
+  if (typeof entry === "number" || typeof entry === "string") {
+    const priceFromKzt = Number(entry);
+    return Number.isFinite(priceFromKzt) && priceFromKzt > 0
+      ? { priceFromKzt }
+      : null;
+  }
+
+  if (typeof entry === "object") {
+    const priceFromKzt = Number(entry.priceFromKzt);
+    if (!Number.isFinite(priceFromKzt) || priceFromKzt <= 0) return null;
+
+    const result = { priceFromKzt };
+    const minOrderQuantity = Number(entry.minOrderQuantity);
+
+    if (Number.isFinite(minOrderQuantity) && minOrderQuantity > 0) {
+      result.minOrderQuantity = minOrderQuantity;
+    }
+
+    return result;
+  }
+
+  return null;
+}
+
+function catalogPriceFor(product) {
+  const byProductId = pricesConfig.byProductId || {};
+  const byNmID = pricesConfig.byNmID || {};
+
+  const direct = normalizePriceEntry(byProductId[product.id]);
+  if (direct) return direct;
+
+  for (const nmID of product.sourceNmIDs || []) {
+    const byWbId = normalizePriceEntry(byNmID[String(nmID)]);
+    if (byWbId) return byWbId;
+  }
+
+  return null;
+}
+
 const includedWb = wbProducts.filter((product) => includedParents.has(product.parentName));
 const wbCards = includedWb
   .filter((product) => !hiddenNmIDs.has(String(product.nmID)))
@@ -324,6 +367,15 @@ for (const manual of manualProducts) {
 
 for (const product of builtProducts) {
   product.categoryIds = validateCategories(product);
+
+  const catalogPrice = catalogPriceFor(product);
+  if (catalogPrice) {
+    product.priceFromKzt = catalogPrice.priceFromKzt;
+    if (catalogPrice.minOrderQuantity != null) {
+      product.minOrderQuantity = catalogPrice.minOrderQuantity;
+    }
+  }
+
   product.priceFrom = convertedPrices(
     product.priceFromKzt == null ? null : Number(product.priceFromKzt)
   );
