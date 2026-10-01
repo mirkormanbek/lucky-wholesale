@@ -70,7 +70,7 @@ function priceText(product) {
   const currency = state.currency;
   const value = product.priceFrom?.[currency];
 
-  if (value == null) return "По запросу";
+  if (value == null) return null;
 
   const prefix = currency === "KZT" ? "от " : "≈ от ";
   return prefix + money(value, currency);
@@ -204,6 +204,7 @@ function renderProductCard(product) {
   const sizeCount = fragment.querySelector(".product-size-count");
   const article = fragment.querySelector(".product-article");
   const price = fragment.querySelector(".product-price");
+  const priceWrap = fragment.querySelector(".price-wrap");
   const addButton = fragment.querySelector(".add-button");
 
   const photo = product.photos?.[0];
@@ -224,7 +225,13 @@ function renderProductCard(product) {
   brand.textContent = product.brand || "Без бренда";
   title.textContent = product.title || "Без названия";
   article.textContent = product.article ? `Артикул: ${product.article}` : "";
-  price.textContent = priceText(product);
+
+  const priceValue = priceText(product);
+  if (priceValue) {
+    price.textContent = priceValue;
+  } else {
+    priceWrap.hidden = true;
+  }
 
   const colorText = firstColor(product);
   if (colorText) {
@@ -287,10 +294,12 @@ function openProduct(product) {
         <h2>${escapeHtml(product.title || "Без названия")}</h2>
         <div class="product-article">Артикул: ${escapeHtml(product.article || "—")}</div>
 
-        <div class="info-block">
-          <div class="info-label">Оптовая цена</div>
-          <div class="dialog-price">${escapeHtml(priceText(product))}</div>
-        </div>
+        ${priceText(product) ? `
+          <div class="info-block">
+            <div class="info-label">Оптовая цена</div>
+            <div class="dialog-price">${escapeHtml(priceText(product))}</div>
+          </div>
+        ` : ""}
 
         ${colors.length ? `
           <div class="info-block">
@@ -371,7 +380,7 @@ function renderRequest() {
         <div class="request-item-meta">
           ${escapeHtml(product.article || "")}
           ${product.colors?.length ? " · " + escapeHtml(product.colors.join(", ")) : ""}
-          · ${escapeHtml(priceText(product))}
+          ${priceText(product) ? " · " + escapeHtml(priceText(product)) : ""}
         </div>
       </div>
       <button class="remove-button" type="button">Удалить</button>
@@ -394,7 +403,7 @@ async function copyRequest() {
     "Оптовая заявка Lucky Wholesale",
     "",
     ...items.map((product, index) =>
-      `${index + 1}. ${product.title} | ${product.article || "без артикула"} | ${(product.colors || []).join(", ") || "цвет не указан"} | ${priceText(product)}`
+      `${index + 1}. ${product.title} | ${product.article || "без артикула"} | ${(product.colors || []).join(", ") || "цвет не указан"}${priceText(product) ? " | " + priceText(product) : ""}`
     )
   ];
 
