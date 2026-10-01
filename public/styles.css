@@ -91,31 +91,12 @@ button { cursor: pointer; }
   text-decoration: none;
 }
 
-.brand-clover {
-  position: relative;
+.brand-logo {
   display: block;
-  width: 30px;
-  height: 30px;
-  transform: rotate(45deg);
-}
-
-.brand-clover i {
-  position: absolute;
-  width: 13px;
-  height: 18px;
-  border-radius: 70% 70% 55% 55%;
-  background: var(--lime);
-}
-
-.brand-clover i:nth-child(1) { left: 1px; top: 0; transform: rotate(-44deg); }
-.brand-clover i:nth-child(2) { right: 1px; top: 0; transform: rotate(44deg); }
-.brand-clover i:nth-child(3) { left: 1px; bottom: 0; transform: rotate(-136deg); }
-.brand-clover i:nth-child(4) { right: 1px; bottom: 0; transform: rotate(136deg); }
-
-.brand-word {
-  font-size: 19px;
-  font-weight: 900;
-  letter-spacing: -.04em;
+  width: 88px;
+  height: 48px;
+  object-fit: contain;
+  object-position: left center;
 }
 
 .brand-mode {
@@ -1282,13 +1263,12 @@ dialog::backdrop {
 
   .site-header { min-height: 60px; }
 
-  .brand-word { font-size: 17px; }
-  .brand-mode { display: none; }
-
-  .brand-clover {
-    width: 27px;
-    height: 27px;
+  .brand-logo {
+    width: 74px;
+    height: 42px;
   }
+
+  .brand-mode { display: none; }
 
   .request-button {
     padding: 7px 8px 7px 11px;
