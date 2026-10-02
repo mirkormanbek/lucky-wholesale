@@ -27,6 +27,9 @@
     </nav>
 
     <div class="header-actions">
+      <button id="menuToggle" class="menu-toggle" type="button" aria-label="Открыть меню" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
       <label id="currencyControl" class="currency-select">
         <span class="sr-only">Валюта</span>
         <select id="currencySelect" aria-label="Валюта">
@@ -40,6 +43,13 @@
       </button>
     </div>
   </header>
+
+  <nav id="mobileNav" class="mobile-nav" aria-label="Мобильное меню">
+    <a href="#catalog">Каталог <span>↘</span></a>
+    <a href="#about">О нас <span>↘</span></a>
+    <a href="#delivery">Доставка <span>↘</span></a>
+    <a href="#contact">Связаться с нами <span>↘</span></a>
+  </nav>
 
   <main>
     <section class="catalog-masthead">
