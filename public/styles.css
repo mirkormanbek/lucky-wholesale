@@ -32,7 +32,11 @@ button,input,select{font:inherit} button{cursor:pointer}
 
 .sport-marquee{overflow:hidden;background:var(--ink);border-top:1px solid rgba(255,255,255,.1);border-bottom:1px solid rgba(255,255,255,.1);color:#8b8f93}
 .marquee-track{display:flex;width:max-content;animation:marquee 26s linear infinite}.marquee-group{display:flex;align-items:center;gap:18px;padding:13px 9px;font-size:11px;font-weight:850;letter-spacing:.12em;white-space:nowrap}
-.clover{position:relative;width:13px;height:13px;display:inline-block;flex:0 0 13px}.clover:before,.clover:after{content:"";position:absolute;background:var(--lime);border-radius:75% 55% 75% 55%}.clover:before{width:7px;height:11px;left:1px;top:1px;transform:rotate(-45deg);box-shadow:5px 5px 0 var(--lime)}.clover:after{width:7px;height:11px;right:1px;top:1px;transform:rotate(45deg);box-shadow:-5px 5px 0 var(--lime)}
+.clover{width:14px;height:14px;display:inline-block;flex:0 0 14px;background:
+radial-gradient(circle at 32% 32%,var(--lime) 0 28%,transparent 30%),
+radial-gradient(circle at 68% 32%,var(--lime) 0 28%,transparent 30%),
+radial-gradient(circle at 32% 68%,var(--lime) 0 28%,transparent 30%),
+radial-gradient(circle at 68% 68%,var(--lime) 0 28%,transparent 30%);transform:rotate(10deg)}
 @keyframes marquee{to{transform:translateX(-50%)}}
 
 .shop-by{background:var(--paper);padding:42px max(24px,calc((100vw - 1500px)/2)) 46px}
