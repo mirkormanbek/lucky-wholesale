@@ -24,6 +24,61 @@ const manualProducts = await readJson(path.join(root, "catalog/manual-products.j
 const pricesConfig = await readJson(path.join(root, "catalog/prices.json"), { byProductId: {}, byNmID: {} });
 const fx = await readJson(path.join(root, "data/fx.json"));
 
+async function readText(file, fallback = "") {
+  try {
+    return await fs.readFile(file, "utf8");
+  } catch (error) {
+    if (error.code === "ENOENT") return fallback;
+    throw error;
+  }
+}
+
+function parseCsvLine(line) {
+  const values = [];
+  let current = "";
+  let quoted = false;
+
+  for (let i = 0; i < line.length; i += 1) {
+    const ch = line[i];
+
+    if (ch === '"') {
+      if (quoted && line[i + 1] === '"') {
+        current += '"';
+        i += 1;
+      } else {
+        quoted = !quoted;
+      }
+    } else if (ch === "," && !quoted) {
+      values.push(current);
+      current = "";
+    } else {
+      current += ch;
+    }
+  }
+
+  values.push(current);
+  return values;
+}
+
+const skuCsv = (await readText(path.join(root, "data/skus.csv"))).replace(/^\uFEFF/, "");
+const skuLines = skuCsv.split(/\r?\n/).filter(Boolean);
+const skuHeader = skuLines.length ? parseCsvLine(skuLines[0]) : [];
+const nmIdIndex = skuHeader.indexOf("Артикул WB");
+const photoIndex = skuHeader.indexOf("Фото");
+const photoByNmID = new Map();
+
+if (nmIdIndex >= 0 && photoIndex >= 0) {
+  for (const line of skuLines.slice(1)) {
+    const row = parseCsvLine(line);
+    const nmID = row[nmIdIndex];
+    const photo = row[photoIndex];
+
+    if (nmID && photo && /^https?:\/\//i.test(photo) && !photoByNmID.has(String(nmID))) {
+      photoByNmID.set(String(nmID), photo);
+    }
+  }
+}
+
 const categories = categoryConfig.categories || [];
 const validCategoryIds = new Set(categories.map((c) => c.id));
 const internalCategoryIds = new Set(categories.filter((c) => c.internal).map((c) => c.id));
@@ -173,6 +228,13 @@ function applyOverride(base, override = {}) {
 
 function buildWbCard(product) {
   const colors = extractColors(product);
+  const photos = extractPhotos(product);
+  const fallbackPhoto = photoByNmID.get(String(product.nmID));
+
+  if (fallbackPhoto && !photos.includes(fallbackPhoto)) {
+    photos.unshift(fallbackPhoto);
+  }
+
   const base = {
     id: `wb-${product.nmID}`,
     source: "wb",
@@ -184,7 +246,7 @@ function buildWbCard(product) {
     categoryIds: categoryIdsForWb(product),
     colors,
     sizes: wbSizes(product),
-    photos: extractPhotos(product),
+    photos,
     priceFromKzt: null,
     minOrderQuantity: null,
     wbMeta: {
