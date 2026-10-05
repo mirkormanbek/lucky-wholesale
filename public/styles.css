@@ -903,3 +903,145 @@ main{background:var(--dark-bg)}
   .brand-quality-item-wide img{width:52px}
   .brand-quality-item span{font-size:11px}
 }
+
+
+/* ===== Showcase composition V2: one hero product + one different product + info card ===== */
+.showcase-grid{
+  grid-template-columns:1.15fr .95fr .72fr;
+  grid-template-rows:1fr 1fr;
+  min-height:360px;
+}
+.showcase-copy{
+  grid-column:1;
+  grid-row:1/3;
+}
+.showcase-product-main{
+  grid-column:2;
+  grid-row:1/3;
+  min-height:360px;
+}
+.showcase-product-side{
+  grid-column:3;
+  grid-row:1;
+  min-height:175px;
+}
+.showcase-info-card{
+  grid-column:3;
+  grid-row:2;
+  min-height:175px;
+  padding:18px;
+  border:1px solid #27302c;
+  border-radius:22px;
+  background:
+    radial-gradient(circle at 88% 12%,rgba(183,222,44,.13),transparent 30%),
+    linear-gradient(145deg,#15191a,#101315);
+  box-shadow:0 0 35px rgba(183,222,44,.045);
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+.showcase-info-kicker{
+  color:var(--neon);
+  font-size:8px;
+  font-weight:900;
+  letter-spacing:.14em;
+}
+.showcase-info-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px 14px;
+  margin:10px 0;
+}
+.showcase-info-grid div{
+  display:grid;
+  gap:2px;
+}
+.showcase-info-grid strong{
+  color:#f5f6f7;
+  font-size:22px;
+  line-height:1;
+  letter-spacing:-.05em;
+}
+.showcase-info-grid span{
+  color:#7f878d;
+  font-size:8px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+.showcase-info-card p{
+  margin:0;
+  color:#969da2;
+  font-size:9px;
+  line-height:1.4;
+}
+
+/* Brand strip: same rounded UI language + optically equal logo sizing */
+.brand-quality-strip{
+  border-radius:20px !important;
+  border-color:#27302c !important;
+  background:
+    radial-gradient(circle at 8% 50%,rgba(183,222,44,.055),transparent 22%),
+    linear-gradient(180deg,#131618,#101315) !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.012),
+    0 0 34px rgba(183,222,44,.035) !important;
+  overflow:hidden;
+}
+.brand-quality-item{
+  min-width:158px;
+  gap:11px;
+}
+.brand-quality-item img,
+.brand-quality-item-wide img,
+.brand-quality-item:nth-child(1) img,
+.brand-quality-item:nth-child(2) img,
+.brand-quality-item:nth-child(3) img,
+.brand-quality-item:nth-child(4) img,
+.brand-quality-item:nth-child(6) img{
+  width:62px !important;
+  height:30px !important;
+  max-width:62px !important;
+  max-height:30px !important;
+  object-fit:contain !important;
+  transform:none !important;
+  flex:0 0 62px;
+}
+.brand-quality-item:nth-child(2) img{width:56px !important;max-width:56px !important;flex-basis:56px}
+.brand-quality-item:nth-child(3) img{width:48px !important;max-width:48px !important;flex-basis:48px;height:32px !important;max-height:32px !important}
+.brand-quality-item:nth-child(4) img{width:64px !important;max-width:64px !important;flex-basis:64px;height:25px !important;max-height:25px !important}
+.brand-quality-item:nth-child(5) img{width:66px !important;max-width:66px !important;flex-basis:66px;height:27px !important;max-height:27px !important}
+.brand-quality-item:nth-child(6) img{width:67px !important;max-width:67px !important;flex-basis:67px;height:27px !important;max-height:27px !important}
+.brand-quality-item:hover img,
+.brand-quality-item:hover img[src*="fightersmarket"],
+.brand-quality-item:hover img[src*="cybassets"]{
+  transform:none !important;
+}
+.brand-quality-item span{
+  min-width:58px;
+}
+
+/* Responsive composition */
+@media(max-width:1100px){
+  .showcase-grid{
+    grid-template-columns:1fr 1fr;
+    grid-template-rows:auto 260px auto;
+  }
+  .showcase-copy{grid-column:1/3;grid-row:1}
+  .showcase-product-main{grid-column:1;grid-row:2;min-height:260px}
+  .showcase-product-side{grid-column:2;grid-row:2;min-height:260px}
+  .showcase-info-card{grid-column:1/3;grid-row:3;min-height:0}
+  .showcase-info-grid{grid-template-columns:repeat(4,1fr)}
+}
+@media(max-width:720px){
+  .showcase-grid{
+    grid-template-columns:1fr 1fr;
+    grid-template-rows:auto 190px auto;
+  }
+  .showcase-product-main,.showcase-product-side{min-height:190px}
+  .showcase-info-card{padding:15px;border-radius:18px}
+  .showcase-info-grid{grid-template-columns:1fr 1fr}
+  .brand-quality-strip{border-radius:16px !important}
+  .brand-quality-item{min-width:136px}
+  .brand-quality-item img,
+  .brand-quality-item-wide img{transform:scale(.9) !important}
+}
