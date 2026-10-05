@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-10-05T13:03:13.891Z",
+  "generatedAt": "2026-10-05T13:19:14.902Z",
   "summary": {
-    "generatedAt": "2026-10-05T13:03:13.891Z",
+    "generatedAt": "2026-10-05T13:19:14.902Z",
     "wbCardsIncluded": 289,
     "wbCardsHidden": 50,
     "manualProducts": 0,
@@ -13,7 +13,7 @@
     "categoryReviewCount": 0,
     "similarProductGroups": 54,
     "fxEffectiveDate": "05.10.2026",
-    "popularityStatus": "analytics-access-required",
+    "popularityStatus": "ok",
     "popularityPeriod": {
       "start": "2026-09-06",
       "end": "2026-10-05"
