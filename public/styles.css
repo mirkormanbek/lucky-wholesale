@@ -475,3 +475,26 @@ main{background:var(--dark-bg)}
   .sport-card{flex:0 0 58vw;min-height:98px}
   .shop-by .section-heading h2{font-size:30px}
 }
+
+
+/* Category card spacing refinement */
+.sport-name{
+  margin-bottom:10px;
+}
+.sport-bottom{
+  position:static;
+  margin-top:0;
+}
+.sport-card{
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+}
+.sport-index{
+  position:absolute;
+}
+.sport-bottom{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
