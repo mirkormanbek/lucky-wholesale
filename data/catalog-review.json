@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-10-05T13:00:03.965Z",
+  "generatedAt": "2026-10-05T13:03:13.891Z",
   "summary": {
-    "generatedAt": "2026-10-05T13:00:03.965Z",
+    "generatedAt": "2026-10-05T13:03:13.891Z",
     "wbCardsIncluded": 289,
     "wbCardsHidden": 50,
     "manualProducts": 0,
@@ -12,7 +12,12 @@
     "productsWithoutPrice": 239,
     "categoryReviewCount": 0,
     "similarProductGroups": 54,
-    "fxEffectiveDate": "05.10.2026"
+    "fxEffectiveDate": "05.10.2026",
+    "popularityStatus": "analytics-access-required",
+    "popularityPeriod": {
+      "start": "2026-09-06",
+      "end": "2026-10-05"
+    }
   },
   "needsCategoryReview": [],
   "similarProductCandidates": [
