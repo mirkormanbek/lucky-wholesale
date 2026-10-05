@@ -37,7 +37,23 @@ function renderQuickCategories(){const cats=topLevelCategories().filter(c=>produ
 function firstColor(p){const c=p.colors||[];return c.length===0?"":c.length===1?c[0]:`${c[0]} +${c.length-1}`}
 function renderCard(product){
   const f=el.template.content.cloneNode(true),card=f.querySelector(".product-card"),imageButton=f.querySelector(".product-image-button"),img=f.querySelector(".product-image"),ph=f.querySelector(".image-placeholder"),brand=f.querySelector(".product-brand"),title=f.querySelector(".product-title"),color=f.querySelector(".product-color"),size=f.querySelector(".product-size-count"),article=f.querySelector(".product-article"),price=f.querySelector(".product-price"),priceWrap=f.querySelector(".price-wrap"),add=f.querySelector(".add-button"),addLabel=f.querySelector(".add-label"),addIcon=f.querySelector(".add-icon");
-  const photo=product.photos?.[0];if(photo){img.src=photo;img.alt=product.title||"Товар";img.addEventListener("load",()=>{img.classList.add("visible");ph.hidden=true});img.addEventListener("error",()=>{img.removeAttribute("src");img.classList.remove("visible");ph.hidden=false})}
+  const photo=product.photos?.[0];
+  if(photo){
+    const showImage=()=>{img.classList.add("visible");ph.hidden=true};
+    const showPlaceholder=()=>{img.classList.remove("visible");ph.hidden=false};
+
+    img.alt=product.title||"Товар";
+    img.addEventListener("load",showImage,{once:true});
+    img.addEventListener("error",showPlaceholder,{once:true});
+    img.src=photo;
+
+    // Local cached images can finish loading before the load listener fires.
+    // Handle the browser cache case explicitly so grid images never stay hidden.
+    if(img.complete){
+      if(img.naturalWidth>0) showImage();
+      else showPlaceholder();
+    }
+  }
   brand.textContent=product.brand||"Lucky";title.textContent=product.title||"Без названия";article.textContent=product.article||"";
   const pv=priceText(product);if(pv)price.textContent=pv;else priceWrap.hidden=true;
   const ct=firstColor(product);if(ct){color.textContent=ct;color.classList.add("visible")}const sizes=product.sizes||[];if(sizes.length){size.textContent=sizes.length===1?sizes[0]:`${sizes.length} размеров`;size.classList.add("visible")}
