@@ -23,6 +23,10 @@ const overridesConfig = await readJson(path.join(root, "catalog/product-override
 const manualProducts = await readJson(path.join(root, "catalog/manual-products.json"), []);
 const pricesConfig = await readJson(path.join(root, "catalog/prices.json"), { byProductId: {}, byNmID: {} });
 const fx = await readJson(path.join(root, "data/fx.json"));
+const popularity = await readJson(path.join(root, "data/popularity.json"), {
+  status: "missing",
+  rankByNmID: {}
+});
 
 async function readText(file, fallback = "") {
   try {
@@ -390,6 +394,15 @@ function catalogPriceFor(product) {
   return null;
 }
 
+function popularityRankFor(product) {
+  const rankByNmID = popularity.rankByNmID || {};
+  const ranks = (product.sourceNmIDs || [])
+    .map((nmID) => Number(rankByNmID[String(nmID)]))
+    .filter((rank) => Number.isFinite(rank) && rank > 0);
+
+  return ranks.length ? Math.min(...ranks) : null;
+}
+
 const includedWb = wbProducts.filter((product) => includedParents.has(product.parentName));
 const wbCards = includedWb
   .filter((product) => !hiddenNmIDs.has(String(product.nmID)))
@@ -441,6 +454,7 @@ for (const product of builtProducts) {
   product.priceFrom = convertedPrices(
     product.priceFromKzt == null ? null : Number(product.priceFromKzt)
   );
+  product.popularityRank = popularityRankFor(product);
 }
 
 function normalizeFingerprint(value) {
@@ -495,7 +509,10 @@ const internalCatalog = builtProducts
         ? perProductOverrides[String(product.sourceNmIDs[0])]?.priceTiers || []
         : [])
   }))
-  .sort((a, b) => a.title.localeCompare(b.title, "ru"));
+  .sort((a, b) =>
+    (a.popularityRank ?? Number.MAX_SAFE_INTEGER) - (b.popularityRank ?? Number.MAX_SAFE_INTEGER) ||
+    a.title.localeCompare(b.title, "ru")
+  );
 
 const publicCatalog = internalCatalog.map((product) => ({
   id: product.id,
@@ -509,7 +526,8 @@ const publicCatalog = internalCatalog.map((product) => ({
   photos: product.photos,
   priceFromKzt: product.priceFromKzt,
   priceFrom: product.priceFrom,
-  minOrderQuantity: product.minOrderQuantity
+  minOrderQuantity: product.minOrderQuantity,
+  popularityRank: product.popularityRank
 }));
 
 const publicCategories = categories
@@ -528,7 +546,9 @@ const summary = {
   productsWithoutPrice: builtProducts.filter((p) => p.priceFromKzt == null).length,
   categoryReviewCount: needsCategoryReview.length,
   similarProductGroups: similarProductCandidates.length,
-  fxEffectiveDate: fx.effectiveDate || null
+  fxEffectiveDate: fx.effectiveDate || null,
+  popularityStatus: popularity.status || "missing",
+  popularityPeriod: popularity.period || null
 };
 
 const review = {
