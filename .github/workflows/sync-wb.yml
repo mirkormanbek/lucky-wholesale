@@ -42,6 +42,11 @@ jobs:
       - name: Update KZT RUB USD exchange rates
         run: node scripts/update-fx.mjs
 
+      - name: Update WB popularity ranking
+        run: node scripts/sync-popularity.mjs
+        env:
+          WB_API_TOKEN: ${{ secrets.WB_API_TOKEN }}
+
       - name: Build wholesale catalog
         run: node scripts/build-catalog.mjs
 
