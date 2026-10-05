@@ -19,9 +19,14 @@ concurrency:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 jobs:
   sync:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
@@ -65,3 +70,15 @@ jobs:
             git pull --rebase -X theirs origin main
             git push origin main
           fi
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload storefront
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+      - name: Deploy storefront
+        id: deployment
+        uses: actions/deploy-pages@v4
