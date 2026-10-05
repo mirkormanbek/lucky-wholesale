@@ -74,10 +74,24 @@ function renderRequest(){const items=state.products.filter(p=>state.requestIds.h
 async function copyRequest(){const items=state.products.filter(p=>state.requestIds.has(p.id));const lines=["Оптовая заявка Lucky Wholesale","",...items.map((p,i)=>`${i+1}. ${p.title} | ${p.article||"без артикула"} | ${(p.colors||[]).join(", ")||"цвет не указан"}${priceText(p)?" | "+priceText(p):""}`)];await navigator.clipboard.writeText(lines.join("\n"));el.copyRequestButton.textContent="Скопировано";setTimeout(()=>el.copyRequestButton.textContent="Скопировать список",1400)}
 function openRequest(){renderRequest();el.requestDialog.showModal()}
 function renderShowcase(){
-  const picks=[...state.products]
+  const ranked=[...state.products]
     .filter(p=>p.photos?.[0])
-    .sort((a,b)=>(a.popularityRank??Infinity)-(b.popularityRank??Infinity))
-    .slice(0,2);
+    .sort((a,b)=>(a.popularityRank??Infinity)-(b.popularityRank??Infinity));
+
+  const rootCategoryId=(product)=>{
+    const firstId=product?.categoryIds?.[0];
+    if(!firstId)return null;
+    const path=categoryPath(firstId);
+    return path[0]?.id||firstId;
+  };
+
+  const first=ranked[0]||null;
+  const firstRoot=rootCategoryId(first);
+  const second=
+    ranked.find(p=>p.id!==first?.id&&rootCategoryId(p)!==firstRoot) ||
+    ranked.find(p=>p.id!==first?.id&&p.brand!==first?.brand) ||
+    ranked.find(p=>p.id!==first?.id) ||
+    first;
 
   const bind=(product,card,img,title,brand)=>{
     if(!product||!card||!img||!title||!brand)return;
@@ -88,8 +102,8 @@ function renderShowcase(){
     card.onclick=()=>openProduct(product);
   };
 
-  bind(picks[0],el.showcaseCardOne,el.showcaseImageOne,el.showcaseTitleOne,el.showcaseBrandOne);
-  bind(picks[1]||picks[0],el.showcaseCardTwo,el.showcaseImageTwo,el.showcaseTitleTwo,el.showcaseBrandTwo);
+  bind(first,el.showcaseCardOne,el.showcaseImageOne,el.showcaseTitleOne,el.showcaseBrandOne);
+  bind(second,el.showcaseCardTwo,el.showcaseImageTwo,el.showcaseTitleTwo,el.showcaseBrandTwo);
 }
 function render(){renderCategories();renderQuickCategories();renderProducts();saveRequest()}
 
