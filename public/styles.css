@@ -371,3 +371,26 @@ main{background:var(--dark-bg)}
   .sport-card{background:#14171a}
   .product-image{transform:scale(1.075)}
 }
+
+
+/* Fix catalog image loading: lazy images must stay in layout while loading */
+.product-image{
+  display:block !important;
+  opacity:0;
+  transition:opacity .18s ease, transform .22s ease;
+}
+.product-image.visible{
+  display:block !important;
+  opacity:1;
+}
+.product-image-button .image-placeholder{
+  z-index:0;
+}
+.product-image-button .product-image{
+  z-index:1;
+}
+
+/* Never render the empty-state panel when JS marks it hidden */
+.empty-state[hidden]{
+  display:none !important;
+}
