@@ -1045,3 +1045,39 @@ main{background:var(--dark-bg)}
   .brand-quality-item img,
   .brand-quality-item-wide img{transform:scale(.9) !important}
 }
+
+
+/* Mobile brand strip: logos only */
+@media(max-width:720px){
+  .brand-quality-list{
+    gap:0;
+  }
+  .brand-quality-item{
+    min-width:88px !important;
+    width:88px;
+    padding:5px 12px !important;
+    justify-content:center;
+    gap:0 !important;
+  }
+  .brand-quality-item span{
+    display:none !important;
+  }
+  .brand-quality-item::after{
+    height:18px;
+  }
+  .brand-quality-item img,
+  .brand-quality-item-wide img,
+  .brand-quality-item:nth-child(1) img,
+  .brand-quality-item:nth-child(2) img,
+  .brand-quality-item:nth-child(3) img,
+  .brand-quality-item:nth-child(4) img,
+  .brand-quality-item:nth-child(5) img,
+  .brand-quality-item:nth-child(6) img{
+    width:58px !important;
+    max-width:58px !important;
+    height:28px !important;
+    max-height:28px !important;
+    flex:0 0 58px !important;
+    transform:none !important;
+  }
+}
