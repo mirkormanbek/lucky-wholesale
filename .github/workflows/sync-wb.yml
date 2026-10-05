@@ -62,6 +62,6 @@ jobs:
             echo "No generated changes"
           else
             git commit -m "Build wholesale catalog"
-            git pull --rebase origin main
+            git pull --rebase -X theirs origin main
             git push origin main
           fi
