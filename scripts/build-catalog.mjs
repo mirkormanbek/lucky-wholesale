@@ -72,6 +72,33 @@ function splitMulti(value) {
     .filter(Boolean);
 }
 
+
+const importCategories = categoryConfig.categories || [];
+const importCategoryById = new Map(importCategories.map((c) => [c.id, c]));
+
+function importCategoryPath(id) {
+  const parts = [];
+  let current = importCategoryById.get(id);
+  const seen = new Set();
+  while (current && !seen.has(current.id)) {
+    seen.add(current.id);
+    parts.unshift(current.name);
+    current = current.parentId ? importCategoryById.get(current.parentId) : null;
+  }
+  return parts.join(" / ");
+}
+
+const importCategoryIdByLabel = new Map();
+for (const category of importCategories) {
+  importCategoryIdByLabel.set(String(category.id).toLowerCase(), category.id);
+  importCategoryIdByLabel.set(importCategoryPath(category.id).toLowerCase(), category.id);
+}
+
+function resolveImportCategory(value) {
+  const key = String(value || "").trim().toLowerCase();
+  return key ? (importCategoryIdByLabel.get(key) || null) : null;
+}
+
 function parseManualProductsCsv(text) {
   const cleanText = String(text || "").replace(/^\uFEFF/, "").trim();
   if (!cleanText) return [];
@@ -101,7 +128,12 @@ function parseManualProductsCsv(text) {
       id: get(row, "id") || `manual-${String(article || rowIndex + 1).toLowerCase().replace(/[^a-zа-я0-9]+/gi, "-").replace(/^-+|-+$/g, "")}`,
       title,
       brand: get(row, "brand"),
-      categoryIds: splitMulti(get(row, "categoryIds")),
+      categoryIds: (() => {
+        const direct = splitMulti(get(row, "categoryIds"));
+        if (direct.length) return direct;
+        const resolved = resolveImportCategory(get(row, "category"));
+        return resolved ? [resolved] : [];
+      })(),
       article,
       description: get(row, "description"),
       colors: splitMulti(get(row, "colors")),
