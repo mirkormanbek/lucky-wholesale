@@ -1,6 +1,6 @@
 {
   "summary": {
-    "generatedAt": "2026-10-06T08:45:15.267Z",
+    "generatedAt": "2026-10-06T11:19:24.712Z",
     "wbCardsIncluded": 289,
     "wbCardsHidden": 50,
     "manualProducts": 0,
@@ -1358,6 +1358,63 @@
       "popularityRank": 13
     },
     {
+      "id": "wb-205633959",
+      "article": "евер-черный",
+      "title": "Everlast Боксерский шлем детский",
+      "brand": "Lucky Sport",
+      "description": "Боксерский шлем Everlast любительского уровня. Модель выполнена из полиуретана, прочный вкладыш из вспененного материала поглощает энергию ударов и обеспечивает амортизацию. Подкладка эффективно отводит влагу. Застежки-липучки на подбородке, сверху и сзади позволяют удобно регулировать шлем по глубине и ширине\nБоксёрский шлем для любительского бокса.\nВыполнен из 100% полиуретана, внутри материал впитывающий влагу.\nПрочный вкладыш из вспененного материала обеспечивает хорошее поглощение и амортизацию.\nРегулируется сверху и сзади на липучках. Удобная регулировка про глубине и ширине.",
+      "categoryIds": [
+        "combat-boxing-mma-helmets"
+      ],
+      "colors": [
+        "черный",
+        "белый"
+      ],
+      "sizes": [
+        "L",
+        "M",
+        "S",
+        "XL"
+      ],
+      "photos": [
+        "./images/products/wb-205633959.webp",
+        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/big/1.webp",
+        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/c246x328/1.webp",
+        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/c516x688/1.webp",
+        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/hq/1.webp",
+        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/square/1.webp",
+        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/tm/1.webp",
+        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/big/2.webp",
+        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/c246x328/2.webp",
+        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/c516x688/2.webp",
+        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/hq/2.webp",
+        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/square/2.webp",
+        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/tm/2.webp",
+        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/big/3.webp",
+        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/c246x328/3.webp",
+        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/c516x688/3.webp",
+        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/hq/3.webp",
+        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/square/3.webp",
+        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/tm/3.webp",
+        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/big/4.webp",
+        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/c246x328/4.webp",
+        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/c516x688/4.webp",
+        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/hq/4.webp",
+        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/square/4.webp",
+        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/tm/4.webp",
+        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/big/5.webp",
+        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/c246x328/5.webp",
+        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/c516x688/5.webp",
+        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/hq/5.webp",
+        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/square/5.webp",
+        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/tm/5.webp"
+      ],
+      "priceFromKzt": null,
+      "priceFrom": null,
+      "minOrderQuantity": null,
+      "popularityRank": 14
+    },
+    {
       "id": "wb-972402744",
       "article": "кимоно-ессимо(бел)",
       "title": "Кимоно для дзюдо 750 IJF Approved",
@@ -1472,63 +1529,6 @@
         "https://basket-41.wbbasket.ru/vol9724/part972402/972402744/images/hq/14.webp",
         "https://basket-41.wbbasket.ru/vol9724/part972402/972402744/images/square/14.webp",
         "https://basket-41.wbbasket.ru/vol9724/part972402/972402744/images/tm/14.webp"
-      ],
-      "priceFromKzt": null,
-      "priceFrom": null,
-      "minOrderQuantity": null,
-      "popularityRank": 14
-    },
-    {
-      "id": "wb-205633959",
-      "article": "евер-черный",
-      "title": "Everlast Боксерский шлем детский",
-      "brand": "Lucky Sport",
-      "description": "Боксерский шлем Everlast любительского уровня. Модель выполнена из полиуретана, прочный вкладыш из вспененного материала поглощает энергию ударов и обеспечивает амортизацию. Подкладка эффективно отводит влагу. Застежки-липучки на подбородке, сверху и сзади позволяют удобно регулировать шлем по глубине и ширине\nБоксёрский шлем для любительского бокса.\nВыполнен из 100% полиуретана, внутри материал впитывающий влагу.\nПрочный вкладыш из вспененного материала обеспечивает хорошее поглощение и амортизацию.\nРегулируется сверху и сзади на липучках. Удобная регулировка про глубине и ширине.",
-      "categoryIds": [
-        "combat-boxing-mma-helmets"
-      ],
-      "colors": [
-        "черный",
-        "белый"
-      ],
-      "sizes": [
-        "L",
-        "M",
-        "S",
-        "XL"
-      ],
-      "photos": [
-        "./images/products/wb-205633959.webp",
-        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/big/1.webp",
-        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/c246x328/1.webp",
-        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/c516x688/1.webp",
-        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/hq/1.webp",
-        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/square/1.webp",
-        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/tm/1.webp",
-        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/big/2.webp",
-        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/c246x328/2.webp",
-        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/c516x688/2.webp",
-        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/hq/2.webp",
-        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/square/2.webp",
-        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/tm/2.webp",
-        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/big/3.webp",
-        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/c246x328/3.webp",
-        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/c516x688/3.webp",
-        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/hq/3.webp",
-        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/square/3.webp",
-        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/tm/3.webp",
-        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/big/4.webp",
-        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/c246x328/4.webp",
-        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/c516x688/4.webp",
-        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/hq/4.webp",
-        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/square/4.webp",
-        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/tm/4.webp",
-        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/big/5.webp",
-        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/c246x328/5.webp",
-        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/c516x688/5.webp",
-        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/hq/5.webp",
-        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/square/5.webp",
-        "https://basket-14.wbbasket.ru/vol2056/part205633/205633959/images/tm/5.webp"
       ],
       "priceFromKzt": null,
       "priceFrom": null,
@@ -3147,6 +3147,68 @@
       "popularityRank": 41
     },
     {
+      "id": "wb-944046316",
+      "article": "пояс-жудо(син)",
+      "title": "Пояс для дзюдо IJF плотный",
+      "brand": "Mizuno",
+      "description": "Пояс для кимоно дзюдо одобренный международной Федерацией дзюдо IJF. Пояс для дзюдо создан специально для тех, кто ценит качество и комфорт в единоборствах. Изготовлен из 100% хлопка, имеет толщину 5см и плотный наполнитель. Данный аксессуар идеально подходит к кимоно, соответствуя строгим требованиям экипировки профессиональных спортсменов. Такая одежда гарантирует удобство движений и надежную фиксацию во время занятий.\n\nИспользование натурального хлопка делает пояс мягким на ощупь. Он станет незаменимой частью экипировки как новичков, так и опытных бойцов, поддерживая высокий уровень комфорта и стиля. Этот элемент формы подчеркивает серьезное отношение к тренировкам и помогает создавать правильный образ в мире единоборств.",
+      "categoryIds": [
+        "judo-belts"
+      ],
+      "colors": [
+        "синий"
+      ],
+      "sizes": [
+        "240",
+        "260",
+        "280",
+        "300"
+      ],
+      "photos": [
+        "./images/products/wb-944046316.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/big/1.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/c246x328/1.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/c516x688/1.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/hq/1.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/square/1.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/tm/1.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/big/2.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/c246x328/2.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/c516x688/2.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/hq/2.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/square/2.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/tm/2.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/big/3.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/c246x328/3.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/c516x688/3.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/hq/3.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/square/3.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/tm/3.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/big/4.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/c246x328/4.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/c516x688/4.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/hq/4.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/square/4.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/tm/4.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/big/5.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/c246x328/5.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/c516x688/5.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/hq/5.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/square/5.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/tm/5.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/big/6.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/c246x328/6.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/c516x688/6.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/hq/6.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/square/6.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/tm/6.webp"
+      ],
+      "priceFromKzt": null,
+      "priceFrom": null,
+      "minOrderQuantity": null,
+      "popularityRank": 42
+    },
+    {
       "id": "wb-214538092",
       "article": "решетка-киоку",
       "title": "Шлем для карате, бокс фулфейс с решеткой Киокушинкай",
@@ -3211,68 +3273,6 @@
         "https://basket-14.wbbasket.ru/vol2145/part214538/214538092/images/hq/7.webp",
         "https://basket-14.wbbasket.ru/vol2145/part214538/214538092/images/square/7.webp",
         "https://basket-14.wbbasket.ru/vol2145/part214538/214538092/images/tm/7.webp"
-      ],
-      "priceFromKzt": null,
-      "priceFrom": null,
-      "minOrderQuantity": null,
-      "popularityRank": 43
-    },
-    {
-      "id": "wb-944046316",
-      "article": "пояс-жудо(син)",
-      "title": "Пояс для дзюдо IJF плотный",
-      "brand": "Mizuno",
-      "description": "Пояс для кимоно дзюдо одобренный международной Федерацией дзюдо IJF. Пояс для дзюдо создан специально для тех, кто ценит качество и комфорт в единоборствах. Изготовлен из 100% хлопка, имеет толщину 5см и плотный наполнитель. Данный аксессуар идеально подходит к кимоно, соответствуя строгим требованиям экипировки профессиональных спортсменов. Такая одежда гарантирует удобство движений и надежную фиксацию во время занятий.\n\nИспользование натурального хлопка делает пояс мягким на ощупь. Он станет незаменимой частью экипировки как новичков, так и опытных бойцов, поддерживая высокий уровень комфорта и стиля. Этот элемент формы подчеркивает серьезное отношение к тренировкам и помогает создавать правильный образ в мире единоборств.",
-      "categoryIds": [
-        "judo-belts"
-      ],
-      "colors": [
-        "синий"
-      ],
-      "sizes": [
-        "240",
-        "260",
-        "280",
-        "300"
-      ],
-      "photos": [
-        "./images/products/wb-944046316.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/big/1.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/c246x328/1.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/c516x688/1.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/hq/1.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/square/1.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/tm/1.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/big/2.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/c246x328/2.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/c516x688/2.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/hq/2.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/square/2.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/tm/2.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/big/3.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/c246x328/3.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/c516x688/3.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/hq/3.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/square/3.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/tm/3.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/big/4.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/c246x328/4.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/c516x688/4.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/hq/4.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/square/4.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/tm/4.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/big/5.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/c246x328/5.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/c516x688/5.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/hq/5.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/square/5.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/tm/5.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/big/6.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/c246x328/6.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/c516x688/6.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/hq/6.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/square/6.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046316/images/tm/6.webp"
       ],
       "priceFromKzt": null,
       "priceFrom": null,
@@ -3522,6 +3522,68 @@
       "popularityRank": 48
     },
     {
+      "id": "wb-944046321",
+      "article": "пояс-жудо(бел)",
+      "title": "Пояс для дзюдо IJF плотный",
+      "brand": "Mizuno",
+      "description": "Пояс для кимоно дзюдо одобренный международной Федерацией дзюдо IJF. Пояс для дзюдо создан специально для тех, кто ценит качество и комфорт в единоборствах. Изготовлен из 100% хлопка, имеет толщину 5см и плотный наполнитель. Данный аксессуар идеально подходит к кимоно, соответствуя строгим требованиям экипировки профессиональных спортсменов. Такая одежда гарантирует удобство движений и надежную фиксацию во время занятий.\n\nИспользование натурального хлопка делает пояс мягким на ощупь. Он станет незаменимой частью экипировки как новичков, так и опытных бойцов, поддерживая высокий уровень комфорта и стиля. Этот элемент формы подчеркивает серьезное отношение к тренировкам и помогает создавать правильный образ в мире единоборств.",
+      "categoryIds": [
+        "judo-belts"
+      ],
+      "colors": [
+        "желтый"
+      ],
+      "sizes": [
+        "240",
+        "260",
+        "280",
+        "300"
+      ],
+      "photos": [
+        "./images/products/wb-944046321.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/big/1.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/c246x328/1.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/c516x688/1.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/hq/1.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/square/1.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/tm/1.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/big/2.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/c246x328/2.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/c516x688/2.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/hq/2.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/square/2.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/tm/2.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/big/3.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/c246x328/3.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/c516x688/3.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/hq/3.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/square/3.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/tm/3.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/big/4.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/c246x328/4.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/c516x688/4.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/hq/4.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/square/4.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/tm/4.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/big/5.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/c246x328/5.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/c516x688/5.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/hq/5.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/square/5.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/tm/5.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/big/6.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/c246x328/6.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/c516x688/6.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/hq/6.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/square/6.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/tm/6.webp"
+      ],
+      "priceFromKzt": null,
+      "priceFrom": null,
+      "minOrderQuantity": null,
+      "popularityRank": 49
+    },
+    {
       "id": "wb-208104628",
       "article": "киоку",
       "title": "Шлем для бокса, мма, единоборств и юфс",
@@ -3579,68 +3641,6 @@
         "https://basket-14.wbbasket.ru/vol2081/part208104/208104628/images/hq/6.webp",
         "https://basket-14.wbbasket.ru/vol2081/part208104/208104628/images/square/6.webp",
         "https://basket-14.wbbasket.ru/vol2081/part208104/208104628/images/tm/6.webp"
-      ],
-      "priceFromKzt": null,
-      "priceFrom": null,
-      "minOrderQuantity": null,
-      "popularityRank": 49
-    },
-    {
-      "id": "wb-944046321",
-      "article": "пояс-жудо(бел)",
-      "title": "Пояс для дзюдо IJF плотный",
-      "brand": "Mizuno",
-      "description": "Пояс для кимоно дзюдо одобренный международной Федерацией дзюдо IJF. Пояс для дзюдо создан специально для тех, кто ценит качество и комфорт в единоборствах. Изготовлен из 100% хлопка, имеет толщину 5см и плотный наполнитель. Данный аксессуар идеально подходит к кимоно, соответствуя строгим требованиям экипировки профессиональных спортсменов. Такая одежда гарантирует удобство движений и надежную фиксацию во время занятий.\n\nИспользование натурального хлопка делает пояс мягким на ощупь. Он станет незаменимой частью экипировки как новичков, так и опытных бойцов, поддерживая высокий уровень комфорта и стиля. Этот элемент формы подчеркивает серьезное отношение к тренировкам и помогает создавать правильный образ в мире единоборств.",
-      "categoryIds": [
-        "judo-belts"
-      ],
-      "colors": [
-        "желтый"
-      ],
-      "sizes": [
-        "240",
-        "260",
-        "280",
-        "300"
-      ],
-      "photos": [
-        "./images/products/wb-944046321.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/big/1.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/c246x328/1.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/c516x688/1.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/hq/1.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/square/1.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/tm/1.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/big/2.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/c246x328/2.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/c516x688/2.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/hq/2.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/square/2.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/tm/2.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/big/3.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/c246x328/3.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/c516x688/3.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/hq/3.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/square/3.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/tm/3.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/big/4.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/c246x328/4.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/c516x688/4.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/hq/4.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/square/4.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/tm/4.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/big/5.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/c246x328/5.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/c516x688/5.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/hq/5.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/square/5.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/tm/5.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/big/6.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/c246x328/6.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/c516x688/6.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/hq/6.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/square/6.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046321/images/tm/6.webp"
       ],
       "priceFromKzt": null,
       "priceFrom": null,
@@ -4259,7 +4259,7 @@
       "priceFromKzt": null,
       "priceFrom": null,
       "minOrderQuantity": null,
-      "popularityRank": 60
+      "popularityRank": 61
     },
     {
       "id": "wb-1052310009",
@@ -5290,6 +5290,68 @@
       "popularityRank": 82
     },
     {
+      "id": "wb-944046320",
+      "article": "пояс-жудо(кор)",
+      "title": "Пояс для дзюдо IJF плотный",
+      "brand": "Mizuno",
+      "description": "Пояс для кимоно дзюдо одобренный международной Федерацией дзюдо IJF. Пояс для дзюдо создан специально для тех, кто ценит качество и комфорт в единоборствах. Изготовлен из 100% хлопка, имеет толщину 5см и плотный наполнитель. Данный аксессуар идеально подходит к кимоно, соответствуя строгим требованиям экипировки профессиональных спортсменов. Такая одежда гарантирует удобство движений и надежную фиксацию во время занятий.\n\nИспользование натурального хлопка делает пояс мягким на ощупь. Он станет незаменимой частью экипировки как новичков, так и опытных бойцов, поддерживая высокий уровень комфорта и стиля. Этот элемент формы подчеркивает серьезное отношение к тренировкам и помогает создавать правильный образ в мире единоборств.",
+      "categoryIds": [
+        "judo-belts"
+      ],
+      "colors": [
+        "желтый"
+      ],
+      "sizes": [
+        "240",
+        "260",
+        "280",
+        "300"
+      ],
+      "photos": [
+        "./images/products/wb-944046320.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/big/1.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/c246x328/1.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/c516x688/1.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/hq/1.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/square/1.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/tm/1.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/big/2.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/c246x328/2.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/c516x688/2.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/hq/2.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/square/2.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/tm/2.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/big/3.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/c246x328/3.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/c516x688/3.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/hq/3.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/square/3.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/tm/3.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/big/4.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/c246x328/4.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/c516x688/4.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/hq/4.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/square/4.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/tm/4.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/big/5.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/c246x328/5.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/c516x688/5.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/hq/5.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/square/5.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/tm/5.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/big/6.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/c246x328/6.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/c516x688/6.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/hq/6.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/square/6.webp",
+        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/tm/6.webp"
+      ],
+      "priceFromKzt": null,
+      "priceFrom": null,
+      "minOrderQuantity": null,
+      "popularityRank": 84
+    },
+    {
       "id": "wb-208534735",
       "article": "перчатки-еверласт",
       "title": "Боксерские перчатки для бокса",
@@ -5346,7 +5408,7 @@
       "priceFromKzt": null,
       "priceFrom": null,
       "minOrderQuantity": null,
-      "popularityRank": 84
+      "popularityRank": 85
     },
     {
       "id": "wb-418431704",
@@ -5426,7 +5488,7 @@
       "priceFromKzt": null,
       "priceFrom": null,
       "minOrderQuantity": null,
-      "popularityRank": 85
+      "popularityRank": 86
     },
     {
       "id": "wb-208483248",
@@ -5481,68 +5543,6 @@
         "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/hq/5.webp",
         "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/square/5.webp",
         "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/tm/5.webp"
-      ],
-      "priceFromKzt": null,
-      "priceFrom": null,
-      "minOrderQuantity": null,
-      "popularityRank": 86
-    },
-    {
-      "id": "wb-944046320",
-      "article": "пояс-жудо(кор)",
-      "title": "Пояс для дзюдо IJF плотный",
-      "brand": "Mizuno",
-      "description": "Пояс для кимоно дзюдо одобренный международной Федерацией дзюдо IJF. Пояс для дзюдо создан специально для тех, кто ценит качество и комфорт в единоборствах. Изготовлен из 100% хлопка, имеет толщину 5см и плотный наполнитель. Данный аксессуар идеально подходит к кимоно, соответствуя строгим требованиям экипировки профессиональных спортсменов. Такая одежда гарантирует удобство движений и надежную фиксацию во время занятий.\n\nИспользование натурального хлопка делает пояс мягким на ощупь. Он станет незаменимой частью экипировки как новичков, так и опытных бойцов, поддерживая высокий уровень комфорта и стиля. Этот элемент формы подчеркивает серьезное отношение к тренировкам и помогает создавать правильный образ в мире единоборств.",
-      "categoryIds": [
-        "judo-belts"
-      ],
-      "colors": [
-        "желтый"
-      ],
-      "sizes": [
-        "240",
-        "260",
-        "280",
-        "300"
-      ],
-      "photos": [
-        "./images/products/wb-944046320.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/big/1.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/c246x328/1.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/c516x688/1.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/hq/1.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/square/1.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/tm/1.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/big/2.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/c246x328/2.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/c516x688/2.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/hq/2.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/square/2.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/tm/2.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/big/3.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/c246x328/3.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/c516x688/3.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/hq/3.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/square/3.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/tm/3.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/big/4.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/c246x328/4.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/c516x688/4.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/hq/4.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/square/4.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/tm/4.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/big/5.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/c246x328/5.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/c516x688/5.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/hq/5.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/square/5.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/tm/5.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/big/6.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/c246x328/6.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/c516x688/6.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/hq/6.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/square/6.webp",
-        "https://basket-40.wbbasket.ru/vol9440/part944046/944046320/images/tm/6.webp"
       ],
       "priceFromKzt": null,
       "priceFrom": null,
