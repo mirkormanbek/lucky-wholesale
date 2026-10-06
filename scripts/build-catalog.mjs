@@ -148,7 +148,7 @@ function parseManualProductsCsv(text) {
 const manualProductsCsv = parseManualProductsCsv(
   await readText(path.join(root, "catalog/manual-products.csv"), "")
 );
-const manualProducts = [...manualProductsJson, ...manualProductsCsv];
+const manualProductsRaw = [...manualProductsJson, ...manualProductsCsv];
 
 const skuCsv = (await readText(path.join(root, "data/skus.csv"))).replace(/^\uFEFF/, "");
 const skuLines = skuCsv.split(/\r?\n/).filter(Boolean);
@@ -171,6 +171,42 @@ if (nmIdIndex >= 0 && photoIndex >= 0) {
 
 const categories = categoryConfig.categories || [];
 const validCategoryIds = new Set(categories.map((c) => c.id));
+
+const categoryByIdForImport = new Map(categories.map((c) => [c.id, c]));
+function categoryPathName(id) {
+  const parts = [];
+  let current = categoryByIdForImport.get(id);
+  const seen = new Set();
+  while (current && !seen.has(current.id)) {
+    seen.add(current.id);
+    parts.unshift(current.name);
+    current = current.parentId ? categoryByIdForImport.get(current.parentId) : null;
+  }
+  return parts.join(" / ");
+}
+const categoryIdByImportLabel = new Map();
+for (const category of categories) {
+  categoryIdByImportLabel.set(category.id.toLowerCase(), category.id);
+  categoryIdByImportLabel.set(category.name.toLowerCase(), category.id);
+  categoryIdByImportLabel.set(categoryPathName(category.id).toLowerCase(), category.id);
+}
+
+function resolveManualCategoryIds(product) {
+  const direct = (product.categoryIds || []).filter((id) => validCategoryIds.has(id));
+  if (direct.length) return direct;
+
+  const labels = splitMulti(product.category);
+  const resolved = labels
+    .map((label) => categoryIdByImportLabel.get(label.toLowerCase()))
+    .filter(Boolean);
+
+  return uniq(resolved);
+}
+
+const manualProducts = manualProductsRaw.map((product) => ({
+  ...product,
+  categoryIds: resolveManualCategoryIds(product)
+}));
 const internalCategoryIds = new Set(categories.filter((c) => c.internal).map((c) => c.id));
 const includedParents = new Set(categoryMap.includeParentNames || []);
 const hiddenNmIDs = new Set((overridesConfig.hiddenNmIDs || []).map(String));
