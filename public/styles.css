@@ -1081,3 +1081,44 @@ main{background:var(--dark-bg)}
     transform:none !important;
   }
 }
+
+
+/* Desktop showcase height correction */
+@media(min-width:1101px){
+  .top-showcase{
+    padding-top:18px;
+    padding-bottom:14px;
+  }
+  .showcase-grid{
+    height:470px;
+    min-height:0;
+    grid-template-rows:minmax(0,1fr) minmax(0,1fr);
+  }
+  .showcase-copy,
+  .showcase-product-main,
+  .showcase-product-side,
+  .showcase-info-card{
+    min-height:0 !important;
+  }
+  .showcase-product{
+    height:100%;
+  }
+  .showcase-product img{
+    height:100%;
+    min-height:0;
+    object-fit:cover;
+  }
+  .showcase-copy{
+    padding:24px 28px;
+  }
+  .showcase-copy h1{
+    font-size:clamp(40px,3.25vw,56px);
+    margin:8px 0 10px;
+  }
+  .showcase-copy p{
+    max-width:520px;
+  }
+  .showcase-info-card{
+    padding:16px;
+  }
+}
