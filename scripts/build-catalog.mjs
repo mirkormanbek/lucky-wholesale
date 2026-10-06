@@ -20,7 +20,7 @@ const overridesConfig = await readJson(path.join(root, "catalog/product-override
   mergeGroups: [],
   overrides: {}
 });
-const manualProducts = await readJson(path.join(root, "catalog/manual-products.json"), []);
+const manualProductsJson = await readJson(path.join(root, "catalog/manual-products.json"), []);
 const pricesConfig = await readJson(path.join(root, "catalog/prices.json"), { byProductId: {}, byNmID: {} });
 const fx = await readJson(path.join(root, "data/fx.json"));
 const popularity = await readJson(path.join(root, "data/popularity.json"), {
@@ -63,6 +63,60 @@ function parseCsvLine(line) {
   values.push(current);
   return values;
 }
+
+
+function splitMulti(value) {
+  return String(value || "")
+    .split("|")
+    .map((v) => v.trim())
+    .filter(Boolean);
+}
+
+function parseManualProductsCsv(text) {
+  const cleanText = String(text || "").replace(/^\uFEFF/, "").trim();
+  if (!cleanText) return [];
+
+  const lines = cleanText.split(/\r?\n/).filter((line) => line.trim());
+  if (lines.length < 2) return [];
+
+  const headers = parseCsvLine(lines[0]).map((h) => h.trim());
+  const index = Object.fromEntries(headers.map((h, i) => [h, i]));
+  const get = (row, key) => index[key] == null ? "" : String(row[index[key]] ?? "").trim();
+
+  return lines.slice(1).map((line, rowIndex) => {
+    const row = parseCsvLine(line);
+    const activeRaw = get(row, "active").toLowerCase();
+    const active = !["0", "false", "no", "нет", "off"].includes(activeRaw);
+
+    if (!active) return null;
+
+    const title = get(row, "title");
+    const article = get(row, "article");
+    if (!title) return null;
+
+    const priceRaw = get(row, "priceFromKzt").replace(/\s+/g, "").replace(",", ".");
+    const moqRaw = get(row, "minOrderQuantity").replace(/\s+/g, "").replace(",", ".");
+
+    return {
+      id: get(row, "id") || `manual-${String(article || rowIndex + 1).toLowerCase().replace(/[^a-zа-я0-9]+/gi, "-").replace(/^-+|-+$/g, "")}`,
+      title,
+      brand: get(row, "brand"),
+      categoryIds: splitMulti(get(row, "categoryIds")),
+      article,
+      description: get(row, "description"),
+      colors: splitMulti(get(row, "colors")),
+      sizes: splitMulti(get(row, "sizes")),
+      priceFromKzt: priceRaw ? Number(priceRaw) : null,
+      minOrderQuantity: moqRaw ? Number(moqRaw) : null,
+      photos: splitMulti(get(row, "photos"))
+    };
+  }).filter(Boolean);
+}
+
+const manualProductsCsv = parseManualProductsCsv(
+  await readText(path.join(root, "catalog/manual-products.csv"), "")
+);
+const manualProducts = [...manualProductsJson, ...manualProductsCsv];
 
 const skuCsv = (await readText(path.join(root, "data/skus.csv"))).replace(/^\uFEFF/, "");
 const skuLines = skuCsv.split(/\r?\n/).filter(Boolean);
