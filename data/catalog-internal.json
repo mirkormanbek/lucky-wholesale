@@ -1,6 +1,6 @@
 {
   "summary": {
-    "generatedAt": "2026-10-06T11:19:24.712Z",
+    "generatedAt": "2026-10-06T18:58:23.092Z",
     "wbCardsIncluded": 289,
     "wbCardsHidden": 50,
     "manualProducts": 0,
@@ -11,7 +11,7 @@
     "productsWithoutPrice": 239,
     "categoryReviewCount": 0,
     "similarProductGroups": 54,
-    "fxEffectiveDate": "06.10.2026",
+    "fxEffectiveDate": "07.10.2026",
     "popularityStatus": "ok",
     "popularityPeriod": {
       "start": "2026-09-07",
@@ -6444,7 +6444,7 @@
         }
       ],
       "priceFrom": null,
-      "popularityRank": 33,
+      "popularityRank": 34,
       "privatePriceTiers": []
     },
     {
@@ -6986,7 +6986,7 @@
         }
       ],
       "priceFrom": null,
-      "popularityRank": 37,
+      "popularityRank": 38,
       "privatePriceTiers": []
     },
     {
@@ -7364,6 +7364,263 @@
       "privatePriceTiers": []
     },
     {
+      "id": "wb-222226133",
+      "source": "wb",
+      "sourceNmIDs": [
+        222226133
+      ],
+      "article": "араваза-перч(син)",
+      "title": "Перчатки для карате и спаррингов",
+      "brand": "Lucky Sport",
+      "description": "Накладки для защиты запястья и кисти от повреждений и переломов, имеют анатомическую форму с очень удобным изгибом. Учитывают особенности строения кисти. Крепятся на запястье благодаря широкой эластичной ленте с липучкой Velcro. Внутренний наполнитель - эластичная и легкая формованная пена обеспечивает безопасность при контакте, поглощая удар. Плотность наполнителя обеспечивает легкий вес накладки. Внешний слой пошит из искусственной кожи, покрытой полиуретаном. Имеет хорошую прочность, влагоустойчивость и износостойкость даже при активном использовании. Эластичность и качество материала обеспечивают легкость ухода за изделием. Теги для поиска: перчатки для карате, перчатки спортивные, традиционное карате, перчатки sentei, Сетокан, Шотокан, Всестилевое карате, USCO, JKA,  KWF, ФВКР, WKC\n\nНакладки для карате идеально подойдут для отработки ударов и защитят Ваши руки от повреждений. Изделие изготовлено из искусственной кожи и обладает удобной системой фиксации по руке.\n\nЗагнутые с открытой ладонью, крепление на запястье ― эластичная тесьма на липучке, набивка ударной поверхности – поролоновый вкладыш Материал: иск. кожа, хлопок, поролон Цвет: красный, синий \n\nнакладки для каратэ (верх ― искусственная кожа ― пенополиуретан \nВерх перчатки сделан из кожи наполнитель — сформированный пенополиуретан.\nМанжет — на липучке.\nЦвет: синий, красный, черный\nПерчатки – непременный атрибут боксерских поединков. Боксерские перчатки представляют собой надежное оружие бойца. Боксерские перчатки прочно крепятся на руке с помощью манжетки на «липучке» и создают максимальную защиту для рук боксера, предотвращая возможные профессиональные травмы ",
+      "categoryIds": [
+        "karate-gloves"
+      ],
+      "colors": [
+        "синий"
+      ],
+      "sizes": [
+        "L",
+        "M",
+        "S",
+        "XL",
+        "XS"
+      ],
+      "photos": [
+        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/big/1.webp",
+        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/c246x328/1.webp",
+        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/c516x688/1.webp",
+        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/hq/1.webp",
+        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/square/1.webp",
+        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/tm/1.webp",
+        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/big/2.webp",
+        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/c246x328/2.webp",
+        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/c516x688/2.webp",
+        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/hq/2.webp",
+        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/square/2.webp",
+        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/tm/2.webp",
+        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/big/3.webp",
+        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/c246x328/3.webp",
+        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/c516x688/3.webp",
+        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/hq/3.webp",
+        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/square/3.webp",
+        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/tm/3.webp",
+        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/big/4.webp",
+        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/c246x328/4.webp",
+        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/c516x688/4.webp",
+        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/hq/4.webp",
+        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/square/4.webp",
+        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/tm/4.webp",
+        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/big/5.webp",
+        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/c246x328/5.webp",
+        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/c516x688/5.webp",
+        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/hq/5.webp",
+        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/square/5.webp",
+        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/tm/5.webp",
+        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/big/6.webp",
+        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/c246x328/6.webp",
+        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/c516x688/6.webp",
+        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/hq/6.webp",
+        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/square/6.webp",
+        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/tm/6.webp"
+      ],
+      "priceFromKzt": null,
+      "minOrderQuantity": null,
+      "wbMeta": {
+        "nmID": 222226133,
+        "subjectID": 2021,
+        "subjectName": "Перчатки спортивные",
+        "parentID": 1605,
+        "parentName": "Спортивные аксессуары"
+      },
+      "variants": [
+        {
+          "nmID": 222226133,
+          "chrtID": 352833996,
+          "size": "L",
+          "wbSize": "15-17 лет",
+          "sku": "2039786670334",
+          "colors": [
+            "синий"
+          ]
+        },
+        {
+          "nmID": 222226133,
+          "chrtID": 352833995,
+          "size": "M",
+          "wbSize": "12-14 лет",
+          "sku": "2039786670327",
+          "colors": [
+            "синий"
+          ]
+        },
+        {
+          "nmID": 222226133,
+          "chrtID": 352833994,
+          "size": "S",
+          "wbSize": "9-11 лет",
+          "sku": "2039786670310",
+          "colors": [
+            "синий"
+          ]
+        },
+        {
+          "nmID": 222226133,
+          "chrtID": 352833997,
+          "size": "XL",
+          "wbSize": "17+ лет",
+          "sku": "2039786670341",
+          "colors": [
+            "синий"
+          ]
+        },
+        {
+          "nmID": 222226133,
+          "chrtID": 352833993,
+          "size": "XS",
+          "wbSize": "6-8 лет",
+          "sku": "2039786670303",
+          "colors": [
+            "синий"
+          ]
+        }
+      ],
+      "priceFrom": null,
+      "popularityRank": 45,
+      "privatePriceTiers": []
+    },
+    {
+      "id": "wb-370118612",
+      "source": "wb",
+      "sourceNmIDs": [
+        370118612
+      ],
+      "article": "киоку-боди(чер)",
+      "title": "Киокушинкай нагрудник женский белый для каратэ и киокушинкай",
+      "brand": "",
+      "description": "Киокушинкай нагрудник женский белый для каратэ и киокушинкай\n\nЖенский защитный нагрудник для Киокушинкай и каратэ – надежная экипировка для тренировок и соревнований. Изготовлен из прочной экокожи, что обеспечивает долговечность и устойчивость к износу. Внутренняя часть выполнена из полиэстера, который мягко прилегает к телу и не вызывает дискомфорта.\n\nНаполнитель – плотный поролон, который эффективно поглощает удары и снижает риск травм. Надежная фиксация с помощью липучки позволяет подогнать нагрудник по фигуре и обеспечить максимальный комфорт во время движений.\n\nИдеально подходит для тренировок и выступлений в Киокушинкай, каратэ и других контактных видах единоборств. Легкий, удобный и прочный – этот нагрудник обеспечит вам защиту и свободу движений на татами!",
+      "categoryIds": [
+        "karate-chest-protection"
+      ],
+      "colors": [
+        "белый"
+      ],
+      "sizes": [
+        "M",
+        "XL",
+        "XS",
+        "XXS",
+        "L",
+        "S"
+      ],
+      "photos": [
+        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/big/1.webp",
+        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/c246x328/1.webp",
+        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/c516x688/1.webp",
+        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/hq/1.webp",
+        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/square/1.webp",
+        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/tm/1.webp",
+        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/big/2.webp",
+        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/c246x328/2.webp",
+        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/c516x688/2.webp",
+        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/hq/2.webp",
+        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/square/2.webp",
+        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/tm/2.webp",
+        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/big/3.webp",
+        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/c246x328/3.webp",
+        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/c516x688/3.webp",
+        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/hq/3.webp",
+        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/square/3.webp",
+        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/tm/3.webp",
+        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/big/4.webp",
+        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/c246x328/4.webp",
+        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/c516x688/4.webp",
+        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/hq/4.webp",
+        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/square/4.webp",
+        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/tm/4.webp",
+        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/big/5.webp",
+        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/c246x328/5.webp",
+        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/c516x688/5.webp",
+        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/hq/5.webp",
+        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/square/5.webp",
+        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/tm/5.webp"
+      ],
+      "priceFromKzt": null,
+      "minOrderQuantity": null,
+      "wbMeta": {
+        "nmID": 370118612,
+        "subjectID": 569,
+        "subjectName": "Защитные наборы",
+        "parentID": 1605,
+        "parentName": "Спортивные аксессуары"
+      },
+      "variants": [
+        {
+          "nmID": 370118612,
+          "chrtID": 541217558,
+          "size": "M",
+          "wbSize": "85-95 ОГ",
+          "sku": "2043360783587",
+          "colors": [
+            "белый"
+          ]
+        },
+        {
+          "nmID": 370118612,
+          "chrtID": 541217560,
+          "size": "XL",
+          "wbSize": "105-115 ОГ",
+          "sku": "2043360783600",
+          "colors": [
+            "белый"
+          ]
+        },
+        {
+          "nmID": 370118612,
+          "chrtID": 541217556,
+          "size": "XS",
+          "wbSize": "65-75 ОГ",
+          "sku": "2043360783563",
+          "colors": [
+            "белый"
+          ]
+        },
+        {
+          "nmID": 370118612,
+          "chrtID": 541217555,
+          "size": "XXS",
+          "wbSize": "55-65 ОГ",
+          "sku": "2043360783556",
+          "colors": [
+            "белый"
+          ]
+        },
+        {
+          "nmID": 370118612,
+          "chrtID": 541217559,
+          "size": "L",
+          "wbSize": "95-105 ОГ",
+          "sku": "2043360783594",
+          "colors": [
+            "белый"
+          ]
+        },
+        {
+          "nmID": 370118612,
+          "chrtID": 541217557,
+          "size": "S",
+          "wbSize": "75-85 ОГ",
+          "sku": "2043360783570",
+          "colors": [
+            "белый"
+          ]
+        }
+      ],
+      "priceFrom": null,
+      "popularityRank": 47,
+      "privatePriceTiers": []
+    },
+    {
       "id": "wb-1245053769",
       "source": "wb",
       "sourceNmIDs": [
@@ -7640,263 +7897,6 @@
           "sku": "2053202924931",
           "colors": [
             "синий"
-          ]
-        }
-      ],
-      "priceFrom": null,
-      "popularityRank": 45,
-      "privatePriceTiers": []
-    },
-    {
-      "id": "wb-222226133",
-      "source": "wb",
-      "sourceNmIDs": [
-        222226133
-      ],
-      "article": "араваза-перч(син)",
-      "title": "Перчатки для карате и спаррингов",
-      "brand": "Lucky Sport",
-      "description": "Накладки для защиты запястья и кисти от повреждений и переломов, имеют анатомическую форму с очень удобным изгибом. Учитывают особенности строения кисти. Крепятся на запястье благодаря широкой эластичной ленте с липучкой Velcro. Внутренний наполнитель - эластичная и легкая формованная пена обеспечивает безопасность при контакте, поглощая удар. Плотность наполнителя обеспечивает легкий вес накладки. Внешний слой пошит из искусственной кожи, покрытой полиуретаном. Имеет хорошую прочность, влагоустойчивость и износостойкость даже при активном использовании. Эластичность и качество материала обеспечивают легкость ухода за изделием. Теги для поиска: перчатки для карате, перчатки спортивные, традиционное карате, перчатки sentei, Сетокан, Шотокан, Всестилевое карате, USCO, JKA,  KWF, ФВКР, WKC\n\nНакладки для карате идеально подойдут для отработки ударов и защитят Ваши руки от повреждений. Изделие изготовлено из искусственной кожи и обладает удобной системой фиксации по руке.\n\nЗагнутые с открытой ладонью, крепление на запястье ― эластичная тесьма на липучке, набивка ударной поверхности – поролоновый вкладыш Материал: иск. кожа, хлопок, поролон Цвет: красный, синий \n\nнакладки для каратэ (верх ― искусственная кожа ― пенополиуретан \nВерх перчатки сделан из кожи наполнитель — сформированный пенополиуретан.\nМанжет — на липучке.\nЦвет: синий, красный, черный\nПерчатки – непременный атрибут боксерских поединков. Боксерские перчатки представляют собой надежное оружие бойца. Боксерские перчатки прочно крепятся на руке с помощью манжетки на «липучке» и создают максимальную защиту для рук боксера, предотвращая возможные профессиональные травмы ",
-      "categoryIds": [
-        "karate-gloves"
-      ],
-      "colors": [
-        "синий"
-      ],
-      "sizes": [
-        "L",
-        "M",
-        "S",
-        "XL",
-        "XS"
-      ],
-      "photos": [
-        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/big/1.webp",
-        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/c246x328/1.webp",
-        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/c516x688/1.webp",
-        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/hq/1.webp",
-        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/square/1.webp",
-        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/tm/1.webp",
-        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/big/2.webp",
-        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/c246x328/2.webp",
-        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/c516x688/2.webp",
-        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/hq/2.webp",
-        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/square/2.webp",
-        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/tm/2.webp",
-        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/big/3.webp",
-        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/c246x328/3.webp",
-        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/c516x688/3.webp",
-        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/hq/3.webp",
-        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/square/3.webp",
-        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/tm/3.webp",
-        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/big/4.webp",
-        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/c246x328/4.webp",
-        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/c516x688/4.webp",
-        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/hq/4.webp",
-        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/square/4.webp",
-        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/tm/4.webp",
-        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/big/5.webp",
-        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/c246x328/5.webp",
-        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/c516x688/5.webp",
-        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/hq/5.webp",
-        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/square/5.webp",
-        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/tm/5.webp",
-        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/big/6.webp",
-        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/c246x328/6.webp",
-        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/c516x688/6.webp",
-        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/hq/6.webp",
-        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/square/6.webp",
-        "https://basket-15.wbbasket.ru/vol2222/part222226/222226133/images/tm/6.webp"
-      ],
-      "priceFromKzt": null,
-      "minOrderQuantity": null,
-      "wbMeta": {
-        "nmID": 222226133,
-        "subjectID": 2021,
-        "subjectName": "Перчатки спортивные",
-        "parentID": 1605,
-        "parentName": "Спортивные аксессуары"
-      },
-      "variants": [
-        {
-          "nmID": 222226133,
-          "chrtID": 352833996,
-          "size": "L",
-          "wbSize": "15-17 лет",
-          "sku": "2039786670334",
-          "colors": [
-            "синий"
-          ]
-        },
-        {
-          "nmID": 222226133,
-          "chrtID": 352833995,
-          "size": "M",
-          "wbSize": "12-14 лет",
-          "sku": "2039786670327",
-          "colors": [
-            "синий"
-          ]
-        },
-        {
-          "nmID": 222226133,
-          "chrtID": 352833994,
-          "size": "S",
-          "wbSize": "9-11 лет",
-          "sku": "2039786670310",
-          "colors": [
-            "синий"
-          ]
-        },
-        {
-          "nmID": 222226133,
-          "chrtID": 352833997,
-          "size": "XL",
-          "wbSize": "17+ лет",
-          "sku": "2039786670341",
-          "colors": [
-            "синий"
-          ]
-        },
-        {
-          "nmID": 222226133,
-          "chrtID": 352833993,
-          "size": "XS",
-          "wbSize": "6-8 лет",
-          "sku": "2039786670303",
-          "colors": [
-            "синий"
-          ]
-        }
-      ],
-      "priceFrom": null,
-      "popularityRank": 46,
-      "privatePriceTiers": []
-    },
-    {
-      "id": "wb-370118612",
-      "source": "wb",
-      "sourceNmIDs": [
-        370118612
-      ],
-      "article": "киоку-боди(чер)",
-      "title": "Киокушинкай нагрудник женский белый для каратэ и киокушинкай",
-      "brand": "",
-      "description": "Киокушинкай нагрудник женский белый для каратэ и киокушинкай\n\nЖенский защитный нагрудник для Киокушинкай и каратэ – надежная экипировка для тренировок и соревнований. Изготовлен из прочной экокожи, что обеспечивает долговечность и устойчивость к износу. Внутренняя часть выполнена из полиэстера, который мягко прилегает к телу и не вызывает дискомфорта.\n\nНаполнитель – плотный поролон, который эффективно поглощает удары и снижает риск травм. Надежная фиксация с помощью липучки позволяет подогнать нагрудник по фигуре и обеспечить максимальный комфорт во время движений.\n\nИдеально подходит для тренировок и выступлений в Киокушинкай, каратэ и других контактных видах единоборств. Легкий, удобный и прочный – этот нагрудник обеспечит вам защиту и свободу движений на татами!",
-      "categoryIds": [
-        "karate-chest-protection"
-      ],
-      "colors": [
-        "белый"
-      ],
-      "sizes": [
-        "M",
-        "XL",
-        "XS",
-        "XXS",
-        "L",
-        "S"
-      ],
-      "photos": [
-        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/big/1.webp",
-        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/c246x328/1.webp",
-        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/c516x688/1.webp",
-        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/hq/1.webp",
-        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/square/1.webp",
-        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/tm/1.webp",
-        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/big/2.webp",
-        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/c246x328/2.webp",
-        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/c516x688/2.webp",
-        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/hq/2.webp",
-        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/square/2.webp",
-        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/tm/2.webp",
-        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/big/3.webp",
-        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/c246x328/3.webp",
-        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/c516x688/3.webp",
-        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/hq/3.webp",
-        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/square/3.webp",
-        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/tm/3.webp",
-        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/big/4.webp",
-        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/c246x328/4.webp",
-        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/c516x688/4.webp",
-        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/hq/4.webp",
-        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/square/4.webp",
-        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/tm/4.webp",
-        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/big/5.webp",
-        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/c246x328/5.webp",
-        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/c516x688/5.webp",
-        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/hq/5.webp",
-        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/square/5.webp",
-        "https://basket-21.wbbasket.ru/vol3701/part370118/370118612/images/tm/5.webp"
-      ],
-      "priceFromKzt": null,
-      "minOrderQuantity": null,
-      "wbMeta": {
-        "nmID": 370118612,
-        "subjectID": 569,
-        "subjectName": "Защитные наборы",
-        "parentID": 1605,
-        "parentName": "Спортивные аксессуары"
-      },
-      "variants": [
-        {
-          "nmID": 370118612,
-          "chrtID": 541217558,
-          "size": "M",
-          "wbSize": "85-95 ОГ",
-          "sku": "2043360783587",
-          "colors": [
-            "белый"
-          ]
-        },
-        {
-          "nmID": 370118612,
-          "chrtID": 541217560,
-          "size": "XL",
-          "wbSize": "105-115 ОГ",
-          "sku": "2043360783600",
-          "colors": [
-            "белый"
-          ]
-        },
-        {
-          "nmID": 370118612,
-          "chrtID": 541217556,
-          "size": "XS",
-          "wbSize": "65-75 ОГ",
-          "sku": "2043360783563",
-          "colors": [
-            "белый"
-          ]
-        },
-        {
-          "nmID": 370118612,
-          "chrtID": 541217555,
-          "size": "XXS",
-          "wbSize": "55-65 ОГ",
-          "sku": "2043360783556",
-          "colors": [
-            "белый"
-          ]
-        },
-        {
-          "nmID": 370118612,
-          "chrtID": 541217559,
-          "size": "L",
-          "wbSize": "95-105 ОГ",
-          "sku": "2043360783594",
-          "colors": [
-            "белый"
-          ]
-        },
-        {
-          "nmID": 370118612,
-          "chrtID": 541217557,
-          "size": "S",
-          "wbSize": "75-85 ОГ",
-          "sku": "2043360783570",
-          "colors": [
-            "белый"
           ]
         }
       ],
@@ -8719,6 +8719,197 @@
       "privatePriceTiers": []
     },
     {
+      "id": "wb-729599766",
+      "source": "wb",
+      "sourceNmIDs": [
+        729599766
+      ],
+      "article": "кимоно-адикрсн(детбел)",
+      "title": "Кимоно для дзюдо IJF Approved",
+      "brand": "adidas",
+      "description": "Кимоно для дзюдо Adidas Champion 3 – выбор профессионалов и чемпионов Кимоно для дзюдо IJF Approved — это экипировка, созданная для спортсменов, выступающих на соревнованиях международного уровня. Оно официально одобрено Международной федерацией дзюдо (IJF) и соответствует всем требованиям для участия в турнирах, включая Олимпийские игры и чемпионаты мира. Это не просто спортивная форма — это символ профессионализма и уважения к традициям японского боевого искусства. Плотная куртка с плотностью 750 г/м² и брюки 300 г/м² обеспечивают идеальный баланс между прочностью и комфортом. Усиленные швы в зонах наибольшей нагрузки гарантируют долговечность, а анатомический крой позволяет свободно двигаться, не ограничивая амплитуду при бросках и захватах. Кимоно изготовлено из 65% высококачественного хлопка и 35% полиэстера, который отличается воздухопроницаемостью и высокой износостойкостью. В комплекте брюки и куртка, что делает эту модель подходящей как для новичков, так и для опытных дзюдоистов. Это кимоно идеально подойдёт для спортсменов, которым нужно кимоно для дзюдо с допуском IJF, будь то участники соревнований, тренеры или ученики спортивных школ. В наличии широкий размерный ряд, включая детские размеры, что делает Adidas Champion II универсальным выбором для мужчин, женщин и детей. Adidas — бренд, заслуживший доверие на татами по всему миру. Если вы ищете профессиональное кимоно для дзюдо 750 г/м², одобренное IJF, то Adidas — это лучший выбор. Эта модель также часто рассматривается как кимоно для соревнований по дзюдо, подходящее под строгие требования международных правил. Кимоно легко подобрать по росту, оно отлично садится по фигуре и не требует дополнительных доработок. Оно также подойдёт тем, кто ищет кимоно с поясом, для дзюдо японского кроя или кимоно для тренировок и боёв в летний сезон — ткань хоть и плотная, но прекрасно дышит. Закажите Adidas Champion II сейчас, и получите экипировку, которая соответствует самым высоким стандартам в мире дзюдо.",
+      "categoryIds": [
+        "judo-gi"
+      ],
+      "colors": [
+        "синий"
+      ],
+      "sizes": [
+        "150",
+        "130",
+        "135",
+        "140",
+        "145",
+        "155"
+      ],
+      "photos": [
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/big/1.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c246x328/1.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c516x688/1.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/hq/1.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/square/1.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/tm/1.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/big/2.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c246x328/2.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c516x688/2.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/hq/2.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/square/2.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/tm/2.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/big/3.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c246x328/3.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c516x688/3.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/hq/3.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/square/3.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/tm/3.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/big/4.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c246x328/4.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c516x688/4.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/hq/4.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/square/4.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/tm/4.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/big/5.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c246x328/5.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c516x688/5.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/hq/5.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/square/5.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/tm/5.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/big/6.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c246x328/6.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c516x688/6.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/hq/6.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/square/6.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/tm/6.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/big/7.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c246x328/7.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c516x688/7.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/hq/7.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/square/7.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/tm/7.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/big/8.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c246x328/8.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c516x688/8.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/hq/8.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/square/8.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/tm/8.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/big/9.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c246x328/9.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c516x688/9.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/hq/9.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/square/9.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/tm/9.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/big/10.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c246x328/10.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c516x688/10.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/hq/10.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/square/10.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/tm/10.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/big/11.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c246x328/11.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c516x688/11.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/hq/11.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/square/11.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/tm/11.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/big/12.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c246x328/12.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c516x688/12.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/hq/12.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/square/12.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/tm/12.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/big/13.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c246x328/13.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c516x688/13.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/hq/13.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/square/13.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/tm/13.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/big/14.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c246x328/14.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c516x688/14.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/hq/14.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/square/14.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/tm/14.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/big/15.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c246x328/15.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c516x688/15.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/hq/15.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/square/15.webp",
+        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/tm/15.webp"
+      ],
+      "priceFromKzt": null,
+      "minOrderQuantity": null,
+      "wbMeta": {
+        "nmID": 729599766,
+        "subjectID": 491,
+        "subjectName": "Кимоно спортивное",
+        "parentID": 1513,
+        "parentName": "Спортивная одежда"
+      },
+      "variants": [
+        {
+          "nmID": 729599766,
+          "chrtID": 1030687998,
+          "size": "150",
+          "wbSize": "145-150 см",
+          "sku": "2048083908576",
+          "colors": [
+            "синий"
+          ]
+        },
+        {
+          "nmID": 729599766,
+          "chrtID": 1030687994,
+          "size": "130",
+          "wbSize": "125-130 см",
+          "sku": "2048083908538",
+          "colors": [
+            "синий"
+          ]
+        },
+        {
+          "nmID": 729599766,
+          "chrtID": 1030687995,
+          "size": "135",
+          "wbSize": "130-135 см",
+          "sku": "2048083908545",
+          "colors": [
+            "синий"
+          ]
+        },
+        {
+          "nmID": 729599766,
+          "chrtID": 1030687996,
+          "size": "140",
+          "wbSize": "135-140 см",
+          "sku": "2048083908552",
+          "colors": [
+            "синий"
+          ]
+        },
+        {
+          "nmID": 729599766,
+          "chrtID": 1030687997,
+          "size": "145",
+          "wbSize": "140-145 см",
+          "sku": "2048083908569",
+          "colors": [
+            "синий"
+          ]
+        },
+        {
+          "nmID": 729599766,
+          "chrtID": 1030687999,
+          "size": "155",
+          "wbSize": "150-155 см",
+          "sku": "2048083908583",
+          "colors": [
+            "синий"
+          ]
+        }
+      ],
+      "priceFrom": null,
+      "popularityRank": 53,
+      "privatePriceTiers": []
+    },
+    {
       "id": "wb-1052310011",
       "source": "wb",
       "sourceNmIDs": [
@@ -8989,197 +9180,6 @@
           "sku": "2051396756178",
           "colors": [
             "черный"
-          ]
-        }
-      ],
-      "priceFrom": null,
-      "popularityRank": 53,
-      "privatePriceTiers": []
-    },
-    {
-      "id": "wb-729599766",
-      "source": "wb",
-      "sourceNmIDs": [
-        729599766
-      ],
-      "article": "кимоно-адикрсн(детбел)",
-      "title": "Кимоно для дзюдо IJF Approved",
-      "brand": "adidas",
-      "description": "Кимоно для дзюдо Adidas Champion 3 – выбор профессионалов и чемпионов Кимоно для дзюдо IJF Approved — это экипировка, созданная для спортсменов, выступающих на соревнованиях международного уровня. Оно официально одобрено Международной федерацией дзюдо (IJF) и соответствует всем требованиям для участия в турнирах, включая Олимпийские игры и чемпионаты мира. Это не просто спортивная форма — это символ профессионализма и уважения к традициям японского боевого искусства. Плотная куртка с плотностью 750 г/м² и брюки 300 г/м² обеспечивают идеальный баланс между прочностью и комфортом. Усиленные швы в зонах наибольшей нагрузки гарантируют долговечность, а анатомический крой позволяет свободно двигаться, не ограничивая амплитуду при бросках и захватах. Кимоно изготовлено из 65% высококачественного хлопка и 35% полиэстера, который отличается воздухопроницаемостью и высокой износостойкостью. В комплекте брюки и куртка, что делает эту модель подходящей как для новичков, так и для опытных дзюдоистов. Это кимоно идеально подойдёт для спортсменов, которым нужно кимоно для дзюдо с допуском IJF, будь то участники соревнований, тренеры или ученики спортивных школ. В наличии широкий размерный ряд, включая детские размеры, что делает Adidas Champion II универсальным выбором для мужчин, женщин и детей. Adidas — бренд, заслуживший доверие на татами по всему миру. Если вы ищете профессиональное кимоно для дзюдо 750 г/м², одобренное IJF, то Adidas — это лучший выбор. Эта модель также часто рассматривается как кимоно для соревнований по дзюдо, подходящее под строгие требования международных правил. Кимоно легко подобрать по росту, оно отлично садится по фигуре и не требует дополнительных доработок. Оно также подойдёт тем, кто ищет кимоно с поясом, для дзюдо японского кроя или кимоно для тренировок и боёв в летний сезон — ткань хоть и плотная, но прекрасно дышит. Закажите Adidas Champion II сейчас, и получите экипировку, которая соответствует самым высоким стандартам в мире дзюдо.",
-      "categoryIds": [
-        "judo-gi"
-      ],
-      "colors": [
-        "синий"
-      ],
-      "sizes": [
-        "150",
-        "130",
-        "135",
-        "140",
-        "145",
-        "155"
-      ],
-      "photos": [
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/big/1.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c246x328/1.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c516x688/1.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/hq/1.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/square/1.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/tm/1.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/big/2.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c246x328/2.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c516x688/2.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/hq/2.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/square/2.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/tm/2.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/big/3.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c246x328/3.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c516x688/3.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/hq/3.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/square/3.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/tm/3.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/big/4.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c246x328/4.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c516x688/4.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/hq/4.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/square/4.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/tm/4.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/big/5.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c246x328/5.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c516x688/5.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/hq/5.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/square/5.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/tm/5.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/big/6.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c246x328/6.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c516x688/6.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/hq/6.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/square/6.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/tm/6.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/big/7.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c246x328/7.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c516x688/7.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/hq/7.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/square/7.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/tm/7.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/big/8.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c246x328/8.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c516x688/8.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/hq/8.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/square/8.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/tm/8.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/big/9.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c246x328/9.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c516x688/9.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/hq/9.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/square/9.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/tm/9.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/big/10.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c246x328/10.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c516x688/10.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/hq/10.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/square/10.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/tm/10.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/big/11.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c246x328/11.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c516x688/11.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/hq/11.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/square/11.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/tm/11.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/big/12.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c246x328/12.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c516x688/12.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/hq/12.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/square/12.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/tm/12.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/big/13.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c246x328/13.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c516x688/13.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/hq/13.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/square/13.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/tm/13.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/big/14.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c246x328/14.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c516x688/14.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/hq/14.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/square/14.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/tm/14.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/big/15.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c246x328/15.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/c516x688/15.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/hq/15.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/square/15.webp",
-        "https://basket-34.wbbasket.ru/vol7295/part729599/729599766/images/tm/15.webp"
-      ],
-      "priceFromKzt": null,
-      "minOrderQuantity": null,
-      "wbMeta": {
-        "nmID": 729599766,
-        "subjectID": 491,
-        "subjectName": "Кимоно спортивное",
-        "parentID": 1513,
-        "parentName": "Спортивная одежда"
-      },
-      "variants": [
-        {
-          "nmID": 729599766,
-          "chrtID": 1030687998,
-          "size": "150",
-          "wbSize": "145-150 см",
-          "sku": "2048083908576",
-          "colors": [
-            "синий"
-          ]
-        },
-        {
-          "nmID": 729599766,
-          "chrtID": 1030687994,
-          "size": "130",
-          "wbSize": "125-130 см",
-          "sku": "2048083908538",
-          "colors": [
-            "синий"
-          ]
-        },
-        {
-          "nmID": 729599766,
-          "chrtID": 1030687995,
-          "size": "135",
-          "wbSize": "130-135 см",
-          "sku": "2048083908545",
-          "colors": [
-            "синий"
-          ]
-        },
-        {
-          "nmID": 729599766,
-          "chrtID": 1030687996,
-          "size": "140",
-          "wbSize": "135-140 см",
-          "sku": "2048083908552",
-          "colors": [
-            "синий"
-          ]
-        },
-        {
-          "nmID": 729599766,
-          "chrtID": 1030687997,
-          "size": "145",
-          "wbSize": "140-145 см",
-          "sku": "2048083908569",
-          "colors": [
-            "синий"
-          ]
-        },
-        {
-          "nmID": 729599766,
-          "chrtID": 1030687999,
-          "size": "155",
-          "wbSize": "150-155 см",
-          "sku": "2048083908583",
-          "colors": [
-            "синий"
           ]
         }
       ],
@@ -9762,144 +9762,6 @@
       "privatePriceTiers": []
     },
     {
-      "id": "wb-419090867",
-      "source": "wb",
-      "sourceNmIDs": [
-        419090867
-      ],
-      "article": "венум-тряпка(без-бел)",
-      "title": "Venum шингарды, щитки, футы для ног",
-      "brand": "Venum",
-      "description": "Щитки, шингарды от бренда Lucky Sport - это классическая легкая защита голени и плюсневых костей стопы, которая подходит для соревнований и тренировок практически в любом виде контактных единоборств. Чулочный тип защиты позволяет быстро и надежно фиксировать щиток на ноге и подойдет, как для начинающих спортсменов, так и более опытных бойцов.\n\nФуты колен, защита голени и стоп — это необходимое снаряжение для всех, кто занимается боевыми искусствами и контактными видами спорта. Эти элементы защиты разработаны для максимального комфорта и безопасности спортсмена, снижая риск травм при ударах и падениях. Изготовленные из высококачественных материалов, они обеспечивают долговечность и надежность даже при интенсивных тренировках.\n\nФуты колен плотно облегают коленные суставы, предоставляя дополнительную поддержку и амортизацию. Они помогают предотвратить повреждения связок и менисков, что особенно важно при выполнении высоких ударов и активных движений. Защита голени изготовлена из ударопрочных материалов, эффективно рассеивающих силу удара, что снижает риск синяков и переломов.\n\nЭргономичный дизайн и регулируемые ремни обеспечивают надежную фиксацию защиты, не сковывая движений и позволяя сосредоточиться на тренировочном процессе. Специальные вставки на стопах защищают от травм пальцы и плюсневые кости, обеспечивая комфорт при нанесении ударов ногами.\n\nЭта защита идеально подходит для различных боевых искусств, включая карате, тхэквондо, кикбоксинг и ММА. Легкие и дышащие материалы обеспечивают вентиляцию, предотвращая перегрев и дискомфорт во время длительных тренировок. Выбирая футы колен, защиту голени и стоп, вы получаете надежного партнера в достижении спортивных целей, гарантируя себе уверенность и безопасность на каждом занятии.",
-      "categoryIds": [
-        "combat-boxing-mma-shinguards"
-      ],
-      "colors": [
-        "белый"
-      ],
-      "sizes": [
-        "S",
-        "XL",
-        "XS",
-        "L",
-        "M"
-      ],
-      "photos": [
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/big/1.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/c246x328/1.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/c516x688/1.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/hq/1.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/square/1.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/tm/1.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/big/2.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/c246x328/2.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/c516x688/2.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/hq/2.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/square/2.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/tm/2.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/big/3.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/c246x328/3.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/c516x688/3.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/hq/3.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/square/3.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/tm/3.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/big/4.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/c246x328/4.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/c516x688/4.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/hq/4.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/square/4.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/tm/4.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/big/5.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/c246x328/5.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/c516x688/5.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/hq/5.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/square/5.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/tm/5.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/big/6.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/c246x328/6.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/c516x688/6.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/hq/6.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/square/6.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/tm/6.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/big/7.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/c246x328/7.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/c516x688/7.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/hq/7.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/square/7.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/tm/7.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/big/8.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/c246x328/8.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/c516x688/8.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/hq/8.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/square/8.webp",
-        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/tm/8.webp"
-      ],
-      "priceFromKzt": null,
-      "minOrderQuantity": null,
-      "wbMeta": {
-        "nmID": 419090867,
-        "subjectID": 240,
-        "subjectName": "Щитки",
-        "parentID": 1605,
-        "parentName": "Спортивные аксессуары"
-      },
-      "variants": [
-        {
-          "nmID": 419090867,
-          "chrtID": 599416034,
-          "size": "S",
-          "wbSize": "125-140 см",
-          "sku": "2044024489746",
-          "colors": [
-            "белый"
-          ]
-        },
-        {
-          "nmID": 419090867,
-          "chrtID": 599416035,
-          "size": "XL",
-          "wbSize": "175-185 см",
-          "sku": "2044024489753",
-          "colors": [
-            "белый"
-          ]
-        },
-        {
-          "nmID": 419090867,
-          "chrtID": 599416036,
-          "size": "XS",
-          "wbSize": "110-125 см",
-          "sku": "2044024489760",
-          "colors": [
-            "белый"
-          ]
-        },
-        {
-          "nmID": 419090867,
-          "chrtID": 599416032,
-          "size": "L",
-          "wbSize": "160-175 см",
-          "sku": "2044024489722",
-          "colors": [
-            "белый"
-          ]
-        },
-        {
-          "nmID": 419090867,
-          "chrtID": 599416033,
-          "size": "M",
-          "wbSize": "140-160 см",
-          "sku": "2044024489739",
-          "colors": [
-            "белый"
-          ]
-        }
-      ],
-      "priceFrom": null,
-      "popularityRank": 66,
-      "privatePriceTiers": []
-    },
-    {
       "id": "wb-875118926",
       "source": "wb",
       "sourceNmIDs": [
@@ -10192,7 +10054,145 @@
         }
       ],
       "priceFrom": null,
-      "popularityRank": 68,
+      "popularityRank": 65,
+      "privatePriceTiers": []
+    },
+    {
+      "id": "wb-419090867",
+      "source": "wb",
+      "sourceNmIDs": [
+        419090867
+      ],
+      "article": "венум-тряпка(без-бел)",
+      "title": "Venum шингарды, щитки, футы для ног",
+      "brand": "Venum",
+      "description": "Щитки, шингарды от бренда Lucky Sport - это классическая легкая защита голени и плюсневых костей стопы, которая подходит для соревнований и тренировок практически в любом виде контактных единоборств. Чулочный тип защиты позволяет быстро и надежно фиксировать щиток на ноге и подойдет, как для начинающих спортсменов, так и более опытных бойцов.\n\nФуты колен, защита голени и стоп — это необходимое снаряжение для всех, кто занимается боевыми искусствами и контактными видами спорта. Эти элементы защиты разработаны для максимального комфорта и безопасности спортсмена, снижая риск травм при ударах и падениях. Изготовленные из высококачественных материалов, они обеспечивают долговечность и надежность даже при интенсивных тренировках.\n\nФуты колен плотно облегают коленные суставы, предоставляя дополнительную поддержку и амортизацию. Они помогают предотвратить повреждения связок и менисков, что особенно важно при выполнении высоких ударов и активных движений. Защита голени изготовлена из ударопрочных материалов, эффективно рассеивающих силу удара, что снижает риск синяков и переломов.\n\nЭргономичный дизайн и регулируемые ремни обеспечивают надежную фиксацию защиты, не сковывая движений и позволяя сосредоточиться на тренировочном процессе. Специальные вставки на стопах защищают от травм пальцы и плюсневые кости, обеспечивая комфорт при нанесении ударов ногами.\n\nЭта защита идеально подходит для различных боевых искусств, включая карате, тхэквондо, кикбоксинг и ММА. Легкие и дышащие материалы обеспечивают вентиляцию, предотвращая перегрев и дискомфорт во время длительных тренировок. Выбирая футы колен, защиту голени и стоп, вы получаете надежного партнера в достижении спортивных целей, гарантируя себе уверенность и безопасность на каждом занятии.",
+      "categoryIds": [
+        "combat-boxing-mma-shinguards"
+      ],
+      "colors": [
+        "белый"
+      ],
+      "sizes": [
+        "S",
+        "XL",
+        "XS",
+        "L",
+        "M"
+      ],
+      "photos": [
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/big/1.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/c246x328/1.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/c516x688/1.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/hq/1.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/square/1.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/tm/1.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/big/2.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/c246x328/2.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/c516x688/2.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/hq/2.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/square/2.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/tm/2.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/big/3.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/c246x328/3.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/c516x688/3.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/hq/3.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/square/3.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/tm/3.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/big/4.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/c246x328/4.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/c516x688/4.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/hq/4.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/square/4.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/tm/4.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/big/5.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/c246x328/5.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/c516x688/5.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/hq/5.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/square/5.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/tm/5.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/big/6.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/c246x328/6.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/c516x688/6.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/hq/6.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/square/6.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/tm/6.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/big/7.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/c246x328/7.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/c516x688/7.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/hq/7.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/square/7.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/tm/7.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/big/8.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/c246x328/8.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/c516x688/8.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/hq/8.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/square/8.webp",
+        "https://basket-24.wbbasket.ru/vol4190/part419090/419090867/images/tm/8.webp"
+      ],
+      "priceFromKzt": null,
+      "minOrderQuantity": null,
+      "wbMeta": {
+        "nmID": 419090867,
+        "subjectID": 240,
+        "subjectName": "Щитки",
+        "parentID": 1605,
+        "parentName": "Спортивные аксессуары"
+      },
+      "variants": [
+        {
+          "nmID": 419090867,
+          "chrtID": 599416034,
+          "size": "S",
+          "wbSize": "125-140 см",
+          "sku": "2044024489746",
+          "colors": [
+            "белый"
+          ]
+        },
+        {
+          "nmID": 419090867,
+          "chrtID": 599416035,
+          "size": "XL",
+          "wbSize": "175-185 см",
+          "sku": "2044024489753",
+          "colors": [
+            "белый"
+          ]
+        },
+        {
+          "nmID": 419090867,
+          "chrtID": 599416036,
+          "size": "XS",
+          "wbSize": "110-125 см",
+          "sku": "2044024489760",
+          "colors": [
+            "белый"
+          ]
+        },
+        {
+          "nmID": 419090867,
+          "chrtID": 599416032,
+          "size": "L",
+          "wbSize": "160-175 см",
+          "sku": "2044024489722",
+          "colors": [
+            "белый"
+          ]
+        },
+        {
+          "nmID": 419090867,
+          "chrtID": 599416033,
+          "size": "M",
+          "wbSize": "140-160 см",
+          "sku": "2044024489739",
+          "colors": [
+            "белый"
+          ]
+        }
+      ],
+      "priceFrom": null,
+      "popularityRank": 67,
       "privatePriceTiers": []
     },
     {
@@ -11797,413 +11797,6 @@
       "privatePriceTiers": []
     },
     {
-      "id": "wb-208534735",
-      "source": "wb",
-      "sourceNmIDs": [
-        208534735
-      ],
-      "article": "перчатки-еверласт",
-      "title": "Боксерские перчатки для бокса",
-      "brand": "Lucky Sport",
-      "description": "Тренировочные перчатки выполнены из высококачественных материалов, основой является наполнитель высокой прочности и качественная искусственная кожа. Такой материал надежен и практичен в использовании, большинство профессиональных боксеров предпочитают именно данную изделию. Идеально подходят для тренировок в таких видах спорта, как: классический бокс, кикбоксинг, тайский бокс (муай-тай). Популярная модель перчаток подходит как для новичков, так и для любителей и профессионалов. Модель выполнены из эко-кожи, что способствует надежности и долговечности продукта. Внутренний вкладыш спортивных перчаток имеет цельную структуру, а так же форму \"антинокаут\". Особенностью качественных профессиональных перчаток является их удобная, анатомически изогнутая форма, которая обеспечивает оптимальный комфорт для тренировок, а мягкий многослойный наполнитель (пенополиуретан) позволит защитить от травм. Пакистанский бренд давно зарекомендовал себя на российском рынке, как производитель долговечной, красивой и стильной экипировки для многих видов единоборств. Модель представлена в размерах унций (oz). Это отличный подарок на 23 февраля, день рождения и другой праздник!",
-      "categoryIds": [
-        "combat-boxing-mma-gloves"
-      ],
-      "colors": [
-        "черный"
-      ],
-      "sizes": [
-        "12 oz",
-        "10 oz",
-        "14 oz",
-        "16 oz",
-        "4 oz",
-        "6 oz",
-        "8 oz"
-      ],
-      "photos": [
-        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/big/1.webp",
-        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/c246x328/1.webp",
-        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/c516x688/1.webp",
-        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/hq/1.webp",
-        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/square/1.webp",
-        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/tm/1.webp",
-        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/big/2.webp",
-        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/c246x328/2.webp",
-        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/c516x688/2.webp",
-        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/hq/2.webp",
-        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/square/2.webp",
-        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/tm/2.webp",
-        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/big/3.webp",
-        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/c246x328/3.webp",
-        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/c516x688/3.webp",
-        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/hq/3.webp",
-        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/square/3.webp",
-        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/tm/3.webp",
-        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/big/4.webp",
-        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/c246x328/4.webp",
-        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/c516x688/4.webp",
-        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/hq/4.webp",
-        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/square/4.webp",
-        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/tm/4.webp",
-        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/big/5.webp",
-        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/c246x328/5.webp",
-        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/c516x688/5.webp",
-        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/hq/5.webp",
-        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/square/5.webp",
-        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/tm/5.webp"
-      ],
-      "priceFromKzt": null,
-      "minOrderQuantity": null,
-      "wbMeta": {
-        "nmID": 208534735,
-        "subjectID": 921,
-        "subjectName": "Перчатки боксерские",
-        "parentID": 1605,
-        "parentName": "Спортивные аксессуары"
-      },
-      "variants": [
-        {
-          "nmID": 208534735,
-          "chrtID": 334222356,
-          "size": "12 oz",
-          "wbSize": "65-75 кг",
-          "sku": "2039471407917",
-          "colors": [
-            "черный"
-          ]
-        },
-        {
-          "nmID": 208534735,
-          "chrtID": 334222355,
-          "size": "10 oz",
-          "wbSize": "50-65 кг",
-          "sku": "2039471407900",
-          "colors": [
-            "черный"
-          ]
-        },
-        {
-          "nmID": 208534735,
-          "chrtID": 334222357,
-          "size": "14 oz",
-          "wbSize": "75-85 кг",
-          "sku": "2039471407924",
-          "colors": [
-            "черный"
-          ]
-        },
-        {
-          "nmID": 208534735,
-          "chrtID": 334222358,
-          "size": "16 oz",
-          "wbSize": "85 и более кг",
-          "sku": "2039471407931",
-          "colors": [
-            "черный"
-          ]
-        },
-        {
-          "nmID": 208534735,
-          "chrtID": 334222352,
-          "size": "4 oz",
-          "wbSize": "До 6 лет",
-          "sku": "2039471390998",
-          "colors": [
-            "черный"
-          ]
-        },
-        {
-          "nmID": 208534735,
-          "chrtID": 334222353,
-          "size": "6 oz",
-          "wbSize": "от 6 до 9 лет",
-          "sku": "2039471407887",
-          "colors": [
-            "черный"
-          ]
-        },
-        {
-          "nmID": 208534735,
-          "chrtID": 334222354,
-          "size": "8 oz",
-          "wbSize": "от 8 до 13 лет",
-          "sku": "2039471407894",
-          "colors": [
-            "черный"
-          ]
-        }
-      ],
-      "priceFrom": null,
-      "popularityRank": 85,
-      "privatePriceTiers": []
-    },
-    {
-      "id": "wb-418431704",
-      "source": "wb",
-      "sourceNmIDs": [
-        418431704
-      ],
-      "article": "футы-синий",
-      "title": "Venum футы, щитки для мма и единоборств",
-      "brand": "Lucky Sport",
-      "description": "Щитки от бренда Lucky Sport\n\nЗащита голени и стопы отличается сверхлегким весом. Модель анатомической формы скомбинирована из двух деталей, изготовленных из полиуретана, заполненных пенной набивкой. Набивка усилена на большеберцовой кости и подъеме. Два горизонтальных ремня крепят защиту на голени застежками-липучками. Эластичные ремни фиксируют стопу и пятку.\n\nПористый полиэстер в качестве подкладки обеспечивает отвод влаги. Эко кожа\n\nСмешанные единоборства требуют надежную защиту голени ног. Спортивные щитки для единоборств обеспечивают защиту голеностопа. Жесткие щитки для тайского бокса или щитки для мма также подойдет как защита для карате. В нашей таблице размеров вы можете измерить свои параметры и подобрать свой размер.\n\nЩитки-футы используются в различных единоборствах для отработки различных ударов ногами.\n\nФиксируются с помощью эластичной тесьмы с липучками",
-      "categoryIds": [
-        "combat-boxing-mma-shinguards"
-      ],
-      "colors": [
-        "синий"
-      ],
-      "sizes": [
-        "L",
-        "S",
-        "M",
-        "XL"
-      ],
-      "photos": [
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/big/1.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/c246x328/1.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/c516x688/1.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/hq/1.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/square/1.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/tm/1.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/big/2.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/c246x328/2.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/c516x688/2.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/hq/2.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/square/2.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/tm/2.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/big/3.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/c246x328/3.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/c516x688/3.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/hq/3.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/square/3.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/tm/3.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/big/4.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/c246x328/4.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/c516x688/4.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/hq/4.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/square/4.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/tm/4.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/big/5.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/c246x328/5.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/c516x688/5.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/hq/5.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/square/5.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/tm/5.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/big/6.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/c246x328/6.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/c516x688/6.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/hq/6.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/square/6.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/tm/6.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/big/7.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/c246x328/7.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/c516x688/7.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/hq/7.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/square/7.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/tm/7.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/big/8.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/c246x328/8.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/c516x688/8.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/hq/8.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/square/8.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/tm/8.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/big/9.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/c246x328/9.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/c516x688/9.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/hq/9.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/square/9.webp",
-        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/tm/9.webp"
-      ],
-      "priceFromKzt": null,
-      "minOrderQuantity": null,
-      "wbMeta": {
-        "nmID": 418431704,
-        "subjectID": 240,
-        "subjectName": "Щитки",
-        "parentID": 1605,
-        "parentName": "Спортивные аксессуары"
-      },
-      "variants": [
-        {
-          "nmID": 418431704,
-          "chrtID": 598561264,
-          "size": "L",
-          "wbSize": "165-175 см",
-          "sku": "2044005581551",
-          "colors": [
-            "синий"
-          ]
-        },
-        {
-          "nmID": 418431704,
-          "chrtID": 598561268,
-          "size": "S",
-          "wbSize": "145-155 см",
-          "sku": "2044005581575",
-          "colors": [
-            "синий"
-          ]
-        },
-        {
-          "nmID": 418431704,
-          "chrtID": 598561266,
-          "size": "M",
-          "wbSize": "155-165 см",
-          "sku": "2044005581568",
-          "colors": [
-            "синий"
-          ]
-        },
-        {
-          "nmID": 418431704,
-          "chrtID": 598561269,
-          "size": "XL",
-          "wbSize": "175+ см",
-          "sku": "2044005581582",
-          "colors": [
-            "синий"
-          ]
-        }
-      ],
-      "priceFrom": null,
-      "popularityRank": 86,
-      "privatePriceTiers": []
-    },
-    {
-      "id": "wb-208483248",
-      "source": "wb",
-      "sourceNmIDs": [
-        208483248
-      ],
-      "article": "черепашки-син",
-      "title": "Перчатки для мма (ufc) черепашки рукопашка (мма)",
-      "brand": "Lucky Sport",
-      "description": "Перчатки для рукопашного боя GREEN HILL от бренда Lucky Sport\n\nПерчатки для смешанных единоборств или для ММА - это аксессуар, который используется в боевых искусствах с элементами тайского бокса, боёв без правил,рукопашного боя единоборств для женщин и других спортивных единоборств.\n\nСмешение стилей в ММА требует особой экипировки, которая бы снижала до минимума вероятность травматизма. Этот атрибут ММА, который используется как для боёв, так и для тренировок, опытными спортсменами и тем, кто только начинает посещать спортивную секцию, ещё называют «перчатки для захвата». Главная отличительная особенность дизайна перчаток для спортивных смешанных единоборств – открытые пальцы, что позволяет бойцу уверенно выполнять захваты, удары и вести борьбу в партере. Есть у этого аксессуара и отдельное отверстие для большого пальца руки, который остается свободным. Такая защита для единоборств позволяет бойцу полноценно использовать руки в борьбе и для удержания противника.\n\nСпециальные накладки на пальцы защищают суставы, а их малый вес и удобная форма позволяет без помех сжать кулак. Для надёжной фиксации на руке спортсмена практически на всех моделях предусмотрены специальные липучки. Это гарантирует эффективность и безопасность ударов и в зале на спортивных тренировках, и на соревнованиях по смешанным единоборствам\n\nМатериал перчаток - Натуральная кожа",
-      "categoryIds": [
-        "combat-boxing-mma-gloves"
-      ],
-      "colors": [
-        "синий",
-        "черный",
-        "белый"
-      ],
-      "sizes": [
-        "XL",
-        "S",
-        "L",
-        "M",
-        "XS"
-      ],
-      "photos": [
-        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/big/1.webp",
-        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/c246x328/1.webp",
-        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/c516x688/1.webp",
-        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/hq/1.webp",
-        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/square/1.webp",
-        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/tm/1.webp",
-        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/big/2.webp",
-        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/c246x328/2.webp",
-        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/c516x688/2.webp",
-        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/hq/2.webp",
-        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/square/2.webp",
-        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/tm/2.webp",
-        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/big/3.webp",
-        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/c246x328/3.webp",
-        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/c516x688/3.webp",
-        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/hq/3.webp",
-        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/square/3.webp",
-        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/tm/3.webp",
-        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/big/4.webp",
-        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/c246x328/4.webp",
-        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/c516x688/4.webp",
-        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/hq/4.webp",
-        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/square/4.webp",
-        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/tm/4.webp",
-        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/big/5.webp",
-        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/c246x328/5.webp",
-        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/c516x688/5.webp",
-        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/hq/5.webp",
-        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/square/5.webp",
-        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/tm/5.webp"
-      ],
-      "priceFromKzt": null,
-      "minOrderQuantity": null,
-      "wbMeta": {
-        "nmID": 208483248,
-        "subjectID": 2021,
-        "subjectName": "Перчатки спортивные",
-        "parentID": 1605,
-        "parentName": "Спортивные аксессуары"
-      },
-      "variants": [
-        {
-          "nmID": 208483248,
-          "chrtID": 342247627,
-          "size": "XL",
-          "wbSize": "21-24",
-          "sku": "2039599587850",
-          "colors": [
-            "синий",
-            "черный",
-            "белый"
-          ]
-        },
-        {
-          "nmID": 208483248,
-          "chrtID": 334145632,
-          "size": "S",
-          "wbSize": "19-20",
-          "sku": "2039470538742",
-          "colors": [
-            "синий",
-            "черный",
-            "белый"
-          ]
-        },
-        {
-          "nmID": 208483248,
-          "chrtID": 334145634,
-          "size": "L",
-          "wbSize": "21-22",
-          "sku": "2039470538766",
-          "colors": [
-            "синий",
-            "черный",
-            "белый"
-          ]
-        },
-        {
-          "nmID": 208483248,
-          "chrtID": 334145633,
-          "size": "M",
-          "wbSize": "20-21",
-          "sku": "2039470538759",
-          "colors": [
-            "синий",
-            "черный",
-            "белый"
-          ]
-        },
-        {
-          "nmID": 208483248,
-          "chrtID": 334145631,
-          "size": "XS",
-          "wbSize": "18-19",
-          "sku": "2039470537721",
-          "colors": [
-            "синий",
-            "черный",
-            "белый"
-          ]
-        }
-      ],
-      "priceFrom": null,
-      "popularityRank": 87,
-      "privatePriceTiers": []
-    },
-    {
       "id": "wb-1052310010",
       "source": "wb",
       "sourceNmIDs": [
@@ -12474,6 +12067,413 @@
           "sku": "2051396755966",
           "colors": [
             "черный"
+          ]
+        }
+      ],
+      "priceFrom": null,
+      "popularityRank": 85,
+      "privatePriceTiers": []
+    },
+    {
+      "id": "wb-208534735",
+      "source": "wb",
+      "sourceNmIDs": [
+        208534735
+      ],
+      "article": "перчатки-еверласт",
+      "title": "Боксерские перчатки для бокса",
+      "brand": "Lucky Sport",
+      "description": "Тренировочные перчатки выполнены из высококачественных материалов, основой является наполнитель высокой прочности и качественная искусственная кожа. Такой материал надежен и практичен в использовании, большинство профессиональных боксеров предпочитают именно данную изделию. Идеально подходят для тренировок в таких видах спорта, как: классический бокс, кикбоксинг, тайский бокс (муай-тай). Популярная модель перчаток подходит как для новичков, так и для любителей и профессионалов. Модель выполнены из эко-кожи, что способствует надежности и долговечности продукта. Внутренний вкладыш спортивных перчаток имеет цельную структуру, а так же форму \"антинокаут\". Особенностью качественных профессиональных перчаток является их удобная, анатомически изогнутая форма, которая обеспечивает оптимальный комфорт для тренировок, а мягкий многослойный наполнитель (пенополиуретан) позволит защитить от травм. Пакистанский бренд давно зарекомендовал себя на российском рынке, как производитель долговечной, красивой и стильной экипировки для многих видов единоборств. Модель представлена в размерах унций (oz). Это отличный подарок на 23 февраля, день рождения и другой праздник!",
+      "categoryIds": [
+        "combat-boxing-mma-gloves"
+      ],
+      "colors": [
+        "черный"
+      ],
+      "sizes": [
+        "12 oz",
+        "10 oz",
+        "14 oz",
+        "16 oz",
+        "4 oz",
+        "6 oz",
+        "8 oz"
+      ],
+      "photos": [
+        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/big/1.webp",
+        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/c246x328/1.webp",
+        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/c516x688/1.webp",
+        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/hq/1.webp",
+        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/square/1.webp",
+        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/tm/1.webp",
+        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/big/2.webp",
+        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/c246x328/2.webp",
+        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/c516x688/2.webp",
+        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/hq/2.webp",
+        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/square/2.webp",
+        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/tm/2.webp",
+        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/big/3.webp",
+        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/c246x328/3.webp",
+        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/c516x688/3.webp",
+        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/hq/3.webp",
+        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/square/3.webp",
+        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/tm/3.webp",
+        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/big/4.webp",
+        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/c246x328/4.webp",
+        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/c516x688/4.webp",
+        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/hq/4.webp",
+        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/square/4.webp",
+        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/tm/4.webp",
+        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/big/5.webp",
+        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/c246x328/5.webp",
+        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/c516x688/5.webp",
+        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/hq/5.webp",
+        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/square/5.webp",
+        "https://basket-14.wbbasket.ru/vol2085/part208534/208534735/images/tm/5.webp"
+      ],
+      "priceFromKzt": null,
+      "minOrderQuantity": null,
+      "wbMeta": {
+        "nmID": 208534735,
+        "subjectID": 921,
+        "subjectName": "Перчатки боксерские",
+        "parentID": 1605,
+        "parentName": "Спортивные аксессуары"
+      },
+      "variants": [
+        {
+          "nmID": 208534735,
+          "chrtID": 334222356,
+          "size": "12 oz",
+          "wbSize": "65-75 кг",
+          "sku": "2039471407917",
+          "colors": [
+            "черный"
+          ]
+        },
+        {
+          "nmID": 208534735,
+          "chrtID": 334222355,
+          "size": "10 oz",
+          "wbSize": "50-65 кг",
+          "sku": "2039471407900",
+          "colors": [
+            "черный"
+          ]
+        },
+        {
+          "nmID": 208534735,
+          "chrtID": 334222357,
+          "size": "14 oz",
+          "wbSize": "75-85 кг",
+          "sku": "2039471407924",
+          "colors": [
+            "черный"
+          ]
+        },
+        {
+          "nmID": 208534735,
+          "chrtID": 334222358,
+          "size": "16 oz",
+          "wbSize": "85 и более кг",
+          "sku": "2039471407931",
+          "colors": [
+            "черный"
+          ]
+        },
+        {
+          "nmID": 208534735,
+          "chrtID": 334222352,
+          "size": "4 oz",
+          "wbSize": "До 6 лет",
+          "sku": "2039471390998",
+          "colors": [
+            "черный"
+          ]
+        },
+        {
+          "nmID": 208534735,
+          "chrtID": 334222353,
+          "size": "6 oz",
+          "wbSize": "от 6 до 9 лет",
+          "sku": "2039471407887",
+          "colors": [
+            "черный"
+          ]
+        },
+        {
+          "nmID": 208534735,
+          "chrtID": 334222354,
+          "size": "8 oz",
+          "wbSize": "от 8 до 13 лет",
+          "sku": "2039471407894",
+          "colors": [
+            "черный"
+          ]
+        }
+      ],
+      "priceFrom": null,
+      "popularityRank": 86,
+      "privatePriceTiers": []
+    },
+    {
+      "id": "wb-418431704",
+      "source": "wb",
+      "sourceNmIDs": [
+        418431704
+      ],
+      "article": "футы-синий",
+      "title": "Venum футы, щитки для мма и единоборств",
+      "brand": "Lucky Sport",
+      "description": "Щитки от бренда Lucky Sport\n\nЗащита голени и стопы отличается сверхлегким весом. Модель анатомической формы скомбинирована из двух деталей, изготовленных из полиуретана, заполненных пенной набивкой. Набивка усилена на большеберцовой кости и подъеме. Два горизонтальных ремня крепят защиту на голени застежками-липучками. Эластичные ремни фиксируют стопу и пятку.\n\nПористый полиэстер в качестве подкладки обеспечивает отвод влаги. Эко кожа\n\nСмешанные единоборства требуют надежную защиту голени ног. Спортивные щитки для единоборств обеспечивают защиту голеностопа. Жесткие щитки для тайского бокса или щитки для мма также подойдет как защита для карате. В нашей таблице размеров вы можете измерить свои параметры и подобрать свой размер.\n\nЩитки-футы используются в различных единоборствах для отработки различных ударов ногами.\n\nФиксируются с помощью эластичной тесьмы с липучками",
+      "categoryIds": [
+        "combat-boxing-mma-shinguards"
+      ],
+      "colors": [
+        "синий"
+      ],
+      "sizes": [
+        "L",
+        "S",
+        "M",
+        "XL"
+      ],
+      "photos": [
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/big/1.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/c246x328/1.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/c516x688/1.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/hq/1.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/square/1.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/tm/1.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/big/2.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/c246x328/2.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/c516x688/2.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/hq/2.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/square/2.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/tm/2.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/big/3.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/c246x328/3.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/c516x688/3.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/hq/3.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/square/3.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/tm/3.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/big/4.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/c246x328/4.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/c516x688/4.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/hq/4.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/square/4.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/tm/4.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/big/5.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/c246x328/5.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/c516x688/5.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/hq/5.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/square/5.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/tm/5.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/big/6.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/c246x328/6.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/c516x688/6.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/hq/6.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/square/6.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/tm/6.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/big/7.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/c246x328/7.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/c516x688/7.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/hq/7.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/square/7.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/tm/7.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/big/8.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/c246x328/8.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/c516x688/8.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/hq/8.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/square/8.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/tm/8.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/big/9.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/c246x328/9.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/c516x688/9.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/hq/9.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/square/9.webp",
+        "https://basket-24.wbbasket.ru/vol4184/part418431/418431704/images/tm/9.webp"
+      ],
+      "priceFromKzt": null,
+      "minOrderQuantity": null,
+      "wbMeta": {
+        "nmID": 418431704,
+        "subjectID": 240,
+        "subjectName": "Щитки",
+        "parentID": 1605,
+        "parentName": "Спортивные аксессуары"
+      },
+      "variants": [
+        {
+          "nmID": 418431704,
+          "chrtID": 598561264,
+          "size": "L",
+          "wbSize": "165-175 см",
+          "sku": "2044005581551",
+          "colors": [
+            "синий"
+          ]
+        },
+        {
+          "nmID": 418431704,
+          "chrtID": 598561268,
+          "size": "S",
+          "wbSize": "145-155 см",
+          "sku": "2044005581575",
+          "colors": [
+            "синий"
+          ]
+        },
+        {
+          "nmID": 418431704,
+          "chrtID": 598561266,
+          "size": "M",
+          "wbSize": "155-165 см",
+          "sku": "2044005581568",
+          "colors": [
+            "синий"
+          ]
+        },
+        {
+          "nmID": 418431704,
+          "chrtID": 598561269,
+          "size": "XL",
+          "wbSize": "175+ см",
+          "sku": "2044005581582",
+          "colors": [
+            "синий"
+          ]
+        }
+      ],
+      "priceFrom": null,
+      "popularityRank": 87,
+      "privatePriceTiers": []
+    },
+    {
+      "id": "wb-208483248",
+      "source": "wb",
+      "sourceNmIDs": [
+        208483248
+      ],
+      "article": "черепашки-син",
+      "title": "Перчатки для мма (ufc) черепашки рукопашка (мма)",
+      "brand": "Lucky Sport",
+      "description": "Перчатки для рукопашного боя GREEN HILL от бренда Lucky Sport\n\nПерчатки для смешанных единоборств или для ММА - это аксессуар, который используется в боевых искусствах с элементами тайского бокса, боёв без правил,рукопашного боя единоборств для женщин и других спортивных единоборств.\n\nСмешение стилей в ММА требует особой экипировки, которая бы снижала до минимума вероятность травматизма. Этот атрибут ММА, который используется как для боёв, так и для тренировок, опытными спортсменами и тем, кто только начинает посещать спортивную секцию, ещё называют «перчатки для захвата». Главная отличительная особенность дизайна перчаток для спортивных смешанных единоборств – открытые пальцы, что позволяет бойцу уверенно выполнять захваты, удары и вести борьбу в партере. Есть у этого аксессуара и отдельное отверстие для большого пальца руки, который остается свободным. Такая защита для единоборств позволяет бойцу полноценно использовать руки в борьбе и для удержания противника.\n\nСпециальные накладки на пальцы защищают суставы, а их малый вес и удобная форма позволяет без помех сжать кулак. Для надёжной фиксации на руке спортсмена практически на всех моделях предусмотрены специальные липучки. Это гарантирует эффективность и безопасность ударов и в зале на спортивных тренировках, и на соревнованиях по смешанным единоборствам\n\nМатериал перчаток - Натуральная кожа",
+      "categoryIds": [
+        "combat-boxing-mma-gloves"
+      ],
+      "colors": [
+        "синий",
+        "черный",
+        "белый"
+      ],
+      "sizes": [
+        "XL",
+        "S",
+        "L",
+        "M",
+        "XS"
+      ],
+      "photos": [
+        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/big/1.webp",
+        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/c246x328/1.webp",
+        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/c516x688/1.webp",
+        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/hq/1.webp",
+        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/square/1.webp",
+        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/tm/1.webp",
+        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/big/2.webp",
+        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/c246x328/2.webp",
+        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/c516x688/2.webp",
+        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/hq/2.webp",
+        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/square/2.webp",
+        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/tm/2.webp",
+        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/big/3.webp",
+        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/c246x328/3.webp",
+        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/c516x688/3.webp",
+        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/hq/3.webp",
+        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/square/3.webp",
+        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/tm/3.webp",
+        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/big/4.webp",
+        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/c246x328/4.webp",
+        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/c516x688/4.webp",
+        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/hq/4.webp",
+        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/square/4.webp",
+        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/tm/4.webp",
+        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/big/5.webp",
+        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/c246x328/5.webp",
+        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/c516x688/5.webp",
+        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/hq/5.webp",
+        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/square/5.webp",
+        "https://basket-14.wbbasket.ru/vol2084/part208483/208483248/images/tm/5.webp"
+      ],
+      "priceFromKzt": null,
+      "minOrderQuantity": null,
+      "wbMeta": {
+        "nmID": 208483248,
+        "subjectID": 2021,
+        "subjectName": "Перчатки спортивные",
+        "parentID": 1605,
+        "parentName": "Спортивные аксессуары"
+      },
+      "variants": [
+        {
+          "nmID": 208483248,
+          "chrtID": 342247627,
+          "size": "XL",
+          "wbSize": "21-24",
+          "sku": "2039599587850",
+          "colors": [
+            "синий",
+            "черный",
+            "белый"
+          ]
+        },
+        {
+          "nmID": 208483248,
+          "chrtID": 334145632,
+          "size": "S",
+          "wbSize": "19-20",
+          "sku": "2039470538742",
+          "colors": [
+            "синий",
+            "черный",
+            "белый"
+          ]
+        },
+        {
+          "nmID": 208483248,
+          "chrtID": 334145634,
+          "size": "L",
+          "wbSize": "21-22",
+          "sku": "2039470538766",
+          "colors": [
+            "синий",
+            "черный",
+            "белый"
+          ]
+        },
+        {
+          "nmID": 208483248,
+          "chrtID": 334145633,
+          "size": "M",
+          "wbSize": "20-21",
+          "sku": "2039470538759",
+          "colors": [
+            "синий",
+            "черный",
+            "белый"
+          ]
+        },
+        {
+          "nmID": 208483248,
+          "chrtID": 334145631,
+          "size": "XS",
+          "wbSize": "18-19",
+          "sku": "2039470537721",
+          "colors": [
+            "синий",
+            "черный",
+            "белый"
           ]
         }
       ],
@@ -13929,7 +13929,7 @@
         }
       ],
       "priceFrom": null,
-      "popularityRank": 115,
+      "popularityRank": 114,
       "privatePriceTiers": []
     },
     {
@@ -14031,7 +14031,7 @@
         }
       ],
       "priceFrom": null,
-      "popularityRank": 118,
+      "popularityRank": 117,
       "privatePriceTiers": []
     },
     {
