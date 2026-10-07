@@ -88,6 +88,9 @@ jobs:
         run: |
           lftp -u "$FTP_USERNAME","$FTP_PASSWORD" "ftp://$FTP_SERVER" <<'LFTP'
           set ftp:passive-mode true
+          set ftp:ssl-force false
+          set ftp:ssl-protect-data false
+          set ssl:verify-certificate false
           set net:max-retries 5
           set net:reconnect-interval-base 5
           set net:timeout 30
