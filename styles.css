@@ -1244,3 +1244,30 @@ main{background:var(--dark-bg)}
   0%{transform:translate3d(0,0,0)}
   100%{transform:translate3d(-50%,0,0)}
 }
+
+
+/* Final SVG brand ticker overrides */
+.brand-quality-track .brand-quality-item:nth-child(n+7) img{
+  display:block !important;
+  filter:none !important;
+  mix-blend-mode:normal !important;
+  opacity:.92 !important;
+}
+.brand-quality-track .brand-quality-item:nth-child(n+7)::before{
+  content:none !important;
+  display:none !important;
+}
+.brand-quality-item img[src*="brand-everlast.svg"]{width:86px !important;height:34px !important;object-fit:contain !important}
+.brand-quality-item img[src*="brand-top-ten.svg"]{width:82px !important;height:32px !important;object-fit:contain !important}
+.brand-quality-item img[src*="brand-green-hill.svg"]{width:84px !important;height:32px !important;object-fit:contain !important}
+.brand-quality-item img[src*="brand-essimo.svg"]{width:72px !important;height:30px !important;object-fit:contain !important}
+.brand-quality-item img[src*="brand-tatami.svg"]{display:block !important;width:74px !important;height:34px !important;object-fit:contain !important}
+.brand-quality-item:last-child::after{
+  content:"" !important;
+  display:block !important;
+  width:1px !important;
+  min-width:1px !important;
+  height:22px !important;
+  margin-left:24px !important;
+  background:rgba(255,255,255,.16) !important;
+}
