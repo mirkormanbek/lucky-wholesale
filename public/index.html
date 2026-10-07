@@ -7,7 +7,7 @@
   <title>Lucky Wholesale — оптовый каталог</title>
   <meta name="description" content="Оптовый каталог спортивных товаров Lucky." />
   <link rel="icon" type="image/svg+xml" href="./clover.svg" />
-  <link rel="stylesheet" href="./styles.css?v=20261008-pagination" />
+  <link rel="stylesheet" href="./styles.css?v=20261008-categories" />
 </head>
 <body>
   <div class="announcement">
@@ -165,11 +165,11 @@
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 21-4.35-4.35m2.35-5.15a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z"/></svg>
             <input id="searchInput" type="search" placeholder="Поиск по названию, бренду, артикулу…" autocomplete="off" />
           </div>
-          <button id="filtersToggle" class="filter-button filters-toggle" type="button">Категории <span>＋</span></button>
+          <button id="filtersToggle" class="filter-button filters-toggle" type="button">Все категории <span>＋</span></button>
         </div>
       </div>
 
-      <div id="quickCategoryRail" class="quick-category-rail"></div>
+      <div class="category-navigation"><div class="category-navigation-label" id="directionLabel">Вид спорта</div><nav id="quickCategoryRail" class="quick-category-rail" aria-labelledby="directionLabel"></nav><nav id="subcategoryRail" class="subcategory-rail" aria-label="Тип товара в выбранном виде спорта" hidden></nav></div>
 
       <div class="catalog-layout">
         <aside id="sidebar" class="sidebar">
@@ -186,15 +186,15 @@
 
         <section class="catalog-content">
           <div class="catalog-toolbar">
-            <div class="catalog-view-label">PRODUCTS</div>
+            <div class="catalog-view-label">Товары раздела</div>
             <label class="sort-select">
               <span>Сортировка</span>
               <select id="sortSelect">
-                <option value="default">По умолчанию</option>
+                <option value="default">По популярности</option>
                 <option value="title">По названию</option>
                 <option value="brand">По бренду</option>
-                <option value="priceAsc">Цена: ниже</option>
-                <option value="priceDesc">Цена: выше</option>
+                <option value="priceAsc">Сначала дешевле</option>
+                <option value="priceDesc">Сначала дороже</option>
               </select>
             </label>
           </div>
@@ -390,6 +390,6 @@
     </article>
   </template>
 
-  <script type="module" src="./app.js?v=20261008-pagination"></script>
+  <script type="module" src="./app.js?v=20261008-categories"></script>
 </body>
 </html>

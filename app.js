@@ -30,14 +30,59 @@ function renderCategories(){
   const renderBranch=(parentId,level)=>{
     for(const c of childrenOf(parentId)){
       if(productCountForCategory(c.id)===0)continue;
-      const b=document.createElement("button");b.type="button";b.className=`category-button level-${Math.min(level,2)}`;b.textContent=c.name;b.classList.toggle("active",c.id===state.selectedCategoryId);b.addEventListener("click",()=>selectCategory(c.id));el.categoryTree.appendChild(b);renderBranch(c.id,level+1)
+      const b=document.createElement("button");b.type="button";b.className=`category-button level-${Math.min(level,2)}`;b.textContent=c.name+" · "+productCountForCategory(c.id);b.classList.toggle("active",c.id===state.selectedCategoryId);b.setAttribute("aria-pressed",String(c.id===state.selectedCategoryId));b.addEventListener("click",()=>selectCategory(c.id));el.categoryTree.appendChild(b);renderBranch(c.id,level+1)
     }
   };
   renderBranch(null,0)
 }
 function topLevelCategories(){return childrenOf(null)}
-function renderTopCategories(){const cats=topLevelCategories().filter(c=>productCountForCategory(c.id)>0);el.topCategoryRail.innerHTML="";cats.forEach((c,i)=>{const count=productCountForCategory(c.id);const b=document.createElement("button");b.type="button";b.className="sport-card";b.innerHTML=`<span class="sport-index">${String(i+1).padStart(2,"0")}</span><span class="sport-name">${escapeHtml(c.name)}</span><span class="sport-bottom"><span>${count} товаров</span><span class="sport-arrow">↗</span></span>`;b.addEventListener("click",()=>selectCategory(c.id));el.topCategoryRail.appendChild(b)})}
-function renderQuickCategories(){const cats=topLevelCategories().filter(c=>productCountForCategory(c.id)>0);el.quickCategoryRail.innerHTML="";const all=document.createElement("button");all.type="button";all.className="quick-category-button";all.classList.toggle("active",!state.selectedCategoryId);all.textContent="Все";all.addEventListener("click",()=>selectCategory(null,{scroll:false}));el.quickCategoryRail.appendChild(all);for(const c of cats){const b=document.createElement("button");b.type="button";b.className="quick-category-button";b.classList.toggle("active",c.id===state.selectedCategoryId);b.textContent=c.name;b.addEventListener("click",()=>selectCategory(c.id,{scroll:false}));el.quickCategoryRail.appendChild(b)}}
+// Sport navigation flattens the combat group for buyers; source taxonomy stays unchanged.
+function buyerDirections(){
+  const ids=["judo","bjj","combat-boxing-mma","karate"];
+  const combat=state.categories.find(c=>c.id==="combat");
+  const combatSports=combat?childrenOf(combat.id):[];
+  const ordered=[...ids.map(id=>combatSports.find(c=>c.id===id)).filter(Boolean),...combatSports.filter(c=>!ids.includes(c.id)),...topLevelCategories().filter(c=>c.id!=="combat")];
+  return ordered.filter(c=>c.active!==false&&productCountForCategory(c.id)>0);
+}
+function directionLabel(c){return ({"bjj":"BJJ / Джиу-джитсу","combat-boxing-mma":"Бокс / MMA","karate":"Карате"})[c.id]||c.name}
+function selectedDirection(){const path=categoryPath(state.selectedCategoryId);return buyerDirections().find(c=>path.some(p=>p.id===c.id))}
+function categoryChip(c,{label=c.name,active=false,onClick}={}){
+  const button=document.createElement("button");button.type="button";button.className="quick-category-button";
+  const name=document.createElement("span");name.textContent=label;
+  const count=document.createElement("span");count.className="category-count";count.textContent=productCountForCategory(c.id);
+  button.append(name,count);button.classList.toggle("active",active);button.setAttribute("aria-pressed",String(active));
+  button.addEventListener("click",onClick||(()=>selectCategory(c.id,{scroll:false})));return button;
+}
+function renderTopCategories(){
+  el.topCategoryRail.replaceChildren();
+  for(const c of buyerDirections()){
+    const button=document.createElement("button");button.type="button";button.className="sport-card";
+    button.innerHTML=`<span class="sport-name">${escapeHtml(directionLabel(c))}</span><span class="sport-bottom"><span>${productCountForCategory(c.id)} товаров</span><span class="sport-arrow" aria-hidden="true">↗</span></span>`;
+    button.addEventListener("click",()=>selectCategory(c.id));el.topCategoryRail.appendChild(button);
+  }
+}
+function renderQuickCategories(){
+  el.quickCategoryRail.replaceChildren();
+  const all=document.createElement("button");all.type="button";all.className="quick-category-button";all.textContent="Все товары";
+  all.classList.toggle("active",!state.selectedCategoryId);all.setAttribute("aria-pressed",String(!state.selectedCategoryId));
+  all.addEventListener("click",()=>selectCategory(null,{scroll:false}));el.quickCategoryRail.appendChild(all);
+  const selected=selectedDirection();
+  for(const c of buyerDirections())el.quickCategoryRail.appendChild(categoryChip(c,{label:directionLabel(c),active:selected?.id===c.id}));
+  const subcategories=document.querySelector("#subcategoryRail");
+  subcategories.replaceChildren();subcategories.hidden=!state.selectedCategoryId;
+  if(!state.selectedCategoryId)return;
+  // Show product types within the selected sport; retain a direct all-sport option.
+  const parent=selected||state.categoryById.get(state.selectedCategoryId);
+  if(!parent)return;
+  const title=document.createElement("span");title.className="subcategory-label";title.textContent="Тип товара";
+  subcategories.appendChild(title);
+  subcategories.appendChild(categoryChip(parent,{label:"Все в разделе",active:state.selectedCategoryId===parent.id}));
+  for(const c of childrenOf(parent.id).filter(c=>productCountForCategory(c.id)>0)){
+    const active=categoryPath(state.selectedCategoryId).some(p=>p.id===c.id);
+    subcategories.appendChild(categoryChip(c,{active}));
+  }
+}
+
 
 function firstColor(p){const c=p.colors||[];return c.length===0?"":c.length===1?c[0]:`${c[0]} +${c.length-1}`}
 function renderCard(product){
@@ -104,7 +149,7 @@ function renderProducts(){
   for(const x of visible)f.appendChild(renderCard(x));
   el.productGrid.appendChild(f);
   const pathText=categoryPath(state.selectedCategoryId).map(x=>x.name).join(" / ");
-  el.activeCategoryTitle.textContent="Все оптовые товары";
+  el.activeCategoryTitle.textContent=state.categoryById.get(state.selectedCategoryId)?.name||"Все оптовые товары";
   const count=p.length?`${start+1}–${start+visible.length} из ${p.length} товаров`:"0 товаров";
   el.resultsMeta.textContent=pathText?`${pathText} · ${count}`:count;
   renderPagination(p.length);

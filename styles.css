@@ -947,3 +947,36 @@ main{background:var(--dark-bg)}
 .catalog-pagination button:disabled{opacity:.35;cursor:default}
 .catalog-pagination button:not(:disabled):hover{border-color:var(--lime,#b7de2c)}
 .catalog-pagination :focus-visible{outline:2px solid var(--lime,#b7de2c);outline-offset:3px}
+
+/* Buyer navigation: sports are visible, product types follow the chosen sport. */
+#topCategoryRail{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;overflow:visible}
+#topCategoryRail .sport-card{display:flex;flex-direction:column;justify-content:space-between;gap:12px;min-height:108px;padding:18px;flex:auto}
+#topCategoryRail .sport-name{margin:0;max-width:none;font-size:19px;line-height:1.2;word-break:normal}
+#topCategoryRail .sport-bottom{position:static;display:flex;align-items:center;justify-content:space-between;width:100%;gap:8px}
+.category-navigation{padding:20px 0;border-top:1px solid var(--dark-line,#29302c);border-bottom:1px solid var(--dark-line,#29302c);margin-bottom:18px}
+.category-navigation-label,.subcategory-label{color:#9ea7a2;font-size:12px;font-weight:650}
+#quickCategoryRail{flex-wrap:wrap;overflow:visible;gap:8px;margin:0;padding:10px 0 0}
+#quickCategoryRail .quick-category-button,.subcategory-rail .quick-category-button{display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:9px 13px;font-size:13px}
+.category-count{font-size:11px;opacity:.65;font-variant-numeric:tabular-nums}
+.subcategory-rail{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-top:14px;padding-top:14px;border-top:1px solid #252d29}
+.subcategory-rail[hidden]{display:none}
+.subcategory-label{flex-basis:100%}
+.subcategory-rail .quick-category-button{border-radius:10px}
+.category-navigation button:focus-visible,#topCategoryRail button:focus-visible{outline:2px solid var(--neon,#b7de2c);outline-offset:3px}
+.catalog-toolbar .sort-select{display:flex;align-items:center;gap:10px;font-size:12px}
+.catalog-toolbar .sort-select select{min-height:44px;padding:10px 28px 10px 12px;border:1px solid #354039;border-radius:12px;background:#171d1a;color:#eef2ed;font-size:13px}
+.catalog-toolbar .sort-select select:focus-visible{outline:2px solid var(--neon,#b7de2c);outline-offset:2px}
+@media(max-width:720px){
+  #topCategoryRail{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  #topCategoryRail .sport-card{min-height:94px;padding:14px;border-radius:16px}
+  #topCategoryRail .sport-name{font-size:17px}
+  #topCategoryRail .sport-arrow{width:28px;height:28px;font-size:18px}
+  .catalog-intro-actions{flex-wrap:wrap;gap:10px}
+  .catalog-intro-actions .search-wrap{flex:1 1 100%;max-width:none}
+  .catalog-intro-actions .filters-toggle{width:auto;min-height:42px;padding:10px 16px;font-size:13px}
+  .category-navigation{padding:16px 0;margin-bottom:12px}
+  #quickCategoryRail{gap:7px}
+  #quickCategoryRail .quick-category-button,.subcategory-rail .quick-category-button{font-size:12px;padding:9px 11px}
+  .catalog-toolbar .sort-select{width:100%;justify-content:space-between}
+  .catalog-toolbar .sort-select select{max-width:72%;flex:1}
+}
