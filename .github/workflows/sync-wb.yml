@@ -83,7 +83,7 @@ jobs:
           FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
         run: |
-          curl --silent --show-error --fail --ftp-ssl --user "$FTP_USERNAME:$FTP_PASSWORD" "ftp://$FTP_SERVER/" --list-only >/dev/null
+          curl --silent --show-error --fail --user "$FTP_USERNAME:$FTP_PASSWORD" "ftp://$FTP_SERVER/" --list-only >/dev/null
           echo "FTP login successful"
 
       - name: Configure Pages
