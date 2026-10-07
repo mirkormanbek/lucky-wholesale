@@ -1201,3 +1201,17 @@ main{background:var(--dark-bg)}
 @keyframes brand-stage-marquee{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
 @media(max-width:720px){.brand-quality-stage{animation-duration:28s}}
 @media(prefers-reduced-motion:reduce){.brand-quality-stage{animation-play-state:paused}}
+
+/* Brand rail hard-fix: continuous single-line marquee + safe wordmark fallback */
+.brand-quality-stage{animation:brand-stage-marquee 22s linear infinite !important}
+.brand-quality-stage>.brand-quality-track{display:flex !important;flex-flow:row nowrap !important;align-items:center !important}
+.brand-quality-track .brand-quality-item:nth-child(n+7) img{display:none !important}
+.brand-quality-track .brand-quality-item:nth-child(n+7){min-width:155px !important}
+.brand-quality-track .brand-quality-item:nth-child(n+7)::before{
+  display:block;flex:0 0 auto;color:#f2f3f4;font-weight:900;line-height:1;white-space:nowrap;
+}
+.brand-quality-track .brand-quality-item:nth-child(7)::before{content:"EVERLAST";font-size:18px;font-style:italic;letter-spacing:-1px}
+.brand-quality-track .brand-quality-item:nth-child(8)::before{content:"TOP TEN";font-size:17px;letter-spacing:-.5px}
+.brand-quality-track .brand-quality-item:nth-child(9)::before{content:"GREEN HILL";font-size:15px;letter-spacing:-.6px}
+.brand-quality-track .brand-quality-item:nth-child(10)::before{content:"essimo";font-size:20px;font-weight:800;letter-spacing:-1px}
+@media(prefers-reduced-motion:reduce){.brand-quality-stage{animation:brand-stage-marquee 22s linear infinite !important}}
