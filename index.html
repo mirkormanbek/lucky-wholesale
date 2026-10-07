@@ -7,7 +7,7 @@
   <title>Lucky Wholesale — оптовый каталог</title>
   <meta name="description" content="Оптовый каталог спортивных товаров Lucky." />
   <link rel="icon" type="image/svg+xml" href="./clover.svg" />
-  <link rel="stylesheet" href="./styles.css?v=20261008-categories" />
+  <link rel="stylesheet" href="./styles.css?v=20261008-compact" />
 </head>
 <body>
   <div class="announcement">
@@ -141,17 +141,6 @@
         </div>
     </section>
 
-    <section class="shop-by" aria-labelledby="shopByTitle">
-      <div class="section-heading">
-        <div>
-          <div class="section-kicker dark">SHOP BY SPORT</div>
-          <h2 id="shopByTitle">Выберите направление</h2>
-        </div>
-        <button class="text-link" data-scroll-to-catalog type="button">Все товары <span>→</span></button>
-      </div>
-      <div id="topCategoryRail" class="sport-grid"></div>
-    </section>
-
     <section id="catalog" class="catalog-shell">
       <div class="catalog-intro">
         <div>
@@ -165,11 +154,24 @@
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 21-4.35-4.35m2.35-5.15a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z"/></svg>
             <input id="searchInput" type="search" placeholder="Поиск по названию, бренду, артикулу…" autocomplete="off" />
           </div>
-          <button id="filtersToggle" class="filter-button filters-toggle" type="button">Все категории <span>＋</span></button>
         </div>
       </div>
 
-      <div class="category-navigation"><div class="category-navigation-label" id="directionLabel">Вид спорта</div><nav id="quickCategoryRail" class="quick-category-rail" aria-labelledby="directionLabel"></nav><nav id="subcategoryRail" class="subcategory-rail" aria-label="Тип товара в выбранном виде спорта" hidden></nav></div>
+      <div class="compact-filters">
+        <button id="filtersToggle" class="compact-sport" type="button" aria-haspopup="dialog" aria-controls="sportPicker"><span>Вид спорта</span><strong id="sportValue">Все</strong><span aria-hidden="true">⌄</span></button>
+        <label class="compact-type"><span>Тип товара</span><select id="productType" disabled><option value="">Все товары</option></select></label>
+            <label class="sort-select">
+              <span>Сортировка</span>
+              <select id="sortSelect">
+                <option value="default">По популярности</option>
+                <option value="title">По названию</option>
+                <option value="brand">По бренду</option>
+                <option value="priceAsc">Сначала дешевле</option>
+                <option value="priceDesc">Сначала дороже</option>
+              </select>
+            </label>
+      </div>
+      <div id="activeFilters" class="active-filters" aria-label="Выбранные фильтры" hidden></div>
 
       <div class="catalog-layout">
         <aside id="sidebar" class="sidebar">
@@ -185,19 +187,6 @@
         </aside>
 
         <section class="catalog-content">
-          <div class="catalog-toolbar">
-            <div class="catalog-view-label">Товары раздела</div>
-            <label class="sort-select">
-              <span>Сортировка</span>
-              <select id="sortSelect">
-                <option value="default">По популярности</option>
-                <option value="title">По названию</option>
-                <option value="brand">По бренду</option>
-                <option value="priceAsc">Сначала дешевле</option>
-                <option value="priceDesc">Сначала дороже</option>
-              </select>
-            </label>
-          </div>
 
           <div id="productGrid" class="product-grid"></div>
           <nav id="catalogPagination" class="catalog-pagination" aria-label="Страницы каталога" hidden></nav>
@@ -390,6 +379,12 @@
     </article>
   </template>
 
-  <script type="module" src="./app.js?v=20261008-categories"></script>
+  <dialog id="sportPicker" class="sport-picker" aria-labelledby="sportPickerTitle">
+    <div class="sport-picker-head"><h2 id="sportPickerTitle">Вид спорта</h2><button id="sportPickerClose" type="button" aria-label="Закрыть выбор спорта">×</button></div>
+    <label class="sport-picker-search"><span class="visually-hidden">Поиск вида спорта</span><input id="sportSearch" type="search" placeholder="Найти вид спорта…" autocomplete="off" /></label>
+    <div id="sportChoices" class="sport-choices"></div>
+    <p id="sportNoResults" hidden>Ничего не найдено. Измените запрос.</p>
+  </dialog>
+  <script type="module" src="./app.js?v=20261008-compact"></script>
 </body>
 </html>

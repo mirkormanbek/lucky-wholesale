@@ -7,7 +7,7 @@ const el={
   showcaseImageOne:document.querySelector("#showcaseImageOne"),showcaseImageTwo:document.querySelector("#showcaseImageTwo"),
   showcaseTitleOne:document.querySelector("#showcaseTitleOne"),showcaseTitleTwo:document.querySelector("#showcaseTitleTwo"),
   showcaseBrandOne:document.querySelector("#showcaseBrandOne"),showcaseBrandTwo:document.querySelector("#showcaseBrandTwo"),
-  pagination:document.querySelector("#catalogPagination"),productGrid:document.querySelector("#productGrid"),categoryTree:document.querySelector("#categoryTree"),topCategoryRail:document.querySelector("#topCategoryRail"),quickCategoryRail:document.querySelector("#quickCategoryRail"),
+  pagination:document.querySelector("#catalogPagination"),productGrid:document.querySelector("#productGrid"),categoryTree:document.querySelector("#categoryTree"),
   productCount:document.querySelector("#productCount"),categoryCount:document.querySelector("#categoryCount"),searchInput:document.querySelector("#searchInput"),sortSelect:document.querySelector("#sortSelect"),currencySelect:document.querySelector("#currencySelect"),currencyControl:document.querySelector("#currencyControl"),resultsMeta:document.querySelector("#resultsMeta"),activeCategoryTitle:document.querySelector("#activeCategoryTitle"),clearCategory:document.querySelector("#clearCategory"),sidebar:document.querySelector("#sidebar"),sidebarClose:document.querySelector("#sidebarClose"),filtersToggle:document.querySelector("#filtersToggle"),emptyState:document.querySelector("#emptyState"),
   productDialog:document.querySelector("#productDialog"),dialogContent:document.querySelector("#dialogContent"),dialogClose:document.querySelector("#dialogClose"),requestButton:document.querySelector("#requestButton"),requestCount:document.querySelector("#requestCount"),mobileRequestButton:document.querySelector("#mobileRequestButton"),mobileRequestCount:document.querySelector("#mobileRequestCount"),requestDialog:document.querySelector("#requestDialog"),requestDialogClose:document.querySelector("#requestDialogClose"),requestItems:document.querySelector("#requestItems"),requestEmpty:document.querySelector("#requestEmpty"),copyRequestButton:document.querySelector("#copyRequestButton"),template:document.querySelector("#productCardTemplate")
 };
@@ -46,41 +46,58 @@ function buyerDirections(){
 }
 function directionLabel(c){return ({"bjj":"BJJ / Джиу-джитсу","combat-boxing-mma":"Бокс / MMA","karate":"Карате"})[c.id]||c.name}
 function selectedDirection(){const path=categoryPath(state.selectedCategoryId);return buyerDirections().find(c=>path.some(p=>p.id===c.id))}
-function categoryChip(c,{label=c.name,active=false,onClick}={}){
-  const button=document.createElement("button");button.type="button";button.className="quick-category-button";
-  const name=document.createElement("span");name.textContent=label;
-  const count=document.createElement("span");count.className="category-count";count.textContent=productCountForCategory(c.id);
-  button.append(name,count);button.classList.toggle("active",active);button.setAttribute("aria-pressed",String(active));
-  button.addEventListener("click",onClick||(()=>selectCategory(c.id,{scroll:false})));return button;
-}
-function renderTopCategories(){
-  el.topCategoryRail.replaceChildren();
-  for(const c of buyerDirections()){
-    const button=document.createElement("button");button.type="button";button.className="sport-card";
-    button.innerHTML=`<span class="sport-name">${escapeHtml(directionLabel(c))}</span><span class="sport-bottom"><span>${productCountForCategory(c.id)} товаров</span><span class="sport-arrow" aria-hidden="true">↗</span></span>`;
-    button.addEventListener("click",()=>selectCategory(c.id));el.topCategoryRail.appendChild(button);
+function renderSportChoices(){
+  const query=normalize(document.querySelector("#sportSearch").value);
+  const list=document.querySelector("#sportChoices");list.replaceChildren();
+  const choices=[{id:null,name:"Все виды спорта"},...buyerDirections()];
+  const combat=state.categoryById.get("combat");
+  if(combat&&productCountForCategory(combat.id)>0)choices.push({...combat,name:"Все единоборства"});
+  let found=0;
+  for(const c of choices){
+    const name=c.id?directionLabel(c):c.name;
+    if(query&&!normalize(name).includes(query))continue;
+    found++;
+    const button=document.createElement("button");button.type="button";button.className="sport-choice";
+    const active=c.id===state.selectedCategoryId||selectedDirection()?.id===c.id;
+    button.setAttribute("aria-pressed",String(active));
+    const label=document.createElement("span");label.textContent=name;
+    const count=document.createElement("span");count.textContent=c.id?productCountForCategory(c.id):state.products.length;
+    button.append(label,count);button.addEventListener("click",()=>{
+      document.querySelector("#sportPicker").close();
+      selectCategory(c.id,{scroll:false});
+    });list.appendChild(button);
   }
+  document.querySelector("#sportNoResults").hidden=found>0;
+}
+function openSportPicker(){
+  document.querySelector("#sportSearch").value="";
+  renderSportChoices();document.querySelector("#sportPicker").showModal();
+  document.querySelector("#sportSearch").focus();
 }
 function renderQuickCategories(){
-  el.quickCategoryRail.replaceChildren();
-  const all=document.createElement("button");all.type="button";all.className="quick-category-button";all.textContent="Все товары";
-  all.classList.toggle("active",!state.selectedCategoryId);all.setAttribute("aria-pressed",String(!state.selectedCategoryId));
-  all.addEventListener("click",()=>selectCategory(null,{scroll:false}));el.quickCategoryRail.appendChild(all);
-  const selected=selectedDirection();
-  for(const c of buyerDirections())el.quickCategoryRail.appendChild(categoryChip(c,{label:directionLabel(c),active:selected?.id===c.id}));
-  const subcategories=document.querySelector("#subcategoryRail");
-  subcategories.replaceChildren();subcategories.hidden=!state.selectedCategoryId;
-  if(!state.selectedCategoryId)return;
-  // Show product types within the selected sport; retain a direct all-sport option.
-  const parent=selected||state.categoryById.get(state.selectedCategoryId);
-  if(!parent)return;
-  const title=document.createElement("span");title.className="subcategory-label";title.textContent="Тип товара";
-  subcategories.appendChild(title);
-  subcategories.appendChild(categoryChip(parent,{label:"Все в разделе",active:state.selectedCategoryId===parent.id}));
-  for(const c of childrenOf(parent.id).filter(c=>productCountForCategory(c.id)>0)){
-    const active=categoryPath(state.selectedCategoryId).some(p=>p.id===c.id);
-    subcategories.appendChild(categoryChip(c,{active}));
-  }
+  const direction=selectedDirection(),current=state.categoryById.get(state.selectedCategoryId);
+  const parent=direction||current;
+  document.querySelector("#sportValue").textContent=parent?directionLabel(parent):"Все";
+  const type=document.querySelector("#productType");
+  type.replaceChildren();
+  const all=document.createElement("option");all.value=parent?.id||"";all.textContent="Все товары";type.appendChild(all);
+  const addTypes=(id,prefix="")=>{
+    for(const c of childrenOf(id).filter(c=>c.active!==false&&productCountForCategory(c.id)>0)){
+      const option=document.createElement("option");option.value=c.id;option.textContent=prefix+c.name+" · "+productCountForCategory(c.id);
+      type.appendChild(option);addTypes(c.id,prefix+"— ");
+    }
+  };
+  if(parent)addTypes(parent.id);
+  type.disabled=!parent||type.options.length===1;
+  type.value=current?.id||"";
+  const tags=document.querySelector("#activeFilters");tags.replaceChildren();
+  const addTag=(label,remove)=>{
+    const button=document.createElement("button");button.type="button";button.className="active-filter";
+    button.textContent=label+" ×";button.setAttribute("aria-label","Убрать фильтр: "+label);button.addEventListener("click",remove);tags.appendChild(button);
+  };
+  if(parent)addTag(directionLabel(parent),()=>selectCategory(null,{scroll:false}));
+  if(current&&parent&&current.id!==parent.id)addTag(current.name,()=>selectCategory(parent.id,{scroll:false}));
+  tags.hidden=!tags.childElementCount;
 }
 
 
@@ -196,8 +213,8 @@ function renderShowcase(){
 }
 function render(){renderCategories();renderQuickCategories();renderProducts();saveRequest()}
 
-async function init(){try{const [cr,gr]=await Promise.all([fetch("./data/catalog.json",{cache:"no-store"}),fetch("./data/categories.json",{cache:"no-store"})]);if(!cr.ok||!gr.ok)throw new Error("load");const c=await cr.json(),g=await gr.json();state.products=Array.isArray(c.products)?c.products:[];state.categories=Array.isArray(g)?g:[];state.categoryById=new Map(state.categories.map(x=>[x.id,x]));const initialCategory=new URLSearchParams(window.location.search).get("category");if(initialCategory&&state.categoryById.has(initialCategory))state.selectedCategoryId=initialCategory;const top=topLevelCategories().filter(x=>productCountForCategory(x.id)>0).length;if(el.productCount)el.productCount.textContent=state.products.length;if(el.categoryCount)el.categoryCount.textContent=top;el.currencySelect.value=state.currency;const hasPrice=state.products.some(p=>p.priceFrom?.KZT!=null);el.currencyControl.hidden=!hasPrice;if(!hasPrice)[...el.sortSelect.options].forEach(o=>{if(o.value==="priceAsc"||o.value==="priceDesc")o.hidden=true});renderTopCategories();renderShowcase();render()}catch(e){console.error(e);el.resultsMeta.textContent="Ошибка загрузки каталога";el.productGrid.innerHTML="";el.emptyState.hidden=false}}
-el.searchInput.addEventListener("input",e=>{state.query=e.target.value;state.page=1;renderProducts()});el.sortSelect.addEventListener("change",e=>{state.sort=e.target.value;state.page=1;renderProducts()});el.currencySelect.addEventListener("change",e=>{state.currency=e.target.value;state.page=1;localStorage.setItem("lucky-wholesale-currency",state.currency);renderProducts()});el.clearCategory.addEventListener("click",()=>selectCategory(null,{scroll:false}));el.filtersToggle.addEventListener("click",()=>{el.sidebar.classList.add("open");document.body.classList.add("sidebar-open")});el.sidebarClose.addEventListener("click",closeSidebar);el.dialogClose.addEventListener("click",()=>el.productDialog.close());el.requestDialogClose.addEventListener("click",()=>el.requestDialog.close());el.requestButton.addEventListener("click",openRequest);el.mobileRequestButton.addEventListener("click",openRequest);el.copyRequestButton.addEventListener("click",copyRequest);el.productDialog.addEventListener("click",e=>{if(e.target===el.productDialog)el.productDialog.close()});el.requestDialog.addEventListener("click",e=>{if(e.target===el.requestDialog)el.requestDialog.close()});document.querySelectorAll("[data-scroll-to-catalog]").forEach(b=>b.addEventListener("click",()=>document.querySelector("#catalog")?.scrollIntoView({behavior:"smooth",block:"start"})));document.querySelectorAll("[data-category-shortcut]").forEach(b=>b.addEventListener("click",()=>{const id=b.dataset.categoryShortcut;if(state.categoryById.has(id))selectCategory(id)}));
+async function init(){try{const [cr,gr]=await Promise.all([fetch("./data/catalog.json",{cache:"no-store"}),fetch("./data/categories.json",{cache:"no-store"})]);if(!cr.ok||!gr.ok)throw new Error("load");const c=await cr.json(),g=await gr.json();state.products=Array.isArray(c.products)?c.products:[];state.categories=Array.isArray(g)?g:[];state.categoryById=new Map(state.categories.map(x=>[x.id,x]));const initialCategory=new URLSearchParams(window.location.search).get("category");if(initialCategory&&state.categoryById.has(initialCategory))state.selectedCategoryId=initialCategory;const top=topLevelCategories().filter(x=>productCountForCategory(x.id)>0).length;if(el.productCount)el.productCount.textContent=state.products.length;if(el.categoryCount)el.categoryCount.textContent=top;el.currencySelect.value=state.currency;const hasPrice=state.products.some(p=>p.priceFrom?.KZT!=null);el.currencyControl.hidden=!hasPrice;if(!hasPrice)[...el.sortSelect.options].forEach(o=>{if(o.value==="priceAsc"||o.value==="priceDesc")o.hidden=true});renderShowcase();render()}catch(e){console.error(e);el.resultsMeta.textContent="Ошибка загрузки каталога";el.productGrid.innerHTML="";el.emptyState.hidden=false}}
+el.searchInput.addEventListener("input",e=>{state.query=e.target.value;state.page=1;renderProducts()});el.sortSelect.addEventListener("change",e=>{state.sort=e.target.value;state.page=1;renderProducts()});el.currencySelect.addEventListener("change",e=>{state.currency=e.target.value;state.page=1;localStorage.setItem("lucky-wholesale-currency",state.currency);renderProducts()});el.clearCategory.addEventListener("click",()=>selectCategory(null,{scroll:false}));el.filtersToggle.addEventListener("click",openSportPicker);el.sidebarClose.addEventListener("click",closeSidebar);el.dialogClose.addEventListener("click",()=>el.productDialog.close());el.requestDialogClose.addEventListener("click",()=>el.requestDialog.close());el.requestButton.addEventListener("click",openRequest);el.mobileRequestButton.addEventListener("click",openRequest);el.copyRequestButton.addEventListener("click",copyRequest);el.productDialog.addEventListener("click",e=>{if(e.target===el.productDialog)el.productDialog.close()});el.requestDialog.addEventListener("click",e=>{if(e.target===el.requestDialog)el.requestDialog.close()});document.querySelectorAll("[data-scroll-to-catalog]").forEach(b=>b.addEventListener("click",()=>document.querySelector("#catalog")?.scrollIntoView({behavior:"smooth",block:"start"})));document.querySelectorAll("[data-category-shortcut]").forEach(b=>b.addEventListener("click",()=>{const id=b.dataset.categoryShortcut;if(state.categoryById.has(id))selectCategory(id)}));
 if(el.menuToggle&&el.mobileNav){
   el.menuToggle.addEventListener("click",()=>{
     const open=el.mobileNav.classList.toggle("open");
@@ -208,4 +225,13 @@ if(el.menuToggle&&el.mobileNav){
     el.menuToggle.setAttribute("aria-expanded","false");
   }));
 }
+document.querySelector("#sportPicker").addEventListener("keydown",e=>{
+  if(e.key==="Escape"){e.preventDefault();document.querySelector("#sportPicker").close();}
+});
+document.querySelector("#sportSearch").addEventListener("input",renderSportChoices);
+document.querySelector("#sportPickerClose").addEventListener("click",()=>document.querySelector("#sportPicker").close());
+document.querySelector("#sportPicker").addEventListener("click",e=>{
+  if(e.target===e.currentTarget){const rect=e.currentTarget.getBoundingClientRect();if(e.clientX<rect.left||e.clientX>rect.right||e.clientY<rect.top||e.clientY>rect.bottom)e.currentTarget.close();}
+});
+document.querySelector("#productType").addEventListener("change",e=>selectCategory(e.target.value||null,{scroll:false}));
 init();
