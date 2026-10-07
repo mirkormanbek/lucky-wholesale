@@ -1244,3 +1244,25 @@ main{background:var(--dark-bg)}
   0%{transform:translate3d(0,0,0)}
   100%{transform:translate3d(-50%,0,0)}
 }
+
+
+/* Brand strip: logos only + separators after every logo */
+.brand-quality-item > span{
+  display:none !important;
+}
+.brand-quality-item::after{
+  content:"" !important;
+  display:block !important;
+  width:1px !important;
+  height:20px !important;
+  margin-left:22px !important;
+  background:rgba(255,255,255,.14) !important;
+  flex:0 0 auto !important;
+}
+.brand-quality-track .brand-quality-item:nth-child(7)::before,
+.brand-quality-track .brand-quality-item:nth-child(8)::before,
+.brand-quality-track .brand-quality-item:nth-child(9)::before,
+.brand-quality-track .brand-quality-item:nth-child(10)::before{
+  content:none !important;
+  display:none !important;
+}
