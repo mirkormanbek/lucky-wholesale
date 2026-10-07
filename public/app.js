@@ -1,4 +1,5 @@
-const state={products:[],categories:[],categoryById:new Map(),selectedCategoryId:null,query:"",sort:"default",currency:localStorage.getItem("lucky-wholesale-currency")||"KZT",requestIds:new Set(JSON.parse(localStorage.getItem("lucky-wholesale-request")||"[]"))};
+const PAGE_SIZE=24;
+const state={page:1,products:[],categories:[],categoryById:new Map(),selectedCategoryId:null,query:"",sort:"default",currency:localStorage.getItem("lucky-wholesale-currency")||"KZT",requestIds:new Set(JSON.parse(localStorage.getItem("lucky-wholesale-request")||"[]"))};
 
 const el={
   menuToggle:document.querySelector("#menuToggle"),mobileNav:document.querySelector("#mobileNav"),
@@ -6,7 +7,7 @@ const el={
   showcaseImageOne:document.querySelector("#showcaseImageOne"),showcaseImageTwo:document.querySelector("#showcaseImageTwo"),
   showcaseTitleOne:document.querySelector("#showcaseTitleOne"),showcaseTitleTwo:document.querySelector("#showcaseTitleTwo"),
   showcaseBrandOne:document.querySelector("#showcaseBrandOne"),showcaseBrandTwo:document.querySelector("#showcaseBrandTwo"),
-  productGrid:document.querySelector("#productGrid"),categoryTree:document.querySelector("#categoryTree"),topCategoryRail:document.querySelector("#topCategoryRail"),quickCategoryRail:document.querySelector("#quickCategoryRail"),
+  pagination:document.querySelector("#catalogPagination"),productGrid:document.querySelector("#productGrid"),categoryTree:document.querySelector("#categoryTree"),topCategoryRail:document.querySelector("#topCategoryRail"),quickCategoryRail:document.querySelector("#quickCategoryRail"),
   productCount:document.querySelector("#productCount"),categoryCount:document.querySelector("#categoryCount"),searchInput:document.querySelector("#searchInput"),sortSelect:document.querySelector("#sortSelect"),currencySelect:document.querySelector("#currencySelect"),currencyControl:document.querySelector("#currencyControl"),resultsMeta:document.querySelector("#resultsMeta"),activeCategoryTitle:document.querySelector("#activeCategoryTitle"),clearCategory:document.querySelector("#clearCategory"),sidebar:document.querySelector("#sidebar"),sidebarClose:document.querySelector("#sidebarClose"),filtersToggle:document.querySelector("#filtersToggle"),emptyState:document.querySelector("#emptyState"),
   productDialog:document.querySelector("#productDialog"),dialogContent:document.querySelector("#dialogContent"),dialogClose:document.querySelector("#dialogClose"),requestButton:document.querySelector("#requestButton"),requestCount:document.querySelector("#requestCount"),mobileRequestButton:document.querySelector("#mobileRequestButton"),mobileRequestCount:document.querySelector("#mobileRequestCount"),requestDialog:document.querySelector("#requestDialog"),requestDialogClose:document.querySelector("#requestDialogClose"),requestItems:document.querySelector("#requestItems"),requestEmpty:document.querySelector("#requestEmpty"),copyRequestButton:document.querySelector("#copyRequestButton"),template:document.querySelector("#productCardTemplate")
 };
@@ -21,7 +22,7 @@ function productCountForCategory(id){const ids=descendants(id);return state.prod
 function filteredProducts(){const q=normalize(state.query),ids=descendants(state.selectedCategoryId);let p=state.products.filter(x=>{if(ids&&!(x.categoryIds||[]).some(id=>ids.has(id)))return false;if(!q)return true;return normalize([x.title,x.brand,x.article,...(x.colors||[]),...(x.sizes||[])].filter(Boolean).join(" ")).includes(q)});p=[...p];if(state.sort==="default")p.sort((a,b)=>(a.popularityRank??Infinity)-(b.popularityRank??Infinity)||(a.title||"").localeCompare(b.title||"","ru"));if(state.sort==="title")p.sort((a,b)=>(a.title||"").localeCompare(b.title||"","ru"));if(state.sort==="brand")p.sort((a,b)=>(a.brand||"").localeCompare(b.brand||"","ru")||(a.title||"").localeCompare(b.title||"","ru"));if(state.sort==="priceAsc")p.sort((a,b)=>(a.priceFrom?.[state.currency]??Infinity)-(b.priceFrom?.[state.currency]??Infinity));if(state.sort==="priceDesc")p.sort((a,b)=>(b.priceFrom?.[state.currency]??-Infinity)-(a.priceFrom?.[state.currency]??-Infinity));return p}
 function categoryPath(id){const path=[];let c=state.categoryById.get(id),seen=new Set();while(c&&!seen.has(c.id)){seen.add(c.id);path.unshift(c);c=c.parentId?state.categoryById.get(c.parentId):null}return path}
 function closeSidebar(){el.sidebar.classList.remove("open");document.body.classList.remove("sidebar-open")}
-function selectCategory(id,{scroll=true,updateUrl=true}={}){state.selectedCategoryId=id||null;closeSidebar();if(updateUrl){const url=new URL(window.location.href);if(state.selectedCategoryId)url.searchParams.set("category",state.selectedCategoryId);else url.searchParams.delete("category");history.replaceState({},"",url.pathname+url.search+url.hash)}render();if(scroll)document.querySelector("#catalog")?.scrollIntoView({behavior:"smooth",block:"start"})}
+function selectCategory(id,{scroll=true,updateUrl=true}={}){state.selectedCategoryId=id||null;state.page=1;closeSidebar();if(updateUrl){const url=new URL(window.location.href);if(state.selectedCategoryId)url.searchParams.set("category",state.selectedCategoryId);else url.searchParams.delete("category");history.replaceState({},"",url.pathname+url.search+url.hash)}render();if(scroll)document.querySelector("#catalog")?.scrollIntoView({behavior:"smooth",block:"start"})}
 
 function childrenOf(parentId){return state.categories.filter(c=>(c.parentId||null)===(parentId||null))}
 function renderCategories(){
@@ -64,7 +65,50 @@ function renderCard(product){
   const open=()=>openProduct(product);imageButton.addEventListener("click",open);title.addEventListener("click",open);
   const added=state.requestIds.has(product.id);add.classList.toggle("added",added);addLabel.textContent=added?"В заявке":"В заявку";addIcon.textContent=added?"✓":"＋";add.addEventListener("click",()=>toggleRequest(product.id));card.dataset.productId=product.id;return f
 }
-function renderProducts(){const p=filteredProducts();el.productGrid.innerHTML="";el.emptyState.hidden=p.length>0;const f=document.createDocumentFragment();for(const x of p)f.appendChild(renderCard(x));el.productGrid.appendChild(f);const path=categoryPath(state.selectedCategoryId);const pathText=path.map(x=>x.name).join(" / ");el.activeCategoryTitle.textContent="Все оптовые товары";el.resultsMeta.textContent=pathText?`${pathText} · ${p.length} товаров`:`${p.length} товаров`}
+function changePage(page){
+  state.page=page;
+  renderProducts();
+  document.querySelector("#catalog")?.scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"});
+  el.pagination.querySelector("select")?.focus({preventScroll:true});
+}
+function renderPagination(total){
+  const pages=Math.ceil(total/PAGE_SIZE);
+  el.pagination.replaceChildren();
+  el.pagination.hidden=pages<=1;
+  if(pages<=1)return;
+  const previous=document.createElement("button");
+  previous.type="button";previous.textContent="←";previous.setAttribute("aria-label","Предыдущая страница");previous.disabled=state.page===1;
+  previous.addEventListener("click",()=>changePage(state.page-1));
+  const label=document.createElement("label");
+  label.textContent="Страница ";
+  const select=document.createElement("select");
+  select.setAttribute("aria-label","Страница каталога");
+  for(let page=1;page<=pages;page++){
+    const option=document.createElement("option");
+    option.value=page;option.textContent=`${page} из ${pages}`;option.selected=page===state.page;
+    select.appendChild(option);
+  }
+  select.addEventListener("change",()=>changePage(Number(select.value)));
+  label.appendChild(select);
+  const next=document.createElement("button");
+  next.type="button";next.textContent="→";next.setAttribute("aria-label","Следующая страница");next.disabled=state.page===pages;
+  next.addEventListener("click",()=>changePage(state.page+1));
+  el.pagination.append(previous,label,next);
+}
+function renderProducts(){
+  const p=filteredProducts();
+  state.page=Math.max(1,Math.min(state.page,Math.ceil(p.length/PAGE_SIZE)||1));
+  const start=(state.page-1)*PAGE_SIZE,visible=p.slice(start,start+PAGE_SIZE);
+  el.productGrid.innerHTML="";el.emptyState.hidden=p.length>0;
+  const f=document.createDocumentFragment();
+  for(const x of visible)f.appendChild(renderCard(x));
+  el.productGrid.appendChild(f);
+  const pathText=categoryPath(state.selectedCategoryId).map(x=>x.name).join(" / ");
+  el.activeCategoryTitle.textContent="Все оптовые товары";
+  const count=p.length?`${start+1}–${start+visible.length} из ${p.length} товаров`:"0 товаров";
+  el.resultsMeta.textContent=pathText?`${pathText} · ${count}`:count;
+  renderPagination(p.length);
+}
 
 function openProduct(p){const colors=p.colors||[],sizes=p.sizes||[],cats=(p.categoryIds||[]).map(id=>state.categoryById.get(id)?.name).filter(Boolean);el.dialogContent.innerHTML=`<div class="dialog-product"><div class="dialog-media">${p.photos?.[0]?`<img src="${escapeHtml(p.photos[0])}" alt="${escapeHtml(p.title||"Товар")}" />`:""}</div><div class="dialog-info"><div class="section-kicker dark">${escapeHtml(p.brand||"Lucky")}</div><h2>${escapeHtml(p.title||"Без названия")}</h2><div class="product-article">Артикул: ${escapeHtml(p.article||"—")}</div>${priceText(p)?`<div class="info-block"><div class="info-label">Оптовая цена</div><div class="dialog-price">${escapeHtml(priceText(p))}</div></div>`:""}${colors.length?`<div class="info-block"><div class="info-label">Цвет</div><div class="chip-row">${colors.map(x=>`<span class="chip">${escapeHtml(x)}</span>`).join("")}</div></div>`:""}${sizes.length?`<div class="info-block"><div class="info-label">Размеры</div><div class="chip-row">${sizes.map(x=>`<span class="chip">${escapeHtml(x)}</span>`).join("")}</div></div>`:""}${cats.length?`<div class="info-block"><div class="info-label">Категория</div><div class="chip-row">${cats.map(x=>`<span class="chip">${escapeHtml(x)}</span>`).join("")}</div></div>`:""}${p.description?`<div class="info-block"><div class="info-label">Описание</div><div class="dialog-description">${escapeHtml(p.description)}</div></div>`:""}<div class="info-block"><button id="dialogAddButton" class="dialog-primary wide" type="button">${state.requestIds.has(p.id)?"Убрать из заявки":"Добавить в заявку"}</button></div></div></div>`;el.productDialog.showModal();document.querySelector("#dialogAddButton")?.addEventListener("click",()=>{toggleRequest(p.id);el.productDialog.close()})}
 
@@ -108,7 +152,7 @@ function renderShowcase(){
 function render(){renderCategories();renderQuickCategories();renderProducts();saveRequest()}
 
 async function init(){try{const [cr,gr]=await Promise.all([fetch("./data/catalog.json",{cache:"no-store"}),fetch("./data/categories.json",{cache:"no-store"})]);if(!cr.ok||!gr.ok)throw new Error("load");const c=await cr.json(),g=await gr.json();state.products=Array.isArray(c.products)?c.products:[];state.categories=Array.isArray(g)?g:[];state.categoryById=new Map(state.categories.map(x=>[x.id,x]));const initialCategory=new URLSearchParams(window.location.search).get("category");if(initialCategory&&state.categoryById.has(initialCategory))state.selectedCategoryId=initialCategory;const top=topLevelCategories().filter(x=>productCountForCategory(x.id)>0).length;if(el.productCount)el.productCount.textContent=state.products.length;if(el.categoryCount)el.categoryCount.textContent=top;el.currencySelect.value=state.currency;const hasPrice=state.products.some(p=>p.priceFrom?.KZT!=null);el.currencyControl.hidden=!hasPrice;if(!hasPrice)[...el.sortSelect.options].forEach(o=>{if(o.value==="priceAsc"||o.value==="priceDesc")o.hidden=true});renderTopCategories();renderShowcase();render()}catch(e){console.error(e);el.resultsMeta.textContent="Ошибка загрузки каталога";el.productGrid.innerHTML="";el.emptyState.hidden=false}}
-el.searchInput.addEventListener("input",e=>{state.query=e.target.value;renderProducts()});el.sortSelect.addEventListener("change",e=>{state.sort=e.target.value;renderProducts()});el.currencySelect.addEventListener("change",e=>{state.currency=e.target.value;localStorage.setItem("lucky-wholesale-currency",state.currency);renderProducts()});el.clearCategory.addEventListener("click",()=>selectCategory(null,{scroll:false}));el.filtersToggle.addEventListener("click",()=>{el.sidebar.classList.add("open");document.body.classList.add("sidebar-open")});el.sidebarClose.addEventListener("click",closeSidebar);el.dialogClose.addEventListener("click",()=>el.productDialog.close());el.requestDialogClose.addEventListener("click",()=>el.requestDialog.close());el.requestButton.addEventListener("click",openRequest);el.mobileRequestButton.addEventListener("click",openRequest);el.copyRequestButton.addEventListener("click",copyRequest);el.productDialog.addEventListener("click",e=>{if(e.target===el.productDialog)el.productDialog.close()});el.requestDialog.addEventListener("click",e=>{if(e.target===el.requestDialog)el.requestDialog.close()});document.querySelectorAll("[data-scroll-to-catalog]").forEach(b=>b.addEventListener("click",()=>document.querySelector("#catalog")?.scrollIntoView({behavior:"smooth",block:"start"})));document.querySelectorAll("[data-category-shortcut]").forEach(b=>b.addEventListener("click",()=>{const id=b.dataset.categoryShortcut;if(state.categoryById.has(id))selectCategory(id)}));
+el.searchInput.addEventListener("input",e=>{state.query=e.target.value;state.page=1;renderProducts()});el.sortSelect.addEventListener("change",e=>{state.sort=e.target.value;state.page=1;renderProducts()});el.currencySelect.addEventListener("change",e=>{state.currency=e.target.value;state.page=1;localStorage.setItem("lucky-wholesale-currency",state.currency);renderProducts()});el.clearCategory.addEventListener("click",()=>selectCategory(null,{scroll:false}));el.filtersToggle.addEventListener("click",()=>{el.sidebar.classList.add("open");document.body.classList.add("sidebar-open")});el.sidebarClose.addEventListener("click",closeSidebar);el.dialogClose.addEventListener("click",()=>el.productDialog.close());el.requestDialogClose.addEventListener("click",()=>el.requestDialog.close());el.requestButton.addEventListener("click",openRequest);el.mobileRequestButton.addEventListener("click",openRequest);el.copyRequestButton.addEventListener("click",copyRequest);el.productDialog.addEventListener("click",e=>{if(e.target===el.productDialog)el.productDialog.close()});el.requestDialog.addEventListener("click",e=>{if(e.target===el.requestDialog)el.requestDialog.close()});document.querySelectorAll("[data-scroll-to-catalog]").forEach(b=>b.addEventListener("click",()=>document.querySelector("#catalog")?.scrollIntoView({behavior:"smooth",block:"start"})));document.querySelectorAll("[data-category-shortcut]").forEach(b=>b.addEventListener("click",()=>{const id=b.dataset.categoryShortcut;if(state.categoryById.has(id))selectCategory(id)}));
 if(el.menuToggle&&el.mobileNav){
   el.menuToggle.addEventListener("click",()=>{
     const open=el.mobileNav.classList.toggle("open");

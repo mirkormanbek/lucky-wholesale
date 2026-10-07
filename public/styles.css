@@ -936,3 +936,14 @@ main{background:var(--dark-bg)}
 }
 /* Keep the brand loop continuous; reduce its speed for reduced-motion users. */
 @media(prefers-reduced-motion:reduce){.brand-quality-stage{animation-duration:52s}}
+
+/* Compact catalog pagination; render only the current page's product cards. */
+.catalog-pagination{display:flex;align-items:center;justify-content:center;gap:14px;margin:28px 0 12px;color:#d3d7da}
+.catalog-pagination[hidden]{display:none}
+.catalog-pagination label{display:flex;align-items:center;gap:8px;font-size:14px}
+.catalog-pagination button,.catalog-pagination select{min-height:44px;border:1px solid #354039;border-radius:12px;background:#171d1a;color:#eef2ed;font:inherit}
+.catalog-pagination button{width:44px;font-size:20px;cursor:pointer}
+.catalog-pagination select{padding:8px 12px;cursor:pointer}
+.catalog-pagination button:disabled{opacity:.35;cursor:default}
+.catalog-pagination button:not(:disabled):hover{border-color:var(--lime,#b7de2c)}
+.catalog-pagination :focus-visible{outline:2px solid var(--lime,#b7de2c);outline-offset:3px}
