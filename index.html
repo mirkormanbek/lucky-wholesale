@@ -7,7 +7,7 @@
   <title>Lucky Wholesale — оптовый каталог</title>
   <meta name="description" content="Оптовый каталог спортивных товаров Lucky." />
   <link rel="icon" type="image/svg+xml" href="./clover.svg" />
-  <link rel="stylesheet" href="./styles.css?v=20261007-brand-mobile" />
+  <link rel="stylesheet" href="./styles.css?v=20261008-pagination" />
 </head>
 <body>
   <div class="announcement">
@@ -157,7 +157,7 @@
         <div>
           <div class="section-kicker dark">WHOLESALE CATALOG</div>
           <h2 id="activeCategoryTitle">Все оптовые товары</h2>
-          <div id="resultsMeta" class="catalog-meta">Загрузка…</div>
+          <div id="resultsMeta" aria-live="polite" aria-atomic="true" class="catalog-meta">Загрузка…</div>
         </div>
 
         <div class="catalog-intro-actions">
@@ -200,6 +200,7 @@
           </div>
 
           <div id="productGrid" class="product-grid"></div>
+          <nav id="catalogPagination" class="catalog-pagination" aria-label="Страницы каталога" hidden></nav>
           <div id="emptyState" class="empty-state" hidden>
             <strong>Ничего не найдено</strong>
             <span>Измените категорию или поисковый запрос.</span>
@@ -389,6 +390,6 @@
     </article>
   </template>
 
-  <script type="module" src="./app.js"></script>
+  <script type="module" src="./app.js?v=20261008-pagination"></script>
 </body>
 </html>
