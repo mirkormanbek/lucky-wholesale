@@ -77,19 +77,32 @@ function openSportPicker(){
 function renderQuickCategories(){
   const direction=selectedDirection(),current=state.categoryById.get(state.selectedCategoryId);
   const parent=direction||current;
-  document.querySelector("#sportValue").textContent=parent?directionLabel(parent):"Все";
+  const rail=document.querySelector("#sportRail"),left=rail.scrollLeft;
+  rail.replaceChildren();
+  for(const c of [{id:null,name:"Все"},...buyerDirections()]){
+    const button=document.createElement("button");button.type="button";
+    button.textContent=c.id==="bjj"?"BJJ":c.id?directionLabel(c):c.name;
+    button.className="sport-tab";button.setAttribute("aria-pressed",String(c.id===(parent?.id||null)));
+    button.addEventListener("click",()=>selectCategory(c.id,{scroll:false}));rail.appendChild(button);
+  }
+  rail.scrollLeft=left;
   const type=document.querySelector("#productType");
   type.replaceChildren();
   const all=document.createElement("option");all.value=parent?.id||"";all.textContent="Все товары";type.appendChild(all);
-  const addTypes=(id,prefix="")=>{
+  const addTypes=(id,prefix="",target=type)=>{
     for(const c of childrenOf(id).filter(c=>c.active!==false&&productCountForCategory(c.id)>0)){
       const option=document.createElement("option");option.value=c.id;option.textContent=prefix+c.name+" · "+productCountForCategory(c.id);
-      type.appendChild(option);addTypes(c.id,prefix+"— ");
+      target.appendChild(option);addTypes(c.id,prefix+"— ",target);
     }
   };
   if(parent)addTypes(parent.id);
-  type.disabled=!parent||type.options.length===1;
+  else for(const sport of buyerDirections()){
+    const group=document.createElement("optgroup");group.label=directionLabel(sport);
+    addTypes(sport.id,"",group);if(group.children.length)type.appendChild(group);
+  }
+  type.disabled=false;
   type.value=current?.id||"";
+  document.querySelector("#typeValue").textContent=current&&current.id!==parent?.id?current.name:"Все товары";
   const tags=document.querySelector("#activeFilters");tags.replaceChildren();
   const addTag=(label,remove)=>{
     const button=document.createElement("button");button.type="button";button.className="active-filter";
@@ -158,6 +171,7 @@ function renderPagination(total){
   el.pagination.append(previous,label,next);
 }
 function renderProducts(){
+  document.querySelector("#sortValue").textContent=el.sortSelect.selectedOptions[0]?.textContent||"По популярности";
   const p=filteredProducts();
   state.page=Math.max(1,Math.min(state.page,Math.ceil(p.length/PAGE_SIZE)||1));
   const start=(state.page-1)*PAGE_SIZE,visible=p.slice(start,start+PAGE_SIZE);
