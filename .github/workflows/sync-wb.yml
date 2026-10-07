@@ -62,7 +62,12 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/ public/data/ public/images/
+          git add data/ public/data/ public/images/ index.html styles.css app.js clover.svg lucky-logo.svg version.txt
+          cp -f public/index.html public/styles.css public/app.js public/clover.svg public/lucky-logo.svg public/version.txt ./
+          rm -rf ./images ./data
+          cp -a public/images ./images
+          cp -a public/data ./data
+          git add index.html styles.css app.js clover.svg lucky-logo.svg version.txt images/ data/
           if git diff --cached --quiet; then
             echo "No generated changes"
           else
