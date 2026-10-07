@@ -1192,3 +1192,12 @@ main{background:var(--dark-bg)}
 @media(prefers-reduced-motion:reduce){
   .brand-quality-track{animation-play-state:paused}
 }
+
+/* Brand carousel production fix */
+.brand-quality-list{display:block !important;width:100% !important;overflow:hidden !important}
+.brand-quality-stage{display:flex !important;flex-wrap:nowrap !important;width:max-content !important;will-change:transform;animation:brand-stage-marquee 34s linear infinite}
+.brand-quality-stage>.brand-quality-track{display:flex !important;flex-wrap:nowrap !important;flex:0 0 auto !important;width:max-content !important;animation:none !important}
+.brand-quality-track .brand-quality-item:nth-child(n+7) img{filter:grayscale(1) invert(1) !important;mix-blend-mode:screen;opacity:.9}
+@keyframes brand-stage-marquee{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+@media(max-width:720px){.brand-quality-stage{animation-duration:28s}}
+@media(prefers-reduced-motion:reduce){.brand-quality-stage{animation-play-state:paused}}
