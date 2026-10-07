@@ -11,6 +11,12 @@ on:
       - "scripts/**"
       - "config/**"
       - "catalog/**"
+      - "public/**"
+      - "index.html"
+      - "styles.css"
+      - "app.js"
+      - "clover.svg"
+      - "lucky-logo.svg"
       - ".github/workflows/sync-wb.yml"
 
 concurrency:
