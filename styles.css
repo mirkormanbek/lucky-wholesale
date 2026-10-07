@@ -1266,3 +1266,28 @@ main{background:var(--dark-bg)}
   content:none !important;
   display:none !important;
 }
+
+
+/* Final brand ticker cleanup: never render duplicate text labels */
+.brand-quality-item span,
+.brand-quality-item > span,
+.brand-quality-track .brand-quality-item span{
+  display:none !important;
+  width:0 !important;
+  max-width:0 !important;
+  overflow:hidden !important;
+  margin:0 !important;
+  padding:0 !important;
+}
+.brand-quality-item{
+  gap:0 !important;
+}
+.brand-quality-item::after{
+  content:"" !important;
+  display:block !important;
+  width:1px !important;
+  min-width:1px !important;
+  height:22px !important;
+  margin-left:24px !important;
+  background:rgba(255,255,255,.16) !important;
+}
