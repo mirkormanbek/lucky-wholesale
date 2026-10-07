@@ -84,7 +84,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftp
           local-dir: ./public/
-          server-dir: ./
+          server-dir: ./opt.luckysport.kz/
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
