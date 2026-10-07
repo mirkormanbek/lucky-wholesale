@@ -1292,3 +1292,22 @@ main{background:var(--dark-bg)}
 .brand-quality-item{
   align-items:center !important;
 }
+
+
+/* Optical brand-logo normalization after trimming SVG viewBoxes */
+.brand-quality-item img{
+  object-fit:contain !important;
+  object-position:center !important;
+  transform:none !important;
+}
+.brand-quality-track .brand-quality-item:nth-child(1) img{width:64px !important;height:26px !important;max-width:64px !important;max-height:26px !important;flex-basis:64px !important} /* Mizuno */
+.brand-quality-track .brand-quality-item:nth-child(2) img{width:58px !important;height:25px !important;max-width:58px !important;max-height:25px !important;flex-basis:58px !important} /* Adidas */
+.brand-quality-track .brand-quality-item:nth-child(3) img{width:58px !important;height:26px !important;max-width:58px !important;max-height:26px !important;flex-basis:58px !important} /* Kusakura */
+.brand-quality-track .brand-quality-item:nth-child(4) img{width:58px !important;height:24px !important;max-width:58px !important;max-height:24px !important;flex-basis:58px !important} /* Nike */
+.brand-quality-track .brand-quality-item:nth-child(5) img{width:66px !important;height:25px !important;max-width:66px !important;max-height:25px !important;flex-basis:66px !important} /* Venum */
+.brand-quality-track .brand-quality-item:nth-child(6) img{width:66px !important;height:25px !important;max-width:66px !important;max-height:25px !important;flex-basis:66px !important} /* Kingz */
+.brand-quality-track .brand-quality-item:nth-child(7) img{width:58px !important;height:27px !important;max-width:58px !important;max-height:27px !important;flex-basis:58px !important} /* Everlast */
+.brand-quality-track .brand-quality-item:nth-child(8) img{width:72px !important;height:24px !important;max-width:72px !important;max-height:24px !important;flex-basis:72px !important} /* Top Ten */
+.brand-quality-track .brand-quality-item:nth-child(9) img{width:72px !important;height:24px !important;max-width:72px !important;max-height:24px !important;flex-basis:72px !important} /* Green Hill */
+.brand-quality-track .brand-quality-item:nth-child(10) img{width:72px !important;height:24px !important;max-width:72px !important;max-height:24px !important;flex-basis:72px !important} /* Essimo */
+.brand-quality-track .brand-quality-item:nth-child(11) img{width:72px !important;height:24px !important;max-width:72px !important;max-height:24px !important;flex-basis:72px !important} /* Tatami */
