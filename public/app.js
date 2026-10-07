@@ -69,10 +69,19 @@ function renderSportChoices(){
   }
   document.querySelector("#sportNoResults").hidden=found>0;
 }
+function sizeSportPicker(){
+  const viewport=window.visualViewport;
+  const picker=document.querySelector("#sportPicker");
+  picker.style.setProperty("--picker-height",Math.max(120,(viewport?.height||window.innerHeight)-24)+"px");
+  picker.style.setProperty("--picker-top",((viewport?.offsetTop||0)+12)+"px");
+}
+window.visualViewport?.addEventListener("resize",sizeSportPicker);
+window.visualViewport?.addEventListener("scroll",sizeSportPicker);
+window.addEventListener("resize",sizeSportPicker);
 function openSportPicker(){
   document.querySelector("#sportSearch").value="";
-  renderSportChoices();document.querySelector("#sportPicker").showModal();
-  document.querySelector("#sportSearch").focus();
+  renderSportChoices();sizeSportPicker();document.querySelector("#sportPicker").showModal();
+  document.querySelector("#sportPickerClose").focus({preventScroll:true});
 }
 function renderQuickCategories(){
   const direction=selectedDirection(),current=state.categoryById.get(state.selectedCategoryId);

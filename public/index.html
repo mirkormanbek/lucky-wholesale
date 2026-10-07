@@ -7,7 +7,7 @@
   <title>Lucky Wholesale — оптовый каталог</title>
   <meta name="description" content="Оптовый каталог спортивных товаров Lucky." />
   <link rel="icon" type="image/svg+xml" href="./clover.svg" />
-  <link rel="stylesheet" href="./styles.css?v=20261008-touch" />
+  <link rel="stylesheet" href="./styles.css?v=20261008-picker" />
 </head>
 <body>
   <div class="announcement">
@@ -382,11 +382,11 @@
   </template>
 
   <dialog id="sportPicker" class="sport-picker" aria-labelledby="sportPickerTitle">
-    <div class="sport-picker-head"><h2 id="sportPickerTitle">Вид спорта</h2><button id="sportPickerClose" type="button" aria-label="Закрыть выбор спорта">×</button></div>
+    <div class="sport-picker-head"><h2 id="sportPickerTitle">Вид спорта</h2><button id="sportPickerClose" autofocus type="button" aria-label="Закрыть выбор спорта">×</button></div>
     <label class="sport-picker-search"><span class="visually-hidden">Поиск вида спорта</span><input id="sportSearch" type="search" placeholder="Найти вид спорта…" autocomplete="off" /></label>
     <div id="sportChoices" class="sport-choices"></div>
     <p id="sportNoResults" hidden>Ничего не найдено. Измените запрос.</p>
   </dialog>
-  <script type="module" src="./app.js?v=20261008-touch"></script>
+  <script type="module" src="./app.js?v=20261008-picker"></script>
 </body>
 </html>
