@@ -1271,3 +1271,24 @@ main{background:var(--dark-bg)}
   margin-left:24px !important;
   background:rgba(255,255,255,.16) !important;
 }
+
+
+/* Optical normalization for brand logos: equal perceived size */
+.brand-quality-item img{
+  width:78px !important;
+  height:32px !important;
+  max-width:78px !important;
+  max-height:32px !important;
+  object-fit:contain !important;
+  object-position:center !important;
+  flex:0 0 78px !important;
+  transform:none !important;
+}
+.brand-quality-item img[src*="brand-everlast.svg"]{width:78px !important;height:32px !important}
+.brand-quality-item img[src*="brand-top-ten.svg"]{width:78px !important;height:32px !important}
+.brand-quality-item img[src*="brand-green-hill.svg"]{width:78px !important;height:32px !important}
+.brand-quality-item img[src*="brand-essimo.svg"]{width:78px !important;height:32px !important}
+.brand-quality-item img[src*="brand-tatami.svg"]{width:78px !important;height:32px !important}
+.brand-quality-item{
+  align-items:center !important;
+}
