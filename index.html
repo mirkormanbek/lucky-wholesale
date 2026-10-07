@@ -7,7 +7,7 @@
   <title>Lucky Wholesale — оптовый каталог</title>
   <meta name="description" content="Оптовый каталог спортивных товаров Lucky." />
   <link rel="icon" type="image/svg+xml" href="./clover.svg" />
-  <link rel="stylesheet" href="./styles.css?v=20261008-compact" />
+  <link rel="stylesheet" href="./styles.css?v=20261008-touch" />
 </head>
 <body>
   <div class="announcement">
@@ -157,19 +157,21 @@
         </div>
       </div>
 
+      <div class="sport-navigation">
+        <nav id="sportRail" class="sport-rail" aria-label="Виды спорта"></nav>
+        <button id="filtersToggle" class="sport-all" type="button" aria-haspopup="dialog" aria-controls="sportPicker" aria-label="Найти вид спорта"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
+      </div>
       <div class="compact-filters">
-        <button id="filtersToggle" class="compact-sport" type="button" aria-haspopup="dialog" aria-controls="sportPicker"><span>Вид спорта</span><strong id="sportValue">Все</strong><span aria-hidden="true">⌄</span></button>
-        <label class="compact-type"><span>Тип товара</span><select id="productType" disabled><option value="">Все товары</option></select></label>
-            <label class="sort-select">
-              <span>Сортировка</span>
-              <select id="sortSelect">
-                <option value="default">По популярности</option>
-                <option value="title">По названию</option>
-                <option value="brand">По бренду</option>
-                <option value="priceAsc">Сначала дешевле</option>
-                <option value="priceDesc">Сначала дороже</option>
-              </select>
-            </label>
+        <label class="touch-select"><span>Тип товара</span><strong id="typeValue" aria-hidden="true">Все товары</strong><span class="select-chevron" aria-hidden="true">⌄</span><select id="productType" aria-label="Тип товара"><option value="">Все товары</option></select></label>
+        <label class="touch-select"><span>Сортировка</span><strong id="sortValue" aria-hidden="true">По популярности</strong><span class="select-chevron" aria-hidden="true">⌄</span>
+          <select id="sortSelect" aria-label="Сортировка">
+            <option value="default">По популярности</option>
+            <option value="title">По названию</option>
+            <option value="brand">По бренду</option>
+            <option value="priceAsc">Сначала дешевле</option>
+            <option value="priceDesc">Сначала дороже</option>
+          </select>
+        </label>
       </div>
       <div id="activeFilters" class="active-filters" aria-label="Выбранные фильтры" hidden></div>
 
@@ -385,6 +387,6 @@
     <div id="sportChoices" class="sport-choices"></div>
     <p id="sportNoResults" hidden>Ничего не найдено. Измените запрос.</p>
   </dialog>
-  <script type="module" src="./app.js?v=20261008-compact"></script>
+  <script type="module" src="./app.js?v=20261008-touch"></script>
 </body>
 </html>
