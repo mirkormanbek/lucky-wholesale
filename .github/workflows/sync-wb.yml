@@ -76,6 +76,16 @@ jobs:
             git push origin main
           fi
 
+      - name: Test FTP credentials
+        shell: bash
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          curl --silent --show-error --fail --ftp-ssl --user "$FTP_USERNAME:$FTP_PASSWORD" "ftp://$FTP_SERVER/" --list-only >/dev/null
+          echo "FTP login successful"
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
