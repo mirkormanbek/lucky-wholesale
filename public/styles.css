@@ -1215,3 +1215,32 @@ main{background:var(--dark-bg)}
 .brand-quality-track .brand-quality-item:nth-child(9)::before{content:"GREEN HILL";font-size:15px;letter-spacing:-.6px}
 .brand-quality-track .brand-quality-item:nth-child(10)::before{content:"essimo";font-size:20px;font-weight:800;letter-spacing:-1px}
 @media(prefers-reduced-motion:reduce){.brand-quality-stage{animation:brand-stage-marquee 22s linear infinite !important}}
+
+/* Two independent marquees: sports + brands */
+.sport-marquee .marquee-track{
+  animation-play-state:running !important;
+}
+.brand-quality-list{
+  overflow:hidden !important;
+  position:relative !important;
+}
+.brand-quality-stage{
+  display:flex !important;
+  flex-flow:row nowrap !important;
+  width:max-content !important;
+  transform:translate3d(0,0,0);
+  animation:lucky-brand-loop 26s linear infinite !important;
+  animation-play-state:running !important;
+}
+.brand-quality-stage > .brand-quality-track{
+  display:flex !important;
+  flex-flow:row nowrap !important;
+  align-items:center !important;
+  flex:0 0 auto !important;
+  width:max-content !important;
+  animation:none !important;
+}
+@keyframes lucky-brand-loop{
+  0%{transform:translate3d(0,0,0)}
+  100%{transform:translate3d(-50%,0,0)}
+}
