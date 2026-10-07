@@ -1291,3 +1291,16 @@ main{background:var(--dark-bg)}
   margin-left:24px !important;
   background:rgba(255,255,255,.16) !important;
 }
+
+
+/* Keep brand captions visible; separators remain after every brand */
+.brand-quality-item span,
+.brand-quality-item > span,
+.brand-quality-track .brand-quality-item span{
+  display:inline !important;
+  width:auto !important;
+  max-width:none !important;
+  overflow:visible !important;
+  margin-left:8px !important;
+  padding:0 !important;
+}
