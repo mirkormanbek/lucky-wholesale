@@ -984,3 +984,19 @@ main{background:var(--dark-bg)}
 @media(max-width:720px){
   .catalog-intro-actions .search-wrap{width:100%;max-width:none}
 }
+
+/* Verified company figures; full numerals remain readable on narrow screens. */
+.company-sales{grid-column:1/-1;border-color:#6a7f26;background:linear-gradient(120deg,#263315,#151c16);gap:12px}
+.about-stats .company-sales strong{font-size:clamp(28px,5vw,52px);line-height:1.1;letter-spacing:-.04em}
+.company-sales>span{letter-spacing:.04em}
+.marketplace-names{display:flex;flex-wrap:wrap;gap:8px}
+.marketplace-names span{padding:7px 11px;border:1px solid #586638;border-radius:999px;color:#e5eed3;font-size:12px;letter-spacing:0}
+.warehouse-locations{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-content:center;min-width:0}
+.warehouse-locations article{display:flex;flex-direction:column;gap:12px;padding:20px 14px;border:1px solid #303b32;border-radius:16px;background:#141b16;min-width:0}
+.warehouse-locations strong{font-size:clamp(19px,3vw,30px);white-space:nowrap;letter-spacing:-.04em;color:#ecf0e8}
+.warehouse-locations span{font-size:13px;color:#a6b09f}
+.contact-card .contact-channel{display:flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.05em}
+.contact-channel img{width:28px;height:28px;flex:0 0 28px;object-fit:contain;filter:brightness(0) invert(1)}
+.contact-primary .contact-channel img{filter:brightness(0)}
+.showcase-info-grid strong{font-size:clamp(20px,2.4vw,32px);white-space:nowrap}
+@media(max-width:720px){.warehouse-locations{gap:8px}.warehouse-locations article{padding:16px 10px}.about-stats .fact-card strong{font-size:clamp(22px,5.5vw,28px)}.about-stats .company-sales strong{font-size:32px}}
