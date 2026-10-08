@@ -1000,3 +1000,10 @@ main{background:var(--dark-bg)}
 .contact-primary .contact-channel img{filter:brightness(0)}
 .showcase-info-grid strong{font-size:clamp(20px,2.4vw,32px);white-space:nowrap}
 @media(max-width:720px){.warehouse-locations{gap:8px}.warehouse-locations article{padding:16px 10px}.about-stats .fact-card strong{font-size:clamp(22px,5.5vw,28px)}.about-stats .company-sales strong{font-size:32px}}
+
+/* Secondary retail reference appears only inside the opened product. */
+.product-retail-reference{display:flex;flex-direction:column;align-items:flex-start;gap:6px;margin-top:18px}
+.product-retail-reference a{display:inline-flex;align-items:center;gap:6px;min-height:44px;color:#c6cec8;font-size:13px;text-underline-offset:4px}
+.product-retail-reference a:hover{color:#b7de2c}
+.product-retail-reference a:focus-visible{outline:2px solid #b7de2c;outline-offset:3px}
+.product-retail-reference small{color:#98a39c;font-size:11px;line-height:1.5}
