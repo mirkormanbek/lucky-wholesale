@@ -55,6 +55,37 @@ try {
     }
     if (strlen((string)file_get_contents('php://input')) > 65536) stop('Слишком большой запрос.');
     $input = json_decode((string)file_get_contents('php://input'), true);if (!is_array($input)) stop('Неверные данные.');
+    if ($action === 'batch-save') {
+        $batchId = clean_text($input['batchId'] ?? '', 80);
+        if (!preg_match('/^[a-zA-Z0-9-]{10,80}$/D', $batchId)) stop('Неверная партия.');
+        $items = $input['items'] ?? [];if (!is_array($items) || count($items) < 1 || count($items) > 8) stop('В партии должно быть от 1 до 8 фото.');
+        $category = clean_text($input['categoryId'] ?? '', 120);$categories = json_decode((string)file_get_contents(dirname(__DIR__) . '/data/categories.json'), true);
+        if (!array_filter($categories ?: [], fn($c) => $c['id'] === $category && ($c['active'] ?? true)) || array_filter($categories ?: [], fn($c) => ($c['parentId'] ?? null) === $category && ($c['active'] ?? true))) stop('Выберите конкретный тип товара.');
+        $price = $input['price'] ?? null;if (!is_numeric($price) || !is_finite((float)$price) || $price <= 0 || $price > 100000000) stop('Укажите корректную цену.');
+        $title = clean_text($input['title'] ?? '', 480);if (!$title) stop('Название не сформировано.');
+        $material = clean_text($input['material'] ?? '', 240);$sizes = clean_list($input['sizes'] ?? []);$colors = clean_list($input['colors'] ?? []);if (count($colors) > 1) stop('Укажите один общий цвет или оставьте цвет пустым.');
+        $fingerprint = hash('sha256', json_encode($input, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR));
+        $records = warehouse_state(function(&$s) use ($batchId, $items, $input, $category, $price, $title, $material, $sizes, $colors, $fingerprint, $user, $owner) {
+            $batch = $s['batches'][$batchId] ?? null;
+            if ($batch) {
+                if ($batch['owner'] !== $user) stop('Нет доступа к партии.', 403);
+                if ($batch['fingerprint'] !== $fingerprint) stop('Эта партия уже сохранена с другими данными. Обновите список товаров.', 409);
+                return array_map(fn($id) => present($s['products'][$id], $s), $batch['ids']);
+            }
+            $ids = []; $photoIds = [];
+            foreach ($items as $item) {
+                $id = clean_text($item['id'] ?? '', 80);$photoId = clean_text($item['photoId'] ?? '', 80);
+                if (!preg_match('/^[a-zA-Z0-9-]{10,80}$/D', $id) || isset($s['products'][$id]) || in_array($id, $ids, true)) stop('Неверный или повторный товар.');
+                if (!isset($s['photos'][$photoId]) || !can_read($s['photos'][$photoId])) stop('Нет доступа к фото.', 403);
+                if (in_array($photoId, $photoIds, true)) stop('Каждому товару нужно отдельное фото.');
+                $ids[] = $id;$photoIds[] = $photoId;
+            }
+            $settings = json_decode((string)file_get_contents(__DIR__ . '/fields.json'), true);
+            foreach ($ids as $i => $id) $s['products'][$id] = ['id' => $id, 'article' => 'LW-' . strtoupper(substr(str_replace('-', '', $id), 0, 12)), 'modelGroupId' => $id, 'owner' => $user, 'title' => $title . ' — вариант ' . ($i + 1), 'categoryId' => $category, 'price' => (float)$price, 'currency' => $settings['currency'] ?? 'KZT', 'material' => $material, 'sizes' => $sizes, 'colors' => $colors, 'photos' => [$photoIds[$i]], 'status' => !$owner && !empty($input['submit']) ? 'review' : 'draft', 'comment' => '', 'revision' => 1, 'updatedAt' => gmdate('c')];
+            $s['batches'][$batchId] = ['owner' => $user, 'ids' => $ids, 'fingerprint' => $fingerprint];
+            return array_map(fn($id) => present($s['products'][$id], $s), $ids);
+        });warehouse_json(['products' => $records]);
+    }
     if ($action === 'save') {
         $id = clean_text($input['id'] ?? '', 80);if (!preg_match('/^[a-zA-Z0-9-]{10,80}$/D', $id)) stop('Неверный идентификатор.');
         $category = clean_text($input['categoryId'] ?? '', 120);$categories = json_decode((string)file_get_contents(dirname(__DIR__) . '/data/categories.json'), true);
@@ -69,9 +100,20 @@ try {
             if ($old && ($input['revision'] ?? null) !== $old['revision']) stop('Товар изменился на другом устройстве. Обновите список.', 409);
             if ($old && !$owner && in_array($old['status'], ['review', 'published'], true)) stop('Товар уже на проверке. Дождитесь возврата.', 403);
             foreach ($ids as $photoId) if (!is_string($photoId) || !isset($s['photos'][$photoId]) || !can_read($s['photos'][$photoId])) stop('Нет доступа к фото.', 403);
+            $derived = clean_text($input['derivedFrom'] ?? '', 80);
+            $modelGroupId = $old['modelGroupId'] ?? $id;
+            if (!$old && $derived !== '') {
+                $source = $s['products'][$derived] ?? null;
+                if (!$source || !can_read($source)) stop('Исходная модель недоступна.', 403);
+                if ($source['categoryId'] !== $category) stop('Для другой категории создайте новую модель.');
+                $modelGroupId = $source['modelGroupId'] ?? $source['id'];
+            }
+            $colors = clean_list($input['colors'] ?? []);
+            if (count($colors) > 1) stop('Каждый цвет — отдельный товар. Оставьте один цвет или создайте другой вариант.');
             $settings = json_decode((string)file_get_contents(__DIR__ . '/fields.json'), true);
             $record = ['id' => $id, 'article' => $old['article'] ?? 'LW-' . strtoupper(substr(str_replace('-', '', $id), 0, 12)), 'owner' => $old['owner'] ?? $user, 'title' => clean_text($input['title'] ?? '', 540), 'categoryId' => $category, 'price' => (float)$price, 'currency' => $settings['currency'] ?? 'KZT', 'material' => clean_text($input['material'] ?? '', 240), 'sizes' => clean_list($input['sizes'] ?? []), 'colors' => clean_list($input['colors'] ?? []), 'photos' => array_values(array_unique($ids)), 'status' => $old && $old['status'] === 'published' ? 'review' : ($old['status'] ?? 'draft'), 'comment' => $old['comment'] ?? '', 'revision' => ($old['revision'] ?? 0) + 1, 'updatedAt' => gmdate('c')];
             if ($record['title'] === '') stop('Название не сформировано.');
+            $record['modelGroupId'] = $modelGroupId;
             $s['products'][$id] = $record;return present($record, $s);
         });warehouse_json(['product' => $record]);
     }
