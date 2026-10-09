@@ -1,5 +1,5 @@
 const $=id=>document.getElementById(id);
-let db,fields,categories,current,photos=[],manualCategory=false,busy=false,role="manager",view="all";
+let db,fields,categories,current,photos=[],manualCategory=false,busy=false,role="manager",view="all",colorExplicit=true;
 const normalize=s=>String(s).toLowerCase().replaceAll("ё","е").trim();
 const split=s=>[...new Set(s.split(",").map(x=>x.trim()).filter(Boolean))];
 const message=s=>$("message").textContent=s;
@@ -29,8 +29,14 @@ async function all(){const data=await api("list");role=data.role;return data.pro
 async function upload(photo,kind){const source=await (await fetch(photo[kind],{credentials:"same-origin"})).blob(),form=new FormData();form.append("photo",source,photo.name||"product.png");form.append("kind",kind);if(photo.serverId)form.append("id",photo.serverId);const response=await fetch("./api.php?action=upload",{method:"POST",headers:{"X-Requested-With":"LuckyWarehouse"},credentials:"same-origin",body:form});const data=await response.json();if(!response.ok)throw Error(data.error||"Не удалось загрузить фото.");return data.id;}
 async function put(product){for(const photo of product.photos){const live=photos.find(p=>p.id===photo.id);if(!photo.serverId)photo.serverId=await upload(photo,"original");if(live)live.serverId=photo.serverId;if(photo.processed?.startsWith("data:")){await upload(photo,"processed");photo.processed="./api.php?action=photo&id="+photo.serverId+"&kind=processed";if(live)live.processed=photo.processed;}}return (await api("save",{...product,photos:product.photos.map(p=>p.serverId)})).product;}
 function options(select,values){select.replaceChildren();for(const value of values){const option=document.createElement("option");option.value=value;option.textContent=value||"Выберите";select.appendChild(option);}}
-function checks(id,values,chosen=[]){$(id).replaceChildren();for(const value of [...new Set(values)]){const label=document.createElement("label"),input=document.createElement("input");input.type="checkbox";input.value=value;input.checked=chosen.includes(value);label.append(input,document.createTextNode(value));$(id).appendChild(label);}}
+function checks(id,values,chosen=[]){$(id).replaceChildren();for(const value of [...new Set(values)]){const label=document.createElement("label"),input=document.createElement("input");input.type=id==="colors"?"radio":"checkbox";if(id==="colors")input.name="product-color-value";input.value=value;input.checked=chosen.includes(value);label.append(input,document.createTextNode(value));$(id).appendChild(label);}}
 function chosen(id){return [...$(id).querySelectorAll("input:checked")].map(e=>e.value);}
+function entryMode(){
+ $("ownerActions").hidden=role!=="owner"||$("entryMode").value==="batch";
+ const batch=$("entryMode").value==="batch";$("entryHint").textContent=batch?"Каждое фото станет отдельным товаром. Категория, цена и характеристики общие для партии.":"Фото одного товара и одного цвета.";
+ $("save").textContent=batch?(role==="owner"?"Создать товары · ":"Отправить на проверку · ")+photos.length:(role==="owner"?"Сохранить изменения":"Отправить на проверку");
+ $("saveDraft").textContent=batch?"Сохранить всю партию":"Сохранить черновик";
+}
 function categoryTitle(){
  const category=categories.find(c=>c.id===$("category").value);if(!category)return "";
  return fields.titles?.[category.id]||category.name;
@@ -63,8 +69,9 @@ function renderPhotos(){
  $("photoPreview").replaceChildren();
  photos.forEach((photo,index)=>{const figure=document.createElement("figure"),img=document.createElement("img"),caption=document.createElement("figcaption"),button=document.createElement("button");if(photo.original){img.src=photo.original;img.alt="Оригинал фото товара";caption.textContent="Оригинал";figure.append(photoThumbnail(img,photo,"original"),caption);}button.type="button";button.disabled=busy;button.textContent="Убрать из карточки";button.addEventListener("click",()=>{photos.splice(index,1);renderPhotos();});
  if(photo.processed){const result=document.createElement("img"),note=document.createElement("figcaption");result.src=photo.processed;result.alt="Результат ИИ-обработки на белом фоне";note.textContent=photo.processingStatus==="approved"?"Фото подтверждено":"Белый фон · требуется проверка";figure.append(photoThumbnail(result,photo,"processed"),note);if(role==="owner"&&photo.processingStatus!=="approved"){const approve=document.createElement("button");approve.type="button";approve.disabled=busy;approve.textContent="Принять фото";approve.addEventListener("click",()=>approvePhoto(photo));figure.append(approve);const reject=document.createElement("button");reject.type="button";reject.disabled=busy;reject.textContent="Отклонить результат";reject.addEventListener("click",()=>rejectPhoto(photo));figure.append(reject);}}
- if(role==="owner"&&fields.imageProcessingEnabled&&photo.original&&!photo.processed){const process=document.createElement("button");process.type="button";process.disabled=busy;process.textContent="Обработать фон · платно";process.addEventListener("click",()=>processPhoto(photo));figure.append(process);}
+ if(role==="owner"&&fields.imageProcessingEnabled&&photo.original&&!photo.processed&&$("entryMode").value!=="batch"){const process=document.createElement("button");process.type="button";process.disabled=busy;process.textContent="Обработать фон · платно";process.addEventListener("click",()=>processPhoto(photo));figure.append(process);}
  figure.append(button);$("photoPreview").appendChild(figure);});
+ entryMode();
 }
 async function processPhoto(photo){
  if(busy||role!=="owner"||!fields.imageProcessingEnabled)return;
@@ -98,17 +105,24 @@ async function addPhotos(files){
 }
 function newProduct(){
  if(busy)return;
+ colorExplicit=true;
+ $("entryMode").disabled=false;
+ $("addColor").hidden=true;
  $("listControls").hidden=true;
  current={id:crypto.randomUUID(),article:"LW-"+new Date().toISOString().slice(0,10).replaceAll("-","")+"-"+crypto.randomUUID().slice(0,8).toUpperCase()};
  photos=[];manualCategory=false;$("editor").reset();$("editor").hidden=false;$("productList").hidden=true;
  $("article").textContent=current.article;$("savedStatus").textContent="";$("reviewComment").textContent="";$("save").disabled=false;$("saveDraft").disabled=false;$("ownerActions").hidden=role!=="owner";$("extraFields").open=false;typeOptions();titlePreview();checks("colors",fields.colors);categoryFields();renderPhotos();priceHints().catch(e=>message(e.message));message("");
 }
 function edit(record){
+ $("entryMode").value="single";$("entryMode").disabled=true;
+ colorExplicit=record.colors.length<=1;
+ $("addColor").hidden=false;
  $("listControls").hidden=true;
  current=record;photos=structuredClone(record.photos);manualCategory=true;$("editor").hidden=false;$("productList").hidden=true;
  $("article").textContent=record.article;$("sport").value=categories.find(c=>c.id===record.categoryId)?.parentId||"";typeOptions(record.categoryId);$("title").value=record.title===categoryTitle()?"":record.title;titlePreview();$("extraFields").open=false;$("price").value=record.price;
- categoryFields(record);checks("colors",fields.colors,record.colors);$("customColors").value=record.colors.filter(s=>!fields.colors.includes(s)).join(", ");
+ categoryFields(record);checks("colors",fields.colors,colorExplicit?record.colors:[]);$("customColors").value=colorExplicit?record.colors.filter(s=>!fields.colors.includes(s)).join(", "):"";
  renderPhotos();priceHints();$("savedStatus").textContent="Черновик. Для публикации требуется ваше подтверждение.";
+ if(!colorExplicit)$("savedStatus").textContent="В старой карточке несколько цветов: "+record.colors.join(", ")+". Перед сохранением выберите один цвет для этого товара. Другие цвета добавьте отдельными товарами.";
  $("ownerActions").hidden=role!=="owner";$("reviewComment").textContent=record.comment||"";$("save").disabled=role!=="owner"&&["review","published"].includes(record.status);$("saveDraft").disabled=$("save").disabled;
 }
 async function list(){
@@ -126,17 +140,38 @@ $("photos").addEventListener("change",e=>addPhotos([...e.target.files]));$("came
 $("newProduct").addEventListener("click",newProduct);$("showList").addEventListener("click",()=>list().catch(e=>message(e.message)));
 async function saveForm(submit){
  if(busy)return false;if(!photos.length){message("Добавьте хотя бы одно фото.");return false;}
+ if(!colorExplicit){message("В старой карточке несколько цветов. Явно выберите один цвет перед сохранением.");return false;}
  const price=Number($("price").value);if(!Number.isFinite(price)||price<=0){message("Укажите корректную цену.");return;}
  if(!$("category").value){message("Выберите тип товара.");return;}
  const material=$("customMaterial").value.trim()||$("material").value;
- const product={...current,title:$("title").value.trim()||categoryTitle(),categoryId:$("category").value,price,currency:fields.currency,material,sizes:[...new Set([...chosen("sizes"),...split($("customSizes").value)])],colors:[...new Set([...chosen("colors"),...split($("customColors").value)])],photos:structuredClone(photos),status:"draft",updatedAt:new Date().toISOString()};
+ const product={...current,title:$("title").value.trim()||categoryTitle(),categoryId:$("category").value,price,currency:fields.currency,material,sizes:[...new Set([...chosen("sizes"),...split($("customSizes").value)])],colors:$("customColors").value.trim()?[$("customColors").value.trim()]:chosen("colors"),photos:structuredClone(photos),status:"draft",updatedAt:new Date().toISOString()};
+ if($("entryMode").value==="batch")return saveBatch(product,submit);
  busy=true;$("save").disabled=true;$("saveDraft").disabled=true;renderPhotos();
- try{current=await put(product);photos=structuredClone(current.photos);$("article").textContent=current.article;if(submit&&role!=="owner")current=(await api("transition",{id:current.id,revision:current.revision,status:"review"})).product;$("savedStatus").textContent=submit&&role!=="owner"?"Отправлено владельцу на проверку.":"Сохранено на сервере.";message("Сохранено. Товар доступен с другого устройства.");return true;}
+ try{current=await put(product);photos=structuredClone(current.photos);$("entryMode").disabled=true;$("article").textContent=current.article;$("addColor").hidden=false;if(submit&&role!=="owner")current=(await api("transition",{id:current.id,revision:current.revision,status:"review"})).product;$("savedStatus").textContent=submit&&role!=="owner"?"Отправлено владельцу на проверку.":"Сохранено на сервере.";message("Сохранено. Товар доступен с другого устройства.");return true;}
  catch(e){message(e.message||"Не удалось сохранить на сервере.");return false;}
  finally{busy=false;$("save").disabled=false;$("saveDraft").disabled=false;renderPhotos();}
 }
+async function saveBatch(product,submit){
+ busy=true;$("save").disabled=true;$("saveDraft").disabled=true;$("entryMode").disabled=true;renderPhotos();
+ try{
+ const items=[];for(const photo of photos){photo.batchSkuId=photo.batchSkuId||crypto.randomUUID();if(!photo.serverId)photo.serverId=await upload(photo,"original");items.push({id:photo.batchSkuId,photoId:photo.serverId});}
+ const result=await api("batch-save",{batchId:current.id,items,title:product.title,categoryId:product.categoryId,price:product.price,material:product.material,sizes:product.sizes,colors:product.colors,submit:submit&&role!=="owner"});
+ await list();message("Создано товаров: "+result.products.length+". У каждого свой артикул и фото."+(submit&&role!=="owner"?" Партия отправлена владельцу.":" Товары сохранены как черновики."));return true;
+ }catch(e){message(e.message||"Не удалось сохранить партию. Повторный запрос не создаст дубликаты.");return false;}
+ finally{busy=false;$("save").disabled=false;$("saveDraft").disabled=false;$("entryMode").disabled=false;renderPhotos();}
+}
+$("entryMode").addEventListener("change",renderPhotos);
 $("editor").addEventListener("submit",async e=>{e.preventDefault();await saveForm(true);});
 $("saveDraft").addEventListener("click",()=>saveForm(false));
+$("customColors").addEventListener("input",()=>{colorExplicit=true;if($("customColors").value.trim())$("colors").querySelectorAll("input").forEach(input=>input.checked=false);});
+$("colors").addEventListener("change",()=>{colorExplicit=true;$("customColors").value="";});
+$("addColor").addEventListener("click",async()=>{
+ if(busy)return;
+ if(!current.revision){if(!await saveForm(false))return;}
+ const source=structuredClone(current);newProduct();current.derivedFrom=source.id;
+ $("sport").value=categories.find(c=>c.id===source.categoryId)?.parentId||"";typeOptions(source.categoryId);$("title").value=source.title===categoryTitle()?"":source.title;titlePreview();$("price").value=source.price;categoryFields(source);$("extraFields").open=true;
+ message("Другой цвет — новый товар и артикул. Выберите цвет и добавьте его фото. Категория и цена уже подставлены.");
+});
 async function transition(status){if(busy)return;if(!await saveForm(false))return;const comment=status==="returned"?prompt("Что менеджеру нужно исправить?"):"";if(comment===null)return;try{current=(await api("transition",{id:current.id,revision:current.revision,status,comment})).product;await list();message(status==="published"?"Товар опубликован на сайте.":"Статус товара обновлён.");}catch(e){message(e.message);}}
 $("publish").addEventListener("click",()=>transition("published"));$("returnProduct").addEventListener("click",()=>transition("returned"));$("hideProduct").addEventListener("click",()=>transition("hidden"));
 $("viewFilter").addEventListener("change",()=>{view=$("viewFilter").value;list().catch(e=>message(e.message));});
