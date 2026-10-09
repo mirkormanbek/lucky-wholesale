@@ -3,6 +3,26 @@ let db,fields,categories,current,photos=[],manualCategory=false,busy=false,role=
 const normalize=s=>String(s).toLowerCase().replaceAll("ё","е").trim();
 const split=s=>[...new Set(s.split(",").map(x=>x.trim()).filter(Boolean))];
 const message=s=>$("message").textContent=s;
+let viewedPhoto=null,viewerZoom=false,previousOverflow="";
+function viewerImage(kind){
+ if(!viewedPhoto?.[kind])return;
+ $("viewerImage").src=viewedPhoto[kind];$("viewerImage").alt=kind==="original"?"Оригинал фото товара":"Обработанное фото товара";
+ $("viewerOriginal").setAttribute("aria-pressed",String(kind==="original"));$("viewerProcessed").setAttribute("aria-pressed",String(kind==="processed"));
+ viewerZoom=false;$("viewerCanvas").classList.remove("actual-size");$("viewerZoom").textContent="Увеличить до 100%";
+}
+function openPhoto(photo,kind){
+ viewedPhoto=photo;$("viewerOriginal").hidden=!photo.original;$("viewerProcessed").hidden=!photo.processed;
+ $("viewerNote").textContent=photo.original?"Сравните детали, цвет и надписи на товаре.":"Оригинал удалён после подтверждения. Доступно обработанное фото.";
+ viewerImage(photo[kind]?kind:(photo.processed?"processed":"original"));
+ if(!$("photoViewer").open){previousOverflow=document.documentElement.style.overflow;document.documentElement.style.overflow="hidden";$("photoViewer").showModal();}
+}
+function photoThumbnail(img,photo,kind){const button=document.createElement("button");button.type="button";button.className="photo-thumbnail";button.setAttribute("aria-label",kind==="original"?"Открыть оригинал фото крупно":"Открыть обработанное фото крупно");button.title="Нажмите для увеличения";button.append(img);button.addEventListener("click",()=>openPhoto(photo,kind));return button;}
+$("viewerOriginal").addEventListener("click",()=>viewerImage("original"));$("viewerProcessed").addEventListener("click",()=>viewerImage("processed"));
+$("viewerClose").addEventListener("click",()=>$("photoViewer").close());
+$("viewerZoom").addEventListener("click",()=>{viewerZoom=!viewerZoom;$("viewerCanvas").classList.toggle("actual-size",viewerZoom);$("viewerZoom").textContent=viewerZoom?"Вписать в экран":"Увеличить до 100%";});
+$("photoViewer").addEventListener("close",()=>{document.documentElement.style.overflow=previousOverflow;viewedPhoto=null;$("viewerImage").removeAttribute("src");});
+$("photoViewer").addEventListener("click",e=>{if(e.target!==$("photoViewer"))return;const r=e.currentTarget.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)e.currentTarget.close();});
+$("photoViewer").addEventListener("keydown",e=>{if(e.key==="ArrowLeft"||e.key==="ArrowRight"){e.preventDefault();viewerImage(e.key==="ArrowLeft"?"original":"processed");}});
 function request(req){return new Promise((resolve,reject)=>{req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error)});}
 async function api(action,body){const response=await fetch("./api.php?action="+action,{cache:"no-store",credentials:"same-origin",...(body?{method:"POST",headers:{"Content-Type":"application/json","X-Requested-With":"LuckyWarehouse"},body:JSON.stringify(body)}:{})});let data;try{data=await response.json();}catch(e){throw Error("Серверный модуль не установлен или не настроен.");}if(!response.ok)throw Error(data.error||"Ошибка сервера.");return data;}
 async function all(){const data=await api("list");role=data.role;return data.products;}
@@ -41,8 +61,8 @@ async function priceHints(){
 }
 function renderPhotos(){
  $("photoPreview").replaceChildren();
- photos.forEach((photo,index)=>{const figure=document.createElement("figure"),img=document.createElement("img"),caption=document.createElement("figcaption"),button=document.createElement("button");if(photo.original){img.src=photo.original;img.alt="Оригинал фото товара";caption.textContent="Оригинал";figure.append(img,caption);}button.type="button";button.disabled=busy;button.textContent="Убрать из карточки";button.addEventListener("click",()=>{photos.splice(index,1);renderPhotos();});
- if(photo.processed){const result=document.createElement("img"),note=document.createElement("figcaption");result.src=photo.processed;result.alt="Результат ИИ-обработки на белом фоне";note.textContent=photo.processingStatus==="approved"?"Фото подтверждено":"Белый фон · требуется проверка";figure.append(result,note);if(role==="owner"&&photo.processingStatus!=="approved"){const approve=document.createElement("button");approve.type="button";approve.disabled=busy;approve.textContent="Принять фото";approve.addEventListener("click",()=>approvePhoto(photo));figure.append(approve);const reject=document.createElement("button");reject.type="button";reject.disabled=busy;reject.textContent="Отклонить результат";reject.addEventListener("click",()=>rejectPhoto(photo));figure.append(reject);}}
+ photos.forEach((photo,index)=>{const figure=document.createElement("figure"),img=document.createElement("img"),caption=document.createElement("figcaption"),button=document.createElement("button");if(photo.original){img.src=photo.original;img.alt="Оригинал фото товара";caption.textContent="Оригинал";figure.append(photoThumbnail(img,photo,"original"),caption);}button.type="button";button.disabled=busy;button.textContent="Убрать из карточки";button.addEventListener("click",()=>{photos.splice(index,1);renderPhotos();});
+ if(photo.processed){const result=document.createElement("img"),note=document.createElement("figcaption");result.src=photo.processed;result.alt="Результат ИИ-обработки на белом фоне";note.textContent=photo.processingStatus==="approved"?"Фото подтверждено":"Белый фон · требуется проверка";figure.append(photoThumbnail(result,photo,"processed"),note);if(role==="owner"&&photo.processingStatus!=="approved"){const approve=document.createElement("button");approve.type="button";approve.disabled=busy;approve.textContent="Принять фото";approve.addEventListener("click",()=>approvePhoto(photo));figure.append(approve);const reject=document.createElement("button");reject.type="button";reject.disabled=busy;reject.textContent="Отклонить результат";reject.addEventListener("click",()=>rejectPhoto(photo));figure.append(reject);}}
  if(role==="owner"&&fields.imageProcessingEnabled&&photo.original&&!photo.processed){const process=document.createElement("button");process.type="button";process.disabled=busy;process.textContent="Обработать фон · платно";process.addEventListener("click",()=>processPhoto(photo));figure.append(process);}
  figure.append(button);$("photoPreview").appendChild(figure);});
 }
