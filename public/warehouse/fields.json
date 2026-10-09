@@ -1,0 +1,141 @@
+{
+  "currency": "KZT",
+  "imageProcessingEnabled": true,
+  "titles": {
+    "combat-boxing-mma-gloves": "Боксёрские перчатки",
+    "karate-gloves": "Перчатки для карате",
+    "judo-gi": "Кимоно для дзюдо",
+    "bjj-gi": "Кимоно для джиу-джитсу",
+    "karate-gi": "Кимоно для карате",
+    "judo-belts": "Пояс для дзюдо",
+    "combat-boxing-mma-helmets": "Боксёрский шлем",
+    "karate-helmets": "Шлем для карате",
+    "combat-boxing-mma-shinguards": "Щитки для единоборств",
+    "combat-boxing-mma-mitts": "Боксёрские лапы",
+    "combat-boxing-mma-wraps": "Боксёрские бинты",
+    "volleyball-nets": "Волейбольная сетка",
+    "other-nets": "Спортивная сетка"
+  },
+  "colors": [
+    "Чёрный",
+    "Белый",
+    "Красный",
+    "Синий",
+    "Зелёный",
+    "Жёлтый",
+    "Серый",
+    "Розовый"
+  ],
+  "defaults": {
+    "materials": [],
+    "sizes": []
+  },
+  "categories": {
+    "combat-boxing-mma-gloves": {
+      "materials": [
+        "Натуральная кожа",
+        "Экокожа",
+        "ПУ"
+      ],
+      "sizes": [
+        "4 оз",
+        "6 оз",
+        "8 оз",
+        "10 оз",
+        "12 оз",
+        "14 оз",
+        "16 оз"
+      ]
+    },
+    "karate-gloves": {
+      "materials": [
+        "Натуральная кожа",
+        "Экокожа",
+        "ПУ"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
+      ]
+    },
+    "judo-gi": {
+      "materials": [
+        "Хлопок",
+        "Хлопок / полиэстер"
+      ],
+      "sizes": []
+    },
+    "bjj-gi": {
+      "materials": [
+        "Хлопок",
+        "Хлопок / полиэстер"
+      ],
+      "sizes": []
+    },
+    "karate-gi": {
+      "materials": [
+        "Хлопок",
+        "Хлопок / полиэстер"
+      ],
+      "sizes": []
+    }
+  },
+  "rules": [
+    {
+      "categoryId": "karate-gloves",
+      "all": [
+        "перчат",
+        "карат"
+      ]
+    },
+    {
+      "categoryId": "bjj-gi",
+      "all": [
+        "кимоно",
+        "bjj"
+      ]
+    },
+    {
+      "categoryId": "judo-gi",
+      "all": [
+        "кимоно",
+        "дзюдо"
+      ]
+    },
+    {
+      "categoryId": "karate-gi",
+      "all": [
+        "кимоно",
+        "карат"
+      ]
+    },
+    {
+      "categoryId": "combat-boxing-mma-gloves",
+      "all": [
+        "перчат"
+      ]
+    },
+    {
+      "categoryId": "combat-boxing-mma-wraps",
+      "all": [
+        "бинт"
+      ]
+    },
+    {
+      "categoryId": "combat-boxing-mma-helmets",
+      "all": [
+        "шлем"
+      ]
+    },
+    {
+      "categoryId": "football-balls",
+      "all": [
+        "мяч",
+        "футбол"
+      ]
+    }
+  ]
+}
