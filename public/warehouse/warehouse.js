@@ -33,6 +33,7 @@ function checks(id,values,chosen=[]){$(id).replaceChildren();for(const value of 
 function chosen(id){return [...$(id).querySelectorAll("input:checked")].map(e=>e.value);}
 function entryMode(){
  $("ownerActions").hidden=role!=="owner"||$("entryMode").value==="batch";
+ $("addColor").hidden=$("entryMode").value==="batch";$("addColor").disabled=busy;
  const batch=$("entryMode").value==="batch";$("entryHint").textContent=batch?"Каждое фото станет отдельным товаром. Категория, цена и характеристики общие для партии.":"Фото одного товара и одного цвета.";
  $("save").textContent=batch?(role==="owner"?"Создать товары · ":"Отправить на проверку · ")+photos.length:(role==="owner"?"Сохранить изменения":"Отправить на проверку");
  $("saveDraft").textContent=batch?"Сохранить всю партию":"Сохранить черновик";
@@ -107,7 +108,7 @@ function newProduct(){
  if(busy)return;
  colorExplicit=true;
  $("entryMode").disabled=false;
- $("addColor").hidden=true;
+ $("addColor").hidden=false;
  $("listControls").hidden=true;
  current={id:crypto.randomUUID(),article:"LW-"+new Date().toISOString().slice(0,10).replaceAll("-","")+"-"+crypto.randomUUID().slice(0,8).toUpperCase()};
  photos=[];manualCategory=false;$("editor").reset();$("editor").hidden=false;$("productList").hidden=true;
