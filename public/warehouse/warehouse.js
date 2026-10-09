@@ -32,6 +32,7 @@ function options(select,values){select.replaceChildren();for(const value of valu
 function checks(id,values,chosen=[]){$(id).replaceChildren();for(const value of [...new Set(values)]){const label=document.createElement("label"),input=document.createElement("input");input.type=id==="colors"?"radio":"checkbox";if(id==="colors")input.name="product-color-value";input.value=value;input.checked=chosen.includes(value);label.append(input,document.createTextNode(value));$(id).appendChild(label);}}
 function chosen(id){return [...$(id).querySelectorAll("input:checked")].map(e=>e.value);}
 function entryMode(){
+ $("ownerActions").hidden=role!=="owner"||$("entryMode").value==="batch";
  const batch=$("entryMode").value==="batch";$("entryHint").textContent=batch?"Каждое фото станет отдельным товаром. Категория, цена и характеристики общие для партии.":"Фото одного товара и одного цвета.";
  $("save").textContent=batch?(role==="owner"?"Создать товары · ":"Отправить на проверку · ")+photos.length:(role==="owner"?"Сохранить изменения":"Отправить на проверку");
  $("saveDraft").textContent=batch?"Сохранить всю партию":"Сохранить черновик";
@@ -146,7 +147,7 @@ async function saveForm(submit){
  const product={...current,title:$("title").value.trim()||categoryTitle(),categoryId:$("category").value,price,currency:fields.currency,material,sizes:[...new Set([...chosen("sizes"),...split($("customSizes").value)])],colors:$("customColors").value.trim()?[$("customColors").value.trim()]:chosen("colors"),photos:structuredClone(photos),status:"draft",updatedAt:new Date().toISOString()};
  if($("entryMode").value==="batch")return saveBatch(product,submit);
  busy=true;$("save").disabled=true;$("saveDraft").disabled=true;renderPhotos();
- try{current=await put(product);photos=structuredClone(current.photos);$("article").textContent=current.article;$("addColor").hidden=false;if(submit&&role!=="owner")current=(await api("transition",{id:current.id,revision:current.revision,status:"review"})).product;$("savedStatus").textContent=submit&&role!=="owner"?"Отправлено владельцу на проверку.":"Сохранено на сервере.";message("Сохранено. Товар доступен с другого устройства.");return true;}
+ try{current=await put(product);photos=structuredClone(current.photos);$("entryMode").disabled=true;$("article").textContent=current.article;$("addColor").hidden=false;if(submit&&role!=="owner")current=(await api("transition",{id:current.id,revision:current.revision,status:"review"})).product;$("savedStatus").textContent=submit&&role!=="owner"?"Отправлено владельцу на проверку.":"Сохранено на сервере.";message("Сохранено. Товар доступен с другого устройства.");return true;}
  catch(e){message(e.message||"Не удалось сохранить на сервере.");return false;}
  finally{busy=false;$("save").disabled=false;$("saveDraft").disabled=false;renderPhotos();}
 }
