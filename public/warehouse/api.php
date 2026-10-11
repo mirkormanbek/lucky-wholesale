@@ -8,7 +8,7 @@ $owner = $user === WAREHOUSE_OWNER;
 $action = $_GET['action'] ?? 'list';
 $post = ($_SERVER['REQUEST_METHOD'] ?? '') === 'POST';
 if ($post && (($_SERVER['HTTP_X_REQUESTED_WITH'] ?? '') !== 'LuckyWarehouse' || ($_SERVER['HTTP_SEC_FETCH_SITE'] ?? '') === 'cross-site')) stop('Недопустимый запрос.', 403);
-if (!$post && !in_array($action, ['list', 'photo'], true)) stop('Нужен POST-запрос.', 405);
+if (!$post && !in_array($action, ['list', 'photo', 'wb-list'], true)) stop('Нужен POST-запрос.', 405);
 function can_read(array $record): bool { global $user, $owner; return $owner || ($record['owner'] ?? '') === $user; }
 function clean_text($value, int $max): string { if (!is_string($value) || strlen($value) > $max) stop('Неверное поле.'); return trim($value); }
 function clean_list($value): array { if (!is_array($value) || count($value) > 20) stop('Неверный список характеристик.'); return array_values(array_unique(array_filter(array_map(fn($v) => clean_text($v, 180), $value)))); }
@@ -20,6 +20,16 @@ function present(array $product, array $state): array {
     return $product;
 }
 try {
+    if (in_array($action, ['wb-list', 'wb-save'], true)) {
+        if (!$owner) stop('Цены ВБ доступны только владельцу.', 403);
+        require_once __DIR__ . '/wb-pricing.php';
+        if ($action === 'wb-save') {
+            $raw = (string)file_get_contents('php://input');if (strlen($raw) > 65536) stop('Слишком большой запрос.');
+            $data = json_decode($raw, true);if (!is_array($data) || !isset($data['items']) || !is_array($data['items'])) stop('Неверные данные.');
+            wb_save_prices($data['items']);
+        }
+        warehouse_json(['products' => wb_admin_products()]);
+    }
     if ($action === 'list') warehouse_json(warehouse_state(function(&$state) use ($user, $owner) { return ['user' => $user, 'role' => $owner ? 'owner' : 'manager', 'products' => array_values(array_map(fn($p) => present($p, $state), array_filter($state['products'], fn($p) => can_read($p))))]; }));
     if ($action === 'photo') {
         $id = $_GET['id'] ?? ''; $kind = $_GET['kind'] ?? 'original';
