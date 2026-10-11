@@ -14,6 +14,9 @@ if (empty($_SERVER['REMOTE_USER'])) answer(['error' => 'Сначала наст�
 if ($_SERVER['REMOTE_USER'] !== WAREHOUSE_OWNER) answer(['error' => 'ИИ-обработка доступна только владельцу.'], 403);
 if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') answer(['error' => 'Нужен POST-запрос.'], 405);
 if (($_SERVER['HTTP_X_REQUESTED_WITH'] ?? '') !== 'LuckyWarehouse' || ($_SERVER['HTTP_SEC_FETCH_SITE'] ?? '') === 'cross-site') answer(['error' => 'Недопустимый запрос.'], 403);
+$instructions = $_POST['instructions'] ?? '';
+if (!is_string($instructions) || strlen($instructions) > 4000 || !preg_match('//u', $instructions) || preg_match_all('/./us', $instructions) > 1000) answer(['error' => 'Пожелания к обработке: не более 1000 символов.'], 400);
+$instructions = trim($instructions);
 $root = realpath($_SERVER['DOCUMENT_ROOT'] ?? '');
 $private = $root ? realpath(dirname($root) . '/lucky-wholesale-private') : false;
 if (!$private || !$root || strpos($private . '/', $root . '/') === 0) answer(['error' => 'Закрытая конфигурация не найдена.'], 503);
@@ -42,6 +45,7 @@ $encoded = json_encode(['day' => $day, 'count' => $count + 1]);
 rewind($lock);
 if (fwrite($lock, $encoded) !== strlen($encoded) || !ftruncate($lock, strlen($encoded)) || !fflush($lock)) answer(['error' => 'Не удалось сохранить лимит.'], 503);
 $prompt = 'Edit the supplied product photograph for a wholesale product card. Isolate the exact photographed product on a plain pure white studio background. Center the product with comfortable margins, soft studio lighting and a subtle natural contact shadow. Preserve the actual product shape, proportions, color, material, seams, logos, labels and package contents. Do not invent or reconstruct unreadable lettering, add accessories, recolor or redesign the product. Remove only the surrounding scene. If multiple different product models are visible, preserve the whole group without inventing a selection.';
+if ($instructions !== '') $prompt .= "\nOptional owner requests for presentation: " . $instructions . "\nApply these requests only where compatible with the requirements above. You may remove external packaging if explicitly requested, but preserve the actual products. Always keep the plain white studio background and preserve the product's true shape, colors, logos and details; do not add text or invent parts.";
 $curl = curl_init('https://api.openai.com/v1/images/edits');
 curl_setopt_array($curl, [CURLOPT_POST => true, CURLOPT_RETURNTRANSFER => true, CURLOPT_CONNECTTIMEOUT => 15, CURLOPT_TIMEOUT => 100, CURLOPT_HTTPHEADER => ['Authorization: Bearer ' . trim($key)], CURLOPT_POSTFIELDS => ['model' => 'gpt-image-1.5', 'image' => new CURLFile($photo['tmp_name'], $mime, 'product.' . $extensions[$mime]), 'prompt' => $prompt, 'input_fidelity' => 'high', 'quality' => 'medium', 'size' => '1024x1024', 'background' => 'opaque', 'output_format' => 'png']]);
 $response = curl_exec($curl);

@@ -70,17 +70,18 @@ function renderPhotos(){
  $("photoPreview").replaceChildren();
  photos.forEach((photo,index)=>{const figure=document.createElement("figure"),img=document.createElement("img"),caption=document.createElement("figcaption"),button=document.createElement("button");if(photo.original){img.src=photo.original;img.alt="Оригинал фото товара";caption.textContent="Оригинал";figure.append(photoThumbnail(img,photo,"original"),caption);}button.type="button";button.disabled=busy;button.textContent="Убрать из карточки";button.addEventListener("click",()=>{photos.splice(index,1);renderPhotos();});
  if(photo.processed){const result=document.createElement("img"),note=document.createElement("figcaption");result.src=photo.processed;result.alt="Результат ИИ-обработки на белом фоне";note.textContent=photo.processingStatus==="approved"?"Фото подтверждено":"Белый фон · требуется проверка";figure.append(photoThumbnail(result,photo,"processed"),note);if(role==="owner"&&photo.processingStatus!=="approved"){const approve=document.createElement("button");approve.type="button";approve.disabled=busy;approve.textContent="Принять фото";approve.addEventListener("click",()=>approvePhoto(photo));figure.append(approve);const reject=document.createElement("button");reject.type="button";reject.disabled=busy;reject.textContent="Отклонить результат";reject.addEventListener("click",()=>rejectPhoto(photo));figure.append(reject);}}
- if(role==="owner"&&fields.imageProcessingEnabled&&photo.original&&!photo.processed&&$("entryMode").value!=="batch"){const process=document.createElement("button");process.type="button";process.disabled=busy;process.textContent="Обработать фон · платно";process.addEventListener("click",()=>processPhoto(photo));figure.append(process);}
+ if(role==="owner"&&fields.imageProcessingEnabled&&photo.original&&!photo.processed&&$("entryMode").value!=="batch"){const label=document.createElement("label"),instructions=document.createElement("textarea"),hint=document.createElement("small");figure.classList.add("processing-photo");label.textContent="Пожелания к обработке · необязательно";instructions.maxLength=1000;instructions.rows=3;instructions.placeholder="Например: убрать упаковку, оставить мягкую тень";instructions.value=photo.processingInstructions||"";instructions.disabled=busy;instructions.className="processing-instructions";instructions.addEventListener("input",()=>{photo.processingInstructions=instructions.value;});label.append(instructions);hint.textContent="Белый фон; форма, цвета и логотипы товара сохраняются. До 1000 символов.";const process=document.createElement("button");process.type="button";process.disabled=busy;process.textContent="Обработать фон · платно";process.addEventListener("click",()=>processPhoto(photo));figure.append(label,hint,process);}
  figure.append(button);$("photoPreview").appendChild(figure);});
  entryMode();
 }
 async function processPhoto(photo){
  if(busy||role!=="owner"||!fields.imageProcessingEnabled)return;
+ const instructions=(photo.processingInstructions||"").trim();
  if(!confirm("Отправить фото в ИИ-сервис? Обработка оплачивается отдельно. Проверьте, что в кадре одна модель товара."))return;
- const index=photos.indexOf(photo);if(!await saveForm(false))return;photo=photos[index];
+ const index=photos.indexOf(photo);if(!await saveForm(false))return;photo=photos[index];photo.processingInstructions=instructions;
  busy=true;for(const id of ["save","newProduct","showList","photos","camera","export"])$(id).disabled=true;renderPhotos();message("Фото обрабатывается. Не закрывайте страницу.");
  try{
- const source=await (await fetch(photo.original)).blob(),form=new FormData();form.append("photo",source,photo.name);
+ const source=await (await fetch(photo.original)).blob(),form=new FormData();form.append("photo",source,photo.name);form.append("instructions",instructions);
  const response=await fetch("./process-photo.php",{method:"POST",headers:{"X-Requested-With":"LuckyWarehouse"},body:form,credentials:"same-origin"});
  const data=await response.json();if(!response.ok)throw Error(data.error||"Не удалось обработать фото.");
  if(typeof data.image!=="string"||!data.image.startsWith("data:image/png;base64,"))throw Error("Сервис вернул неверное фото.");
