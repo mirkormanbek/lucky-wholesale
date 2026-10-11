@@ -99,12 +99,12 @@ jobs:
           set ssl:verify-certificate false
           set net:max-retries 5
           set net:reconnect-interval-base 5
-            set net:timeout 30
-            put public/warehouse/wb-pricing.php -o opt.luckysport.kz/warehouse/wb-pricing.php
-            put public/warehouse/wb-existing.json -o opt.luckysport.kz/warehouse/wb-existing.json
-            put public/warehouse/wb-prices.js -o opt.luckysport.kz/warehouse/wb-prices.js
-            put public/wb-catalog.php -o opt.luckysport.kz/wb-catalog.php
-            mirror --reverse --only-newer --parallel=1 --verbose public/ opt.luckysport.kz/
+          set net:timeout 30
+          put public/warehouse/wb-pricing.php -o opt.luckysport.kz/warehouse/wb-pricing.php
+          put public/warehouse/wb-existing.json -o opt.luckysport.kz/warehouse/wb-existing.json
+          put public/warehouse/wb-prices.js -o opt.luckysport.kz/warehouse/wb-prices.js
+          put public/wb-catalog.php -o opt.luckysport.kz/wb-catalog.php
+          mirror --reverse --only-newer --parallel=1 --verbose public/ opt.luckysport.kz/
           bye
           LFTP
 
