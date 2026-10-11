@@ -25,7 +25,7 @@ $("photoViewer").addEventListener("click",e=>{if(e.target!==$("photoViewer"))ret
 $("photoViewer").addEventListener("keydown",e=>{if(e.key==="ArrowLeft"||e.key==="ArrowRight"){e.preventDefault();viewerImage(e.key==="ArrowLeft"?"original":"processed");}});
 function request(req){return new Promise((resolve,reject)=>{req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error)});}
 async function api(action,body){const response=await fetch("./api.php?action="+action,{cache:"no-store",credentials:"same-origin",...(body?{method:"POST",headers:{"Content-Type":"application/json","X-Requested-With":"LuckyWarehouse"},body:JSON.stringify(body)}:{})});let data;try{data=await response.json();}catch(e){throw Error("Серверный модуль не установлен или не настроен.");}if(!response.ok)throw Error(data.error||"Ошибка сервера.");return data;}
-async function all(){const data=await api("list");role=data.role;return data.products;}
+async function all(){const data=await api("list");role=data.role;$("wbProducts").hidden=role!=="owner";return data.products;}
 async function upload(photo,kind){const source=await (await fetch(photo[kind],{credentials:"same-origin"})).blob(),form=new FormData();form.append("photo",source,photo.name||"product.png");form.append("kind",kind);if(photo.serverId)form.append("id",photo.serverId);const response=await fetch("./api.php?action=upload",{method:"POST",headers:{"X-Requested-With":"LuckyWarehouse"},credentials:"same-origin",body:form});const data=await response.json();if(!response.ok)throw Error(data.error||"Не удалось загрузить фото.");return data.id;}
 async function put(product){for(const photo of product.photos){const live=photos.find(p=>p.id===photo.id);if(!photo.serverId)photo.serverId=await upload(photo,"original");if(live)live.serverId=photo.serverId;if(photo.processed?.startsWith("data:")){await upload(photo,"processed");photo.processed="./api.php?action=photo&id="+photo.serverId+"&kind=processed";if(live)live.processed=photo.processed;}}return (await api("save",{...product,photos:product.photos.map(p=>p.serverId)})).product;}
 function options(select,values){select.replaceChildren();for(const value of values){const option=document.createElement("option");option.value=value;option.textContent=value||"Выберите";select.appendChild(option);}}
@@ -106,6 +106,7 @@ async function addPhotos(files){
  finally{busy=false;$("save").disabled=false;$("photos").value="";$("camera").value="";renderPhotos();}
 }
 function newProduct(){
+ $("wbPanel").hidden=true;
  if(busy)return;
  colorExplicit=true;
  $("entryMode").disabled=false;
@@ -128,6 +129,7 @@ function edit(record){
  $("ownerActions").hidden=role!=="owner";$("reviewComment").textContent=record.comment||"";$("save").disabled=role!=="owner"&&["review","published"].includes(record.status);$("saveDraft").disabled=$("save").disabled;
 }
 async function list(){
+ $("wbPanel").hidden=true;
  $("listControls").hidden=false;
  $("editor").hidden=true;$("productList").hidden=false;$("productList").replaceChildren();
  const records=(await all()).sort((a,b)=>b.updatedAt.localeCompare(a.updatedAt));
