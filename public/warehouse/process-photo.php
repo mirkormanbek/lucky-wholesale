@@ -31,19 +31,9 @@ $mime = (new finfo(FILEINFO_MIME_TYPE))->file($photo['tmp_name']);
 $extensions = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp'];
 $dimensions = @getimagesize($photo['tmp_name']);
 if (!isset($extensions[$mime]) || !$dimensions || $dimensions[0] * $dimensions[1] > 40000000) answer(['error' => 'Неверный формат или слишком большое фото.'], 400);
-// Reserve before the API call. Failures consume the allowance because provider billing
-// may still occur after a timeout. No automatic retries or parallel provider requests.
+// Serialize provider requests; no daily cap or automatic retries.
 $lock = @fopen($private . '/photo-processing-limit.json', 'c+');
 if (!$lock || !flock($lock, LOCK_EX | LOCK_NB)) answer(['error' => 'Обработка уже идёт или хранилище недоступно. Попробуйте позже.'], 429);
-$raw = stream_get_contents($lock);
-$limit = $raw === '' ? [] : json_decode($raw, true);
-if (!is_array($limit)) answer(['error' => 'Не удалось проверить лимит обработки.'], 503);
-$day = gmdate('Y-m-d');
-$count = ($limit['day'] ?? '') === $day ? (int)($limit['count'] ?? 0) : 0;
-if ($count >= 10) answer(['error' => 'Достигнут тестовый лимит: 10 обработок в сутки.'], 429);
-$encoded = json_encode(['day' => $day, 'count' => $count + 1]);
-rewind($lock);
-if (fwrite($lock, $encoded) !== strlen($encoded) || !ftruncate($lock, strlen($encoded)) || !fflush($lock)) answer(['error' => 'Не удалось сохранить лимит.'], 503);
 $prompt = 'Edit the supplied product photograph for a wholesale product card. Isolate the exact photographed product on a plain pure white studio background. Center the product with comfortable margins, soft studio lighting and a subtle natural contact shadow. Preserve the actual product shape, proportions, color, material, seams, logos, labels and package contents. Do not invent or reconstruct unreadable lettering, add accessories, recolor or redesign the product. Remove only the surrounding scene. If multiple different product models are visible, preserve the whole group without inventing a selection.';
 if ($instructions !== '') $prompt .= "\nOptional owner requests for presentation: " . $instructions . "\nApply these requests only where compatible with the requirements above. You may remove external packaging if explicitly requested, but preserve the actual products. Always keep the plain white studio background and preserve the product's true shape, colors, logos and details; do not add text or invent parts.";
 $curl = curl_init('https://api.openai.com/v1/images/edits');
