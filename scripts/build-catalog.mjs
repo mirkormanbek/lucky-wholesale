@@ -11,7 +11,8 @@ async function readJson(file, fallback = null) {
 }
 
 const root = process.cwd();
-const wbProducts = await readJson(path.join(root, "data/products.json"), []);
+const wbProducts = await readJson(path.join(root, "data/products.json"));
+if (!Array.isArray(wbProducts) || wbProducts.length === 0) throw new Error("WB source is missing or empty; refusing to overwrite the published catalog.");
 const categoryConfig = await readJson(path.join(root, "config/catalog-categories.json"));
 const categoryMap = await readJson(path.join(root, "config/category-map.json"));
 const pricing = await readJson(path.join(root, "config/pricing.json"));
