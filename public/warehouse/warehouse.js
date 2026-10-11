@@ -1,3 +1,4 @@
+let warehouseRecords=[];
 const $=id=>document.getElementById(id);
 let db,fields,categories,current,photos=[],manualCategory=false,busy=false,role="manager",view="all",colorExplicit=true;
 const normalize=s=>String(s).toLowerCase().replaceAll("ё","е").trim();
@@ -132,9 +133,12 @@ async function list(){
  $("wbPanel").hidden=true;
  $("listControls").hidden=false;
  $("editor").hidden=true;$("productList").hidden=false;$("productList").replaceChildren();
- const records=(await all()).sort((a,b)=>b.updatedAt.localeCompare(a.updatedAt));
- if(!records.length)$("productList").textContent="Черновиков пока нет.";
- for(const record of records.filter(p=>view==="all"||p.status===view)){const article=document.createElement("article"),text=document.createElement("div"),title=document.createElement("strong"),meta=document.createElement("p"),button=document.createElement("button"),image=document.createElement("img");image.src=record.photos[0]?.processed||record.photos[0]?.original||"";image.alt="";image.className="list-photo";title.textContent=record.title;meta.textContent=record.article+" · "+record.price+" "+(fields.currency==="RUB"?"₽":"₸")+" · "+({draft:"Черновик",review:"На проверке",returned:"Вернуть на доработку",published:"На сайте",hidden:"Снят с сайта"}[record.status]||record.status);text.append(title,meta);button.textContent="Открыть";button.addEventListener("click",()=>edit(record));article.append(image,text,button);$("productList").appendChild(article);}
+ warehouseRecords=await all();renderWarehouseList();
+}
+function renderWarehouseList(){
+ $("productList").replaceChildren();const query=normalize($("warehouseSearch").value);const records=warehouseRecords.filter(p=>(view==="all"?p.status!=="hidden":p.status===view)&&normalize([p.title,p.article,...(p.colors||[])].join(" ")).includes(query)).sort((a,b)=>{const order=$("warehouseSort").value;if(order==="name")return a.title.localeCompare(b.title,"ru");if(order==="priceAsc")return a.price-b.price;if(order==="priceDesc")return b.price-a.price;return order==="oldest"?a.updatedAt.localeCompare(b.updatedAt):b.updatedAt.localeCompare(a.updatedAt);});
+ if(!records.length)$("productList").textContent="Товаров по этому поиску и фильтру нет.";
+ for(const record of records.filter(p=>view==="all"?p.status!=="hidden":p.status===view)){const article=document.createElement("article"),text=document.createElement("div"),title=document.createElement("strong"),meta=document.createElement("p"),button=document.createElement("button"),image=document.createElement("img");image.src=record.photos[0]?.processed||record.photos[0]?.original||"";image.alt="";image.className="list-photo";title.textContent=record.title;meta.textContent=record.article+" · "+record.price+" "+(fields.currency==="RUB"?"₽":"₸")+" · "+({draft:"Черновик",review:"На проверке",returned:"Вернуть на доработку",published:"На сайте",hidden:"Удалён с сайта"}[record.status]||record.status);text.append(title,meta);button.textContent="Открыть";button.addEventListener("click",()=>edit(record));article.append(image,text,button);$("productList").appendChild(article);}
  $("save").textContent=role==="owner"?"Сохранить изменения":"Отправить на проверку";
 }
 $("title").addEventListener("input",titlePreview);
@@ -177,8 +181,9 @@ $("addColor").addEventListener("click",async()=>{
  message("Другой цвет — новый товар и артикул. Выберите цвет и добавьте его фото. Категория и цена уже подставлены.");
 });
 async function transition(status){if(busy)return;if(!await saveForm(false))return;const comment=status==="returned"?prompt("Что менеджеру нужно исправить?"):"";if(comment===null)return;try{current=(await api("transition",{id:current.id,revision:current.revision,status,comment})).product;await list();message(status==="published"?"Товар опубликован на сайте.":"Статус товара обновлён.");}catch(e){message(e.message);}}
-$("publish").addEventListener("click",()=>transition("published"));$("returnProduct").addEventListener("click",()=>transition("returned"));$("hideProduct").addEventListener("click",()=>transition("hidden"));
-$("viewFilter").addEventListener("change",()=>{view=$("viewFilter").value;list().catch(e=>message(e.message));});
+$("publish").addEventListener("click",()=>transition("published"));$("returnProduct").addEventListener("click",()=>transition("returned"));$("hideProduct").addEventListener("click",async()=>{if(busy)return;if(!current?.revision){message("Сначала сохраните товар.");return;}if(!confirm("Удалить с сайта товар «"+current.title+"»? Фото и цена останутся в разделе «Удалённые»."))return;busy=true;renderPhotos();try{await api("transition",{id:current.id,revision:current.revision,status:"hidden"});await list();message("Товар удалён с сайта. Статус обновлён.");}catch(e){message(e.message);}finally{busy=false;renderPhotos();}});
+$("viewFilter").addEventListener("change",()=>{view=$("viewFilter").value;renderWarehouseList();});
+$("warehouseSearch").addEventListener("input",renderWarehouseList);$("warehouseSort").addEventListener("change",renderWarehouseList);
 $("export").addEventListener("click",async()=>{
  const products=await all();if(!products.length){message("Сначала сохраните товар.");return;}
  const blob=new Blob([JSON.stringify({version:1,exportedAt:new Date().toISOString(),products})],{type:"application/json"});

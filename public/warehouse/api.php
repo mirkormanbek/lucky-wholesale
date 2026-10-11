@@ -20,13 +20,14 @@ function present(array $product, array $state): array {
     return $product;
 }
 try {
-    if (in_array($action, ['wb-list', 'wb-save'], true)) {
+    if (in_array($action, ['wb-list', 'wb-save', 'wb-hide'], true)) {
         if (!$owner) stop('Цены ВБ доступны только владельцу.', 403);
         require_once __DIR__ . '/wb-pricing.php';
-        if ($action === 'wb-save') {
+        if (in_array($action, ['wb-save', 'wb-hide'], true)) {
             $raw = (string)file_get_contents('php://input');if (strlen($raw) > 65536) stop('Слишком большой запрос.');
-            $data = json_decode($raw, true);if (!is_array($data) || !isset($data['items']) || !is_array($data['items'])) stop('Неверные данные.');
-            wb_save_prices($data['items']);
+            $data = json_decode($raw, true);if (!is_array($data)) stop('Неверные данные.');
+            if ($action === 'wb-hide') wb_hide_product($data);
+            else { if (!isset($data['items']) || !is_array($data['items'])) stop('Неверные данные.');wb_save_prices($data['items']); }
         }
         warehouse_json(['products' => wb_admin_products()]);
     }

@@ -42,6 +42,15 @@ function wb_save_prices(array $items): void {
         foreach ($updates as $id => $value) $s['wbPrices'][$id] = $value;
     });
 }
+function wb_hide_product(array $input): void {
+    $source = wb_source();$id = $input['id'] ?? '';
+    if (!is_string($id) || !isset($source[$id])) warehouse_json(['error' => 'Товар не найден.'], 404);
+    warehouse_state(function(&$s) use ($input, $id) {
+        $old = $s['wbPrices'][$id] ?? null;
+        if (($input['revision'] ?? null) !== ($old['revision'] ?? 0)) warehouse_json(['error' => 'Товар изменён на другом устройстве. Обновите список.'], 409);
+        $s['wbPrices'][$id] = ['price' => $old['price'] ?? null, 'status' => 'hidden', 'revision' => ($old['revision'] ?? 0) + 1, 'updatedAt' => gmdate('c')];
+    });
+}
 function wb_public_products(): array {
     $source = wb_source();$existing = wb_existing();
     $fx = json_decode((string)file_get_contents(dirname(__DIR__) . '/data/fx.json'), true);
