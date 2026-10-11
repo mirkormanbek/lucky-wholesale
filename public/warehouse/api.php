@@ -20,13 +20,14 @@ function present(array $product, array $state): array {
     return $product;
 }
 try {
-    if (in_array($action, ['wb-list', 'wb-save', 'wb-hide'], true)) {
+    if (in_array($action, ['wb-list', 'wb-save', 'wb-hide', 'wb-restore'], true)) {
         if (!$owner) stop('Цены ВБ доступны только владельцу.', 403);
         require_once __DIR__ . '/wb-pricing.php';
-        if (in_array($action, ['wb-save', 'wb-hide'], true)) {
+        if (in_array($action, ['wb-save', 'wb-hide', 'wb-restore'], true)) {
             $raw = (string)file_get_contents('php://input');if (strlen($raw) > 65536) stop('Слишком большой запрос.');
             $data = json_decode($raw, true);if (!is_array($data)) stop('Неверные данные.');
             if ($action === 'wb-hide') wb_hide_product($data);
+            elseif ($action === 'wb-restore') wb_restore_product($data);
             else { if (!isset($data['items']) || !is_array($data['items'])) stop('Неверные данные.');wb_save_prices($data['items']); }
         }
         warehouse_json(['products' => wb_admin_products()]);
@@ -92,7 +93,7 @@ try {
                 $ids[] = $id;$photoIds[] = $photoId;
             }
             $settings = json_decode((string)file_get_contents(__DIR__ . '/fields.json'), true);
-            foreach ($ids as $i => $id) $s['products'][$id] = ['id' => $id, 'article' => 'LW-' . strtoupper(substr(str_replace('-', '', $id), 0, 12)), 'modelGroupId' => $id, 'owner' => $user, 'title' => $title . ' — вариант ' . ($i + 1), 'categoryId' => $category, 'price' => (float)$price, 'currency' => $settings['currency'] ?? 'KZT', 'material' => $material, 'sizes' => $sizes, 'colors' => $colors, 'photos' => [$photoIds[$i]], 'status' => !$owner && !empty($input['submit']) ? 'review' : 'draft', 'comment' => '', 'revision' => 1, 'updatedAt' => gmdate('c')];
+            foreach ($ids as $i => $id) $s['products'][$id] = ['id' => $id, 'article' => 'LW-' . strtoupper(substr(str_replace('-', '', $id), 0, 12)), 'modelGroupId' => $id, 'owner' => $user, 'title' => $title . ' — вариант ' . ($i + 1), 'categoryId' => $category, 'price' => (float)$price, 'currency' => $settings['currency'] ?? 'KZT', 'material' => $material, 'sizes' => $sizes, 'colors' => $colors, 'photos' => [$photoIds[$i]], 'status' => !$owner && !empty($input['submit']) ? 'review' : 'draft', 'comment' => '', 'revision' => 1, 'createdAt' => gmdate('c'), 'updatedAt' => gmdate('c')];
             $s['batches'][$batchId] = ['owner' => $user, 'ids' => $ids, 'fingerprint' => $fingerprint];
             return array_map(fn($id) => present($s['products'][$id], $s), $ids);
         });warehouse_json(['products' => $records]);
@@ -107,6 +108,7 @@ try {
         $ids = $input['photos'] ?? [];if (!is_array($ids) || count($ids) < 1 || count($ids) > 8) stop('Добавьте от 1 до 8 фото.');
         $record = warehouse_state(function(&$s) use ($input, $id, $category, $price, $ids, $user, $owner) {
             $old = $s['products'][$id] ?? null;
+            if ($old && $old['status'] === 'trashed') stop('Сначала восстановите товар из корзины.', 409);
             if ($old && !can_read($old)) stop('Нет доступа.', 403);
             if ($old && ($input['revision'] ?? null) !== $old['revision']) stop('Товар изменился на другом устройстве. Обновите список.', 409);
             if ($old && !$owner && in_array($old['status'], ['review', 'published'], true)) stop('Товар уже на проверке. Дождитесь возврата.', 403);
@@ -122,7 +124,7 @@ try {
             $colors = clean_list($input['colors'] ?? []);
             if (count($colors) > 1) stop('Каждый цвет — отдельный товар. Оставьте один цвет или создайте другой вариант.');
             $settings = json_decode((string)file_get_contents(__DIR__ . '/fields.json'), true);
-            $record = ['id' => $id, 'article' => $old['article'] ?? 'LW-' . strtoupper(substr(str_replace('-', '', $id), 0, 12)), 'owner' => $old['owner'] ?? $user, 'title' => clean_text($input['title'] ?? '', 540), 'categoryId' => $category, 'price' => (float)$price, 'currency' => $settings['currency'] ?? 'KZT', 'material' => clean_text($input['material'] ?? '', 240), 'sizes' => clean_list($input['sizes'] ?? []), 'colors' => clean_list($input['colors'] ?? []), 'photos' => array_values(array_unique($ids)), 'status' => $old && $old['status'] === 'published' ? 'review' : ($old['status'] ?? 'draft'), 'comment' => $old['comment'] ?? '', 'revision' => ($old['revision'] ?? 0) + 1, 'updatedAt' => gmdate('c')];
+            $record = ['id' => $id, 'article' => $old['article'] ?? 'LW-' . strtoupper(substr(str_replace('-', '', $id), 0, 12)), 'owner' => $old['owner'] ?? $user, 'title' => clean_text($input['title'] ?? '', 540), 'categoryId' => $category, 'price' => (float)$price, 'currency' => $settings['currency'] ?? 'KZT', 'material' => clean_text($input['material'] ?? '', 240), 'sizes' => clean_list($input['sizes'] ?? []), 'colors' => clean_list($input['colors'] ?? []), 'photos' => array_values(array_unique($ids)), 'status' => $old && $old['status'] === 'published' ? 'review' : ($old['status'] ?? 'draft'), 'comment' => $old['comment'] ?? '', 'revision' => ($old['revision'] ?? 0) + 1, 'createdAt' => $old['createdAt'] ?? $old['updatedAt'] ?? gmdate('c'), 'updatedAt' => gmdate('c')];
             if ($record['title'] === '') stop('Название не сформировано.');
             $record['modelGroupId'] = $modelGroupId;
             $s['products'][$id] = $record;return present($record, $s);
@@ -134,7 +136,10 @@ try {
             $p = $s['products'][$id] ?? null;if (!$p || !can_read($p)) stop('Товар не найден.', 404);
             if (($input['revision'] ?? null) !== $p['revision']) stop('Товар изменился. Обновите список.', 409);
             if (!$owner && ($to !== 'review' || !in_array($p['status'], ['draft', 'returned'], true))) stop('Нет доступа к публикации.', 403);
-            if (!in_array($to, ['review', 'returned', 'published', 'hidden'], true)) stop('Неверный статус.');
+            if (!in_array($to, ['review', 'returned', 'published', 'hidden', 'trashed', 'restore'], true)) stop('Неверный статус.');
+            if ($p['status'] === 'trashed' && $to !== 'restore') stop('Сначала восстановите товар из корзины.', 409);
+            if ($to === 'restore') { if ($p['status'] !== 'trashed') stop('Товар не в корзине.'); $to = $p['previousStatus'] ?? 'hidden'; }
+            if ($to === 'trashed') { if ($p['status'] === 'trashed') stop('Товар уже в корзине.'); $p['previousStatus'] = $p['status']; $p['deleteAfter'] = gmdate('c', time() + 86400); } else { unset($p['deleteAfter'], $p['previousStatus']); }
             if ($to === 'published') foreach ($p['photos'] as $photoId) if (!$s['photos'][$photoId]['approved'] || !$s['photos'][$photoId]['processed']) stop('Сначала подтвердите обработанные фото.');
             $p['status'] = $to;$p['comment'] = $to === 'returned' ? clean_text($input['comment'] ?? '', 1500) : '';$p['revision']++;$p['updatedAt'] = gmdate('c');$s['products'][$id] = $p;return present($p, $s);
         });warehouse_json(['product' => $record]);

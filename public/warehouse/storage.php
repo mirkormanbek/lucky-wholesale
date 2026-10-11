@@ -17,6 +17,7 @@ function warehouse_state(callable $callback) {
         $state = $raw === '' ? ['products' => [], 'photos' => []] : json_decode($raw, true);
         if (!is_array($state) || !isset($state['products'], $state['photos'])) throw new RuntimeException('Не удалось прочитать хранилище.');
         $before = $state;
+        $garbage = warehouse_expire_trash($state);
         $result = $callback($state);
         if ($state !== $before) {
             $json = json_encode($state, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
@@ -24,6 +25,7 @@ function warehouse_state(callable $callback) {
             if (!$temp || file_put_contents($temp, $json) !== strlen($json) || !rename($temp, $file)) throw new RuntimeException('Не удалось сохранить товар.');
             @chmod($file, 0600);
         }
+        foreach ($garbage as $name) { $file = warehouse_photo_path($name); if (is_file($file)) @unlink($file); }
         return $result;
     } finally { flock($lock, LOCK_UN); fclose($lock); }
 }
@@ -35,4 +37,29 @@ function warehouse_json(array $data, int $status = 200): void {
     http_response_code($status); header('Content-Type: application/json; charset=utf-8');
     header('Cache-Control: no-store'); header('X-Content-Type-Options: nosniff');
     echo json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES); exit;
+}
+
+function warehouse_expire_trash(array &$state): array {
+    foreach ($state['products'] as &$product) if (empty($product['createdAt'])) $product['createdAt'] = $product['updatedAt'] ?? gmdate('c');
+    unset($product);
+    $candidates = [];$now = time();
+    foreach ($state['products'] as $id => $p) {
+        if (($p['status'] ?? '') !== 'trashed' || empty($p['deleteAfter']) || strtotime($p['deleteAfter']) > $now) continue;
+        foreach ($p['photos'] as $photoId) $candidates[$photoId] = true;
+        unset($state['products'][$id]);
+        foreach ($state['batches'] ?? [] as $key => $batch) if (in_array($id, $batch['ids'] ?? [], true)) unset($state['batches'][$key]);
+    }
+    $used = [];
+    foreach ($state['products'] as $p) foreach ($p['photos'] as $photoId) $used[$photoId] = true;
+    $files = [];
+    foreach ($candidates as $photoId => $_) {
+        if (isset($used[$photoId]) || !isset($state['photos'][$photoId])) continue;
+        foreach (['original', 'processed'] as $kind) if (!empty($state['photos'][$photoId][$kind])) $files[] = $state['photos'][$photoId][$kind];
+        unset($state['photos'][$photoId]);
+    }
+    foreach ($state['wbPrices'] ?? [] as $id => $p) if (($p['status'] ?? '') === 'trashed' && !empty($p['deleteAfter']) && strtotime($p['deleteAfter']) <= $now) {
+        $state['wbDeleted'][$id] = true;unset($state['wbPrices'][$id]);
+    }
+    $retained = [];foreach ($state['photos'] as $photo) foreach (['original', 'processed'] as $kind) if (!empty($photo[$kind])) $retained[$photo[$kind]] = true;
+    return array_values(array_filter(array_unique($files), fn($name) => !isset($retained[$name])));
 }
