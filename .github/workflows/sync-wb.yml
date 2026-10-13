@@ -50,7 +50,9 @@ jobs:
           WB_API_TOKEN: ${{ secrets.WB_API_TOKEN }}
 
       - name: Update KZT RUB USD exchange rates
-        run: node scripts/update-fx.mjs
+        run: |
+          node scripts/update-fx.mjs
+          cp data/fx.json public/data/fx.json
 
       - name: Update WB popularity ranking
         if: github.event_name == 'workflow_dispatch'
