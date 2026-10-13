@@ -1,0 +1,36 @@
+name: Fetch selected review media (preview only)
+on:
+  push:
+    branches: [preview/about-production-stores]
+    paths:
+      - scripts/fetch-selected-review-media.mjs
+      - .github/workflows/fetch-selected-review-media.yml
+permissions:
+  contents: write
+concurrency:
+  group: lucky-selected-review-media
+  cancel-in-progress: false
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install media encoder
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+      - name: Fetch selected reviews and media
+        run: node scripts/fetch-selected-review-media.mjs
+        env:
+          WB_API_TOKEN: ${{ secrets.WB_API_TOKEN }}
+      - name: Save only selected media in preview branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public/data/selected-review-media.json public/media/
+          if ! git diff --cached --quiet; then
+            git commit -m 'Fetch selected review media for owner preview'
+            git push origin HEAD:preview/about-production-stores
+          fi
