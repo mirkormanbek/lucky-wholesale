@@ -128,9 +128,8 @@ function renderQuickCategories(){
 }
 
 
-function firstColor(p){const c=p.colors||[];return c.length===0?"":c.length===1?c[0]:`${c[0]} +${c.length-1}`}
 function renderCard(product){
-  const f=el.template.content.cloneNode(true),card=f.querySelector(".product-card"),imageButton=f.querySelector(".product-image-button"),img=f.querySelector(".product-image"),ph=f.querySelector(".image-placeholder"),brand=f.querySelector(".product-brand"),title=f.querySelector(".product-title"),color=f.querySelector(".product-color"),size=f.querySelector(".product-size-count"),article=f.querySelector(".product-article"),price=f.querySelector(".product-price"),priceWrap=f.querySelector(".price-wrap"),add=f.querySelector(".add-button"),addLabel=f.querySelector(".add-label"),addIcon=f.querySelector(".add-icon");
+  const f=el.template.content.cloneNode(true),card=f.querySelector(".product-card"),imageButton=f.querySelector(".product-image-button"),img=f.querySelector(".product-image"),ph=f.querySelector(".image-placeholder"),brand=f.querySelector(".product-brand"),title=f.querySelector(".product-title"),article=f.querySelector(".product-article"),price=f.querySelector(".product-price"),priceWrap=f.querySelector(".price-wrap"),add=f.querySelector(".add-button"),addLabel=f.querySelector(".add-label"),addIcon=f.querySelector(".add-icon");
   const photo=product.photos?.[0];
   if(photo){
     const showImage=()=>{img.classList.add("visible");ph.hidden=true};
@@ -150,7 +149,6 @@ function renderCard(product){
   }
   brand.textContent=product.brand||"Lucky";title.textContent=product.title||"Без названия";article.textContent=product.article||"";
   const pv=priceText(product);if(pv)price.textContent=pv;else priceWrap.hidden=true;
-  const ct=firstColor(product);if(ct){color.textContent=ct;color.classList.add("visible")}const sizes=product.sizes||[];if(sizes.length){size.textContent=sizes.length===1?sizes[0]:`${sizes.length} размеров`;size.classList.add("visible")}
   const open=()=>openProduct(product);imageButton.addEventListener("click",open);title.addEventListener("click",open);
   const added=state.requestIds.has(product.id);add.classList.toggle("added",added);addLabel.textContent=added?"В заявке":"В заявку";addIcon.textContent=added?"✓":"＋";add.addEventListener("click",()=>toggleRequest(product.id));card.dataset.productId=product.id;return f
 }
