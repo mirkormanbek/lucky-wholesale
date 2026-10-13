@@ -7,7 +7,7 @@
   <title>Lucky — оптовый каталог</title>
   <meta name="description" content="Оптовый каталог спортивных товаров Lucky." />
   <link rel="icon" type="image/svg+xml" href="./clover.svg" />
-  <link rel="stylesheet" href="./styles.css?v=about-preview-4" />
+  <link rel="stylesheet" href="./styles.css?v=about-preview-5" />
 </head>
 <body>
   <div class="announcement">
@@ -249,18 +249,18 @@
           <section class="customer-reviews" aria-labelledby="customerReviewsHeading">
             <div class="reviews-heading"><div><span class="supply-label">РЕАЛЬНЫЙ ОПЫТ ПОКУПАТЕЛЕЙ</span><h4 id="customerReviewsHeading">Что говорят о наших товарах</h4></div><div class="review-navigation"><button id="reviewPrevious" type="button" aria-label="Предыдущие отзывы" aria-controls="reviewRail">←</button><button id="reviewNext" type="button" aria-label="Следующие отзывы" aria-controls="reviewRail">→</button></div></div>
             <div id="reviewRail" class="review-rail" tabindex="0" aria-label="Выбранные отзывы покупателей Вайлдберриз">
-              <article class="review-card"><div class="review-stars" aria-label="Оценка 5 из 5"><span aria-hidden="true">★★★★★</span></div><blockquote>Ткань отличная и прочная.
+              <article class="review-card" data-review-key="ekaterina"><div class="review-stars" aria-label="Оценка 5 из 5"><span aria-hidden="true">★★★★★</span></div><blockquote>Ткань отличная и прочная.
 Покупали сыну на день рождения, ему очень понравился кимоно. Спасибо продавцу.</blockquote><footer><strong>Екатерина</strong><span>Кимоно · Вайлдберриз</span></footer></article>
-              <article class="review-card"><div class="review-stars" aria-label="Оценка 5 из 5"><span aria-hidden="true">★★★★★</span></div><blockquote>Очень хорошее кимоно приятно сидит хвалю!!!</blockquote><footer><strong>Павел</strong><span>Кимоно · Вайлдберриз</span></footer></article>
-              <article class="review-card"><div class="review-stars" aria-label="Оценка 5 из 5"><span aria-hidden="true">★★★★★</span></div><blockquote>Качество очень хорошее! Размер подошёл ровно!
+              <article class="review-card" data-review-key="pavel"><div class="review-stars" aria-label="Оценка 5 из 5"><span aria-hidden="true">★★★★★</span></div><blockquote>Очень хорошее кимоно приятно сидит хвалю!!!</blockquote><footer><strong>Павел</strong><span>Кимоно · Вайлдберриз</span></footer></article>
+              <article class="review-card" data-review-key="alexey"><div class="review-stars" aria-label="Оценка 5 из 5"><span aria-hidden="true">★★★★★</span></div><blockquote>Качество очень хорошее! Размер подошёл ровно!
 Всё очень хорошо!
 Продавца рекомендую!</blockquote><footer><strong>Алексей</strong><span>Кимоно · Вайлдберриз</span></footer></article>
-              <article class="review-card"><div class="review-stars" aria-label="Оценка 5 из 5"><span aria-hidden="true">★★★★★</span></div><blockquote>Качественный шлем
+              <article class="review-card" data-review-key="elena"><div class="review-stars" aria-label="Оценка 5 из 5"><span aria-hidden="true">★★★★★</span></div><blockquote>Качественный шлем
 На 5.5 лет подошел размер L
 Смотрится стилево, мы с сыном довольны
 Рекомендуем к покупке
 🔥</blockquote><footer><strong>Елена</strong><span>Шлем · Вайлдберриз</span></footer></article>
-              <article class="review-card"><div class="review-stars" aria-label="Оценка 5 из 5"><span aria-hidden="true">★★★★★</span></div><blockquote>Отличное кимоно, плотное, село хорошо, посмотрим как поведёт себя в носке</blockquote><footer><strong>Нина</strong><span>Кимоно · Вайлдберриз</span></footer></article>
+              <article class="review-card" data-review-key="nina"><div class="review-stars" aria-label="Оценка 5 из 5"><span aria-hidden="true">★★★★★</span></div><blockquote>Отличное кимоно, плотное, село хорошо, посмотрим как поведёт себя в носке</blockquote><footer><strong>Нина</strong><span>Кимоно · Вайлдберриз</span></footer></article>
             </div><a class="reviews-source" href="https://www.wildberries.ru/seller/1270260" target="_blank" rel="noopener noreferrer">Открыть магазин на Вайлдберриз <span aria-hidden="true">↗</span><span class="sr-only"> в новой вкладке</span></a>
           </section>
         </section>
@@ -417,6 +417,7 @@
     <p id="sportNoResults" hidden>Ничего не найдено. Измените запрос.</p>
   </dialog>
   <dialog id="productionVideoViewer" class="production-video-viewer" aria-labelledby="productionVideoTitle"><header><h2 id="productionVideoTitle">Видео с производства</h2><button id="productionVideoClose" type="button" aria-label="Закрыть видео">Закрыть ×</button></header><video id="productionVideo" controls playsinline preload="none"></video></dialog>
-  <script type="module" src="./app.js?v=about-preview-4"></script>
+  <dialog id="reviewMediaViewer" class="review-media-viewer" aria-labelledby="reviewMediaTitle"><header><h2 id="reviewMediaTitle">Фото покупателя</h2><button id="reviewMediaClose" type="button" aria-label="Закрыть фото или видео отзыва">Закрыть ×</button></header><img id="reviewMediaImage" alt="Фото покупателя к отзыву" hidden><video id="reviewMediaVideo" controls playsinline preload="none" hidden></video></dialog>
+  <script type="module" src="./app.js?v=about-preview-5"></script>
 </body>
 </html>

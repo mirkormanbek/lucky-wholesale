@@ -10,16 +10,17 @@ const selected=[
 ];
 const normalize=s=>String(s||'').toLowerCase().replaceAll('ё','е').replace(/[^\p{L}\p{N}]+/gu,'');
 export function matches(review,item){const text=normalize([review.pros,review.text].filter(Boolean).join(' '));return review.productValuation===5&&item.snippets.every(s=>text.includes(normalize(s)));}
-function mediaURL(value){try{const u=new URL(value);return u.protocol==='https:'&&(u.hostname.endsWith('.wbbasket.ru')||u.hostname.endsWith('.wb.ru')||u.hostname.endsWith('.wildberries.ru')||u.hostname.endsWith('.wbstatic.net')||u.hostname.endsWith('.wbcontent.net')||u.hostname.endsWith('.wbbasket.com'))?u.href:null;}catch{return null;}}
+function mediaURL(value){try{const u=new URL(value);return u.protocol==='https:'&&(u.hostname.endsWith('.wbbasket.ru')||u.hostname.endsWith('.wb.ru')||u.hostname.endsWith('.wildberries.ru')||u.hostname.endsWith('.wbstatic.net')||u.hostname.endsWith('.wbcontent.net')||u.hostname.endsWith('.wbbasket.com')||u.hostname.endsWith('.geobasket.ru'))?u.href:null;}catch{return null;}}
 const root=process.cwd(),output=path.join(root,'public/data/selected-review-media.json');
 async function main(){
   const token=process.env.WB_API_TOKEN?.trim();if(!token)throw Error('WB_API_TOKEN отсутствует.');
-  try{const previous=JSON.parse(await fs.readFile(output,'utf8'));if(previous.apiStatus==='HTTP 429'){const wait=Math.max(0,Date.parse(previous.generatedAt)+725000-Date.now());if(wait){console.log('Ожидание разрешённого интервала WB: '+Math.ceil(wait/1000)+' секунд.');await new Promise(r=>setTimeout(r,wait));}}}catch{/* First run has no previous report. */}
-  const found=new Map(),ambiguous=new Set();let requests=0,scanned=0,apiStatus='ok';
+  let limited=false;try{const previous=JSON.parse(await fs.readFile(output,'utf8'));if(previous.apiStatus==='HTTP 429'){limited=true;const wait=Math.max(0,Date.parse(previous.generatedAt)+725000-Date.now());if(wait){console.log('Ожидание разрешённого интервала WB: '+Math.ceil(wait/1000)+' секунд.');await new Promise(r=>setTimeout(r,wait));}}}catch{/* First run has no previous report. */}
+  const found=new Map(),ambiguous=new Set();let requests=0,scanned=0,apiStatus='ok',nextRequestAt=0;
   async function list(endpoint,skip,answered){
     const url=new URL('https://feedbacks-api.wildberries.ru/api/v1/'+endpoint);url.searchParams.set('take','5000');url.searchParams.set('skip',String(skip));url.searchParams.set('order','dateDesc');if(answered!==undefined)url.searchParams.set('isAnswered',String(answered));
-    if(requests)await new Promise(r=>setTimeout(r,500));requests++;
+    const wait=Math.max(0,nextRequestAt-Date.now());if(wait){console.log('Ожидание интервала WB: '+Math.ceil(wait/1000)+' секунд.');await new Promise(r=>setTimeout(r,wait));}else if(requests)await new Promise(r=>setTimeout(r,500));requests++;
     const response=await fetch(url,{headers:{Authorization:token},redirect:'error',signal:AbortSignal.timeout(45000)});
+    if(limited)nextRequestAt=Date.now()+725000;
     if(!response.ok){apiStatus='HTTP '+response.status;return null;}const data=await response.json();if(data.error||!Array.isArray(data.data?.feedbacks)){apiStatus='Некорректный ответ WB';return null;}
     const reviews=data.data.feedbacks;scanned+=reviews.length;
     for(const review of reviews)for(const item of selected)if(matches(review,item)){
