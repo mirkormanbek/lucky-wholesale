@@ -156,31 +156,24 @@ function changePage(page){
   state.page=page;
   renderProducts();
   document.querySelector("#catalog")?.scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"});
-  el.pagination.querySelector("select")?.focus({preventScroll:true});
+  el.pagination.querySelector('[aria-current="page"]')?.focus({preventScroll:true});
 }
 function renderPagination(total){
   const pages=Math.ceil(total/PAGE_SIZE);
   el.pagination.replaceChildren();
   el.pagination.hidden=pages<=1;
   if(pages<=1)return;
-  const previous=document.createElement("button");
-  previous.type="button";previous.textContent="←";previous.setAttribute("aria-label","Предыдущая страница");previous.disabled=state.page===1;
-  previous.addEventListener("click",()=>changePage(state.page-1));
-  const label=document.createElement("label");
-  label.textContent="Страница ";
-  const select=document.createElement("select");
-  select.setAttribute("aria-label","Страница каталога");
-  for(let page=1;page<=pages;page++){
-    const option=document.createElement("option");
-    option.value=page;option.textContent=`${page} из ${pages}`;option.selected=page===state.page;
-    select.appendChild(option);
+
+  const visible=new Set([1,pages]);
+  if(pages<=5){for(let page=1;page<=pages;page++)visible.add(page);}
+  else {const center=Math.max(2,Math.min(pages-1,state.page));for(let page=Math.max(2,center-1);page<=Math.min(pages-1,center+1);page++)visible.add(page);}
+  let last=0;
+  for(const page of [...visible].sort((a,b)=>a-b)){
+    if(last&&page-last>1){const gap=document.createElement("span");gap.className="pagination-gap";gap.textContent="…";gap.setAttribute("aria-hidden","true");el.pagination.append(gap);}
+    const button=document.createElement("button");button.type="button";button.textContent=page;button.setAttribute("aria-label","Страница "+page);
+    if(page===state.page)button.setAttribute("aria-current","page");
+    button.addEventListener("click",()=>{if(page!==state.page)changePage(page);});el.pagination.append(button);last=page;
   }
-  select.addEventListener("change",()=>changePage(Number(select.value)));
-  label.appendChild(select);
-  const next=document.createElement("button");
-  next.type="button";next.textContent="→";next.setAttribute("aria-label","Следующая страница");next.disabled=state.page===pages;
-  next.addEventListener("click",()=>changePage(state.page+1));
-  el.pagination.append(previous,label,next);
 }
 function renderProducts(){
   document.querySelector("#sortValue").textContent=el.sortSelect.selectedOptions[0]?.textContent||"По популярности";
