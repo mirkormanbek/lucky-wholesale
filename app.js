@@ -164,6 +164,8 @@ function renderPagination(total){
   el.pagination.hidden=pages<=1;
   if(pages<=1)return;
 
+  const arrow=(label,text,target,disabled)=>{const b=document.createElement("button");b.type="button";b.textContent=text;b.setAttribute("aria-label",label);b.disabled=disabled;b.style.opacity=disabled?".35":"1";b.addEventListener("click",()=>changePage(target));return b;};
+  el.pagination.append(arrow("Предыдущая страница","←",state.page-1,state.page===1));
   const visible=new Set([1,pages]);
   if(pages<=5){for(let page=1;page<=pages;page++)visible.add(page);}
   else {const center=Math.max(2,Math.min(pages-1,state.page));for(let page=Math.max(2,center-1);page<=Math.min(pages-1,center+1);page++)visible.add(page);}
@@ -174,6 +176,7 @@ function renderPagination(total){
     if(page===state.page)button.setAttribute("aria-current","page");
     button.addEventListener("click",()=>{if(page!==state.page)changePage(page);});el.pagination.append(button);last=page;
   }
+  el.pagination.append(arrow("Следующая страница","→",state.page+1,state.page===pages));
 }
 function renderProducts(){
   document.querySelector("#sortValue").textContent=el.sortSelect.selectedOptions[0]?.textContent||"По популярности";
