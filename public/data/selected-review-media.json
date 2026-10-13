@@ -1,18 +1,48 @@
 {
-  "generatedAt": "2026-10-13T11:41:48.391Z",
-  "apiStatus": "HTTP 429",
-  "requests": 2,
-  "scanned": 5000,
+  "generatedAt": "2026-10-13T12:18:40.713Z",
+  "apiStatus": "ok",
+  "requests": 3,
+  "scanned": 8561,
   "reviews": [
     {
       "key": "ekaterina",
-      "matched": false,
-      "reason": "not-found"
+      "matched": true,
+      "id": "2jYN0lWqzgUFnGaRudks",
+      "nmId": 621656979,
+      "productName": "Кимоно (ги бжж) для джиу-джитсу",
+      "createdDate": "2026-03-11T04:40:35Z",
+      "photos": [
+        "./media/reviews/ekaterina-1.webp",
+        "./media/reviews/ekaterina-2.webp"
+      ],
+      "video": "./media/reviews/ekaterina-video.mp4",
+      "mediaDiagnostics": {
+        "photoCount": 2,
+        "photoHosts": [
+          "mow-feedback-uuid-02-cdn-02.geobasket.ru",
+          "mow-feedback-uuid-02-cdn-02.geobasket.ru"
+        ],
+        "videoHost": "videofeedback01.wbbasket.ru"
+      }
     },
     {
       "key": "pavel",
-      "matched": false,
-      "reason": "not-found"
+      "matched": true,
+      "id": "sAiZUMKTUBS4UyknC88C",
+      "nmId": 451350192,
+      "productName": "Кимоно для дзюдо IJF Approved",
+      "createdDate": "2026-08-23T13:06:58Z",
+      "photos": [
+        "./media/reviews/pavel-1.webp"
+      ],
+      "video": "./media/reviews/pavel-video.mp4",
+      "mediaDiagnostics": {
+        "photoCount": 1,
+        "photoHosts": [
+          "mow-feedback-uuid-06-cdn-06.geobasket.ru"
+        ],
+        "videoHost": "videofeedback09.wbbasket.ru"
+      }
     },
     {
       "key": "alexey",
@@ -21,7 +51,10 @@
       "nmId": 451350192,
       "productName": "Кимоно для дзюдо IJF Approved",
       "createdDate": "2026-09-02T18:10:01Z",
-      "photos": [],
+      "photos": [
+        "./media/reviews/alexey-1.webp",
+        "./media/reviews/alexey-2.webp"
+      ],
       "video": null,
       "mediaDiagnostics": {
         "photoCount": 2,
@@ -34,8 +67,22 @@
     },
     {
       "key": "elena",
-      "matched": false,
-      "reason": "not-found"
+      "matched": true,
+      "id": "VYpPpxaXNkjHkBEQMtGL",
+      "nmId": 205633959,
+      "productName": "Everlast Боксерский шлем детский",
+      "createdDate": "2026-09-28T15:25:01Z",
+      "photos": [
+        "./media/reviews/elena-1.webp"
+      ],
+      "video": null,
+      "mediaDiagnostics": {
+        "photoCount": 1,
+        "photoHosts": [
+          "mow-feedback-uuid-01-cdn-01.geobasket.ru"
+        ],
+        "videoHost": null
+      }
     },
     {
       "key": "nina",
@@ -44,7 +91,9 @@
       "nmId": 1052310012,
       "productName": "Кимоно для джиу-джитсу (бжж)",
       "createdDate": "2026-07-15T09:09:43Z",
-      "photos": [],
+      "photos": [
+        "./media/reviews/nina-1.webp"
+      ],
       "video": null,
       "mediaDiagnostics": {
         "photoCount": 1,
