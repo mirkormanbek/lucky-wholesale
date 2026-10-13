@@ -1,0 +1,58 @@
+{
+  "generatedAt": "2026-10-13T11:41:48.391Z",
+  "apiStatus": "HTTP 429",
+  "requests": 2,
+  "scanned": 5000,
+  "reviews": [
+    {
+      "key": "ekaterina",
+      "matched": false,
+      "reason": "not-found"
+    },
+    {
+      "key": "pavel",
+      "matched": false,
+      "reason": "not-found"
+    },
+    {
+      "key": "alexey",
+      "matched": true,
+      "id": "KdXEH64RvelJit5ofpaU",
+      "nmId": 451350192,
+      "productName": "Кимоно для дзюдо IJF Approved",
+      "createdDate": "2026-09-02T18:10:01Z",
+      "photos": [],
+      "video": null,
+      "mediaDiagnostics": {
+        "photoCount": 2,
+        "photoHosts": [
+          "mow-feedback-uuid-02-cdn-02.geobasket.ru",
+          "mow-feedback-uuid-04-cdn-04.geobasket.ru"
+        ],
+        "videoHost": null
+      }
+    },
+    {
+      "key": "elena",
+      "matched": false,
+      "reason": "not-found"
+    },
+    {
+      "key": "nina",
+      "matched": true,
+      "id": "4ZUJIXIYCVhOW9CFIUOd",
+      "nmId": 1052310012,
+      "productName": "Кимоно для джиу-джитсу (бжж)",
+      "createdDate": "2026-07-15T09:09:43Z",
+      "photos": [],
+      "video": null,
+      "mediaDiagnostics": {
+        "photoCount": 1,
+        "photoHosts": [
+          "mow-feedback-uuid-05-cdn-05.geobasket.ru"
+        ],
+        "videoHost": null
+      }
+    }
+  ]
+}
