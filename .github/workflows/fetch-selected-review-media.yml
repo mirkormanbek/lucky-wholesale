@@ -9,7 +9,7 @@ permissions:
   contents: write
 concurrency:
   group: lucky-selected-review-media
-  cancel-in-progress: false
+  cancel-in-progress: true
 jobs:
   fetch:
     runs-on: ubuntu-latest
@@ -32,5 +32,6 @@ jobs:
           git add public/data/selected-review-media.json public/media/
           if ! git diff --cached --quiet; then
             git commit -m 'Fetch selected review media for owner preview'
+            git pull --rebase origin preview/about-production-stores
             git push origin HEAD:preview/about-production-stores
           fi
