@@ -272,3 +272,6 @@ document.querySelector("#sportPicker").addEventListener("click",e=>{
 });
 document.querySelector("#productType").addEventListener("change",e=>selectCategory(e.target.value||null,{scroll:false}));
 init();
+
+const productionViewer=document.querySelector('#productionVideoViewer'),productionVideo=document.querySelector('#productionVideo');let productionTrigger=null;
+if(productionViewer&&productionVideo){document.querySelectorAll('[data-production-video]').forEach(button=>button.addEventListener('click',()=>{productionTrigger=button;document.querySelector('#productionVideoTitle').textContent=button.dataset.videoTitle;productionVideo.src=button.dataset.productionVideo;productionViewer.showModal();productionVideo.play().catch(()=>{});}));document.querySelector('#productionVideoClose').addEventListener('click',()=>productionViewer.close());productionViewer.addEventListener('click',event=>{if(event.target===productionViewer){const bounds=productionViewer.getBoundingClientRect();if(event.clientX<bounds.left||event.clientX>bounds.right||event.clientY<bounds.top||event.clientY>bounds.bottom)productionViewer.close();}});productionViewer.addEventListener('close',()=>{productionVideo.pause();productionVideo.removeAttribute('src');productionVideo.load();productionTrigger?.focus({preventScroll:true});});}

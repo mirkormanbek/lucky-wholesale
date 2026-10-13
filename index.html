@@ -7,7 +7,7 @@
   <title>Lucky — оптовый каталог</title>
   <meta name="description" content="Оптовый каталог спортивных товаров Lucky." />
   <link rel="icon" type="image/svg+xml" href="./clover.svg" />
-  <link rel="stylesheet" href="./styles.css?v=16" />
+  <link rel="stylesheet" href="./styles.css?v=about-preview-1" />
 </head>
 <body>
   <div class="announcement">
@@ -236,6 +236,24 @@
             <article><span>Алматы</span><strong>10 000 м²</strong><span>площадь склада</span></article>
           </div>
         </div>
+
+        <section class="trust-block" aria-labelledby="marketplaceHeading">
+          <div class="trust-heading"><div><span class="supply-label">ОПЫТ РОЗНИЧНЫХ ПРОДАЖ</span><h3 id="marketplaceHeading">Наши магазины</h3></div><p>Посмотрите ассортимент и отзывы покупателей. Для оптового заказа оставьте заявку на этом сайте.</p></div>
+          <div class="store-links">
+            <a class="store-link" href="https://www.wildberries.ru/seller/1270260" target="_blank" rel="noopener noreferrer"><span class="store-mark" aria-hidden="true">ВБ</span><span><strong>Вайлдберриз</strong><small>Основной магазин Lucky</small></span><span aria-hidden="true">↗</span><span class="sr-only">Открыть в новой вкладке</span></a>
+            <a class="store-link" href="https://ozon.kz/seller/lucky-sport/" target="_blank" rel="noopener noreferrer"><span class="store-mark ozon-mark" aria-hidden="true">О</span><span><strong>Озон</strong><small>Lucky Sport</small></span><span aria-hidden="true">↗</span><span class="sr-only">Открыть в новой вкладке</span></a>
+            <a class="store-link" href="https://www.wildberries.ru/seller/4235886" target="_blank" rel="noopener noreferrer"><span class="store-mark" aria-hidden="true">ВБ</span><span><strong>Вайлдберриз</strong><small>Второй магазин Lucky</small></span><span aria-hidden="true">↗</span><span class="sr-only">Открыть в новой вкладке</span></a>
+          </div>
+        </section>
+        <section class="trust-block factory-block" aria-labelledby="factoryHeading">
+          <div class="trust-heading"><div><span class="supply-label">ФАБРИКИ-ПАРТНЁРЫ</span><h3 id="factoryHeading">Производство изнутри</h3></div><p>Реальные кадры с производства: рабочие места, материалы и оборудование.</p></div>
+          <div class="factory-location"><strong>Sajiwah Sports</strong><span>Сиалкот, Пакистан</span><details><summary>Адрес производства</summary><p lang="en">3.5 km Daska Road, Kotli Noonan, Sambrial, Sialkot, Pakistan</p></details></div>
+          <div class="factory-videos" aria-label="Видео с производства">
+            <article class="factory-video-card"><button class="factory-video-open" type="button" data-production-video="./media/production/workshop.mp4" data-video-title="Цех и оборудование" aria-label="Смотреть видео: Цех и оборудование"><img src="./media/production/workshop.webp" alt="Цех и оборудование на производстве" width="480" height="854" loading="lazy" decoding="async"><span class="factory-play" aria-hidden="true">▶</span><span class="factory-duration">18 сек</span></button><h4>Цех и оборудование</h4></article>
+            <article class="factory-video-card"><button class="factory-video-open" type="button" data-production-video="./media/production/fabric-work.mp4" data-video-title="Работа с материалами" aria-label="Смотреть видео: Работа с материалами"><img src="./media/production/fabric-work.webp" alt="Работа с материалами на производстве" width="480" height="854" loading="lazy" decoding="async"><span class="factory-play" aria-hidden="true">▶</span><span class="factory-duration">18 сек</span></button><h4>Работа с материалами</h4></article>
+            <article class="factory-video-card"><button class="factory-video-open" type="button" data-production-video="./media/production/embroidery.mp4" data-video-title="Вышивальные машины" aria-label="Смотреть видео: Вышивальные машины"><img src="./media/production/embroidery.webp" alt="Вышивальные машины на производстве" width="480" height="854" loading="lazy" decoding="async"><span class="factory-play" aria-hidden="true">▶</span><span class="factory-duration">18 сек</span></button><h4>Вышивальные машины</h4></article>
+          </div><p class="factory-video-note">Короткие фрагменты · видео загружается только при открытии</p>
+        </section>
       </div>
     </section>
 
@@ -379,6 +397,7 @@
     <div id="sportChoices" class="sport-choices"></div>
     <p id="sportNoResults" hidden>Ничего не найдено. Измените запрос.</p>
   </dialog>
-  <script type="module" src="./app.js?v=17"></script>
+  <dialog id="productionVideoViewer" class="production-video-viewer" aria-labelledby="productionVideoTitle"><header><h2 id="productionVideoTitle">Видео с производства</h2><button id="productionVideoClose" type="button" aria-label="Закрыть видео">Закрыть ×</button></header><video id="productionVideo" controls playsinline preload="none"></video></dialog>
+  <script type="module" src="./app.js?v=about-preview-1"></script>
 </body>
 </html>
