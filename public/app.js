@@ -1,5 +1,5 @@
 const PAGE_SIZE=24;
-const state={page:1,products:[],categories:[],categoryById:new Map(),selectedCategoryId:null,query:"",sort:"default",currency:localStorage.getItem("lucky-wholesale-currency")||"USD",requestIds:new Set(JSON.parse(localStorage.getItem("lucky-wholesale-request")||"[]"))};
+const state={page:1,products:[],categories:[],categoryById:new Map(),selectedCategoryId:null,query:"",sort:"default",currency:localStorage.getItem("lucky-wholesale-currency")||"RUB",requestIds:new Set(JSON.parse(localStorage.getItem("lucky-wholesale-request")||"[]"))};
 
 const el={
   menuToggle:document.querySelector("#menuToggle"),mobileNav:document.querySelector("#mobileNav"),
