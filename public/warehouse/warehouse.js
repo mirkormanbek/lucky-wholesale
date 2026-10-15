@@ -193,7 +193,7 @@ $("export").addEventListener("click",async()=>{
 $("migrate").addEventListener("click",async()=>{if(!db||busy)return;busy=true;$("migrate").disabled=true;try{const local=await request(db.transaction("products").objectStore("products").getAll());const existing=new Set((await all()).map(p=>p.id));for(const record of local){if(existing.has(record.id))continue;await put(record);}await list();message("Старые черновики перенесены на сервер. Локальная копия сохранена.");$("migrate").hidden=true;}catch(e){message(e.message||"Не удалось перенести черновики.");}finally{busy=false;$("migrate").disabled=false;}});
 (async()=>{
  try{
- const responses=await Promise.all([fetch("./fields.json",{cache:"no-store"}),fetch("../data/categories.json")]);if(responses.some(r=>!r.ok))throw Error("Не удалось загрузить настройки.");
+ const responses=await Promise.all([fetch("./fields.json",{cache:"no-store"}),fetch("../data/categories.json",{cache:"no-store"})]);if(responses.some(r=>!r.ok))throw Error("Не удалось загрузить настройки.");
  [fields,categories]=await Promise.all(responses.map(r=>r.json()));
  $("processingNote").textContent=fields.imageProcessingEnabled?"Обработка фото оплачивается отдельно. Сравните результат с оригиналом перед подтверждением публикации.":"ИИ-обработка пока выключена. Оригиналы сохраняются для обработки на белом фоне.";
  sportOptions();populateCategoryFilter("warehouseCategory");

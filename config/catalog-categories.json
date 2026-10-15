@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "categories": [
     {
       "id": "combat",
@@ -464,6 +464,278 @@
       "slug": "muay-thai-protection",
       "parentId": "muay-thai",
       "sort": 60,
+      "active": true
+    },
+    {
+      "id": "combat-boxing-mma-shoes",
+      "name": "Боксёрки",
+      "slug": "combat-boxing-mma-shoes",
+      "parentId": "combat-boxing-mma",
+      "sort": 85,
+      "active": true
+    },
+    {
+      "id": "combat-boxing-mma-skipping-ropes",
+      "name": "Скакалки",
+      "slug": "combat-boxing-mma-skipping-ropes",
+      "parentId": "combat-boxing-mma",
+      "sort": 110,
+      "active": true
+    },
+    {
+      "id": "judo-kneepads",
+      "name": "Наколенники",
+      "slug": "judo-kneepads",
+      "parentId": "judo",
+      "sort": 30,
+      "active": true
+    },
+    {
+      "id": "judo-tape",
+      "name": "Спортивный тейп",
+      "slug": "judo-tape",
+      "parentId": "judo",
+      "sort": 40,
+      "active": true
+    },
+    {
+      "id": "bjj-earguards",
+      "name": "Защита ушей",
+      "slug": "bjj-earguards",
+      "parentId": "bjj",
+      "sort": 60,
+      "active": true
+    },
+    {
+      "id": "bjj-kneepads",
+      "name": "Наколенники",
+      "slug": "bjj-kneepads",
+      "parentId": "bjj",
+      "sort": 70,
+      "active": true
+    },
+    {
+      "id": "bjj-tape",
+      "name": "Спортивный тейп",
+      "slug": "bjj-tape",
+      "parentId": "bjj",
+      "sort": 80,
+      "active": true
+    },
+    {
+      "id": "karate-shinguards",
+      "name": "Щитки и футы",
+      "slug": "karate-shinguards",
+      "parentId": "karate",
+      "sort": 60,
+      "active": true
+    },
+    {
+      "id": "karate-mouthguards",
+      "name": "Капы",
+      "slug": "karate-mouthguards",
+      "parentId": "karate",
+      "sort": 70,
+      "active": true
+    },
+    {
+      "id": "karate-groin",
+      "name": "Защита паха",
+      "slug": "karate-groin",
+      "parentId": "karate",
+      "sort": 80,
+      "active": true
+    },
+    {
+      "id": "kickboxing-helmets",
+      "name": "Шлемы",
+      "slug": "kickboxing-helmets",
+      "parentId": "kickboxing",
+      "sort": 70,
+      "active": true
+    },
+    {
+      "id": "kickboxing-mouthguards",
+      "name": "Капы",
+      "slug": "kickboxing-mouthguards",
+      "parentId": "kickboxing",
+      "sort": 80,
+      "active": true
+    },
+    {
+      "id": "kickboxing-groin",
+      "name": "Защита паха",
+      "slug": "kickboxing-groin",
+      "parentId": "kickboxing",
+      "sort": 90,
+      "active": true
+    },
+    {
+      "id": "muay-thai-helmets",
+      "name": "Шлемы",
+      "slug": "muay-thai-helmets",
+      "parentId": "muay-thai",
+      "sort": 70,
+      "active": true
+    },
+    {
+      "id": "muay-thai-mouthguards",
+      "name": "Капы",
+      "slug": "muay-thai-mouthguards",
+      "parentId": "muay-thai",
+      "sort": 80,
+      "active": true
+    },
+    {
+      "id": "muay-thai-groin",
+      "name": "Защита паха",
+      "slug": "muay-thai-groin",
+      "parentId": "muay-thai",
+      "sort": 90,
+      "active": true
+    },
+    {
+      "id": "football-futsal-shoes",
+      "name": "Футзалки",
+      "slug": "football-futsal-shoes",
+      "parentId": "football",
+      "sort": 25,
+      "active": true
+    },
+    {
+      "id": "football-goalkeeper-gloves",
+      "name": "Вратарские перчатки",
+      "slug": "football-goalkeeper-gloves",
+      "parentId": "football",
+      "sort": 30,
+      "active": true
+    },
+    {
+      "id": "football-shinguards",
+      "name": "Щитки",
+      "slug": "football-shinguards",
+      "parentId": "football",
+      "sort": 40,
+      "active": true
+    },
+    {
+      "id": "football-socks",
+      "name": "Гетры",
+      "slug": "football-socks",
+      "parentId": "football",
+      "sort": 50,
+      "active": true
+    },
+    {
+      "id": "football-uniform",
+      "name": "Форма и манишки",
+      "slug": "football-uniform",
+      "parentId": "football",
+      "sort": 60,
+      "active": true
+    },
+    {
+      "id": "football-goals-nets",
+      "name": "Ворота и сетки",
+      "slug": "football-goals-nets",
+      "parentId": "football",
+      "sort": 70,
+      "active": true
+    },
+    {
+      "id": "football-training",
+      "name": "Тренировочный инвентарь",
+      "slug": "football-training",
+      "parentId": "football",
+      "sort": 80,
+      "active": true
+    },
+    {
+      "id": "basketball-hoops",
+      "name": "Кольца и сетки",
+      "slug": "basketball-hoops",
+      "parentId": "basketball",
+      "sort": 20,
+      "active": true
+    },
+    {
+      "id": "basketball-uniform",
+      "name": "Форма",
+      "slug": "basketball-uniform",
+      "parentId": "basketball",
+      "sort": 30,
+      "active": true
+    },
+    {
+      "id": "basketball-shoes",
+      "name": "Кроссовки",
+      "slug": "basketball-shoes",
+      "parentId": "basketball",
+      "sort": 40,
+      "active": true
+    },
+    {
+      "id": "volleyball-balls",
+      "name": "Мячи",
+      "slug": "volleyball-balls",
+      "parentId": "volleyball",
+      "sort": 5,
+      "active": true
+    },
+    {
+      "id": "volleyball-kneepads",
+      "name": "Наколенники",
+      "slug": "volleyball-kneepads",
+      "parentId": "volleyball",
+      "sort": 25,
+      "active": true
+    },
+    {
+      "id": "volleyball-uniform",
+      "name": "Форма",
+      "slug": "volleyball-uniform",
+      "parentId": "volleyball",
+      "sort": 30,
+      "active": true
+    },
+    {
+      "id": "volleyball-shoes",
+      "name": "Кроссовки",
+      "slug": "volleyball-shoes",
+      "parentId": "volleyball",
+      "sort": 40,
+      "active": true
+    },
+    {
+      "id": "other-pumps",
+      "name": "Насосы и иглы",
+      "slug": "other-pumps",
+      "parentId": "other",
+      "sort": 50,
+      "active": true
+    },
+    {
+      "id": "other-resistance-bands",
+      "name": "Эспандеры и резинки",
+      "slug": "other-resistance-bands",
+      "parentId": "other",
+      "sort": 60,
+      "active": true
+    },
+    {
+      "id": "other-mats",
+      "name": "Коврики",
+      "slug": "other-mats",
+      "parentId": "other",
+      "sort": 70,
+      "active": true
+    },
+    {
+      "id": "other-bottles",
+      "name": "Бутылки и шейкеры",
+      "slug": "other-bottles",
+      "parentId": "other",
+      "sort": 80,
       "active": true
     }
   ]

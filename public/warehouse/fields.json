@@ -38,7 +38,50 @@
     "muay-thai-shorts": "Шорты для муай-тай",
     "muay-thai-pads": "Тай-пэды для муай-тай",
     "muay-thai-wraps": "Бинты для муай-тай",
-    "muay-thai-protection": "Защита для муай-тай"
+    "muay-thai-protection": "Защита для муай-тай",
+    "combat-boxing-mma-shoes": "Боксёрки",
+    "combat-boxing-mma-skipping-ropes": "Скакалка для бокса",
+    "judo-kneepads": "Наколенники для дзюдо",
+    "judo-tape": "Спортивный тейп для дзюдо",
+    "bjj-earguards": "Защита ушей для джиу-джитсу",
+    "bjj-kneepads": "Наколенники для джиу-джитсу",
+    "bjj-tape": "Спортивный тейп для джиу-джитсу",
+    "karate-shinguards": "Щитки для карате",
+    "karate-mouthguards": "Капа для карате",
+    "karate-groin": "Защита паха для карате",
+    "kickboxing-helmets": "Шлем для кикбоксинга",
+    "kickboxing-mouthguards": "Капа для кикбоксинга",
+    "kickboxing-groin": "Защита паха для кикбоксинга",
+    "muay-thai-helmets": "Шлем для муай-тай",
+    "muay-thai-mouthguards": "Капа для муай-тай",
+    "muay-thai-groin": "Защита паха для муай-тай",
+    "football-futsal-shoes": "Футзалки",
+    "football-goalkeeper-gloves": "Вратарские перчатки",
+    "football-shinguards": "Футбольные щитки",
+    "football-socks": "Футбольные гетры",
+    "football-uniform": "Футбольная форма",
+    "football-goals-nets": "Футбольная сетка",
+    "football-training": "Тренировочный инвентарь для футбола",
+    "basketball-hoops": "Баскетбольное кольцо",
+    "basketball-uniform": "Баскетбольная форма",
+    "basketball-shoes": "Баскетбольные кроссовки",
+    "volleyball-balls": "Волейбольный мяч",
+    "volleyball-kneepads": "Волейбольные наколенники",
+    "volleyball-uniform": "Волейбольная форма",
+    "volleyball-shoes": "Волейбольные кроссовки",
+    "other-pumps": "Насос для мячей",
+    "other-resistance-bands": "Эспандер",
+    "other-mats": "Коврик для тренировок",
+    "other-bottles": "Спортивная бутылка",
+    "combat-boxing-mma-protection": "Защита",
+    "karate-chest-protection": "Защита груди",
+    "football-balls": "Футбольные мячи",
+    "football-boots": "Бутсы",
+    "basketball-balls": "Баскетбольные мячи",
+    "volleyball-protection": "Защита",
+    "other-accessories": "Аксессуары",
+    "other-bags": "Сумки и рюкзаки",
+    "other-workout": "Воркаут"
   },
   "colors": [
     "Чёрный",
@@ -88,6 +131,7 @@
     "judo-gi": {
       "materials": [
         "Хлопок",
+        "Полиэстер",
         "Хлопок / полиэстер"
       ],
       "sizes": []
@@ -95,6 +139,7 @@
     "bjj-gi": {
       "materials": [
         "Хлопок",
+        "Полиэстер",
         "Хлопок / полиэстер"
       ],
       "sizes": []
@@ -102,24 +147,40 @@
     "karate-gi": {
       "materials": [
         "Хлопок",
+        "Полиэстер",
         "Хлопок / полиэстер"
       ],
       "sizes": []
     },
     "bjj-belts": {
-      "materials": [],
+      "materials": [
+        "Хлопок",
+        "Полиэстер",
+        "Хлопок / полиэстер"
+      ],
       "sizes": []
     },
     "bjj-rashguards": {
-      "materials": [],
+      "materials": [
+        "Полиэстер / эластан",
+        "Нейлон / эластан"
+      ],
       "sizes": []
     },
     "bjj-shorts": {
-      "materials": [],
+      "materials": [
+        "Полиэстер",
+        "Хлопок",
+        "Хлопок / полиэстер",
+        "Полиэстер / эластан"
+      ],
       "sizes": []
     },
     "bjj-spats": {
-      "materials": [],
+      "materials": [
+        "Полиэстер / эластан",
+        "Нейлон / эластан"
+      ],
       "sizes": []
     },
     "combat-boxing-mma-mma-gloves": {
@@ -137,79 +198,633 @@
       ]
     },
     "combat-boxing-mma-mouthguards": {
-      "materials": [],
+      "materials": [
+        "ЭВА",
+        "Силикон",
+        "Термопластик"
+      ],
       "sizes": []
     },
     "combat-boxing-mma-groin": {
-      "materials": [],
+      "materials": [
+        "Натуральная кожа",
+        "Экокожа",
+        "ПУ",
+        "Текстиль",
+        "Неопрен",
+        "Пластик"
+      ],
       "sizes": []
     },
     "combat-boxing-mma-pads": {
-      "materials": [],
+      "materials": [
+        "Натуральная кожа",
+        "Экокожа",
+        "ПУ"
+      ],
       "sizes": []
     },
     "combat-boxing-mma-bags": {
-      "materials": [],
+      "materials": [
+        "Натуральная кожа",
+        "Экокожа",
+        "ПУ"
+      ],
       "sizes": []
     },
     "combat-boxing-mma-rashguards": {
-      "materials": [],
+      "materials": [
+        "Полиэстер / эластан",
+        "Нейлон / эластан"
+      ],
       "sizes": []
     },
     "combat-boxing-mma-shorts": {
-      "materials": [],
+      "materials": [
+        "Полиэстер",
+        "Хлопок",
+        "Хлопок / полиэстер",
+        "Полиэстер / эластан"
+      ],
       "sizes": []
     },
     "karate-belts": {
-      "materials": [],
+      "materials": [
+        "Хлопок",
+        "Полиэстер",
+        "Хлопок / полиэстер"
+      ],
       "sizes": []
     },
     "kickboxing-gloves": {
-      "materials": [],
+      "materials": [
+        "Натуральная кожа",
+        "Экокожа",
+        "ПУ"
+      ],
       "sizes": []
     },
     "kickboxing-shinguards": {
-      "materials": [],
+      "materials": [
+        "Натуральная кожа",
+        "Экокожа",
+        "ПУ",
+        "Текстиль",
+        "Неопрен",
+        "Пластик"
+      ],
       "sizes": []
     },
     "kickboxing-shorts": {
-      "materials": [],
+      "materials": [
+        "Полиэстер",
+        "Хлопок",
+        "Хлопок / полиэстер",
+        "Полиэстер / эластан"
+      ],
       "sizes": []
     },
     "kickboxing-pads": {
-      "materials": [],
+      "materials": [
+        "Натуральная кожа",
+        "Экокожа",
+        "ПУ"
+      ],
       "sizes": []
     },
     "kickboxing-wraps": {
-      "materials": [],
+      "materials": [
+        "Хлопок",
+        "Хлопок / эластан",
+        "Полиэстер / эластан"
+      ],
       "sizes": []
     },
     "kickboxing-protection": {
-      "materials": [],
+      "materials": [
+        "Натуральная кожа",
+        "Экокожа",
+        "ПУ",
+        "Текстиль",
+        "Неопрен",
+        "Пластик"
+      ],
       "sizes": []
     },
     "muay-thai-gloves": {
-      "materials": [],
+      "materials": [
+        "Натуральная кожа",
+        "Экокожа",
+        "ПУ"
+      ],
       "sizes": []
     },
     "muay-thai-shinguards": {
-      "materials": [],
+      "materials": [
+        "Натуральная кожа",
+        "Экокожа",
+        "ПУ",
+        "Текстиль",
+        "Неопрен",
+        "Пластик"
+      ],
       "sizes": []
     },
     "muay-thai-shorts": {
-      "materials": [],
+      "materials": [
+        "Полиэстер",
+        "Хлопок",
+        "Хлопок / полиэстер",
+        "Полиэстер / эластан"
+      ],
       "sizes": []
     },
     "muay-thai-pads": {
-      "materials": [],
+      "materials": [
+        "Натуральная кожа",
+        "Экокожа",
+        "ПУ"
+      ],
       "sizes": []
     },
     "muay-thai-wraps": {
-      "materials": [],
+      "materials": [
+        "Хлопок",
+        "Хлопок / эластан",
+        "Полиэстер / эластан"
+      ],
       "sizes": []
     },
     "muay-thai-protection": {
-      "materials": [],
+      "materials": [
+        "Натуральная кожа",
+        "Экокожа",
+        "ПУ",
+        "Текстиль",
+        "Неопрен",
+        "Пластик"
+      ],
+      "sizes": []
+    },
+    "combat-boxing-mma-helmets": {
+      "materials": [
+        "Натуральная кожа",
+        "Экокожа",
+        "ПУ"
+      ],
+      "sizes": []
+    },
+    "combat-boxing-mma-shinguards": {
+      "materials": [
+        "Натуральная кожа",
+        "Экокожа",
+        "ПУ",
+        "Текстиль",
+        "Неопрен",
+        "Пластик"
+      ],
+      "sizes": []
+    },
+    "combat-boxing-mma-mitts": {
+      "materials": [
+        "Натуральная кожа",
+        "Экокожа",
+        "ПУ"
+      ],
+      "sizes": []
+    },
+    "combat-boxing-mma-wraps": {
+      "materials": [
+        "Хлопок",
+        "Хлопок / эластан",
+        "Полиэстер / эластан"
+      ],
+      "sizes": []
+    },
+    "combat-boxing-mma-protection": {
+      "materials": [
+        "Натуральная кожа",
+        "Экокожа",
+        "ПУ",
+        "Текстиль",
+        "Неопрен",
+        "Пластик"
+      ],
+      "sizes": []
+    },
+    "judo-belts": {
+      "materials": [
+        "Хлопок",
+        "Полиэстер",
+        "Хлопок / полиэстер"
+      ],
+      "sizes": []
+    },
+    "karate-helmets": {
+      "materials": [
+        "Натуральная кожа",
+        "Экокожа",
+        "ПУ"
+      ],
+      "sizes": []
+    },
+    "karate-chest-protection": {
+      "materials": [
+        "Натуральная кожа",
+        "Экокожа",
+        "ПУ",
+        "Текстиль",
+        "Неопрен",
+        "Пластик"
+      ],
+      "sizes": []
+    },
+    "football-balls": {
+      "materials": [
+        "ПУ",
+        "ПВХ",
+        "Резина",
+        "Композитная кожа",
+        "Натуральная кожа"
+      ],
+      "sizes": []
+    },
+    "football-boots": {
+      "materials": [
+        "Текстиль",
+        "Синтетическая кожа",
+        "Натуральная кожа",
+        "Текстиль / синтетическая кожа"
+      ],
+      "sizes": []
+    },
+    "basketball-balls": {
+      "materials": [
+        "ПУ",
+        "ПВХ",
+        "Резина",
+        "Композитная кожа",
+        "Натуральная кожа"
+      ],
+      "sizes": []
+    },
+    "volleyball-nets": {
+      "materials": [
+        "Нейлон",
+        "Полипропилен",
+        "Полиэстер",
+        "Металл"
+      ],
+      "sizes": []
+    },
+    "volleyball-protection": {
+      "materials": [
+        "Натуральная кожа",
+        "Экокожа",
+        "ПУ",
+        "Текстиль",
+        "Неопрен",
+        "Пластик"
+      ],
+      "sizes": []
+    },
+    "other-accessories": {
+      "materials": [
+        "Текстиль",
+        "Пластик",
+        "Резина",
+        "Металл"
+      ],
+      "sizes": []
+    },
+    "other-nets": {
+      "materials": [
+        "Нейлон",
+        "Полипропилен",
+        "Полиэстер",
+        "Металл"
+      ],
+      "sizes": []
+    },
+    "other-bags": {
+      "materials": [
+        "Полиэстер",
+        "Нейлон",
+        "Экокожа"
+      ],
+      "sizes": []
+    },
+    "other-workout": {
+      "materials": [
+        "Текстиль",
+        "Пластик",
+        "Резина",
+        "Металл"
+      ],
+      "sizes": []
+    },
+    "combat-boxing-mma-shoes": {
+      "materials": [
+        "Текстиль",
+        "Синтетическая кожа",
+        "Натуральная кожа",
+        "Текстиль / синтетическая кожа"
+      ],
+      "sizes": []
+    },
+    "combat-boxing-mma-skipping-ropes": {
+      "materials": [
+        "ПВХ",
+        "Стальной трос",
+        "Нейлон"
+      ],
+      "sizes": []
+    },
+    "judo-kneepads": {
+      "materials": [
+        "Неопрен",
+        "Полиэстер / эластан",
+        "Нейлон / эластан"
+      ],
+      "sizes": []
+    },
+    "judo-tape": {
+      "materials": [
+        "Хлопок",
+        "Хлопок / эластан",
+        "Полиэстер / эластан"
+      ],
+      "sizes": []
+    },
+    "bjj-earguards": {
+      "materials": [
+        "Натуральная кожа",
+        "Экокожа",
+        "ПУ",
+        "Текстиль",
+        "Неопрен",
+        "Пластик"
+      ],
+      "sizes": []
+    },
+    "bjj-kneepads": {
+      "materials": [
+        "Неопрен",
+        "Полиэстер / эластан",
+        "Нейлон / эластан"
+      ],
+      "sizes": []
+    },
+    "bjj-tape": {
+      "materials": [
+        "Хлопок",
+        "Хлопок / эластан",
+        "Полиэстер / эластан"
+      ],
+      "sizes": []
+    },
+    "karate-shinguards": {
+      "materials": [
+        "Натуральная кожа",
+        "Экокожа",
+        "ПУ",
+        "Текстиль",
+        "Неопрен",
+        "Пластик"
+      ],
+      "sizes": []
+    },
+    "karate-mouthguards": {
+      "materials": [
+        "ЭВА",
+        "Силикон",
+        "Термопластик"
+      ],
+      "sizes": []
+    },
+    "karate-groin": {
+      "materials": [
+        "Натуральная кожа",
+        "Экокожа",
+        "ПУ",
+        "Текстиль",
+        "Неопрен",
+        "Пластик"
+      ],
+      "sizes": []
+    },
+    "kickboxing-helmets": {
+      "materials": [
+        "Натуральная кожа",
+        "Экокожа",
+        "ПУ"
+      ],
+      "sizes": []
+    },
+    "kickboxing-mouthguards": {
+      "materials": [
+        "ЭВА",
+        "Силикон",
+        "Термопластик"
+      ],
+      "sizes": []
+    },
+    "kickboxing-groin": {
+      "materials": [
+        "Натуральная кожа",
+        "Экокожа",
+        "ПУ",
+        "Текстиль",
+        "Неопрен",
+        "Пластик"
+      ],
+      "sizes": []
+    },
+    "muay-thai-helmets": {
+      "materials": [
+        "Натуральная кожа",
+        "Экокожа",
+        "ПУ"
+      ],
+      "sizes": []
+    },
+    "muay-thai-mouthguards": {
+      "materials": [
+        "ЭВА",
+        "Силикон",
+        "Термопластик"
+      ],
+      "sizes": []
+    },
+    "muay-thai-groin": {
+      "materials": [
+        "Натуральная кожа",
+        "Экокожа",
+        "ПУ",
+        "Текстиль",
+        "Неопрен",
+        "Пластик"
+      ],
+      "sizes": []
+    },
+    "football-futsal-shoes": {
+      "materials": [
+        "Текстиль",
+        "Синтетическая кожа",
+        "Натуральная кожа",
+        "Текстиль / синтетическая кожа"
+      ],
+      "sizes": []
+    },
+    "football-goalkeeper-gloves": {
+      "materials": [
+        "Латекс",
+        "Латекс / полиэстер",
+        "Синтетическая кожа"
+      ],
+      "sizes": []
+    },
+    "football-shinguards": {
+      "materials": [
+        "Натуральная кожа",
+        "Экокожа",
+        "ПУ",
+        "Текстиль",
+        "Неопрен",
+        "Пластик"
+      ],
+      "sizes": []
+    },
+    "football-socks": {
+      "materials": [
+        "Полиэстер",
+        "Хлопок",
+        "Хлопок / полиэстер",
+        "Полиэстер / эластан"
+      ],
+      "sizes": []
+    },
+    "football-uniform": {
+      "materials": [
+        "Полиэстер",
+        "Хлопок",
+        "Хлопок / полиэстер",
+        "Полиэстер / эластан"
+      ],
+      "sizes": []
+    },
+    "football-goals-nets": {
+      "materials": [
+        "Нейлон",
+        "Полипропилен",
+        "Полиэстер",
+        "Металл"
+      ],
+      "sizes": []
+    },
+    "football-training": {
+      "materials": [
+        "Текстиль",
+        "Пластик",
+        "Резина",
+        "Металл"
+      ],
+      "sizes": []
+    },
+    "basketball-hoops": {
+      "materials": [
+        "Нейлон",
+        "Полипропилен",
+        "Полиэстер",
+        "Металл"
+      ],
+      "sizes": []
+    },
+    "basketball-uniform": {
+      "materials": [
+        "Полиэстер",
+        "Хлопок",
+        "Хлопок / полиэстер",
+        "Полиэстер / эластан"
+      ],
+      "sizes": []
+    },
+    "basketball-shoes": {
+      "materials": [
+        "Текстиль",
+        "Синтетическая кожа",
+        "Натуральная кожа",
+        "Текстиль / синтетическая кожа"
+      ],
+      "sizes": []
+    },
+    "volleyball-balls": {
+      "materials": [
+        "ПУ",
+        "ПВХ",
+        "Резина",
+        "Композитная кожа",
+        "Натуральная кожа"
+      ],
+      "sizes": []
+    },
+    "volleyball-kneepads": {
+      "materials": [
+        "Неопрен",
+        "Полиэстер / эластан",
+        "Нейлон / эластан"
+      ],
+      "sizes": []
+    },
+    "volleyball-uniform": {
+      "materials": [
+        "Полиэстер",
+        "Хлопок",
+        "Хлопок / полиэстер",
+        "Полиэстер / эластан"
+      ],
+      "sizes": []
+    },
+    "volleyball-shoes": {
+      "materials": [
+        "Текстиль",
+        "Синтетическая кожа",
+        "Натуральная кожа",
+        "Текстиль / синтетическая кожа"
+      ],
+      "sizes": []
+    },
+    "other-pumps": {
+      "materials": [
+        "Текстиль",
+        "Пластик",
+        "Резина",
+        "Металл"
+      ],
+      "sizes": []
+    },
+    "other-resistance-bands": {
+      "materials": [
+        "Латекс",
+        "Термопластичная резина",
+        "Ткань / латекс"
+      ],
+      "sizes": []
+    },
+    "other-mats": {
+      "materials": [
+        "ЭВА",
+        "Термопластичный эластомер",
+        "ПВХ",
+        "Каучук"
+      ],
+      "sizes": []
+    },
+    "other-bottles": {
+      "materials": [
+        "Пластик",
+        "Нержавеющая сталь"
+      ],
       "sizes": []
     }
   },

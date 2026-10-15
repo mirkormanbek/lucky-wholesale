@@ -287,11 +287,43 @@ function searchableText(product) {
     .toLowerCase();
 }
 
+function additionalProductCategory(text,ids){
+ const within=root=>ids.some(id=>id===root||id.startsWith(root+"-"));
+ if(/боксерк|boxing shoes/.test(text))return "combat-boxing-mma-shoes";
+ if(/скакал/.test(text))return "combat-boxing-mma-skipping-ropes";
+ if(/футзалк|обув.*футзал/.test(text))return "football-futsal-shoes";
+ if(/вратар.*перчат|перчат.*вратар/.test(text))return "football-goalkeeper-gloves";
+ if(/насос.*мяч|игл.*насос/.test(text))return "other-pumps";
+ if(/эспандер|фитнес.*резин|резин.*фитнес/.test(text))return "other-resistance-bands";
+ if(/коврик.*(?:тренир|йог|фитнес)/.test(text))return "other-mats";
+ if(/шейкер|спортивн.*бутыл|бутыл.*спорт/.test(text))return "other-bottles";
+ const sport=/муай|тайск|muay/.test(text)?"muay-thai":/кикбокс|kickbox/.test(text)?"kickboxing":null;
+ if(sport){if(/шлем/.test(text))return sport+"-helmets";if(/кап[аыу](?:\s|$|[,.])/.test(text))return sport+"-mouthguards";if(/защит.*пах|ракушк/.test(text))return sport+"-groin";}
+ if(/карат|киокуш/.test(text)&&!/мма|mma/.test(text)){
+  if(/щитк|футы/.test(text))return "karate-shinguards";if(/кап[аыу](?:\s|$|[,.])/.test(text))return "karate-mouthguards";if(/защит.*пах|ракушк/.test(text))return "karate-groin";
+ }
+ const bjj=/bjj|бжж|джиу|jiu.?jitsu/.test(text),judo=/дзюдо|judo/.test(text);
+ if(bjj&&/защит.*уш|уш.*защит/.test(text))return "bjj-earguards";
+ if(bjj||judo){if(/наколен/.test(text))return (bjj?"bjj":"judo")+"-kneepads";if(/тейп/.test(text))return (bjj?"bjj":"judo")+"-tape";}
+ if(/футбол/.test(text)||within("football")){
+  if(/щитк/.test(text))return "football-shinguards";if(/гетр/.test(text))return "football-socks";
+  if(/форм|манишк/.test(text))return "football-uniform";if(/ворот|сетк/.test(text))return "football-goals-nets";
+  if(/фишк|конус|координацион.*лестниц/.test(text))return "football-training";
+ }
+ if(/баскетбол/.test(text)||within("basketball")){
+  if(/кольц|сетк/.test(text))return "basketball-hoops";if(/форм/.test(text))return "basketball-uniform";if(/кроссов/.test(text))return "basketball-shoes";
+ }
+ if(/волейбол/.test(text)||within("volleyball")){
+  if(/наколен/.test(text))return "volleyball-kneepads";if(/мяч/.test(text))return "volleyball-balls";if(/форм/.test(text))return "volleyball-uniform";if(/кроссов/.test(text))return "volleyball-shoes";
+ }
+ return null;
+}
 function refinedProductCategories(product){
  const ids=product.categoryIds||[];
  // Only refine imported WB cards. Explicit warehouse category selections remain authoritative.
  if(!/^wb-\d+$/.test(String(product.id||"")))return ids;
  const text=String(product.title||"").toLowerCase().replaceAll("ё","е");
+ const additional=additionalProductCategory(text,ids);if(additional)return [additional];
  const bjj=/bjj|бжж|джиу|jiu.?jitsu/.test(text),karate=/карат|киокуш/.test(text),kick=/кикбокс|kickbox/.test(text),muay=/муай|муайтай|тайск|muay/.test(text);
  const boxing=ids.some(id=>id.startsWith("combat-boxing-mma"))||/бокс|мма|mma|ufc|черепаш/.test(text);
  let leaf=null,root=null;
