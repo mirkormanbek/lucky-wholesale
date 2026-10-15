@@ -9,3 +9,5 @@ body:has(#photoViewer[open]){overflow:hidden}#photoPreview .photo-thumbnail{padd
 #wbPanel>label{margin:14px 0}.wb-price-row{display:grid;grid-template-columns:24px 64px minmax(0,1fr);gap:12px;padding:16px 0;border-bottom:1px solid #3a453d}.wb-price-row>input[type=checkbox],.wb-check input{width:20px;min-height:20px}.wb-price-row>label,.wb-price-row>.actions{grid-column:2/-1}.wb-price-row p{font-size:12px;color:#aab4ab}.wb-check{display:flex;align-items:center;gap:10px;margin:12px 0}#wbPage{align-self:center}
 
 #listControls{display:grid;grid-template-columns:1fr;gap:12px}@media(min-width:640px){#listControls{grid-template-columns:1fr 2fr 1fr}}
+
+.photo-rotation-controls{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}.photo-rotation-controls button{min-height:44px;padding:10px 12px;flex:1 1 130px}
