@@ -16,7 +16,7 @@ try {
                 $rate = $rates[$currency] ?? null;
                 if (is_numeric($rate) && is_finite((float)$rate) && $rate > 0) $prices[$currency] = round($p['price'] * $baseRate / $rate, 2);
             }
-            return ['id' => 'warehouse-' . $p['id'], 'modelGroupId' => $p['modelGroupId'] ?? $p['id'], 'article' => $p['article'], 'title' => $p['title'], 'brand' => 'Lucky', 'description' => $p['material'] ? 'Материал: ' . $p['material'] : '', 'categoryIds' => [$p['categoryId']], 'colors' => $p['colors'], 'sizes' => $p['sizes'], 'photos' => $photos, 'priceFrom' => $prices];
+            return ['id' => 'warehouse-' . $p['id'], 'modelGroupId' => $p['modelGroupId'] ?? $p['id'], 'article' => $p['article'], 'title' => $p['title'], 'brand' => 'Lucky', 'material' => $p['material'] ?? '', 'description' => $p['material'] ? 'Материал: ' . $p['material'] : '', 'categoryIds' => [$p['categoryId']], 'colors' => $p['colors'], 'sizes' => $p['sizes'], 'photos' => $photos, 'priceFrom' => $prices];
         }, $records));
     });warehouse_json(['products' => $products]);
 } catch (Throwable $e) { warehouse_json(['products' => [], 'error' => 'Складской каталог временно недоступен.'], 503); }
