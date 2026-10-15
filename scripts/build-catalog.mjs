@@ -298,6 +298,7 @@ function additionalProductCategory(text,ids){
  if(/коврик.*(?:тренир|йог|фитнес)/.test(text))return "other-mats";
  if(/шейкер|спортивн.*бутыл|бутыл.*спорт/.test(text))return "other-bottles";
  const sport=/муай|тайск|muay/.test(text)?"muay-thai":/кикбокс|kickbox/.test(text)?"kickboxing":null;
+ if(sport==="kickboxing"&&/штан|брюк|trousers|pants/.test(text))return "kickboxing-pants";
  if(sport){if(/шлем/.test(text))return sport+"-helmets";if(/кап[аыу](?:\s|$|[,.])/.test(text))return sport+"-mouthguards";if(/защит.*пах|ракушк/.test(text))return sport+"-groin";}
  if(/карат|киокуш/.test(text)&&!/мма|mma/.test(text)){
   if(/щитк|футы/.test(text))return "karate-shinguards";if(/кап[аыу](?:\s|$|[,.])/.test(text))return "karate-mouthguards";if(/защит.*пах|ракушк/.test(text))return "karate-groin";

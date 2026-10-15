@@ -726,5 +726,13 @@
     "parentId": "combat-boxing-mma",
     "sort": 110,
     "active": true
+  },
+  {
+    "id": "kickboxing-pants",
+    "name": "Штаны",
+    "slug": "kickboxing-pants",
+    "parentId": "kickboxing",
+    "sort": 35,
+    "active": true
   }
 ]

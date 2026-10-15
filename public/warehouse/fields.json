@@ -81,7 +81,8 @@
     "volleyball-protection": "Защита",
     "other-accessories": "Аксессуары",
     "other-bags": "Сумки и рюкзаки",
-    "other-workout": "Воркаут"
+    "other-workout": "Воркаут",
+    "kickboxing-pants": "Штаны для кикбоксинга"
   },
   "colors": [
     "Чёрный",
@@ -826,6 +827,23 @@
         "Нержавеющая сталь"
       ],
       "sizes": []
+    },
+    "kickboxing-pants": {
+      "materials": [
+        "Полиэстер",
+        "Сатин",
+        "Хлопок",
+        "Хлопок / полиэстер",
+        "Полиэстер / эластан"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ]
     }
   },
   "rules": [
