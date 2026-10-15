@@ -137,15 +137,46 @@ function edit(record){
  $("ownerActions").hidden=role!=="owner";$("trashProduct").hidden=record.status==="trashed";$("restoreProduct").hidden=record.status!=="trashed";$("hideProduct").hidden=record.status==="trashed";$("publish").hidden=record.status==="trashed";$("reviewComment").textContent=record.comment||"";$("save").disabled=role!=="owner"&&["review","published"].includes(record.status);$("save").disabled=$("save").disabled||record.status==="trashed";$("saveDraft").disabled=$("save").disabled;$("returnProduct").hidden=record.status==="trashed";
 }
 async function list(){
+ message("");
  $("wbPanel").hidden=true;
  $("listControls").hidden=false;
  $("editor").hidden=true;$("productList").hidden=false;$("productList").replaceChildren();
  warehouseRecords=await all();renderWarehouseList();
 }
+let warehousePage=1;
+const warehousePageSize=24;
+const statusNames={draft:"Черновик",review:"На проверке",returned:"На доработке",published:"На сайте",hidden:"Снят с сайта",trashed:"В корзине"};
+function selectWarehouseStatus(status){$("viewFilter").value=status;$("viewFilter").dispatchEvent(new Event("change"));}
+function renderInventoryOverview(){
+ const overview=$("inventoryOverview"),tabs=$("statusTabs");overview.replaceChildren();tabs.replaceChildren();
+ const count=status=>warehouseRecords.filter(p=>status==="all"?!["hidden","trashed"].includes(p.status):p.status===status).length;
+ for(const [status,title]of [["all","Активные товары"],["review","На проверке"],["published","На сайте"]]){const b=document.createElement("button"),label=document.createElement("span"),n=document.createElement("strong");b.type="button";label.textContent=title;n.textContent=count(status);b.append(label,n);b.addEventListener("click",()=>selectWarehouseStatus(status));overview.append(b);}
+ for(const [status,title]of [["all","Все"],["review","На проверке"],["draft","Черновики"],["returned","На доработке"],["published","На сайте"],["hidden","Снятые"],["trashed","Корзина"]]){const b=document.createElement("button"),n=document.createElement("span");b.type="button";b.textContent=title;b.setAttribute("aria-pressed",String(view===status));n.textContent=count(status);b.append(n);b.addEventListener("click",()=>selectWarehouseStatus(status));tabs.append(b);}
+}
 function renderWarehouseList(){
- $("productList").replaceChildren();const query=normalize($("warehouseSearch").value);const records=warehouseRecords.filter(p=>(view==="all"?!["hidden","trashed"].includes(p.status):p.status===view)&&categoryMatches(p.categoryId,$("warehouseCategory").value)&&normalize([p.title,p.article,...(p.colors||[])].join(" ")).includes(query)).sort((a,b)=>{const order=$("warehouseSort").value;if(order.startsWith("created")){const x=a.createdAt||a.updatedAt,y=b.createdAt||b.updatedAt;return order==="createdAsc"?x.localeCompare(y):y.localeCompare(x);}if(order==="name")return a.title.localeCompare(b.title,"ru");if(order==="priceAsc")return a.price-b.price;if(order==="priceDesc")return b.price-a.price;return order==="oldest"?a.updatedAt.localeCompare(b.updatedAt):b.updatedAt.localeCompare(a.updatedAt);});
- if(!records.length)$("productList").textContent="Товаров по этому поиску и фильтру нет.";
- for(const record of records){const article=document.createElement("article"),text=document.createElement("div"),title=document.createElement("strong"),meta=document.createElement("p"),button=document.createElement("button"),image=document.createElement("img");image.src=record.photos[0]?.processed||record.photos[0]?.original||"";image.alt="";image.className="list-photo";title.textContent=record.title;meta.textContent=record.article+" · "+record.price+" "+(fields.currency==="RUB"?"₽":"₸")+" · "+({draft:"Черновик",review:"На проверке",returned:"Вернуть на доработку",published:"На сайте",hidden:"Снят с сайта",trashed:"В корзине до " + new Date(record.deleteAfter).toLocaleString("ru-RU")}[record.status]||record.status);text.append(title,meta);button.textContent="Открыть";button.addEventListener("click",()=>edit(record));article.append(image,text,button);$("productList").appendChild(article);}
+ renderInventoryOverview();$("productList").replaceChildren();const query=normalize($("warehouseSearch").value);
+ const records=warehouseRecords.filter(p=>(view==="all"?!["hidden","trashed"].includes(p.status):p.status===view)&&categoryMatches(p.categoryId,$("warehouseCategory").value)&&normalize([p.title,p.article,...(p.colors||[])].join(" ")).includes(query)).sort((a,b)=>{
+  const order=$("warehouseSort").value;const date=p=>String(p.createdAt||p.updatedAt||"");
+  if(order.startsWith("created"))return order==="createdAsc"?date(a).localeCompare(date(b)):date(b).localeCompare(date(a));
+  if(order==="name")return a.title.localeCompare(b.title,"ru");if(order==="priceAsc")return a.price-b.price;if(order==="priceDesc")return b.price-a.price;
+  return order==="oldest"?String(a.updatedAt||"").localeCompare(String(b.updatedAt||"")):String(b.updatedAt||"").localeCompare(String(a.updatedAt||""));
+ });
+ const pages=Math.max(1,Math.ceil(records.length/warehousePageSize));warehousePage=Math.min(warehousePage,pages);const start=(warehousePage-1)*warehousePageSize;
+ $("inventoryResults").textContent=records.length?`${start+1}–${Math.min(start+warehousePageSize,records.length)} из ${records.length} товаров`:"0 товаров";
+ $("inventoryTableHeading").hidden=!records.length;
+ if(!records.length){const empty=document.createElement("div"),title=document.createElement("strong"),text=document.createElement("span");empty.className="inventory-empty";title.textContent="Товаров пока нет";text.textContent=query||$("warehouseCategory").value?"Измените поиск или категорию, чтобы увидеть другие товары.":"Выберите другой статус или добавьте новый товар.";empty.append(title,text);$("productList").append(empty);}
+ for(const record of records.slice(start,start+warehousePageSize)){
+  const row=document.createElement("article"),product=document.createElement("div"),details=document.createElement("div"),title=document.createElement("strong"),meta=document.createElement("p"),price=document.createElement("div"),status=document.createElement("span"),date=document.createElement("div"),button=document.createElement("button");row.className="inventory-row";product.className="inventory-product";
+  const source=record.photos[0]?.processed||record.photos[0]?.original;
+  if(source){const image=document.createElement("img");image.src=source;image.alt="";image.loading="lazy";image.className="list-photo";product.append(image);}else{const placeholder=document.createElement("span");placeholder.className="photo-placeholder";placeholder.textContent="Нет фото";product.append(placeholder);}
+  title.textContent=record.title;const category=categories.find(c=>c.id===record.categoryId);meta.textContent=[record.article,category?.name,(record.colors||[]).join(", ")].filter(Boolean).join(" · ");details.append(title,meta);product.append(details);
+  price.className="inventory-price";price.textContent=new Intl.NumberFormat("ru-RU",{maximumFractionDigits:2}).format(record.price)+" "+(record.currency==="RUB"?"₽":record.currency==="USD"?"$":"₸");
+  status.className="inventory-status";status.dataset.status=record.status;status.textContent=statusNames[record.status]||record.status;if(record.status==="trashed")status.title="Хранится до "+new Date(record.deleteAfter).toLocaleString("ru-RU");
+  date.className="inventory-date";const at=new Date(record.createdAt||record.updatedAt);date.textContent=Number.isNaN(at.getTime())?"—":at.toLocaleDateString("ru-RU");
+  button.type="button";button.className="inventory-open";button.textContent="Открыть";button.setAttribute("aria-label","Открыть товар «"+record.title+"»");button.addEventListener("click",()=>{edit(record);window.scrollTo({top:0,behavior:"smooth"});});row.append(product,price,status,date,button);$("productList").append(row);
+ }
+ const pagination=$("warehousePagination");pagination.replaceChildren();pagination.hidden=pages<=1;
+ if(pages>1){const previous=document.createElement("button"),next=document.createElement("button"),label=document.createElement("span");previous.type=next.type="button";previous.textContent="←";next.textContent="→";previous.setAttribute("aria-label","Предыдущая страница склада");next.setAttribute("aria-label","Следующая страница склада");previous.disabled=warehousePage===1;next.disabled=warehousePage===pages;label.textContent=`Страница ${warehousePage} из ${pages}`;previous.addEventListener("click",()=>{warehousePage--;renderWarehouseList();});next.addEventListener("click",()=>{warehousePage++;renderWarehouseList();});pagination.append(previous,label,next);}
  $("save").textContent=role==="owner"?"Сохранить изменения":"Отправить на проверку";
 }
 $("title").addEventListener("input",titlePreview);
@@ -189,9 +220,9 @@ $("addColor").addEventListener("click",async()=>{
 });
 async function transition(status){if(busy)return;if(!await saveForm(false))return;const comment=status==="returned"?prompt("Что менеджеру нужно исправить?"):"";if(comment===null)return;try{current=(await api("transition",{id:current.id,revision:current.revision,status,comment})).product;await list();message(status==="published"?"Товар опубликован на сайте.":"Статус товара обновлён.");}catch(e){message(e.message);}}
 $("publish").addEventListener("click",()=>transition("published"));$("returnProduct").addEventListener("click",()=>transition("returned"));$("hideProduct").addEventListener("click",async()=>{if(busy)return;if(!current?.revision){message("Сначала сохраните товар.");return;}if(!confirm("Снять с сайта товар «"+current.title+"»? Товар и фото сохранятся без срока удаления."))return;busy=true;renderPhotos();try{await api("transition",{id:current.id,revision:current.revision,status:"hidden"});await list();message("Товар снят с сайта.");}catch(e){message(e.message);}finally{busy=false;renderPhotos();}});
-$("viewFilter").addEventListener("change",()=>{view=$("viewFilter").value;renderWarehouseList();});
-$("warehouseSearch").addEventListener("input",renderWarehouseList);$("warehouseCategory").addEventListener("change",renderWarehouseList);
-$("warehouseSort").addEventListener("change",renderWarehouseList);
+$("viewFilter").addEventListener("change",()=>{view=$("viewFilter").value;warehousePage=1;renderWarehouseList();});
+$("warehouseSearch").addEventListener("input",()=>{warehousePage=1;renderWarehouseList();});$("warehouseCategory").addEventListener("change",()=>{warehousePage=1;renderWarehouseList();});
+$("warehouseSort").addEventListener("change",()=>{warehousePage=1;renderWarehouseList();});
 $("export").addEventListener("click",async()=>{
  const products=await all();if(!products.length){message("Сначала сохраните товар.");return;}
  const blob=new Blob([JSON.stringify({version:1,exportedAt:new Date().toISOString(),products})],{type:"application/json"});
@@ -213,3 +244,17 @@ function categoryMatches(id, selected){if(!selected)return true;let c=categories
 function populateCategoryFilter(id){const select=$(id);for(const c of categories.filter(x=>x.active!==false)){const o=document.createElement('option');o.value=c.id;o.textContent=(c.parentId?'— ':'')+c.name;select.append(o);}}
 async function trashTransition(status){if(busy||!current?.revision)return;if(status==='trashed'&&!confirm('Удалить товар «'+current.title+'»? Через 24 часа запись и неиспользуемые фото будут удалены без возможности восстановления. До этого товар можно восстановить из корзины.'))return;busy=true;try{await api('transition',{id:current.id,revision:current.revision,status});await list();message(status==='trashed'?'Товар в корзине на 24 часа.':'Товар восстановлен.');}catch(e){message(e.message);}finally{busy=false;}}
 $("trashProduct").addEventListener('click',()=>trashTransition('trashed'));$("restoreProduct").addEventListener('click',()=>trashTransition('restore'));
+
+function syncCabinetView(){
+ const ready=!$("workspace").hidden,mode=!$("wbPanel").hidden?"wb":!$("editor").hidden?"editor":"warehouse";
+ const hideInventory=!ready||mode!=="warehouse";for(const id of ["inventoryOverview","inventoryPanel"])if($(id).hidden!==hideInventory)$(id).hidden=hideInventory;$("processingNote").hidden=mode!=="editor";
+ $("cabinetTitle").textContent=mode==="wb"?"Товары с ВБ":mode==="editor"?(current?.revision?"Карточка товара":"Новый товар"):"Товары склада";
+ for(const [id,target]of [["navWarehouse","showList"],["navWb","wbProducts"],["navNew","newProduct"]]){const nav=$(id);nav.disabled=!ready||$(target).disabled;if((id==="navWarehouse"&&(mode==="warehouse"||(mode==="editor"&&current?.revision)))||(id==="navWb"&&mode==="wb")||(id==="navNew"&&mode==="editor"&&!current?.revision))nav.setAttribute("aria-current","page");else nav.removeAttribute("aria-current");}
+ const hideDraft=role==="owner";if($("saveDraft").hidden!==hideDraft)$("saveDraft").hidden=hideDraft;
+ const hideWb=$("wbProducts").hidden;if($("navWb").hidden!==hideWb)$("navWb").hidden=hideWb;
+}
+$("navWarehouse").addEventListener("click",()=>$("showList").click());
+$("navWb").addEventListener("click",()=>$("wbProducts").click());
+$("navNew").addEventListener("click",()=>$("newProduct").click());
+new MutationObserver(syncCabinetView).observe($("workspace"),{attributes:true,subtree:true,attributeFilter:["hidden","disabled"]});
+syncCabinetView();
