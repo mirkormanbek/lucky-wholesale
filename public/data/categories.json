@@ -17,7 +17,7 @@
   },
   {
     "id": "combat-boxing-mma-gloves",
-    "name": "Перчатки",
+    "name": "Боксёрские перчатки",
     "slug": "perchatki",
     "parentId": "combat-boxing-mma",
     "sort": 10,
@@ -77,6 +77,30 @@
     "slug": "aksessuary",
     "parentId": "other",
     "sort": 10,
+    "active": true
+  },
+  {
+    "id": "kickboxing-gloves",
+    "name": "Перчатки",
+    "slug": "kickboxing-gloves",
+    "parentId": "kickboxing",
+    "sort": 10,
+    "active": true
+  },
+  {
+    "id": "muay-thai-gloves",
+    "name": "Перчатки",
+    "slug": "muay-thai-gloves",
+    "parentId": "muay-thai",
+    "sort": 10,
+    "active": true
+  },
+  {
+    "id": "combat-boxing-mma-mma-gloves",
+    "name": "Черепашки / перчатки ММА",
+    "slug": "combat-boxing-mma-mma-gloves",
+    "parentId": "combat-boxing-mma",
+    "sort": 15,
     "active": true
   },
   {
@@ -144,6 +168,30 @@
     "active": true
   },
   {
+    "id": "bjj-belts",
+    "name": "Пояса",
+    "slug": "bjj-belts",
+    "parentId": "bjj",
+    "sort": 20,
+    "active": true
+  },
+  {
+    "id": "kickboxing-shinguards",
+    "name": "Щитки",
+    "slug": "kickboxing-shinguards",
+    "parentId": "kickboxing",
+    "sort": 20,
+    "active": true
+  },
+  {
+    "id": "muay-thai-shinguards",
+    "name": "Щитки",
+    "slug": "muay-thai-shinguards",
+    "parentId": "muay-thai",
+    "sort": 20,
+    "active": true
+  },
+  {
     "id": "combat-boxing-mma-shinguards",
     "name": "Щитки",
     "slug": "shitki",
@@ -180,6 +228,30 @@
     "name": "Сумки и рюкзаки",
     "slug": "sumki-ryukzaki",
     "parentId": "other",
+    "sort": 30,
+    "active": true
+  },
+  {
+    "id": "bjj-rashguards",
+    "name": "Рашгарды",
+    "slug": "bjj-rashguards",
+    "parentId": "bjj",
+    "sort": 30,
+    "active": true
+  },
+  {
+    "id": "kickboxing-shorts",
+    "name": "Шорты",
+    "slug": "kickboxing-shorts",
+    "parentId": "kickboxing",
+    "sort": 30,
+    "active": true
+  },
+  {
+    "id": "muay-thai-shorts",
+    "name": "Шорты",
+    "slug": "muay-thai-shorts",
+    "parentId": "muay-thai",
     "sort": 30,
     "active": true
   },
@@ -224,6 +296,38 @@
     "active": true
   },
   {
+    "id": "bjj-shorts",
+    "name": "Шорты",
+    "slug": "bjj-shorts",
+    "parentId": "bjj",
+    "sort": 40,
+    "active": true
+  },
+  {
+    "id": "kickboxing-pads",
+    "name": "Лапы и тай-пэды",
+    "slug": "kickboxing-pads",
+    "parentId": "kickboxing",
+    "sort": 40,
+    "active": true
+  },
+  {
+    "id": "muay-thai-pads",
+    "name": "Лапы и тай-пэды",
+    "slug": "muay-thai-pads",
+    "parentId": "muay-thai",
+    "sort": 40,
+    "active": true
+  },
+  {
+    "id": "combat-boxing-mma-pads",
+    "name": "Макивары и тай-пэды",
+    "slug": "combat-boxing-mma-pads",
+    "parentId": "combat-boxing-mma",
+    "sort": 45,
+    "active": true
+  },
+  {
     "id": "combat-boxing-mma-wraps",
     "name": "Бинты",
     "slug": "binty",
@@ -240,11 +344,115 @@
     "active": true
   },
   {
+    "id": "bjj-spats",
+    "name": "Компрессионные штаны",
+    "slug": "bjj-spats",
+    "parentId": "bjj",
+    "sort": 50,
+    "active": true
+  },
+  {
+    "id": "karate-belts",
+    "name": "Пояса",
+    "slug": "karate-belts",
+    "parentId": "karate",
+    "sort": 50,
+    "active": true
+  },
+  {
+    "id": "kickboxing",
+    "name": "Кикбоксинг",
+    "slug": "kickboxing",
+    "parentId": "combat",
+    "sort": 50,
+    "active": true
+  },
+  {
+    "id": "kickboxing-wraps",
+    "name": "Бинты",
+    "slug": "kickboxing-wraps",
+    "parentId": "kickboxing",
+    "sort": 50,
+    "active": true
+  },
+  {
+    "id": "muay-thai-wraps",
+    "name": "Бинты",
+    "slug": "muay-thai-wraps",
+    "parentId": "muay-thai",
+    "sort": 50,
+    "active": true
+  },
+  {
     "id": "combat-boxing-mma-protection",
     "name": "Защита",
     "slug": "zashchita",
     "parentId": "combat-boxing-mma",
     "sort": 60,
+    "active": true
+  },
+  {
+    "id": "kickboxing-protection",
+    "name": "Защита",
+    "slug": "kickboxing-protection",
+    "parentId": "kickboxing",
+    "sort": 60,
+    "active": true
+  },
+  {
+    "id": "muay-thai",
+    "name": "Муай-тай",
+    "slug": "muay-thai",
+    "parentId": "combat",
+    "sort": 60,
+    "active": true
+  },
+  {
+    "id": "muay-thai-protection",
+    "name": "Защита",
+    "slug": "muay-thai-protection",
+    "parentId": "muay-thai",
+    "sort": 60,
+    "active": true
+  },
+  {
+    "id": "combat-boxing-mma-mouthguards",
+    "name": "Капы",
+    "slug": "combat-boxing-mma-mouthguards",
+    "parentId": "combat-boxing-mma",
+    "sort": 65,
+    "active": true
+  },
+  {
+    "id": "combat-boxing-mma-groin",
+    "name": "Защита паха",
+    "slug": "combat-boxing-mma-groin",
+    "parentId": "combat-boxing-mma",
+    "sort": 70,
+    "active": true
+  },
+  {
+    "id": "combat-boxing-mma-bags",
+    "name": "Мешки и груши",
+    "slug": "combat-boxing-mma-bags",
+    "parentId": "combat-boxing-mma",
+    "sort": 80,
+    "active": true
+  },
+  {
+    "id": "combat-boxing-mma-rashguards",
+    "name": "Рашгарды",
+    "slug": "combat-boxing-mma-rashguards",
+    "parentId": "combat-boxing-mma",
+    "sort": 90,
+    "active": true
+  },
+  {
+    "id": "combat-boxing-mma-shorts",
+    "name": "Шорты",
+    "slug": "combat-boxing-mma-shorts",
+    "parentId": "combat-boxing-mma",
+    "sort": 100,
     "active": true
   }
 ]

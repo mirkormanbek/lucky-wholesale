@@ -287,6 +287,32 @@ function searchableText(product) {
     .toLowerCase();
 }
 
+function refinedProductCategories(product){
+ const ids=product.categoryIds||[];
+ // Only refine imported WB cards. Explicit warehouse category selections remain authoritative.
+ if(!/^wb-\d+$/.test(String(product.id||"")))return ids;
+ const text=String(product.title||"").toLowerCase().replaceAll("ё","е");
+ const bjj=/bjj|бжж|джиу|jiu.?jitsu/.test(text),karate=/карат|киокуш/.test(text),kick=/кикбокс|kickbox/.test(text),muay=/муай|муайтай|тайск|muay/.test(text);
+ const boxing=ids.some(id=>id.startsWith("combat-boxing-mma"))||/бокс|мма|mma|ufc|черепаш/.test(text);
+ let leaf=null,root=null;
+ if(/^(?:спортивный\s+)?пояс\b|^пояс|^belt\b/.test(text)){
+  if(bjj){leaf="bjj-belts";root="bjj";}else if(karate){leaf="karate-belts";root="karate";}
+ }else if(bjj){
+  const suffix=/рашгард|rashguard/.test(text)?"rashguards":/шорт/.test(text)?"shorts":/спатс|компрессион.*(?:штан|брюк|леггин)/.test(text)?"spats":null;
+  if(suffix){leaf="bjj-"+suffix;root="bjj";}
+ }else if(kick||muay){
+  root=kick?"kickboxing":"muay-thai";
+  const suffix=/бинт/.test(text)?"wraps":/щитк|защит.*голен/.test(text)?"shinguards":/шорт/.test(text)?"shorts":/лап[аы]|пэд|макивар/.test(text)?"pads":/перчат/.test(text)?"gloves":/защит|кап[аыу]|шлем/.test(text)?"protection":null;
+  if(suffix)leaf=root+"-"+suffix;
+ }else if(boxing){
+  root="combat-boxing-mma";
+  const suffix=/черепаш|перчат.*(?:мма|mma|ufc)|(?:мма|mma).*перчат/.test(text)?"mma-gloves":/кап[аыу](?:\s|$|[,.])|mouthguard/.test(text)?"mouthguards":/защит.*пах|ракушк|бандаж.*пах/.test(text)?"groin":/макивар|тай.?пэд|тайпэд/.test(text)?"pads":/мешок|мешки|груш/.test(text)?"bags":/рашгард|rashguard/.test(text)?"rashguards":/шорт/.test(text)?"shorts":null;
+  if(suffix)leaf=root+"-"+suffix;
+ }
+ if(!leaf)return ids;
+ const related=id=>id===root||id.startsWith(root+"-")||id.startsWith("combat-boxing-mma")||id.startsWith("bjj-")||id==="sports-unclassified";
+ return [...new Set([...ids.filter(id=>!related(id)),leaf])];
+}
 function categoryIdsForWb(product) {
   const subjectKey = String(product.subjectID ?? "");
   let ids = [...(categoryMap.subjectMap?.[subjectKey] || ["sports-unclassified"])];
@@ -565,6 +591,7 @@ for (const manual of manualProducts) {
 
 for (const product of builtProducts) {
   product.categoryIds = validateCategories(product);
+  product.categoryIds = refinedProductCategories(product);
 
   const catalogPrice = catalogPriceFor(product);
   if (catalogPrice) {

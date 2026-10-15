@@ -14,7 +14,31 @@
     "combat-boxing-mma-mitts": "Боксёрские лапы",
     "combat-boxing-mma-wraps": "Боксёрские бинты",
     "volleyball-nets": "Волейбольная сетка",
-    "other-nets": "Спортивная сетка"
+    "other-nets": "Спортивная сетка",
+    "bjj-belts": "Пояс для джиу-джитсу",
+    "bjj-rashguards": "Рашгард для джиу-джитсу",
+    "bjj-shorts": "Шорты для джиу-джитсу",
+    "bjj-spats": "Компрессионные штаны для джиу-джитсу",
+    "combat-boxing-mma-mma-gloves": "Перчатки ММА (черепашки)",
+    "combat-boxing-mma-mouthguards": "Капа для единоборств",
+    "combat-boxing-mma-groin": "Защита паха",
+    "combat-boxing-mma-pads": "Макивара",
+    "combat-boxing-mma-bags": "Боксёрский мешок",
+    "combat-boxing-mma-rashguards": "Рашгард для ММА",
+    "combat-boxing-mma-shorts": "Шорты для бокса и ММА",
+    "karate-belts": "Пояс для карате",
+    "kickboxing-gloves": "Перчатки для кикбоксинга",
+    "kickboxing-shinguards": "Щитки для кикбоксинга",
+    "kickboxing-shorts": "Шорты для кикбоксинга",
+    "kickboxing-pads": "Тай-пэды для кикбоксинга",
+    "kickboxing-wraps": "Бинты для кикбоксинга",
+    "kickboxing-protection": "Защита для кикбоксинга",
+    "muay-thai-gloves": "Перчатки для муай-тай",
+    "muay-thai-shinguards": "Щитки для муай-тай",
+    "muay-thai-shorts": "Шорты для муай-тай",
+    "muay-thai-pads": "Тай-пэды для муай-тай",
+    "muay-thai-wraps": "Бинты для муай-тай",
+    "muay-thai-protection": "Защита для муай-тай"
   },
   "colors": [
     "Чёрный",
@@ -80,6 +104,112 @@
         "Хлопок",
         "Хлопок / полиэстер"
       ],
+      "sizes": []
+    },
+    "bjj-belts": {
+      "materials": [],
+      "sizes": []
+    },
+    "bjj-rashguards": {
+      "materials": [],
+      "sizes": []
+    },
+    "bjj-shorts": {
+      "materials": [],
+      "sizes": []
+    },
+    "bjj-spats": {
+      "materials": [],
+      "sizes": []
+    },
+    "combat-boxing-mma-mma-gloves": {
+      "materials": [
+        "Натуральная кожа",
+        "Экокожа",
+        "ПУ"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
+      ]
+    },
+    "combat-boxing-mma-mouthguards": {
+      "materials": [],
+      "sizes": []
+    },
+    "combat-boxing-mma-groin": {
+      "materials": [],
+      "sizes": []
+    },
+    "combat-boxing-mma-pads": {
+      "materials": [],
+      "sizes": []
+    },
+    "combat-boxing-mma-bags": {
+      "materials": [],
+      "sizes": []
+    },
+    "combat-boxing-mma-rashguards": {
+      "materials": [],
+      "sizes": []
+    },
+    "combat-boxing-mma-shorts": {
+      "materials": [],
+      "sizes": []
+    },
+    "karate-belts": {
+      "materials": [],
+      "sizes": []
+    },
+    "kickboxing-gloves": {
+      "materials": [],
+      "sizes": []
+    },
+    "kickboxing-shinguards": {
+      "materials": [],
+      "sizes": []
+    },
+    "kickboxing-shorts": {
+      "materials": [],
+      "sizes": []
+    },
+    "kickboxing-pads": {
+      "materials": [],
+      "sizes": []
+    },
+    "kickboxing-wraps": {
+      "materials": [],
+      "sizes": []
+    },
+    "kickboxing-protection": {
+      "materials": [],
+      "sizes": []
+    },
+    "muay-thai-gloves": {
+      "materials": [],
+      "sizes": []
+    },
+    "muay-thai-shinguards": {
+      "materials": [],
+      "sizes": []
+    },
+    "muay-thai-shorts": {
+      "materials": [],
+      "sizes": []
+    },
+    "muay-thai-pads": {
+      "materials": [],
+      "sizes": []
+    },
+    "muay-thai-wraps": {
+      "materials": [],
+      "sizes": []
+    },
+    "muay-thai-protection": {
+      "materials": [],
       "sizes": []
     }
   },
