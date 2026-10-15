@@ -12,10 +12,25 @@ if (!$post && !in_array($action, ['list', 'photo', 'wb-list'], true)) stop('Ну
 function can_read(array $record): bool { global $user, $owner; return $owner || ($record['owner'] ?? '') === $user; }
 function clean_text($value, int $max): string { if (!is_string($value) || strlen($value) > $max) stop('Неверное поле.'); return trim($value); }
 function clean_list($value): array { if (!is_array($value) || count($value) > 20) stop('Неверный список характеристик.'); return array_values(array_unique(array_filter(array_map(fn($v) => clean_text($v, 180), $value)))); }
+function store_processed_photo(array &$s, string $id, string $name, bool $replace, string $expected): ?string {
+    if (!isset($s['photos'][$id])) throw new DomainException('Фото не найдено.', 404);
+    $photo = $s['photos'][$id];
+    if ($photo['approved']) throw new DomainException('Принятое фото нельзя менять. Добавьте новый ракурс.', 409);
+    $previous = $photo['processed'];
+    if ($previous) {
+        if (!$replace) throw new DomainException('Результат уже сохранён. Сначала проверьте его.', 409);
+        if (!hash_equals(hash('sha256', $previous), $expected)) throw new DomainException('Фото изменилось. Обновите карточку и повторите поворот.', 409);
+        foreach ($s['products'] as $p) if (in_array($id, $p['photos'], true) && $p['status'] === 'published') throw new DomainException('Фото опубликованного товара нельзя заменить без проверки.', 409);
+    } elseif ($replace) throw new DomainException('Результат больше недоступен. Обновите карточку.', 409);
+    $s['photos'][$id]['processed'] = $name;
+    if ($previous) foreach ($s['products'] as &$p) if (in_array($id, $p['photos'], true)) { $p['revision']++; $p['updatedAt'] = gmdate('c'); }
+    unset($p);
+    return $previous ?: null;
+}
 function present(array $product, array $state): array {
     $product['photos'] = array_values(array_map(function($id) use ($state) {
         $photo = $state['photos'][$id];
-        return ['id' => $id, 'serverId' => $id, 'name' => $photo['name'], 'original' => $photo['original'] ? './api.php?action=photo&id=' . $id . '&kind=original' : null, 'processed' => $photo['processed'] ? './api.php?action=photo&id=' . $id . '&kind=processed' : null, 'processingStatus' => $photo['approved'] ? 'approved' : ($photo['processed'] ? 'needs_review' : 'pending')];
+        return ['id' => $id, 'serverId' => $id, 'name' => $photo['name'], 'original' => $photo['original'] ? './api.php?action=photo&id=' . $id . '&kind=original' : null, 'processed' => $photo['processed'] ? './api.php?action=photo&id=' . $id . '&kind=processed' : null, 'processedVersion' => $photo['processed'] ? hash('sha256', $photo['processed']) : null, 'processingStatus' => $photo['approved'] ? 'approved' : ($photo['processed'] ? 'needs_review' : 'pending')];
     }, $product['photos']));
     return $product;
 }
@@ -43,6 +58,8 @@ try {
     }
     if ($action === 'upload') {
         $upload = $_FILES['photo'] ?? null; $kind = $_POST['kind'] ?? 'original'; $id = $_POST['id'] ?? '';
+        $replace = ($_POST['replace'] ?? '') === '1'; $expected = $_POST['expectedVersion'] ?? '';
+        if (!is_string($expected) || ($replace && !preg_match('/^[a-f0-9]{64}$/D', $expected))) stop('Обновите карточку перед поворотом фото.', 409);
         if (!in_array($kind, ['original', 'processed'], true) || ($kind === 'processed' && !$owner)) stop('Нет доступа к обработанным фото.', 403);
         if (!$upload || $upload['error'] !== UPLOAD_ERR_OK || !is_uploaded_file($upload['tmp_name']) || $upload['size'] > 12 * 1024 * 1024) stop('Нужен JPEG, PNG или WebP до 12 МБ.');
         $mime = (new finfo(FILEINFO_MIME_TYPE))->file($upload['tmp_name']);$types = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp'];$dims = @getimagesize($upload['tmp_name']);
@@ -51,18 +68,16 @@ try {
         $name = bin2hex(random_bytes(16)) . '.' . $types[$mime];
         if (!move_uploaded_file($upload['tmp_name'], warehouse_photo_path($name))) stop('Не удалось сохранить фото.', 503);
         @chmod(warehouse_photo_path($name), 0600);
+        $previous = null;
         try {
-            $result = warehouse_state(function(&$s) use ($id, $kind, $name, $upload, $user) {
+            $result = warehouse_state(function(&$s) use ($id, $kind, $name, $upload, $user, $replace, $expected, &$previous) {
                 if ($kind === 'processed') {
-                    if (!isset($s['photos'][$id])) stop('Оригинал не найден.', 404);
-                    // Published/approved photos cannot be silently overwritten.
-                    if ($s['photos'][$id]['approved']) stop('Для замены утверждённого фото добавьте новый ракурс.');
-                    if ($s['photos'][$id]['processed']) stop('Результат уже сохранён. Сначала проверьте его.');
-                    $s['photos'][$id]['processed'] = $name;
+                    $previous = store_processed_photo($s, $id, $name, $replace, $expected);
                 } else { $id = bin2hex(random_bytes(16)); $s['photos'][$id] = ['owner' => $user, 'name' => basename($upload['name']), 'original' => $name, 'processed' => null, 'approved' => false]; }
                 return ['id' => $id];
             });
         } catch (Throwable $e) { @unlink(warehouse_photo_path($name)); throw $e; }
+        if ($previous) @unlink(warehouse_photo_path($previous));
         warehouse_json($result);
     }
     if (strlen((string)file_get_contents('php://input')) > 65536) stop('Слишком большой запрос.');
@@ -169,4 +184,5 @@ try {
         $deleted = !$removed || @unlink(warehouse_photo_path($removed));warehouse_json(['ok' => true, 'originalDeleted' => $deleted]);
     }
     stop('Неизвестное действие.', 404);
-} catch (Throwable $e) { stop('Ошибка хранилища. Проверьте права закрытой папки и конфигурацию PHP.', 503); }
+} catch (DomainException $e) { stop($e->getMessage(), in_array($e->getCode(), [400, 404, 409], true) ? $e->getCode() : 400); }
+catch (Throwable $e) { stop('Ошибка хранилища. Проверьте права закрытой папки и конфигурацию PHP.', 503); }
