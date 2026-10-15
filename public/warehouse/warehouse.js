@@ -1,3 +1,4 @@
+import {normaliseRotation,rotationRequest,rotatedPhotoSource,keepPhotoEdits} from "./photo-tools.js?v=1";
 let warehouseRecords=[];
 const $=id=>document.getElementById(id);
 let db,fields,categories,current,photos=[],manualCategory=false,busy=false,role="manager",view="all",colorExplicit=true;
@@ -7,7 +8,7 @@ const message=s=>$("message").textContent=s;
 let viewedPhoto=null,viewerZoom=false,previousOverflow="";
 function viewerImage(kind){
  if(!viewedPhoto?.[kind])return;
- $("viewerImage").src=viewedPhoto[kind];$("viewerImage").alt=kind==="original"?"Оригинал фото товара":"Обработанное фото товара";
+ $("viewerImage").src=kind==="original"?(viewedPhoto.processingSource||viewedPhoto.original):viewedPhoto[kind];$("viewerImage").alt=kind==="original"?"Оригинал фото товара":"Обработанное фото товара";
  $("viewerOriginal").setAttribute("aria-pressed",String(kind==="original"));$("viewerProcessed").setAttribute("aria-pressed",String(kind==="processed"));
  viewerZoom=false;$("viewerCanvas").classList.remove("actual-size");$("viewerZoom").textContent="Увеличить до 100%";
 }
@@ -69,25 +70,31 @@ async function priceHints(){
 }
 function renderPhotos(){
  $("photoPreview").replaceChildren();
- photos.forEach((photo,index)=>{const figure=document.createElement("figure"),img=document.createElement("img"),caption=document.createElement("figcaption"),button=document.createElement("button");if(photo.original){img.src=photo.original;img.alt="Оригинал фото товара";caption.textContent="Оригинал";figure.append(photoThumbnail(img,photo,"original"),caption);}button.type="button";button.disabled=busy;button.textContent="Убрать из карточки";button.addEventListener("click",()=>{photos.splice(index,1);renderPhotos();});
+ photos.forEach((photo,index)=>{const figure=document.createElement("figure"),img=document.createElement("img"),caption=document.createElement("figcaption"),button=document.createElement("button");if(photo.original){img.src=photo.processingSource||photo.original;img.alt="Оригинал фото товара";caption.textContent=photo.inputRotation?"Оригинал · поворот "+photo.inputRotation+"°":"Оригинал";figure.append(photoThumbnail(img,photo,"original"),caption);}button.type="button";button.disabled=busy;button.textContent="Убрать из карточки";button.addEventListener("click",()=>{photos.splice(index,1);renderPhotos();});
  if(photo.processed){const result=document.createElement("img"),note=document.createElement("figcaption");result.src=photo.processed;result.alt="Результат ИИ-обработки на белом фоне";note.textContent=photo.processingStatus==="approved"?"Фото подтверждено":"Белый фон · требуется проверка";figure.append(photoThumbnail(result,photo,"processed"),note);if(role==="owner"&&photo.processingStatus!=="approved"){const approve=document.createElement("button");approve.type="button";approve.disabled=busy;approve.textContent="Принять фото";approve.addEventListener("click",()=>approvePhoto(photo));figure.append(approve);const reject=document.createElement("button");reject.type="button";reject.disabled=busy;reject.textContent="Отклонить результат";reject.addEventListener("click",()=>rejectPhoto(photo));figure.append(reject);}}
- if(role==="owner"&&fields.imageProcessingEnabled&&photo.original&&!photo.processed&&$("entryMode").value!=="batch"){const label=document.createElement("label"),instructions=document.createElement("textarea"),hint=document.createElement("small");figure.classList.add("processing-photo");label.textContent="Пожелания к обработке · необязательно";instructions.maxLength=1000;instructions.rows=3;instructions.placeholder="Например: убрать упаковку, оставить мягкую тень";instructions.value=photo.processingInstructions||"";instructions.disabled=busy;instructions.className="processing-instructions";instructions.addEventListener("input",()=>{photo.processingInstructions=instructions.value;});label.append(instructions);hint.textContent="Белый фон; форма, цвета и логотипы товара сохраняются. До 1000 символов.";const process=document.createElement("button");process.type="button";process.disabled=busy;process.textContent="Обработать фон · платно";process.addEventListener("click",()=>processPhoto(photo));figure.append(label,hint,process);}
+ if(role==="owner"&&fields.imageProcessingEnabled&&photo.original&&!photo.processed&&$("entryMode").value!=="batch"){const label=document.createElement("label"),instructions=document.createElement("textarea"),hint=document.createElement("small");figure.classList.add("processing-photo");const rotation=document.createElement("div");rotation.className="photo-rotation-controls";for(const [text,degrees]of [["↶ Влево 90°",-90],["Вправо 90° ↷",90],["Сбросить",0]]){const rotate=document.createElement("button");rotate.type="button";rotate.textContent=text;rotate.disabled=busy;rotate.addEventListener("click",()=>rotatePhotoInput(photo,degrees));rotation.append(rotate);}figure.append(rotation);label.textContent="Пожелания к обработке · необязательно";instructions.maxLength=1000;instructions.rows=3;instructions.placeholder="Например: убрать упаковку, оставить мягкую тень";instructions.value=photo.processingInstructions||"";instructions.disabled=busy;instructions.className="processing-instructions";instructions.addEventListener("input",()=>{photo.processingInstructions=instructions.value;});label.append(instructions);hint.textContent="Поворот — бесплатно, до ИИ. Положительные углы — по часовой стрелке. Поворот используется при следующей обработке. Пожелания — до 1000 символов; форма, цвета и логотипы сохраняются.";const process=document.createElement("button");process.type="button";process.disabled=busy;process.textContent="Обработать фон · платно";process.addEventListener("click",()=>processPhoto(photo));figure.append(label,hint,process);}
  figure.append(button);$("photoPreview").appendChild(figure);});
  entryMode();
 }
+async function rotatePhotoInput(photo,degrees){
+ if(busy||photo.processed)return;busy=true;renderPhotos();
+ try{const angle=degrees===0?0:normaliseRotation((photo.inputRotation||0)+degrees);const source=await rotatedPhotoSource(photo.original,angle);photo.inputRotation=angle;photo.processingSource=angle?source:null;message("Поворот готов, без ИИ и оплаты. Оригинал сохранён. Проверьте фото перед обработкой.");}catch(e){message(e.message);}finally{busy=false;renderPhotos();}
+}
 async function processPhoto(photo){
  if(busy||role!=="owner"||!fields.imageProcessingEnabled)return;
+ const requested=rotationRequest((photo.processingInstructions||"").trim());
+ if(requested.degrees!==null){busy=true;renderPhotos();try{const angle=normaliseRotation(requested.degrees);photo.processingSource=angle?await rotatedPhotoSource(photo.original,angle):null;photo.inputRotation=angle;photo.processingInstructions=requested.instructions;}catch(e){message(e.message);return;}finally{busy=false;renderPhotos();}await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));}
  const instructions=(photo.processingInstructions||"").trim();
- if(!confirm("Отправить фото в ИИ-сервис? Обработка оплачивается отдельно. Проверьте, что в кадре одна модель товара."))return;
+ if(!confirm("Отправить показанное фото в ИИ-сервис?"+(photo.inputRotation?" Поворот "+photo.inputRotation+"° уже выполнен.":"")+" Обработка фона оплачивается отдельно."))return;
  const index=photos.indexOf(photo);if(!await saveForm(false))return;photo=photos[index];photo.processingInstructions=instructions;
  busy=true;for(const id of ["save","newProduct","showList","photos","camera","export"])$(id).disabled=true;renderPhotos();message("Фото обрабатывается. Не закрывайте страницу.");
  try{
- const source=await (await fetch(photo.original)).blob(),form=new FormData();form.append("photo",source,photo.name);form.append("instructions",instructions);
+ const source=await (await fetch(photo.processingSource||photo.original)).blob(),form=new FormData();form.append("photo",source,photo.name);form.append("instructions",instructions);form.append("orientation_locked",photo.inputRotation?"1":"0");
  const response=await fetch("./process-photo.php",{method:"POST",headers:{"X-Requested-With":"LuckyWarehouse"},body:form,credentials:"same-origin"});
  const data=await response.json();if(!response.ok)throw Error(data.error||"Не удалось обработать фото.");
  if(typeof data.image!=="string"||!data.image.startsWith("data:image/png;base64,"))throw Error("Сервис вернул неверное фото.");
  const image=new Image();image.src=data.image;await image.decode();photo.processed=data.image;photo.processingStatus="needs_review";
- current=await put({...current,photos});photos=structuredClone(current.photos);message("Белый фон готов. Сравните результат с оригиналом и нажмите «Принять фото».");
+ current=await put({...current,photos});photos=keepPhotoEdits(structuredClone(current.photos),photos);message("Белый фон готов. Сравните результат с оригиналом и нажмите «Принять фото».");
  }catch(e){message(e.message||"Ошибка обработки. Оригинал сохранён. Повторный запуск оплачивается отдельно.");}
  finally{busy=false;for(const id of ["save","newProduct","showList","photos","camera","export"])$(id).disabled=false;renderPhotos();}
 }
@@ -155,7 +162,7 @@ async function saveForm(submit){
  const product={...current,title:$("title").value.trim()||categoryTitle(),categoryId:$("category").value,price,currency:fields.currency,material,sizes:[...new Set([...chosen("sizes"),...split($("customSizes").value)])],colors:$("customColors").value.trim()?[$("customColors").value.trim()]:chosen("colors"),photos:structuredClone(photos),status:"draft",updatedAt:new Date().toISOString()};
  if($("entryMode").value==="batch")return saveBatch(product,submit);
  busy=true;$("save").disabled=true;$("saveDraft").disabled=true;renderPhotos();
- try{current=await put(product);photos=structuredClone(current.photos);$("entryMode").disabled=true;$("article").textContent=current.article;$("addColor").hidden=false;if(submit&&role!=="owner")current=(await api("transition",{id:current.id,revision:current.revision,status:"review"})).product;$("savedStatus").textContent=submit&&role!=="owner"?"Отправлено владельцу на проверку.":"Сохранено на сервере.";message("Сохранено. Товар доступен с другого устройства.");return true;}
+ try{current=await put(product);photos=keepPhotoEdits(structuredClone(current.photos),photos);$("entryMode").disabled=true;$("article").textContent=current.article;$("addColor").hidden=false;if(submit&&role!=="owner")current=(await api("transition",{id:current.id,revision:current.revision,status:"review"})).product;$("savedStatus").textContent=submit&&role!=="owner"?"Отправлено владельцу на проверку.":"Сохранено на сервере.";message("Сохранено. Товар доступен с другого устройства.");return true;}
  catch(e){message(e.message||"Не удалось сохранить на сервере.");return false;}
  finally{busy=false;$("save").disabled=false;$("saveDraft").disabled=false;renderPhotos();}
 }
