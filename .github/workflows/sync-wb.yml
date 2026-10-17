@@ -105,6 +105,9 @@ jobs:
           set net:timeout 30
           mirror --reverse --only-newer --parallel=1 --verbose public/media/ opt.luckysport.kz/media/
           put public/data/selected-review-media.json -o opt.luckysport.kz/data/selected-review-media.json
+          put public/warehouse/studio-domain.php -o opt.luckysport.kz/warehouse/studio-domain.php
+          put public/warehouse/process-studio.php -o opt.luckysport.kz/warehouse/process-studio.php
+          put public/warehouse/studio-ui.js -o opt.luckysport.kz/warehouse/studio-ui.js
           put public/data/catalog.json -o opt.luckysport.kz/data/catalog.json
           put public/warehouse/wb-pricing.php -o opt.luckysport.kz/warehouse/wb-pricing.php
           put public/warehouse/wb-existing.json -o opt.luckysport.kz/warehouse/wb-existing.json
@@ -125,3 +128,4 @@ jobs:
       - name: Deploy storefront
         id: deployment
         uses: actions/deploy-pages@v4
+

@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 require __DIR__ . '/storage.php';
+require_once __DIR__ . '/studio-domain.php';
 function stop(string $message, int $code = 400): void { warehouse_json(['error' => $message], $code); }
 $user = $_SERVER['REMOTE_USER'] ?? '';
 if ($user === '') stop('Нужен защищённый вход Plesk.', 403);
@@ -32,6 +33,10 @@ function present(array $product, array $state): array {
         $photo = $state['photos'][$id];
         return ['id' => $id, 'serverId' => $id, 'name' => $photo['name'], 'original' => $photo['original'] ? './api.php?action=photo&id=' . $id . '&kind=original' : null, 'processed' => $photo['processed'] ? './api.php?action=photo&id=' . $id . '&kind=processed' : null, 'processedVersion' => $photo['processed'] ? hash('sha256', $photo['processed']) : null, 'processingStatus' => $photo['approved'] ? 'approved' : ($photo['processed'] ? 'needs_review' : 'pending')];
     }, $product['photos']));
+    global $owner;
+    $product['studioResults'] = $owner ? array_values(array_map(function($id)use($state){$photo=$state['photos'][$id];return ['id'=>$id,'serverId'=>$id,'original'=>null,'processed'=>'./api.php?action=photo&id='.$id.'&kind=processed','processingStatus'=>'needs_review','studio'=>$photo['studio']??[]];}, array_values(array_filter($product['studioResults']??[],fn($id)=>isset($state['photos'][$id]))))) : [];
+    $product['studioPending']=$owner && count(array_filter($product['studioRequests']??[],fn($job)=>($job['status']??'')==='pending' && strtotime($job['at']??'')>time()-180))>0;
+    unset($product['studioRequests']);
     return $product;
 }
 try {
@@ -82,6 +87,12 @@ try {
     }
     if (strlen((string)file_get_contents('php://input')) > 65536) stop('Слишком большой запрос.');
     $input = json_decode((string)file_get_contents('php://input'), true);if (!is_array($input)) stop('Неверные данные.');
+    if ($action === 'studio-result') {
+        if (!$owner) stop('Фотостудия доступна только владельцу.', 403);
+        $garbage=warehouse_state(function(&$s)use($input){return studio_decide($s,$input);});
+        foreach($garbage as $file)@unlink(warehouse_photo_path($file));
+        warehouse_json(['ok'=>true]);
+    }
     if ($action === 'batch-save') {
         $batchId = clean_text($input['batchId'] ?? '', 80);
         if (!preg_match('/^[a-zA-Z0-9-]{10,80}$/D', $batchId)) stop('Неверная партия.');
@@ -142,6 +153,7 @@ try {
             $record = ['id' => $id, 'article' => $old['article'] ?? 'LW-' . strtoupper(substr(str_replace('-', '', $id), 0, 12)), 'owner' => $old['owner'] ?? $user, 'title' => clean_text($input['title'] ?? '', 540), 'categoryId' => $category, 'price' => (float)$price, 'currency' => $settings['currency'] ?? 'KZT', 'material' => clean_text($input['material'] ?? '', 240), 'sizes' => clean_list($input['sizes'] ?? []), 'colors' => clean_list($input['colors'] ?? []), 'photos' => array_values(array_unique($ids)), 'status' => $old && $old['status'] === 'published' ? 'review' : ($old['status'] ?? 'draft'), 'comment' => $old['comment'] ?? '', 'revision' => ($old['revision'] ?? 0) + 1, 'createdAt' => $old['createdAt'] ?? $old['updatedAt'] ?? gmdate('c'), 'updatedAt' => gmdate('c')];
             if ($record['title'] === '') stop('Название не сформировано.');
             $record['modelGroupId'] = $modelGroupId;
+            $record['studioResults']=$old['studioResults']??[];$record['studioRequests']=$old['studioRequests']??[];
             $s['products'][$id] = $record;return present($record, $s);
         });warehouse_json(['product' => $record]);
     }
@@ -186,3 +198,4 @@ try {
     stop('Неизвестное действие.', 404);
 } catch (DomainException $e) { stop($e->getMessage(), in_array($e->getCode(), [400, 404, 409], true) ? $e->getCode() : 400); }
 catch (Throwable $e) { stop('Ошибка хранилища. Проверьте права закрытой папки и конфигурацию PHP.', 503); }
+
