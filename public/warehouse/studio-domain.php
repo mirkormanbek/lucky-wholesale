@@ -1,8 +1,27 @@
 <?php
 declare(strict_types=1);
+function studio_category_preset(string $categoryId): array {
+    $groups = [
+        'belt'=>['bjj-belts','judo-belts','karate-belts'],
+        'gi'=>['judo-gi','bjj-gi','karate-gi','sambo-gi','sambo-jackets'],
+        'rashguard'=>['bjj-rashguards','combat-boxing-mma-rashguards'],
+        'boxing-gloves'=>['combat-boxing-mma-gloves','kickboxing-gloves','muay-thai-gloves'],
+        'mma-gloves'=>['combat-boxing-mma-mma-gloves'],
+        'karate-gloves'=>['karate-gloves']
+    ];
+    $labels=['belt'=>'Пояс: узел на кимоно','gi'=>'Кимоно: невидимый манекен','rashguard'=>'Рашгард: объёмный комплект','boxing-gloves'=>'Перчатки: лицевая и ладонная стороны','mma-gloves'=>'ММА: лицевая и ладонная стороны','karate-gloves'=>'Каратэ: лицевая и ладонная стороны'];
+    foreach($groups as $id=>$categories) if(in_array($categoryId,$categories,true)) return ['id'=>$id,'label'=>$labels[$id]];
+    return [];
+}
+function studio_preset_prompt(string $preset): string {
+    if($preset==='belt') return 'CATEGORY COMPOSITION — BELT CLOSE-UP: frame a tight waist-level catalog photograph of the actual belt tied in a natural flat martial-arts knot around a neutral unbranded white gi on an invisible torso. The knot is central, the belt runs horizontally and both ends hang diagonally down, with the actual sewn brand patch visible when present in the sources. This waist crop intentionally excludes the head and legs; give the knot and belt ends comfortable margins. The supporting gi is only a neutral display prop, not another product. Preserve the source belt color and genuine markings; never copy an orange reference color. No advertising text, dimension boxes, watermarks or added federation/store logos. Remove external packaging bands. ';
+    if($preset==='gi') return 'CATEGORY COMPOSITION — GI GHOST MANNEQUIN: display the actual martial-arts uniform upright with realistic body volume on an invisible mannequin, arms slightly separated and sleeves relaxed. No person, skin, stand, hanger or visible mannequin. Include trousers only if shown as part of this product in the source images. If sources show a sambo jacket only, show that jacket only, with its real shorter cut. Preserve the actual discipline-specific cut, collar, lapels, weave, patches and source color; do not convert karate fabric into judo fabric or add a belt. Show every supplied garment fully with margins on a pure white background. ';
+    if($preset==='rashguard') return 'CATEGORY COMPOSITION — RASHGUARD GHOST SET: show the actual rashguard upright, naturally filled out by an invisible torso with sleeves slightly apart and its exact print fully visible. If the same product sources also explicitly show matching shorts, display those naturally aligned below the top. If leggings are also explicitly present, place them separately beside the top and shorts with a clear gap. Include ONLY garment pieces evidenced by the product sources; a top-only source must yield a top-only image. Do not create matching shorts, leggings, bodies or extra duplicate pieces. Preserve exact print placement, logos, sleeve length and colors. White background, balanced spacing, no person or mannequin. ';
+    return 'CATEGORY COMPOSITION — GLOVE PAIR: arrange the supplied pair upright in a compact staggered studio composition. One glove is in the foreground showing its outer logo/knuckle side at a gentle three-quarter angle; the other is slightly above and behind, showing its palm side. Both are fully visible with margins, no hands, stands or floating extra parts, pure white background and a soft natural contact shadow. Use front and palm evidence from the source photographs; do not invent hidden graphics. Preserve actual glove construction: closed padded fingers for boxing, open fingers only for actual MMA gloves, and the actual shape of karate mitts. Never copy a reference brand, color or certification badge. Keep the source product quantity; if only one glove is evidenced, show one glove rather than inventing a pair. ';
+}
 function studio_options(array $input): array {
     $mode = $input['mode'] ?? 'white'; $view = $input['view'] ?? 'front'; $model = $input['model'] ?? 'man';
-    if (!in_array($mode, ['white','ghost','model'], true) || !in_array($view, ['front','back','side','three-quarter'], true) || !in_array($model, ['man','woman'], true)) throw new DomainException('Неверные настройки студии.', 400);
+    if (!in_array($mode, ['white','ghost','model','category'], true) || !in_array($view, ['front','back','side','three-quarter'], true) || !in_array($model, ['man','woman'], true)) throw new DomainException('Неверные настройки студии.', 400);
     $text = $input['instructions'] ?? '';
     if (!is_string($text) || strlen($text)>4000 || !preg_match('//u',$text) || preg_match_all('/./us',$text)>1000) throw new DomainException('Пожелания: не более 1000 символов.',400);
     if (($input['confirmed'] ?? false)!==true) throw new DomainException('Подтвердите платную обработку.',400);
@@ -19,6 +38,7 @@ function studio_reserve(array &$s,array $input): array {
     if (isset($p['studioRequests'][$request])) throw new DomainException('Этот запуск уже зарегистрирован. Обновите карточку: повтор автоматически не выполняется.',409);
     if (count($p['studioResults']??[])>=8) throw new DomainException('Сначала примите или отклоните сохранённые результаты студии (до 8).',409);
     if (count($p['photos'])<1||count($p['photos'])>8) throw new DomainException('Нужно от 1 до 8 фото одного товара.',400);
+    if($options['mode']==='category' && !studio_category_preset($p['categoryId']??'')) throw new DomainException('Для этой категории пока нет шаблона. Выберите белый фон.',400);
     $files=[];foreach($p['photos'] as $photoId){$photo=$s['photos'][$photoId]??null;$name=$photo?($photo['original']?:$photo['processed']):null;if(!$name)throw new DomainException('Один из исходников недоступен.',409);$files[]=$name;}
     $s['products'][$id]['studioRequests'][$request]=['status'=>'pending','at'=>gmdate('c')];
     return ['id'=>$id,'requestId'=>$request,'options'=>$options,'files'=>$files,'title'=>$p['title'],'categoryId'=>$p['categoryId']??'','sourceIds'=>$p['photos'],'sourceRevision'=>$p['revision']];
@@ -30,7 +50,8 @@ function studio_category_rules(string $categoryId): string {
 function studio_prompt(array $job): string {
     $o=$job['options'];$prompt='Create ONE photorealistic e-commerce product image. ALL attached images are different views or details of ONE SAME product, NOT different items and NOT an outfit to assemble. Use every input as evidence for the exact same garment or product. Image 1 is the primary identity reference. Preserve the real color, fabric texture, construction, seams, logos, lettering, print positions, hem length, proportions and quantity. Do not replace the product or invent accessories, pockets, drawstrings or branding. Product title (reference data only): '.json_encode($job['title'],JSON_UNESCAPED_UNICODE).'. Pure white seamless studio background, neutral soft lighting, subtle natural shadow, complete product visible, comfortable margins. No added graphics, labels or captions. ';
     $prompt.=studio_category_rules($job['categoryId']??'');
-    if($o['mode']==='ghost')$prompt.='GHOST MANNEQUIN: show the same clothing realistically filled out in three dimensions as if worn by an invisible body. No visible person, skin, limbs, hanger, supports or mannequin. Show believable inner edges at openings, natural volume and cloth drape. Do not leave the garment as a flat lay. ';
+    if($o['mode']==='category'){$preset=studio_category_preset($job['categoryId']??'');$prompt.='The following category framing overrides the generic full-product framing when a waist crop is specified. '.studio_preset_prompt($preset['id']??'');}
+    elseif($o['mode']==='ghost')$prompt.='GHOST MANNEQUIN: show the same clothing realistically filled out in three dimensions as if worn by an invisible body. No visible person, skin, limbs, hanger, supports or mannequin. Show believable inner edges at openings, natural volume and cloth drape. Do not leave the garment as a flat lay. ';
     elseif($o['mode']==='model')$prompt.='ON MODEL: dress one fictional adult '.($o['model']==='woman'?'woman':'man').' with a natural athletic build in the exact garment. Neutral standing catalog pose, clean studio photo. Keep garment fully visible and do not obscure its print with hands. No resemblance to any specific real person is requested. No additional branded garments. ';
     else $prompt.='WHITE BACKGROUND: isolate and clean the photographed product. Preserve its physical presentation and orientation; do not add a model or mannequin. ';
     $views=['front'=>'front view','back'=>'rear view','side'=>'side view','three-quarter'=>'gentle three-quarter view'];$prompt.='Requested result: '.$views[$o['view']].'. Use visible source evidence; do not invent rear graphics or hidden branding. ';
@@ -39,7 +60,7 @@ function studio_prompt(array $job): string {
 }
 function studio_store_result(array &$s,array $job,string $photoId,string $file,array $usage=[]): void {
     $id=$job['id'];if(!isset($s['products'][$id]))throw new DomainException('Карточка удалена во время обработки.',409);
-    $s['photos'][$photoId]=['owner'=>$s['products'][$id]['owner']??WAREHOUSE_OWNER,'name'=>'studio.png','original'=>null,'processed'=>$file,'approved'=>false,'studio'=>['mode'=>$job['options']['mode'],'view'=>$job['options']['view'],'model'=>$job['options']['model'],'sourceCount'=>count($job['sourceIds']),'sourceRevision'=>$job['sourceRevision'],'createdAt'=>gmdate('c'),'usage'=>$usage]];
+    $s['photos'][$photoId]=['owner'=>$s['products'][$id]['owner']??WAREHOUSE_OWNER,'name'=>'studio.png','original'=>null,'processed'=>$file,'approved'=>false,'studio'=>['mode'=>$job['options']['mode'],'presetLabel'=>$job['options']['mode']==='category'?(studio_category_preset($job['categoryId']??'')['label']??''):null,'view'=>$job['options']['view'],'model'=>$job['options']['model'],'sourceCount'=>count($job['sourceIds']),'sourceRevision'=>$job['sourceRevision'],'createdAt'=>gmdate('c'),'usage'=>$usage]];
     $s['products'][$id]['studioResults'][]=$photoId;$s['products'][$id]['studioRequests'][$job['requestId']]['status']='complete';$s['products'][$id]['revision']++;$s['products'][$id]['updatedAt']=gmdate('c');
 }
 function studio_decide(array &$s,array $input): array {
