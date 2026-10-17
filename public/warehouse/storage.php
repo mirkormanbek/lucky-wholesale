@@ -45,12 +45,12 @@ function warehouse_expire_trash(array &$state): array {
     $candidates = [];$now = time();
     foreach ($state['products'] as $id => $p) {
         if (($p['status'] ?? '') !== 'trashed' || empty($p['deleteAfter']) || strtotime($p['deleteAfter']) > $now) continue;
-        foreach ($p['photos'] as $photoId) $candidates[$photoId] = true;
+        foreach (array_merge($p['photos'], $p['studioResults'] ?? []) as $photoId) $candidates[$photoId] = true;
         unset($state['products'][$id]);
         foreach ($state['batches'] ?? [] as $key => $batch) if (in_array($id, $batch['ids'] ?? [], true)) unset($state['batches'][$key]);
     }
     $used = [];
-    foreach ($state['products'] as $p) foreach ($p['photos'] as $photoId) $used[$photoId] = true;
+    foreach ($state['products'] as $p) foreach (array_merge($p['photos'], $p['studioResults'] ?? []) as $photoId) $used[$photoId] = true;
     $files = [];
     foreach ($candidates as $photoId => $_) {
         if (isset($used[$photoId]) || !isset($state['photos'][$photoId])) continue;
@@ -63,3 +63,4 @@ function warehouse_expire_trash(array &$state): array {
     $retained = [];foreach ($state['photos'] as $photo) foreach (['original', 'processed'] as $kind) if (!empty($photo[$kind])) $retained[$photo[$kind]] = true;
     return array_values(array_filter(array_unique($files), fn($name) => !isset($retained[$name])));
 }
+

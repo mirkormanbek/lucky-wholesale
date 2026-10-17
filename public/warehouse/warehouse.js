@@ -1,3 +1,4 @@
+import {initPhotoStudio} from "./studio-ui.js?v=1";
 import {normaliseRotation,rotationRequest,rotatedPhotoSource,keepPhotoEdits} from "./photo-tools.js?v=2";
 let warehouseRecords=[];
 const $=id=>document.getElementById(id);
@@ -75,6 +76,7 @@ function renderPhotos(){
  if(role==="owner"&&fields.imageProcessingEnabled&&photo.original&&!photo.processed&&$("entryMode").value!=="batch"){const label=document.createElement("label"),instructions=document.createElement("textarea"),hint=document.createElement("small");figure.classList.add("processing-photo");const rotation=document.createElement("div");rotation.className="photo-rotation-controls";for(const [text,degrees]of [["↶ Влево 90°",-90],["Вправо 90° ↷",90],["Сбросить",0]]){const rotate=document.createElement("button");rotate.type="button";rotate.textContent=text;rotate.disabled=busy;rotate.addEventListener("click",()=>rotatePhotoInput(photo,degrees));rotation.append(rotate);}figure.append(rotation);label.textContent="Пожелания к обработке · необязательно";instructions.maxLength=1000;instructions.rows=3;instructions.placeholder="Например: убрать упаковку, оставить мягкую тень";instructions.value=photo.processingInstructions||"";instructions.disabled=busy;instructions.className="processing-instructions";instructions.addEventListener("input",()=>{photo.processingInstructions=instructions.value;});label.append(instructions);hint.textContent="Поворот — бесплатно, до ИИ. Положительные углы — по часовой стрелке. Поворот используется при следующей обработке. Пожелания — до 1000 символов; форма, цвета и логотипы сохраняются.";const process=document.createElement("button");process.type="button";process.disabled=busy;process.textContent="Обработать фон · платно";process.addEventListener("click",()=>processPhoto(photo));figure.append(label,hint,process);}
  figure.append(button);$("photoPreview").appendChild(figure);});
  entryMode();
+ photoStudio?.render();
 }
 async function rotatePhotoInput(photo,degrees){
  if(busy||photo.processed)return;busy=true;renderPhotos();
@@ -268,3 +270,22 @@ $("navWb").addEventListener("click",()=>$("wbProducts").click());
 $("navNew").addEventListener("click",()=>$("newProduct").click());
 new MutationObserver(syncCabinetView).observe($("workspace"),{attributes:true,subtree:true,attributeFilter:["hidden","disabled"]});
 syncCabinetView();
+
+async function saveForStudio(){
+ if(current?.revision&&current.status==="published"){
+  const pairs=[[$("category").value,current.categoryId],[$("title").value.trim()||categoryTitle(),current.title],[Number($("price").value),Number(current.price)],[$("customMaterial").value.trim()||$("material").value,current.material||""]];
+  const same=(a,b)=>JSON.stringify([...a].sort())===JSON.stringify([...b].sort());
+  if(pairs.some(([a,b])=>a!==b)||!same(photos.map(p=>p.serverId),current.photos.map(p=>p.serverId))||!same([...chosen("sizes"),...split($("customSizes").value)],current.sizes)||!same($("customColors").value.trim()?[$("customColors").value.trim()]:chosen("colors"),current.colors)){message("Сначала сохраните изменения карточки. Опубликованный товар вернётся на проверку.");return false;}
+  return true;
+ }
+ return await saveForm(false);
+}
+const studioDisabledSnapshot=new Map();
+const photoStudio=initPhotoStudio({
+ get:()=>({current,photos,role,busy,fields}),
+ save:saveForStudio,
+ busy:value=>{busy=value;if(value){for(const input of [...$("editor").querySelectorAll("button,input,select,textarea"),...["newProduct","showList","wbProducts","export"].map($)]){if(!studioDisabledSnapshot.has(input))studioDisabledSnapshot.set(input,input.disabled);input.disabled=true;}}else{for(const [input,disabled]of studioDisabledSnapshot)if(input.isConnected)input.disabled=disabled;studioDisabledSnapshot.clear();}renderPhotos();},
+ reload:async()=>{const id=current.id;edit((await all()).find(p=>p.id===id));},
+ api,open:openPhoto,message
+});
+
