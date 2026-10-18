@@ -15,7 +15,7 @@ try{
  if(!is_string($key)||strlen(trim($key))<20)throw new RuntimeException('Серверный ключ обработки фото не настроен.');
  $lock=@fopen($private.'/photo-processing-limit.json','c+');if(!$lock||!flock($lock,LOCK_EX|LOCK_NB))throw new DomainException('Обработка уже идёт. Дождитесь её окончания.',429);
  $job=warehouse_state(function(&$s)use($input){return studio_reserve($s,$input);});
- $fields=['model'=>'gpt-image-1.5','prompt'=>studio_prompt($job),'input_fidelity'=>'high','quality'=>'medium','size'=>'1024x1024','background'=>'opaque','output_format'=>'png','n'=>'1'];
+ $fields=['model'=>'gpt-image-1.5','prompt'=>studio_prompt($job),'input_fidelity'=>'high','quality'=>'medium','size'=>'1024x1536','background'=>'opaque','output_format'=>'png','n'=>'1'];
  $images=[];foreach($job['files'] as $i=>$name){$file=warehouse_photo_path($name);$mime=is_file($file)?(new finfo(FILEINFO_MIME_TYPE))->file($file):'';$dims=@getimagesize($file);
   if(!in_array($mime,['image/jpeg','image/png','image/webp'],true)||!$dims||filesize($file)>12*1024*1024||$dims[0]*$dims[1]>40000000)throw new DomainException('Один из исходников недоступен или превышает лимит фото.',400);
   $images[]=['path'=>$file,'mime'=>$mime];
