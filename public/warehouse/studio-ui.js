@@ -11,6 +11,7 @@ export function initPhotoStudio(context){
   const count=c.photos.length;const locked=running||c.busy||c.current.studioPending;
   $('studioSources').textContent='Исходников: '+count+'. Основной ракурс — первое фото. Если оригинал уже принят и удалён, используем сохранённое обработанное фото. Для нескольких вариантов сначала создайте их, затем заменяйте галерею.';
   $('studioSourceThumbs').replaceChildren();for(const photo of c.photos){const image=document.createElement('img');image.src=photo.original||photo.processed||'';image.alt='Исходник товара';$('studioSourceThumbs').append(image);}
+  $('studioGenerate').textContent='Создать: '+(mode==='category'?preset():modeNames[mode])+' · платно';
   $('studioEstimate').textContent=count?'Ориентир '+estimate(count)+' за кадр':'Сначала добавьте фото';
   $('studioModelField').hidden=mode!=='model';$('studioViewCheck').hidden=!['back','side'].includes($('studioView').value);
   $('photoStudio').querySelectorAll('button,input,select,textarea').forEach(e=>e.disabled=locked);
