@@ -128,6 +128,57 @@ function renderQuickCategories(){
 }
 
 
+
+const sportArtworkRules={
+ "judo":{type:"judo-gi",tone:"#e8edf7",mark:"柔"},
+ "bjj":{type:"bjj-gi",tone:"#e6efea",mark:"BJJ"},
+ "combat-boxing-mma":{type:"combat-boxing-mma-gloves",tone:"#f3e4df",mark:"BOX"},
+ "karate":{type:"karate-gi",tone:"#eee8f3",mark:"空"},
+ "kickboxing":{type:"kickboxing-gloves",tone:"#f3e9d8",mark:"KICK"},
+ "muay-thai":{type:"muay-thai-shorts",tone:"#e4edf0",mark:"THAI"},
+ "football":{type:"football-balls",tone:"#e5eddf",mark:"⚽"},
+ "basketball":{type:"basketball-balls",tone:"#f1e3d4",mark:"◉"},
+ "volleyball":{type:"volleyball-balls",tone:"#e3eafb",mark:"◉"},
+ "other":{tone:"#ecebe5",mark:"+"}
+};
+function syncSportsDiscoveryArrows(){
+ const rail=document.querySelector("#sportsDiscoveryRail");
+ if(!rail)return;
+ const max=rail.scrollWidth-rail.clientWidth;
+ document.querySelector("#sportsDiscoveryPrev").disabled=rail.scrollLeft<=6;
+ document.querySelector("#sportsDiscoveryNext").disabled=rail.scrollLeft>=max-6;
+}
+function renderSportsDiscovery(){
+ const section=document.querySelector("#sportsDiscovery"),rail=document.querySelector("#sportsDiscoveryRail");
+ if(!section||!rail)return;
+ const directions=buyerDirections().filter(c=>productCountForCategory(c.id)>0);
+ section.hidden=!directions.length;
+ const left=rail.scrollLeft;rail.replaceChildren();
+ for(const c of directions){
+  const art=sportArtworkRules[c.id]||{tone:"#e8ebe4",mark:"↗"};
+  const ids=descendants(c.id);
+  const candidates=state.products.filter(p=>p.photos?.[0]&&(p.categoryIds||[]).some(id=>ids.has(id)));
+  const product=candidates.find(p=>art.type&&(p.categoryIds||[]).includes(art.type))||candidates[0];
+  const link=document.createElement("a");link.className="sport-discovery-card";link.style.setProperty("--sport-tone",art.tone);
+  const url=new URL(location.href);url.searchParams.set("category",c.id);url.hash="catalog";link.href=url.pathname+url.search+url.hash;
+  const selected=selectedDirection()?.id===c.id;if(selected)link.setAttribute("aria-current","true");
+  const copy=document.createElement("span");copy.className="sport-discovery-copy";
+  const title=document.createElement("strong");title.textContent=directionLabel(c);
+  const count=document.createElement("span"),n=productCountForCategory(c.id),last=n%10,lastTwo=n%100;
+  count.textContent=n+" "+(last===1&&lastTwo!==11?"товар":last>=2&&last<=4&&(lastTwo<12||lastTwo>14)?"товара":"товаров");
+  const arrow=document.createElement("span");arrow.className="sport-discovery-arrow";arrow.setAttribute("aria-hidden","true");arrow.textContent="↗";
+  const fallback=document.createElement("span");fallback.className="sport-discovery-mark";fallback.setAttribute("aria-hidden","true");fallback.textContent=art.mark;
+  copy.append(title,count);link.append(copy,fallback,arrow);
+  if(product){const image=document.createElement("img");image.alt="";image.loading="lazy";image.decoding="async";image.addEventListener("load",()=>{fallback.hidden=true;image.classList.add("ready");});image.addEventListener("error",()=>{image.hidden=true;fallback.hidden=false;});image.src=product.photos[0];link.append(image);}
+  link.addEventListener("click",event=>{
+   if(event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
+   event.preventDefault();state.query="";el.searchInput.value="";selectCategory(c.id);
+  });
+  rail.append(link);
+ }
+ rail.scrollLeft=left;requestAnimationFrame(syncSportsDiscoveryArrows);
+}
+
 function renderCard(product){
   const f=el.template.content.cloneNode(true),card=f.querySelector(".product-card"),imageButton=f.querySelector(".product-image-button"),img=f.querySelector(".product-image"),ph=f.querySelector(".image-placeholder"),brand=f.querySelector(".product-brand"),title=f.querySelector(".product-title"),article=f.querySelector(".product-article"),price=f.querySelector(".product-price"),priceWrap=f.querySelector(".price-wrap"),add=f.querySelector(".add-button"),addLabel=f.querySelector(".add-label"),addIcon=f.querySelector(".add-icon");
   const photo=product.photos?.[0];
@@ -275,7 +326,7 @@ function renderShowcase(){
   bind(first,el.showcaseCardOne,el.showcaseImageOne,el.showcaseTitleOne,el.showcaseBrandOne);
   bind(second,el.showcaseCardTwo,el.showcaseImageTwo,el.showcaseTitleTwo,el.showcaseBrandTwo);
 }
-function render(){renderCategories();renderQuickCategories();renderProducts();saveRequest()}
+function render(){renderSportsDiscovery();renderCategories();renderQuickCategories();renderProducts();saveRequest()}
 
 function additionalProductCategory(text,ids){
  const within=root=>ids.some(id=>id===root||id.startsWith(root+"-"));
@@ -373,3 +424,8 @@ if(reviewMediaDialog){
  reviewMediaDialog.addEventListener('click',event=>{if(event.target===reviewMediaDialog){const r=reviewMediaDialog.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)reviewMediaDialog.close();}});
  fetch('./data/selected-review-media.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(data=>{for(const item of data?.reviews||[]){if(!item.matched)continue;const card=[...document.querySelectorAll('[data-review-key]')].find(c=>c.dataset.reviewKey===item.key);if(!card)continue;const rail=document.createElement('div');rail.className='review-thumbnails';let index=0;for(const value of item.photos||[]){const src=localReviewAsset(value);if(!src)continue;const button=document.createElement('button');button.type='button';button.className='review-thumbnail';button.setAttribute('aria-label','Открыть фото '+(++index)+' к отзыву '+card.querySelector('footer strong').textContent);const image=document.createElement('img');image.src=src;image.alt='Фото покупателя';image.loading='lazy';button.append(image);button.addEventListener('click',()=>openReviewMedia(src,false,button));rail.append(button);}const video=localReviewAsset(item.video,true);if(video){const button=document.createElement('button');button.type='button';button.className='review-thumbnail';button.setAttribute('aria-label','Смотреть видео к отзыву '+card.querySelector('footer strong').textContent);const poster=localReviewAsset(item.photos?.[0]);if(poster){const image=document.createElement('img');image.src=poster;image.alt='';image.loading='lazy';button.append(image);}const label=document.createElement('span');label.className='review-video-label';label.textContent='▶ Видео';button.append(label);button.addEventListener('click',()=>openReviewMedia(video,true,button));rail.append(button);}if(rail.childElementCount)card.insertBefore(rail,card.querySelector('footer'));if(Number.isSafeInteger(item.nmId)&&item.nmId>0){const link=document.createElement('a');link.className='review-product-link';link.href='https://www.wildberries.ru/catalog/'+item.nmId+'/detail.aspx';link.target='_blank';link.rel='noopener noreferrer';link.textContent='Товар на Вайлдберриз ↗';card.querySelector('footer').append(link);}}}).catch(()=>{});
 }
+
+document.querySelector("#sportsDiscoveryAll").addEventListener("click",openSportPicker);
+for(const [id,sign] of [["sportsDiscoveryPrev",-1],["sportsDiscoveryNext",1]])document.querySelector("#"+id).addEventListener("click",()=>{const rail=document.querySelector("#sportsDiscoveryRail");rail.scrollBy({left:sign*Math.max(240,rail.clientWidth*.8),behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth"});});
+document.querySelector("#sportsDiscoveryRail").addEventListener("scroll",syncSportsDiscoveryArrows,{passive:true});
+window.addEventListener("resize",syncSportsDiscoveryArrows);
