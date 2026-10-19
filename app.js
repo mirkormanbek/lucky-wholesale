@@ -130,16 +130,46 @@ function renderQuickCategories(){
 
 
 const sportArtworkRules={
- "judo":{type:"judo-gi",tone:"#e8edf7",mark:"柔"},
- "bjj":{type:"bjj-gi",tone:"#e6efea",mark:"BJJ"},
- "combat-boxing-mma":{type:"combat-boxing-mma-gloves",tone:"#f3e4df",mark:"BOX"},
- "karate":{type:"karate-gi",tone:"#eee8f3",mark:"空"},
- "kickboxing":{type:"kickboxing-gloves",tone:"#f3e9d8",mark:"KICK"},
- "muay-thai":{type:"muay-thai-shorts",tone:"#e4edf0",mark:"THAI"},
- "football":{type:"football-balls",tone:"#e5eddf",mark:"⚽"},
- "basketball":{type:"basketball-balls",tone:"#f1e3d4",mark:"◉"},
- "volleyball":{type:"volleyball-balls",tone:"#e3eafb",mark:"◉"},
- "other":{tone:"#ecebe5",mark:"+"}
+  "judo": {
+    "image": "./images/sports/judo.png",
+    "mark": "↗"
+  },
+  "bjj": {
+    "image": "./images/sports/bjj.png",
+    "mark": "↗"
+  },
+  "combat-boxing-mma": {
+    "image": "./images/sports/boxing-mma.png",
+    "mark": "↗"
+  },
+  "karate": {
+    "image": "./images/sports/karate.png",
+    "mark": "↗"
+  },
+  "kickboxing": {
+    "image": "./images/sports/kickboxing.png",
+    "mark": "↗"
+  },
+  "muay-thai": {
+    "image": "./images/sports/muay-thai.png",
+    "mark": "↗"
+  },
+  "football": {
+    "image": "./images/sports/football.png",
+    "mark": "↗"
+  },
+  "basketball": {
+    "image": "./images/sports/basketball.png",
+    "mark": "↗"
+  },
+  "volleyball": {
+    "image": "./images/sports/volleyball.png",
+    "mark": "↗"
+  },
+  "other": {
+    "image": "./images/sports/other.png",
+    "mark": "↗"
+  }
 };
 function syncSportsDiscoveryArrows(){
  const rail=document.querySelector("#sportsDiscoveryRail");
@@ -155,11 +185,8 @@ function renderSportsDiscovery(){
  section.hidden=!directions.length;
  const left=rail.scrollLeft;rail.replaceChildren();
  for(const c of directions){
-  const art=sportArtworkRules[c.id]||{tone:"#e8ebe4",mark:"↗"};
-  const ids=descendants(c.id);
-  const candidates=state.products.filter(p=>p.photos?.[0]&&(p.categoryIds||[]).some(id=>ids.has(id)));
-  const product=candidates.find(p=>art.type&&(p.categoryIds||[]).includes(art.type))||candidates[0];
-  const link=document.createElement("a");link.className="sport-discovery-card";link.style.setProperty("--sport-tone",art.tone);
+  const art=sportArtworkRules[c.id]||{image:"./images/sports/other.png",mark:"↗"};
+  const link=document.createElement("a");link.className="sport-discovery-card";
   const url=new URL(location.href);url.searchParams.set("category",c.id);url.hash="catalog";link.href=url.pathname+url.search+url.hash;
   const selected=selectedDirection()?.id===c.id;if(selected)link.setAttribute("aria-current","true");
   const copy=document.createElement("span");copy.className="sport-discovery-copy";
@@ -169,7 +196,7 @@ function renderSportsDiscovery(){
   const arrow=document.createElement("span");arrow.className="sport-discovery-arrow";arrow.setAttribute("aria-hidden","true");arrow.textContent="↗";
   const fallback=document.createElement("span");fallback.className="sport-discovery-mark";fallback.setAttribute("aria-hidden","true");fallback.textContent=art.mark;
   copy.append(title,count);link.append(copy,fallback,arrow);
-  if(product){const image=document.createElement("img");image.alt="";image.loading="lazy";image.decoding="async";image.addEventListener("load",()=>{fallback.hidden=true;image.classList.add("ready");});image.addEventListener("error",()=>{image.hidden=true;fallback.hidden=false;});image.src=product.photos[0];link.append(image);}
+  if(art.image){const image=document.createElement("img");image.alt="";image.loading="lazy";image.decoding="async";image.addEventListener("load",()=>{fallback.hidden=true;image.classList.add("ready");});image.addEventListener("error",()=>{image.hidden=true;fallback.hidden=false;});image.width=384;image.height=384;image.src=art.image;link.append(image);}
   link.addEventListener("click",event=>{
    if(event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
    event.preventDefault();state.query="";el.searchInput.value="";selectCategory(c.id);
