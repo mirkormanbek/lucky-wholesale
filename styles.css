@@ -1062,3 +1062,5 @@ main{background:var(--dark-bg)}
 .sport-discovery-card img{width:51%;height:88%;right:2px;bottom:4px;background:transparent;border-radius:0;object-fit:contain;object-position:center;mix-blend-mode:normal;filter:drop-shadow(0 5px 6px #0003)}
 .sport-discovery-copy{width:51%;padding-right:4px}.sport-discovery-card img.ready{opacity:1}
 @media(max-width:640px){.sport-discovery-card img{width:49%;height:86%;right:1px;bottom:4px}}
+
+.catalog-browse-modes{display:flex;gap:8px;margin:18px 0 12px}.catalog-browse-modes button{min-height:42px;padding:10px 16px;border:1px solid #3c483a;border-radius:9px;background:#141d16;color:#b8c3b2;font-size:13px;font-weight:750}.catalog-browse-modes button[aria-pressed=true]{background:#b7de2c;color:#17200f;border-color:#b7de2c}.catalog-browse-modes button:focus-visible{outline:2px solid #b7de2c;outline-offset:3px}.product-type-rail{margin-bottom:14px}.sport-navigation[hidden],.product-type-rail[hidden],.compact-filters .touch-select[hidden]{display:none}.product-type-rail .sport-tab{white-space:nowrap}@media(max-width:640px){.catalog-browse-modes{gap:6px}.catalog-browse-modes button{flex:1;padding:10px 8px;font-size:12px}}
