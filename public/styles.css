@@ -1057,3 +1057,8 @@ main{background:var(--dark-bg)}
 .sport-discovery-card[aria-current=true]:hover{border-color:#b7de2c}
 .sports-discovery-hint{color:#8b9886;margin-top:2px;font-size:11px}
 @media(max-width:640px){.sports-discovery{padding:24px 16px 4px}.sports-discovery-head{margin-bottom:14px}.sports-discovery-head h2{font-size:26px}.sports-discovery-controls button:first-child{font-size:11px;max-width:none}.sport-discovery-card{flex-basis:206px;min-height:140px;border-radius:10px}.sport-discovery-copy{padding:16px 0 45px 13px}.sport-discovery-copy strong{font-size:16px}.sport-discovery-arrow{left:13px;bottom:12px}.sport-discovery-card img{right:8px;bottom:10px;width:43%;height:74%}}
+
+/* Dedicated transparent sport illustrations, without product-photo panels. */
+.sport-discovery-card img{width:51%;height:88%;right:2px;bottom:4px;background:transparent;border-radius:0;object-fit:contain;object-position:center;mix-blend-mode:normal;filter:drop-shadow(0 5px 6px #0003)}
+.sport-discovery-copy{width:51%;padding-right:4px}.sport-discovery-card img.ready{opacity:1}
+@media(max-width:640px){.sport-discovery-card img{width:49%;height:86%;right:1px;bottom:4px}}
