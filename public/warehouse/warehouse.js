@@ -1,4 +1,4 @@
-import {initPhotoStudio} from "./studio-ui.js?v=4";
+import {initPhotoStudio} from "./studio-ui.js?v=5";
 import {normaliseRotation,rotationRequest,rotatedPhotoSource,keepPhotoEdits} from "./photo-tools.js?v=2";
 let warehouseRecords=[];
 const $=id=>document.getElementById(id);
@@ -54,7 +54,7 @@ function typeOptions(selected=""){
 function sportOptions(){
  const active=categories.filter(c=>c.active!==false),parents=new Set(active.map(c=>c.parentId));
  $("sport").replaceChildren();const blank=document.createElement("option");blank.value="";blank.textContent="Выберите вид спорта";$("sport").appendChild(blank);
- const order=["combat-boxing-mma","judo","bjj","karate","football","basketball","volleyball","other"];
+ const order=["combat-boxing-mma","mma","kickboxing","muay-thai","judo","bjj","karate","sambo","wrestling","football","basketball","volleyball","fitness","gym-equipment","other"];
  for(const c of active.filter(c=>parents.has(c.id)&&c.id!=="combat").sort((a,b)=>(order.indexOf(a.id)<0?99:order.indexOf(a.id))-(order.indexOf(b.id)<0?99:order.indexOf(b.id)))){const option=document.createElement("option");option.value=c.id;option.textContent=c.name.replace(/BJJ\s*\/\s*Джиу-джитсу/i,"Джиу-джитсу").replace(/MMA/g,"ММА");$("sport").appendChild(option);}typeOptions();
 }
 

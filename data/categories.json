@@ -5,7 +5,8 @@
     "slug": "volleyball-balls",
     "parentId": "volleyball",
     "sort": 5,
-    "active": true
+    "active": true,
+    "productTypeId": "balls"
   },
   {
     "id": "combat",
@@ -17,7 +18,7 @@
   },
   {
     "id": "combat-boxing-mma",
-    "name": "Бокс / ММА",
+    "name": "Бокс",
     "slug": "boks-mma",
     "parentId": "combat",
     "sort": 10,
@@ -29,7 +30,8 @@
     "slug": "perchatki",
     "parentId": "combat-boxing-mma",
     "sort": 10,
-    "active": true
+    "active": true,
+    "productTypeId": "gloves"
   },
   {
     "id": "judo-gi",
@@ -37,7 +39,8 @@
     "slug": "kimono",
     "parentId": "judo",
     "sort": 10,
-    "active": true
+    "active": true,
+    "productTypeId": "uniforms"
   },
   {
     "id": "bjj-gi",
@@ -45,15 +48,17 @@
     "slug": "kimono",
     "parentId": "bjj",
     "sort": 10,
-    "active": true
+    "active": true,
+    "productTypeId": "uniforms"
   },
   {
     "id": "karate-gloves",
-    "name": "Перчатки",
+    "name": "Накладки на руки",
     "slug": "perchatki",
     "parentId": "karate",
     "sort": 10,
-    "active": true
+    "active": true,
+    "productTypeId": "gloves"
   },
   {
     "id": "football-balls",
@@ -61,7 +66,8 @@
     "slug": "myachi",
     "parentId": "football",
     "sort": 10,
-    "active": true
+    "active": true,
+    "productTypeId": "balls"
   },
   {
     "id": "basketball-balls",
@@ -69,7 +75,8 @@
     "slug": "myachi",
     "parentId": "basketball",
     "sort": 10,
-    "active": true
+    "active": true,
+    "productTypeId": "balls"
   },
   {
     "id": "volleyball-nets",
@@ -77,7 +84,8 @@
     "slug": "setki",
     "parentId": "volleyball",
     "sort": 10,
-    "active": true
+    "active": true,
+    "productTypeId": "accessories"
   },
   {
     "id": "other-accessories",
@@ -85,7 +93,8 @@
     "slug": "aksessuary",
     "parentId": "other",
     "sort": 10,
-    "active": true
+    "active": true,
+    "productTypeId": "accessories"
   },
   {
     "id": "kickboxing-gloves",
@@ -93,7 +102,8 @@
     "slug": "kickboxing-gloves",
     "parentId": "kickboxing",
     "sort": 10,
-    "active": true
+    "active": true,
+    "productTypeId": "gloves"
   },
   {
     "id": "muay-thai-gloves",
@@ -101,23 +111,34 @@
     "slug": "muay-thai-gloves",
     "parentId": "muay-thai",
     "sort": 10,
-    "active": true
+    "active": true,
+    "productTypeId": "gloves"
   },
   {
     "id": "combat-boxing-mma-mma-gloves",
-    "name": "Черепашки / перчатки ММА",
+    "name": "Перчатки ММА",
     "slug": "combat-boxing-mma-mma-gloves",
-    "parentId": "combat-boxing-mma",
+    "parentId": "mma",
+    "sort": 15,
+    "active": true,
+    "productTypeId": "gloves"
+  },
+  {
+    "id": "mma",
+    "name": "ММА",
+    "slug": "mma",
+    "parentId": "combat",
     "sort": 15,
     "active": true
   },
   {
     "id": "combat-boxing-mma-helmets",
-    "name": "Шлем",
+    "name": "Шлемы",
     "slug": "shlem",
     "parentId": "combat-boxing-mma",
     "sort": 20,
-    "active": true
+    "active": true,
+    "productTypeId": "protection"
   },
   {
     "id": "judo",
@@ -129,11 +150,12 @@
   },
   {
     "id": "judo-belts",
-    "name": "Пояс",
+    "name": "Пояса",
     "slug": "poyas",
     "parentId": "judo",
     "sort": 20,
-    "active": true
+    "active": true,
+    "productTypeId": "belts"
   },
   {
     "id": "karate-helmets",
@@ -141,7 +163,8 @@
     "slug": "shlem",
     "parentId": "karate",
     "sort": 20,
-    "active": true
+    "active": true,
+    "productTypeId": "protection"
   },
   {
     "id": "football",
@@ -157,7 +180,8 @@
     "slug": "butsy",
     "parentId": "football",
     "sort": 20,
-    "active": true
+    "active": true,
+    "productTypeId": "shoes"
   },
   {
     "id": "volleyball-protection",
@@ -165,15 +189,17 @@
     "slug": "zashchita",
     "parentId": "volleyball",
     "sort": 20,
-    "active": true
+    "active": true,
+    "productTypeId": "protection"
   },
   {
     "id": "other-nets",
     "name": "Сетки",
     "slug": "setki",
-    "parentId": "other",
+    "parentId": "gym-equipment",
     "sort": 20,
-    "active": true
+    "active": true,
+    "productTypeId": "equipment"
   },
   {
     "id": "bjj-belts",
@@ -181,7 +207,8 @@
     "slug": "bjj-belts",
     "parentId": "bjj",
     "sort": 20,
-    "active": true
+    "active": true,
+    "productTypeId": "belts"
   },
   {
     "id": "kickboxing-shinguards",
@@ -189,7 +216,8 @@
     "slug": "kickboxing-shinguards",
     "parentId": "kickboxing",
     "sort": 20,
-    "active": true
+    "active": true,
+    "productTypeId": "protection"
   },
   {
     "id": "muay-thai-shinguards",
@@ -197,7 +225,8 @@
     "slug": "muay-thai-shinguards",
     "parentId": "muay-thai",
     "sort": 20,
-    "active": true
+    "active": true,
+    "productTypeId": "protection"
   },
   {
     "id": "basketball-hoops",
@@ -205,7 +234,8 @@
     "slug": "basketball-hoops",
     "parentId": "basketball",
     "sort": 20,
-    "active": true
+    "active": true,
+    "productTypeId": "accessories"
   },
   {
     "id": "football-futsal-shoes",
@@ -213,7 +243,8 @@
     "slug": "football-futsal-shoes",
     "parentId": "football",
     "sort": 25,
-    "active": true
+    "active": true,
+    "productTypeId": "shoes"
   },
   {
     "id": "volleyball-kneepads",
@@ -221,19 +252,21 @@
     "slug": "volleyball-kneepads",
     "parentId": "volleyball",
     "sort": 25,
-    "active": true
+    "active": true,
+    "productTypeId": "protection"
   },
   {
     "id": "combat-boxing-mma-shinguards",
     "name": "Щитки",
     "slug": "shitki",
-    "parentId": "combat-boxing-mma",
+    "parentId": "mma",
     "sort": 30,
-    "active": true
+    "active": true,
+    "productTypeId": "protection"
   },
   {
     "id": "bjj",
-    "name": "BJJ / Джиу-джитсу",
+    "name": "Джиу-джитсу / BJJ",
     "slug": "bjj",
     "parentId": "combat",
     "sort": 30,
@@ -241,11 +274,12 @@
   },
   {
     "id": "karate-chest-protection",
-    "name": "Защита груди",
+    "name": "Защита корпуса",
     "slug": "zashchita-grudi",
     "parentId": "karate",
     "sort": 30,
-    "active": true
+    "active": true,
+    "productTypeId": "protection"
   },
   {
     "id": "basketball",
@@ -261,7 +295,8 @@
     "slug": "sumki-ryukzaki",
     "parentId": "other",
     "sort": 30,
-    "active": true
+    "active": true,
+    "productTypeId": "accessories"
   },
   {
     "id": "bjj-rashguards",
@@ -269,7 +304,8 @@
     "slug": "bjj-rashguards",
     "parentId": "bjj",
     "sort": 30,
-    "active": true
+    "active": true,
+    "productTypeId": "rashguards"
   },
   {
     "id": "kickboxing-shorts",
@@ -277,7 +313,8 @@
     "slug": "kickboxing-shorts",
     "parentId": "kickboxing",
     "sort": 30,
-    "active": true
+    "active": true,
+    "productTypeId": "bottoms"
   },
   {
     "id": "muay-thai-shorts",
@@ -285,7 +322,8 @@
     "slug": "muay-thai-shorts",
     "parentId": "muay-thai",
     "sort": 30,
-    "active": true
+    "active": true,
+    "productTypeId": "bottoms"
   },
   {
     "id": "judo-kneepads",
@@ -293,7 +331,8 @@
     "slug": "judo-kneepads",
     "parentId": "judo",
     "sort": 30,
-    "active": true
+    "active": true,
+    "productTypeId": "protection"
   },
   {
     "id": "football-goalkeeper-gloves",
@@ -301,7 +340,8 @@
     "slug": "football-goalkeeper-gloves",
     "parentId": "football",
     "sort": 30,
-    "active": true
+    "active": true,
+    "productTypeId": "gloves"
   },
   {
     "id": "basketball-uniform",
@@ -309,7 +349,8 @@
     "slug": "basketball-uniform",
     "parentId": "basketball",
     "sort": 30,
-    "active": true
+    "active": true,
+    "productTypeId": "uniforms"
   },
   {
     "id": "volleyball-uniform",
@@ -317,7 +358,17 @@
     "slug": "volleyball-uniform",
     "parentId": "volleyball",
     "sort": 30,
-    "active": true
+    "active": true,
+    "productTypeId": "uniforms"
+  },
+  {
+    "id": "kickboxing-pants",
+    "name": "Штаны",
+    "slug": "kickboxing-pants",
+    "parentId": "kickboxing",
+    "sort": 35,
+    "active": true,
+    "productTypeId": "bottoms"
   },
   {
     "id": "combat-boxing-mma-mitts",
@@ -325,11 +376,12 @@
     "slug": "lapy",
     "parentId": "combat-boxing-mma",
     "sort": 40,
-    "active": true
+    "active": true,
+    "productTypeId": "pads"
   },
   {
     "id": "karate",
-    "name": "Каратэ / Киокушинкай",
+    "name": "Карате",
     "slug": "karate-kyokushin",
     "parentId": "combat",
     "sort": 40,
@@ -341,7 +393,8 @@
     "slug": "kimono",
     "parentId": "karate",
     "sort": 40,
-    "active": true
+    "active": true,
+    "productTypeId": "uniforms"
   },
   {
     "id": "volleyball",
@@ -355,9 +408,10 @@
     "id": "other-workout",
     "name": "Воркаут",
     "slug": "workout",
-    "parentId": "other",
+    "parentId": "fitness",
     "sort": 40,
-    "active": true
+    "active": true,
+    "productTypeId": "fitness"
   },
   {
     "id": "bjj-shorts",
@@ -365,7 +419,8 @@
     "slug": "bjj-shorts",
     "parentId": "bjj",
     "sort": 40,
-    "active": true
+    "active": true,
+    "productTypeId": "bottoms"
   },
   {
     "id": "kickboxing-pads",
@@ -373,7 +428,8 @@
     "slug": "kickboxing-pads",
     "parentId": "kickboxing",
     "sort": 40,
-    "active": true
+    "active": true,
+    "productTypeId": "pads"
   },
   {
     "id": "muay-thai-pads",
@@ -381,7 +437,8 @@
     "slug": "muay-thai-pads",
     "parentId": "muay-thai",
     "sort": 40,
-    "active": true
+    "active": true,
+    "productTypeId": "pads"
   },
   {
     "id": "judo-tape",
@@ -389,7 +446,8 @@
     "slug": "judo-tape",
     "parentId": "judo",
     "sort": 40,
-    "active": true
+    "active": true,
+    "productTypeId": "accessories"
   },
   {
     "id": "football-shinguards",
@@ -397,7 +455,8 @@
     "slug": "football-shinguards",
     "parentId": "football",
     "sort": 40,
-    "active": true
+    "active": true,
+    "productTypeId": "protection"
   },
   {
     "id": "basketball-shoes",
@@ -405,7 +464,8 @@
     "slug": "basketball-shoes",
     "parentId": "basketball",
     "sort": 40,
-    "active": true
+    "active": true,
+    "productTypeId": "shoes"
   },
   {
     "id": "volleyball-shoes",
@@ -413,7 +473,8 @@
     "slug": "volleyball-shoes",
     "parentId": "volleyball",
     "sort": 40,
-    "active": true
+    "active": true,
+    "productTypeId": "shoes"
   },
   {
     "id": "combat-boxing-mma-pads",
@@ -421,7 +482,8 @@
     "slug": "combat-boxing-mma-pads",
     "parentId": "combat-boxing-mma",
     "sort": 45,
-    "active": true
+    "active": true,
+    "productTypeId": "pads"
   },
   {
     "id": "combat-boxing-mma-wraps",
@@ -429,11 +491,12 @@
     "slug": "binty",
     "parentId": "combat-boxing-mma",
     "sort": 50,
-    "active": true
+    "active": true,
+    "productTypeId": "protection"
   },
   {
     "id": "other",
-    "name": "Другое",
+    "name": "Аксессуары",
     "slug": "drugoe",
     "parentId": null,
     "sort": 50,
@@ -445,7 +508,8 @@
     "slug": "bjj-spats",
     "parentId": "bjj",
     "sort": 50,
-    "active": true
+    "active": true,
+    "productTypeId": "bottoms"
   },
   {
     "id": "karate-belts",
@@ -453,7 +517,8 @@
     "slug": "karate-belts",
     "parentId": "karate",
     "sort": 50,
-    "active": true
+    "active": true,
+    "productTypeId": "belts"
   },
   {
     "id": "kickboxing",
@@ -469,7 +534,8 @@
     "slug": "kickboxing-wraps",
     "parentId": "kickboxing",
     "sort": 50,
-    "active": true
+    "active": true,
+    "productTypeId": "protection"
   },
   {
     "id": "muay-thai-wraps",
@@ -477,7 +543,8 @@
     "slug": "muay-thai-wraps",
     "parentId": "muay-thai",
     "sort": 50,
-    "active": true
+    "active": true,
+    "productTypeId": "protection"
   },
   {
     "id": "football-socks",
@@ -485,7 +552,8 @@
     "slug": "football-socks",
     "parentId": "football",
     "sort": 50,
-    "active": true
+    "active": true,
+    "productTypeId": "accessories"
   },
   {
     "id": "other-pumps",
@@ -493,7 +561,242 @@
     "slug": "other-pumps",
     "parentId": "other",
     "sort": 50,
-    "active": true
+    "active": true,
+    "productTypeId": "accessories"
+  },
+  {
+    "id": "boxing-shorts",
+    "name": "Форма и шорты",
+    "slug": "boxing-shorts",
+    "parentId": "combat-boxing-mma",
+    "sort": 50,
+    "active": true,
+    "productTypeId": "bottoms"
+  },
+  {
+    "id": "boxing-protection",
+    "name": "Защита",
+    "slug": "boxing-protection",
+    "parentId": "combat-boxing-mma",
+    "sort": 50,
+    "active": true,
+    "productTypeId": "protection"
+  },
+  {
+    "id": "mma-sparring-gloves",
+    "name": "Спарринговые перчатки ММА",
+    "slug": "mma-sparring-gloves",
+    "parentId": "mma",
+    "sort": 50,
+    "active": true,
+    "productTypeId": "gloves"
+  },
+  {
+    "id": "mma-spats",
+    "name": "Компрессионные штаны",
+    "slug": "mma-spats",
+    "parentId": "mma",
+    "sort": 50,
+    "active": true,
+    "productTypeId": "bottoms"
+  },
+  {
+    "id": "mma-shinguards",
+    "name": "Щитки",
+    "slug": "mma-shinguards",
+    "parentId": "mma",
+    "sort": 50,
+    "active": true,
+    "productTypeId": "protection"
+  },
+  {
+    "id": "mma-mouthguards",
+    "name": "Капы",
+    "slug": "mma-mouthguards",
+    "parentId": "mma",
+    "sort": 50,
+    "active": true,
+    "productTypeId": "protection"
+  },
+  {
+    "id": "mma-groin",
+    "name": "Защита паха",
+    "slug": "mma-groin",
+    "parentId": "mma",
+    "sort": 50,
+    "active": true,
+    "productTypeId": "protection"
+  },
+  {
+    "id": "mma-helmets",
+    "name": "Шлемы",
+    "slug": "mma-helmets",
+    "parentId": "mma",
+    "sort": 50,
+    "active": true,
+    "productTypeId": "protection"
+  },
+  {
+    "id": "mma-wraps",
+    "name": "Бинты",
+    "slug": "mma-wraps",
+    "parentId": "mma",
+    "sort": 50,
+    "active": true,
+    "productTypeId": "protection"
+  },
+  {
+    "id": "kickboxing-feet",
+    "name": "Футы",
+    "slug": "kickboxing-feet",
+    "parentId": "kickboxing",
+    "sort": 50,
+    "active": true,
+    "productTypeId": "protection"
+  },
+  {
+    "id": "kickboxing-elbowguards",
+    "name": "Налокотники",
+    "slug": "kickboxing-elbowguards",
+    "parentId": "kickboxing",
+    "sort": 50,
+    "active": true,
+    "productTypeId": "protection"
+  },
+  {
+    "id": "muay-thai-elbowguards",
+    "name": "Налокотники",
+    "slug": "muay-thai-elbowguards",
+    "parentId": "muay-thai",
+    "sort": 50,
+    "active": true,
+    "productTypeId": "protection"
+  },
+  {
+    "id": "judo-pants",
+    "name": "Отдельные брюки",
+    "slug": "judo-pants",
+    "parentId": "judo",
+    "sort": 50,
+    "active": true,
+    "productTypeId": "bottoms"
+  },
+  {
+    "id": "sambo-jackets",
+    "name": "Куртки",
+    "slug": "sambo-jackets",
+    "parentId": "sambo",
+    "sort": 50,
+    "active": true,
+    "productTypeId": "uniforms"
+  },
+  {
+    "id": "sambo-shorts",
+    "name": "Шорты",
+    "slug": "sambo-shorts",
+    "parentId": "sambo",
+    "sort": 50,
+    "active": true,
+    "productTypeId": "bottoms"
+  },
+  {
+    "id": "sambo-shoes",
+    "name": "Самбовки",
+    "slug": "sambo-shoes",
+    "parentId": "sambo",
+    "sort": 50,
+    "active": true,
+    "productTypeId": "shoes"
+  },
+  {
+    "id": "sambo-belts",
+    "name": "Пояса",
+    "slug": "sambo-belts",
+    "parentId": "sambo",
+    "sort": 50,
+    "active": true,
+    "productTypeId": "belts"
+  },
+  {
+    "id": "sambo-protection",
+    "name": "Защита",
+    "slug": "sambo-protection",
+    "parentId": "sambo",
+    "sort": 50,
+    "active": true,
+    "productTypeId": "protection"
+  },
+  {
+    "id": "wrestling-singlets",
+    "name": "Трико",
+    "slug": "wrestling-singlets",
+    "parentId": "wrestling",
+    "sort": 50,
+    "active": true,
+    "productTypeId": "uniforms"
+  },
+  {
+    "id": "wrestling-shoes",
+    "name": "Борцовки",
+    "slug": "wrestling-shoes",
+    "parentId": "wrestling",
+    "sort": 50,
+    "active": true,
+    "productTypeId": "shoes"
+  },
+  {
+    "id": "wrestling-kneepads",
+    "name": "Наколенники",
+    "slug": "wrestling-kneepads",
+    "parentId": "wrestling",
+    "sort": 50,
+    "active": true,
+    "productTypeId": "protection"
+  },
+  {
+    "id": "wrestling-earguards",
+    "name": "Защита ушей",
+    "slug": "wrestling-earguards",
+    "parentId": "wrestling",
+    "sort": 50,
+    "active": true,
+    "productTypeId": "protection"
+  },
+  {
+    "id": "fitness-dumbbells",
+    "name": "Гантели и гири",
+    "slug": "fitness-dumbbells",
+    "parentId": "fitness",
+    "sort": 50,
+    "active": true,
+    "productTypeId": "fitness"
+  },
+  {
+    "id": "fitness-ropes",
+    "name": "Скакалки",
+    "slug": "fitness-ropes",
+    "parentId": "fitness",
+    "sort": 50,
+    "active": true,
+    "productTypeId": "fitness"
+  },
+  {
+    "id": "gym-mats",
+    "name": "Татами и маты",
+    "slug": "gym-mats",
+    "parentId": "gym-equipment",
+    "sort": 50,
+    "active": true,
+    "productTypeId": "equipment"
+  },
+  {
+    "id": "gym-mounts",
+    "name": "Крепления для мешков",
+    "slug": "gym-mounts",
+    "parentId": "gym-equipment",
+    "sort": 50,
+    "active": true,
+    "productTypeId": "equipment"
   },
   {
     "id": "combat-boxing-mma-protection",
@@ -501,7 +804,8 @@
     "slug": "zashchita",
     "parentId": "combat-boxing-mma",
     "sort": 60,
-    "active": true
+    "active": true,
+    "productTypeId": "protection"
   },
   {
     "id": "kickboxing-protection",
@@ -509,7 +813,8 @@
     "slug": "kickboxing-protection",
     "parentId": "kickboxing",
     "sort": 60,
-    "active": true
+    "active": true,
+    "productTypeId": "protection"
   },
   {
     "id": "muay-thai",
@@ -525,7 +830,8 @@
     "slug": "muay-thai-protection",
     "parentId": "muay-thai",
     "sort": 60,
-    "active": true
+    "active": true,
+    "productTypeId": "protection"
   },
   {
     "id": "bjj-earguards",
@@ -533,15 +839,17 @@
     "slug": "bjj-earguards",
     "parentId": "bjj",
     "sort": 60,
-    "active": true
+    "active": true,
+    "productTypeId": "protection"
   },
   {
     "id": "karate-shinguards",
-    "name": "Щитки и футы",
+    "name": "Защита голени и стопы",
     "slug": "karate-shinguards",
     "parentId": "karate",
     "sort": 60,
-    "active": true
+    "active": true,
+    "productTypeId": "protection"
   },
   {
     "id": "football-uniform",
@@ -549,21 +857,32 @@
     "slug": "football-uniform",
     "parentId": "football",
     "sort": 60,
-    "active": true
+    "active": true,
+    "productTypeId": "uniforms"
   },
   {
     "id": "other-resistance-bands",
     "name": "Эспандеры и резинки",
     "slug": "other-resistance-bands",
-    "parentId": "other",
+    "parentId": "fitness",
     "sort": 60,
-    "active": true
+    "active": true,
+    "productTypeId": "fitness"
   },
   {
     "id": "combat-boxing-mma-mouthguards",
     "name": "Капы",
     "slug": "combat-boxing-mma-mouthguards",
     "parentId": "combat-boxing-mma",
+    "sort": 65,
+    "active": true,
+    "productTypeId": "protection"
+  },
+  {
+    "id": "sambo",
+    "name": "Самбо",
+    "slug": "sambo",
+    "parentId": "combat",
     "sort": 65,
     "active": true
   },
@@ -573,7 +892,8 @@
     "slug": "combat-boxing-mma-groin",
     "parentId": "combat-boxing-mma",
     "sort": 70,
-    "active": true
+    "active": true,
+    "productTypeId": "protection"
   },
   {
     "id": "bjj-kneepads",
@@ -581,7 +901,8 @@
     "slug": "bjj-kneepads",
     "parentId": "bjj",
     "sort": 70,
-    "active": true
+    "active": true,
+    "productTypeId": "protection"
   },
   {
     "id": "karate-mouthguards",
@@ -589,7 +910,8 @@
     "slug": "karate-mouthguards",
     "parentId": "karate",
     "sort": 70,
-    "active": true
+    "active": true,
+    "productTypeId": "protection"
   },
   {
     "id": "kickboxing-helmets",
@@ -597,7 +919,8 @@
     "slug": "kickboxing-helmets",
     "parentId": "kickboxing",
     "sort": 70,
-    "active": true
+    "active": true,
+    "productTypeId": "protection"
   },
   {
     "id": "muay-thai-helmets",
@@ -605,7 +928,8 @@
     "slug": "muay-thai-helmets",
     "parentId": "muay-thai",
     "sort": 70,
-    "active": true
+    "active": true,
+    "productTypeId": "protection"
   },
   {
     "id": "football-goals-nets",
@@ -613,13 +937,31 @@
     "slug": "football-goals-nets",
     "parentId": "football",
     "sort": 70,
-    "active": true
+    "active": true,
+    "productTypeId": "accessories"
   },
   {
     "id": "other-mats",
     "name": "Коврики",
     "slug": "other-mats",
-    "parentId": "other",
+    "parentId": "fitness",
+    "sort": 70,
+    "active": true,
+    "productTypeId": "fitness"
+  },
+  {
+    "id": "wrestling",
+    "name": "Борьба",
+    "slug": "wrestling",
+    "parentId": "combat",
+    "sort": 70,
+    "active": true
+  },
+  {
+    "id": "fitness",
+    "name": "Фитнес-инвентарь",
+    "slug": "fitness",
+    "parentId": null,
     "sort": 70,
     "active": true
   },
@@ -629,7 +971,8 @@
     "slug": "combat-boxing-mma-bags",
     "parentId": "combat-boxing-mma",
     "sort": 80,
-    "active": true
+    "active": true,
+    "productTypeId": "punching"
   },
   {
     "id": "bjj-tape",
@@ -637,7 +980,8 @@
     "slug": "bjj-tape",
     "parentId": "bjj",
     "sort": 80,
-    "active": true
+    "active": true,
+    "productTypeId": "accessories"
   },
   {
     "id": "karate-groin",
@@ -645,7 +989,8 @@
     "slug": "karate-groin",
     "parentId": "karate",
     "sort": 80,
-    "active": true
+    "active": true,
+    "productTypeId": "protection"
   },
   {
     "id": "kickboxing-mouthguards",
@@ -653,7 +998,8 @@
     "slug": "kickboxing-mouthguards",
     "parentId": "kickboxing",
     "sort": 80,
-    "active": true
+    "active": true,
+    "productTypeId": "protection"
   },
   {
     "id": "muay-thai-mouthguards",
@@ -661,7 +1007,8 @@
     "slug": "muay-thai-mouthguards",
     "parentId": "muay-thai",
     "sort": 80,
-    "active": true
+    "active": true,
+    "productTypeId": "protection"
   },
   {
     "id": "football-training",
@@ -669,13 +1016,23 @@
     "slug": "football-training",
     "parentId": "football",
     "sort": 80,
-    "active": true
+    "active": true,
+    "productTypeId": "accessories"
   },
   {
     "id": "other-bottles",
     "name": "Бутылки и шейкеры",
     "slug": "other-bottles",
     "parentId": "other",
+    "sort": 80,
+    "active": true,
+    "productTypeId": "accessories"
+  },
+  {
+    "id": "gym-equipment",
+    "name": "Оборудование для зала",
+    "slug": "gym-equipment",
+    "parentId": null,
     "sort": 80,
     "active": true
   },
@@ -685,15 +1042,17 @@
     "slug": "combat-boxing-mma-shoes",
     "parentId": "combat-boxing-mma",
     "sort": 85,
-    "active": true
+    "active": true,
+    "productTypeId": "shoes"
   },
   {
     "id": "combat-boxing-mma-rashguards",
     "name": "Рашгарды",
     "slug": "combat-boxing-mma-rashguards",
-    "parentId": "combat-boxing-mma",
+    "parentId": "mma",
     "sort": 90,
-    "active": true
+    "active": true,
+    "productTypeId": "rashguards"
   },
   {
     "id": "kickboxing-groin",
@@ -701,7 +1060,8 @@
     "slug": "kickboxing-groin",
     "parentId": "kickboxing",
     "sort": 90,
-    "active": true
+    "active": true,
+    "productTypeId": "protection"
   },
   {
     "id": "muay-thai-groin",
@@ -709,15 +1069,17 @@
     "slug": "muay-thai-groin",
     "parentId": "muay-thai",
     "sort": 90,
-    "active": true
+    "active": true,
+    "productTypeId": "protection"
   },
   {
     "id": "combat-boxing-mma-shorts",
     "name": "Шорты",
     "slug": "combat-boxing-mma-shorts",
-    "parentId": "combat-boxing-mma",
+    "parentId": "mma",
     "sort": 100,
-    "active": true
+    "active": true,
+    "productTypeId": "bottoms"
   },
   {
     "id": "combat-boxing-mma-skipping-ropes",
@@ -725,14 +1087,7 @@
     "slug": "combat-boxing-mma-skipping-ropes",
     "parentId": "combat-boxing-mma",
     "sort": 110,
-    "active": true
-  },
-  {
-    "id": "kickboxing-pants",
-    "name": "Штаны",
-    "slug": "kickboxing-pants",
-    "parentId": "kickboxing",
-    "sort": 35,
-    "active": true
+    "active": true,
+    "productTypeId": "accessories"
   }
 ]
