@@ -13,6 +13,12 @@ if (!$post && !in_array($action, ['list', 'photo', 'wb-list'], true)) stop('Ну
 function can_read(array $record): bool { global $user, $owner; return $owner || ($record['owner'] ?? '') === $user; }
 function clean_text($value, int $max): string { if (!is_string($value) || strlen($value) > $max) stop('Неверное поле.'); return trim($value); }
 function clean_list($value): array { if (!is_array($value) || count($value) > 20) stop('Неверный список характеристик.'); return array_values(array_unique(array_filter(array_map(fn($v) => clean_text($v, 180), $value)))); }
+function additional_categories($value, string $primary, array $categories): array {
+    if (!is_array($value) || count($value)>20) throw new DomainException('Можно выбрать до 20 дополнительных категорий.',400);
+    $valid=[];foreach($categories as $category)if(($category['active']??true)&&!array_filter($categories,fn($c)=>($c['parentId']??null)===$category['id']&&($c['active']??true)))$valid[$category['id']]=true;
+    $result=[];foreach($value as $id){if(!is_string($id)||!isset($valid[$id]))throw new DomainException('Выберите действующий тип товара для дополнительной категории.',400);if($id!==$primary)$result[]=$id;}
+    return array_values(array_unique($result));
+}
 function store_processed_photo(array &$s, string $id, string $name, bool $replace, string $expected): ?string {
     if (!isset($s['photos'][$id])) throw new DomainException('Фото не найдено.', 404);
     $photo = $s['photos'][$id];
@@ -102,8 +108,9 @@ try {
         $price = $input['price'] ?? null;if (!is_numeric($price) || !is_finite((float)$price) || $price <= 0 || $price > 100000000) stop('Укажите корректную цену.');
         $title = clean_text($input['title'] ?? '', 480);if (!$title) stop('Название не сформировано.');
         $material = clean_text($input['material'] ?? '', 240);$sizes = clean_list($input['sizes'] ?? []);$colors = clean_list($input['colors'] ?? []);if (count($colors) > 1) stop('Укажите один общий цвет или оставьте цвет пустым.');
+        $additional=$owner?additional_categories($input['additionalCategoryIds']??[],$category,$categories?:[]):[];
         $fingerprint = hash('sha256', json_encode($input, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR));
-        $records = warehouse_state(function(&$s) use ($batchId, $items, $input, $category, $price, $title, $material, $sizes, $colors, $fingerprint, $user, $owner) {
+        $records = warehouse_state(function(&$s) use ($batchId, $items, $input, $category, $price, $title, $material, $sizes, $colors, $fingerprint, $user, $owner, $additional) {
             $batch = $s['batches'][$batchId] ?? null;
             if ($batch) {
                 if ($batch['owner'] !== $user) stop('Нет доступа к партии.', 403);
@@ -119,7 +126,7 @@ try {
                 $ids[] = $id;$photoIds[] = $photoId;
             }
             $settings = json_decode((string)file_get_contents(__DIR__ . '/fields.json'), true);
-            foreach ($ids as $i => $id) $s['products'][$id] = ['id' => $id, 'article' => 'LW-' . strtoupper(substr(str_replace('-', '', $id), 0, 12)), 'modelGroupId' => $id, 'owner' => $user, 'title' => $title . ' — вариант ' . ($i + 1), 'categoryId' => $category, 'price' => (float)$price, 'currency' => $settings['currency'] ?? 'KZT', 'material' => $material, 'sizes' => $sizes, 'colors' => $colors, 'photos' => [$photoIds[$i]], 'status' => !$owner && !empty($input['submit']) ? 'review' : 'draft', 'comment' => '', 'revision' => 1, 'createdAt' => gmdate('c'), 'updatedAt' => gmdate('c')];
+            foreach ($ids as $i => $id) $s['products'][$id] = ['id' => $id, 'article' => 'LW-' . strtoupper(substr(str_replace('-', '', $id), 0, 12)), 'modelGroupId' => $id, 'owner' => $user, 'title' => $title . ' — вариант ' . ($i + 1), 'categoryId' => $category, 'additionalCategoryIds'=>$additional, 'price' => (float)$price, 'currency' => $settings['currency'] ?? 'KZT', 'material' => $material, 'sizes' => $sizes, 'colors' => $colors, 'photos' => [$photoIds[$i]], 'status' => !$owner && !empty($input['submit']) ? 'review' : 'draft', 'comment' => '', 'revision' => 1, 'createdAt' => gmdate('c'), 'updatedAt' => gmdate('c')];
             $s['batches'][$batchId] = ['owner' => $user, 'ids' => $ids, 'fingerprint' => $fingerprint];
             return array_map(fn($id) => present($s['products'][$id], $s), $ids);
         });warehouse_json(['products' => $records]);
@@ -130,9 +137,10 @@ try {
         $valid = array_filter($categories ?: [], fn($c) => $c['id'] === $category && ($c['active'] ?? true));
         $children = array_filter($categories ?: [], fn($c) => ($c['parentId'] ?? null) === $category && ($c['active'] ?? true));
         if (!$valid || $children) stop('Выберите конкретный тип товара.');
+        $additional=$owner&&array_key_exists('additionalCategoryIds',$input)?additional_categories($input['additionalCategoryIds'],$category,$categories?:[]):null;
         $price = $input['price'] ?? null;if (!is_numeric($price) || !is_finite((float)$price) || $price <= 0 || $price > 100000000) stop('Укажите корректную цену.');
         $ids = $input['photos'] ?? [];if (!is_array($ids) || count($ids) < 1 || count($ids) > 8) stop('Добавьте от 1 до 8 фото.');
-        $record = warehouse_state(function(&$s) use ($input, $id, $category, $price, $ids, $user, $owner) {
+        $record = warehouse_state(function(&$s) use ($input, $id, $category, $price, $ids, $user, $owner, $additional) {
             $old = $s['products'][$id] ?? null;
             if ($old && $old['status'] === 'trashed') stop('Сначала восстановите товар из корзины.', 409);
             if ($old && !can_read($old)) stop('Нет доступа.', 403);
@@ -153,6 +161,7 @@ try {
             $record = ['id' => $id, 'article' => $old['article'] ?? 'LW-' . strtoupper(substr(str_replace('-', '', $id), 0, 12)), 'owner' => $old['owner'] ?? $user, 'title' => clean_text($input['title'] ?? '', 540), 'categoryId' => $category, 'price' => (float)$price, 'currency' => $settings['currency'] ?? 'KZT', 'material' => clean_text($input['material'] ?? '', 240), 'sizes' => clean_list($input['sizes'] ?? []), 'colors' => clean_list($input['colors'] ?? []), 'photos' => array_values(array_unique($ids)), 'status' => $old && $old['status'] === 'published' ? 'review' : ($old['status'] ?? 'draft'), 'comment' => $old['comment'] ?? '', 'revision' => ($old['revision'] ?? 0) + 1, 'createdAt' => $old['createdAt'] ?? $old['updatedAt'] ?? gmdate('c'), 'updatedAt' => gmdate('c')];
             if ($record['title'] === '') stop('Название не сформировано.');
             $record['modelGroupId'] = $modelGroupId;
+            $record['additionalCategoryIds']=array_values(array_filter($additional??($old['additionalCategoryIds']??[]),fn($id)=>$id!==$category));
             $record['studioResults']=$old['studioResults']??[];$record['studioRequests']=$old['studioRequests']??[];
             $s['products'][$id] = $record;return present($record, $s);
         });warehouse_json(['product' => $record]);
