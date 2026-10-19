@@ -7,7 +7,7 @@
   <title>Lucky — оптовый каталог</title>
   <meta name="description" content="Оптовый каталог спортивных товаров Lucky." />
   <link rel="icon" type="image/svg+xml" href="./clover.svg" />
-  <link rel="stylesheet" href="./styles.css?v=card-details-20261014" />
+  <link rel="stylesheet" href="./styles.css?v=sports-20261019" />
 </head>
 <body>
   <div class="announcement">
@@ -139,6 +139,12 @@
         </div>
       </div>
         </div>
+    </section>
+
+    <section id="sportsDiscovery" class="sports-discovery" aria-labelledby="sportsDiscoveryTitle" hidden>
+      <div class="sports-discovery-head"><div><span class="section-kicker dark">ВАШ СПОРТ · НАШ АССОРТИМЕНТ</span><h2 id="sportsDiscoveryTitle">Выберите свой спорт</h2><p>Экипировка для вашего магазина, клуба и команды</p></div><div class="sports-discovery-controls"><button id="sportsDiscoveryAll" type="button">Все направления <span aria-hidden="true">↗</span></button><button id="sportsDiscoveryPrev" type="button" aria-label="Предыдущие виды спорта" aria-controls="sportsDiscoveryRail">←</button><button id="sportsDiscoveryNext" type="button" aria-label="Следующие виды спорта" aria-controls="sportsDiscoveryRail">→</button></div></div>
+      <nav id="sportsDiscoveryRail" class="sports-discovery-rail" aria-label="Быстрый выбор вида спорта"></nav>
+      <p class="sports-discovery-hint">Листайте направления или откройте полный список</p>
     </section>
 
     <section id="catalog" class="catalog-shell">
@@ -418,6 +424,6 @@
   </dialog>
   <dialog id="productionVideoViewer" class="production-video-viewer" aria-labelledby="productionVideoTitle"><header><h2 id="productionVideoTitle">Видео с производства</h2><button id="productionVideoClose" type="button" aria-label="Закрыть видео">Закрыть ×</button></header><video id="productionVideo" controls playsinline preload="none"></video></dialog>
   <dialog id="reviewMediaViewer" class="review-media-viewer" aria-labelledby="reviewMediaTitle"><header><h2 id="reviewMediaTitle">Фото покупателя</h2><button id="reviewMediaClose" type="button" aria-label="Закрыть фото или видео отзыва">Закрыть ×</button></header><img id="reviewMediaImage" alt="Фото покупателя к отзыву" hidden><video id="reviewMediaVideo" controls playsinline preload="none" hidden></video></dialog>
-  <script type="module" src="./app.js?v=kickboxing-pants-20261015"></script>
+  <script type="module" src="./app.js?v=sports-20261019"></script>
 </body>
 </html>
