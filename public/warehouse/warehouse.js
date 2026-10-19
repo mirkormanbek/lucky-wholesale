@@ -57,6 +57,19 @@ function sportOptions(){
  const order=["combat-boxing-mma","judo","bjj","karate","football","basketball","volleyball","other"];
  for(const c of active.filter(c=>parents.has(c.id)&&c.id!=="combat").sort((a,b)=>(order.indexOf(a.id)<0?99:order.indexOf(a.id))-(order.indexOf(b.id)<0?99:order.indexOf(b.id)))){const option=document.createElement("option");option.value=c.id;option.textContent=c.name.replace(/BJJ\s*\/\s*Джиу-джитсу/i,"Джиу-джитсу").replace(/MMA/g,"ММА");$("sport").appendChild(option);}typeOptions();
 }
+
+let additionalCategoryIds=new Set();
+function renderAdditionalCategories(record=null){
+ if(record)additionalCategoryIds=new Set(record.additionalCategoryIds||[]);
+ const primary=$("category").value;additionalCategoryIds.delete(primary);
+ $("additionalCategoryFields").hidden=role!=="owner";
+ $("additionalCategoryCount").textContent=additionalCategoryIds.size?" · "+additionalCategoryIds.size:"";
+ const list=$("additionalCategoryChoices");list.replaceChildren();
+ const path=id=>{const parts=[],seen=new Set();let c=categories.find(c=>c.id===id);while(c&&!seen.has(c.id)){seen.add(c.id);if(c.id!=="combat")parts.unshift(c.name);c=categories.find(x=>x.id===c.parentId);}return parts.join(" / ");};
+ const leaves=categories.filter(c=>c.active!==false&&c.id!==primary&&!categories.some(x=>x.active!==false&&x.parentId===c.id)).sort((a,b)=>path(a.id).localeCompare(path(b.id),"ru"));
+ for(const c of leaves){const label=document.createElement("label"),input=document.createElement("input");input.type="checkbox";input.value=c.id;input.checked=additionalCategoryIds.has(c.id);input.disabled=busy||current?.status==="trashed";input.addEventListener("change",()=>{if(input.checked)additionalCategoryIds.add(c.id);else additionalCategoryIds.delete(c.id);$("additionalCategoryCount").textContent=additionalCategoryIds.size?" · "+additionalCategoryIds.size:"";});label.append(input,document.createTextNode(path(c.id)));list.append(label);}
+}
+
 function categoryFields(record={}){
  const config=fields.categories[$("category").value]||fields.defaults;
  options($("material"),["",...config.materials]);$("material").value=config.materials.includes(record.material)?record.material:"";
@@ -134,7 +147,7 @@ function newProduct(){
  $("listControls").hidden=true;
  current={id:crypto.randomUUID(),article:"LW-"+new Date().toISOString().slice(0,10).replaceAll("-","")+"-"+crypto.randomUUID().slice(0,8).toUpperCase()};
  photos=[];manualCategory=false;$("editor").reset();$("editor").hidden=false;$("productList").hidden=true;
- $("returnProduct").hidden=false;$("trashProduct").hidden=false;$("restoreProduct").hidden=true;$("hideProduct").hidden=false;$("publish").hidden=false;$("article").textContent=current.article;$("savedStatus").textContent="";$("reviewComment").textContent="";$("save").disabled=false;$("saveDraft").disabled=false;$("ownerActions").hidden=role!=="owner";$("extraFields").open=false;typeOptions();titlePreview();checks("colors",fields.colors);categoryFields();renderPhotos();priceHints().catch(e=>message(e.message));message("");
+ $("returnProduct").hidden=false;$("trashProduct").hidden=false;$("restoreProduct").hidden=true;$("hideProduct").hidden=false;$("publish").hidden=false;$("article").textContent=current.article;$("savedStatus").textContent="";$("reviewComment").textContent="";$("save").disabled=false;$("saveDraft").disabled=false;$("ownerActions").hidden=role!=="owner";$("extraFields").open=false;typeOptions();titlePreview();checks("colors",fields.colors);categoryFields();renderAdditionalCategories({});$("additionalCategoryFields").open=false;renderPhotos();priceHints().catch(e=>message(e.message));message("");
 }
 function edit(record){
  $("entryMode").value="single";$("entryMode").disabled=true;
@@ -143,7 +156,7 @@ function edit(record){
  $("listControls").hidden=true;
  current=record;photos=structuredClone(record.photos);manualCategory=true;$("editor").hidden=false;$("productList").hidden=true;
  $("article").textContent=record.article;$("sport").value=categories.find(c=>c.id===record.categoryId)?.parentId||"";typeOptions(record.categoryId);$("title").value=record.title===categoryTitle()?"":record.title;titlePreview();$("extraFields").open=false;$("price").value=record.price;
- categoryFields(record);checks("colors",fields.colors,colorExplicit?record.colors:[]);$("customColors").value=colorExplicit?record.colors.filter(s=>!fields.colors.includes(s)).join(", "):"";
+ renderAdditionalCategories(record);$("additionalCategoryFields").open=false;categoryFields(record);checks("colors",fields.colors,colorExplicit?record.colors:[]);$("customColors").value=colorExplicit?record.colors.filter(s=>!fields.colors.includes(s)).join(", "):"";
  renderPhotos();priceHints();$("savedStatus").textContent="Черновик. Для публикации требуется ваше подтверждение.";
  if(!colorExplicit)$("savedStatus").textContent="В старой карточке несколько цветов: "+record.colors.join(", ")+". Перед сохранением выберите один цвет для этого товара. Другие цвета добавьте отдельными товарами.";
  $("ownerActions").hidden=role!=="owner";$("trashProduct").hidden=record.status==="trashed";$("restoreProduct").hidden=record.status!=="trashed";$("hideProduct").hidden=record.status==="trashed";$("publish").hidden=record.status==="trashed";$("reviewComment").textContent=record.comment||"";$("save").disabled=role!=="owner"&&["review","published"].includes(record.status);$("save").disabled=$("save").disabled||record.status==="trashed";$("saveDraft").disabled=$("save").disabled;$("returnProduct").hidden=record.status==="trashed";
@@ -167,7 +180,7 @@ function renderInventoryOverview(){
 }
 function renderWarehouseList(){
  renderInventoryOverview();$("productList").replaceChildren();const query=normalize($("warehouseSearch").value);
- const records=warehouseRecords.filter(p=>(view==="all"?!["hidden","trashed"].includes(p.status):p.status===view)&&categoryMatches(p.categoryId,$("warehouseCategory").value)&&normalize([p.title,p.article,...(p.colors||[])].join(" ")).includes(query)).sort((a,b)=>{
+ const records=warehouseRecords.filter(p=>(view==="all"?!["hidden","trashed"].includes(p.status):p.status===view)&&[p.categoryId,...(p.additionalCategoryIds||[])].some(id=>categoryMatches(id,$("warehouseCategory").value))&&normalize([p.title,p.article,...(p.colors||[])].join(" ")).includes(query)).sort((a,b)=>{
   const order=$("warehouseSort").value;const date=p=>String(p.createdAt||p.updatedAt||"");
   if(order.startsWith("created"))return order==="createdAsc"?date(a).localeCompare(date(b)):date(b).localeCompare(date(a));
   if(order==="name")return a.title.localeCompare(b.title,"ru");if(order==="priceAsc")return a.price-b.price;if(order==="priceDesc")return b.price-a.price;
@@ -192,8 +205,8 @@ function renderWarehouseList(){
  $("save").textContent=role==="owner"?"Сохранить изменения":"Отправить на проверку";
 }
 $("title").addEventListener("input",titlePreview);
-$("sport").addEventListener("change",()=>{typeOptions();categoryFields();titlePreview();$("categoryHint").textContent="Теперь выберите тип товара.";});
-$("category").addEventListener("change",()=>{categoryFields();titlePreview();$("categoryHint").textContent="Название готово. Осталось указать цену.";});
+$("sport").addEventListener("change",()=>{typeOptions();categoryFields();renderAdditionalCategories();titlePreview();$("categoryHint").textContent="Теперь выберите тип товара.";});
+$("category").addEventListener("change",()=>{categoryFields();renderAdditionalCategories();titlePreview();$("categoryHint").textContent="Название готово. Осталось указать цену.";});
 $("photos").addEventListener("change",e=>addPhotos([...e.target.files]));$("camera").addEventListener("change",e=>addPhotos([...e.target.files]));
 $("newProduct").addEventListener("click",newProduct);$("showList").addEventListener("click",()=>list().catch(e=>message(e.message)));
 async function saveForm(submit){
@@ -202,7 +215,7 @@ async function saveForm(submit){
  const price=Number($("price").value);if(!Number.isFinite(price)||price<=0){message("Укажите корректную цену.");return;}
  if(!$("category").value){message("Выберите тип товара.");return;}
  const material=$("customMaterial").value.trim()||$("material").value;
- const product={...current,title:$("title").value.trim()||categoryTitle(),categoryId:$("category").value,price,currency:fields.currency,material,sizes:[...new Set([...chosen("sizes"),...split($("customSizes").value)])],colors:$("customColors").value.trim()?[$("customColors").value.trim()]:chosen("colors"),photos:structuredClone(photos),status:"draft",updatedAt:new Date().toISOString()};
+ const product={...current,title:$("title").value.trim()||categoryTitle(),categoryId:$("category").value,...(role==="owner"?{additionalCategoryIds:[...additionalCategoryIds]}:{}),price,currency:fields.currency,material,sizes:[...new Set([...chosen("sizes"),...split($("customSizes").value)])],colors:$("customColors").value.trim()?[$("customColors").value.trim()]:chosen("colors"),photos:structuredClone(photos),status:"draft",updatedAt:new Date().toISOString()};
  if($("entryMode").value==="batch")return saveBatch(product,submit);
  busy=true;$("save").disabled=true;$("saveDraft").disabled=true;renderPhotos();
  try{current=await put(product);photos=keepPhotoEdits(structuredClone(current.photos),photos);$("entryMode").disabled=true;$("article").textContent=current.article;$("addColor").hidden=false;if(submit&&role!=="owner")current=(await api("transition",{id:current.id,revision:current.revision,status:"review"})).product;$("savedStatus").textContent=submit&&role!=="owner"?"Отправлено владельцу на проверку.":"Сохранено на сервере.";message("Сохранено. Товар доступен с другого устройства.");return true;}
@@ -213,7 +226,7 @@ async function saveBatch(product,submit){
  busy=true;$("save").disabled=true;$("saveDraft").disabled=true;$("entryMode").disabled=true;renderPhotos();
  try{
  const items=[];for(const photo of photos){photo.batchSkuId=photo.batchSkuId||crypto.randomUUID();if(!photo.serverId)photo.serverId=await upload(photo,"original");items.push({id:photo.batchSkuId,photoId:photo.serverId});}
- const result=await api("batch-save",{batchId:current.id,items,title:product.title,categoryId:product.categoryId,price:product.price,material:product.material,sizes:product.sizes,colors:product.colors,submit:submit&&role!=="owner"});
+ const result=await api("batch-save",{batchId:current.id,items,title:product.title,categoryId:product.categoryId,...(role==="owner"?{additionalCategoryIds:product.additionalCategoryIds}:{}),price:product.price,material:product.material,sizes:product.sizes,colors:product.colors,submit:submit&&role!=="owner"});
  await list();message("Создано товаров: "+result.products.length+". У каждого свой артикул и фото."+(submit&&role!=="owner"?" Партия отправлена владельцу.":" Товары сохранены как черновики."));return true;
  }catch(e){message(e.message||"Не удалось сохранить партию. Повторный запрос не создаст дубликаты.");return false;}
  finally{busy=false;$("save").disabled=false;$("saveDraft").disabled=false;$("entryMode").disabled=false;renderPhotos();}
@@ -227,7 +240,7 @@ $("addColor").addEventListener("click",async()=>{
  if(busy)return;
  if(!current.revision){if(!await saveForm(false))return;}
  const source=structuredClone(current);newProduct();current.derivedFrom=source.id;
- $("sport").value=categories.find(c=>c.id===source.categoryId)?.parentId||"";typeOptions(source.categoryId);$("title").value=source.title===categoryTitle()?"":source.title;titlePreview();$("price").value=source.price;categoryFields(source);$("extraFields").open=true;
+ $("sport").value=categories.find(c=>c.id===source.categoryId)?.parentId||"";typeOptions(source.categoryId);$("title").value=source.title===categoryTitle()?"":source.title;titlePreview();$("price").value=source.price;categoryFields(source);renderAdditionalCategories(source);$("extraFields").open=true;
  message("Другой цвет — новый товар и артикул. Выберите цвет и добавьте его фото. Категория и цена уже подставлены.");
 });
 async function transition(status){if(busy)return;if(!await saveForm(false))return;const comment=status==="returned"?prompt("Что менеджеру нужно исправить?"):"";if(comment===null)return;try{current=(await api("transition",{id:current.id,revision:current.revision,status,comment})).product;await list();message(status==="published"?"Товар опубликован на сайте.":"Статус товара обновлён.");}catch(e){message(e.message);}}
@@ -275,7 +288,7 @@ async function saveForStudio(){
  if(current?.revision&&current.status==="published"){
   const pairs=[[$("category").value,current.categoryId],[$("title").value.trim()||categoryTitle(),current.title],[Number($("price").value),Number(current.price)],[$("customMaterial").value.trim()||$("material").value,current.material||""]];
   const same=(a,b)=>JSON.stringify([...a].sort())===JSON.stringify([...b].sort());
-  if(pairs.some(([a,b])=>a!==b)||!same(photos.map(p=>p.serverId),current.photos.map(p=>p.serverId))||!same([...chosen("sizes"),...split($("customSizes").value)],current.sizes)||!same($("customColors").value.trim()?[$("customColors").value.trim()]:chosen("colors"),current.colors)){message("Сначала сохраните изменения карточки. Опубликованный товар вернётся на проверку.");return false;}
+  if(!same([...additionalCategoryIds],current.additionalCategoryIds||[])||pairs.some(([a,b])=>a!==b)||!same(photos.map(p=>p.serverId),current.photos.map(p=>p.serverId))||!same([...chosen("sizes"),...split($("customSizes").value)],current.sizes)||!same($("customColors").value.trim()?[$("customColors").value.trim()]:chosen("colors"),current.colors)){message("Сначала сохраните изменения карточки. Опубликованный товар вернётся на проверку.");return false;}
   return true;
  }
  return await saveForm(false);

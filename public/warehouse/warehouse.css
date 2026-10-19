@@ -8,3 +8,5 @@
 
 
 #studioCategoryMode{white-space:normal;text-align:left}#studioCategoryMode[aria-pressed="true"]{border-color:#83a717;background:#f4f8e8;box-shadow:inset 0 0 0 1px #83a717}
+
+.additional-categories{margin-top:18px;border-top:1px solid #dce2d8;padding-top:15px}.additional-categories summary{cursor:pointer;font-size:14px;font-weight:750;min-height:36px}.additional-categories p{font-size:12px;line-height:1.6;color:#63705f}.additional-category-choices{max-height:280px;overflow-y:auto;display:grid;gap:6px}.additional-category-choices label{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:7px;font-size:13px;margin:0;background:#f5f7f2}.additional-category-choices input{width:18px;height:18px;margin:0;flex:0 0 auto;accent-color:#83a717}.additional-category-choices label:has(input:checked){background:#eef5d8}.additional-categories[hidden]{display:none}
