@@ -2,11 +2,11 @@
 declare(strict_types=1);
 function studio_category_preset(string $categoryId): array {
     $groups = [
-        'belt'=>['bjj-belts','judo-belts','karate-belts'],
+        'belt'=>['bjj-belts','judo-belts','karate-belts','sambo-belts'],
         'gi'=>['judo-gi','bjj-gi','karate-gi','sambo-gi','sambo-jackets'],
         'rashguard'=>['bjj-rashguards','combat-boxing-mma-rashguards'],
         'boxing-gloves'=>['combat-boxing-mma-gloves','kickboxing-gloves','muay-thai-gloves'],
-        'mma-gloves'=>['combat-boxing-mma-mma-gloves'],
+        'mma-gloves'=>['combat-boxing-mma-mma-gloves','mma-sparring-gloves'],
         'karate-gloves'=>['karate-gloves']
     ];
     $labels=['belt'=>'Пояс: узел на кимоно','gi'=>'Кимоно: невидимый манекен','rashguard'=>'Рашгард: объёмный комплект','boxing-gloves'=>'Перчатки: лицевая и ладонная стороны','mma-gloves'=>'ММА: лицевая и ладонная стороны','karate-gloves'=>'Каратэ: лицевая и ладонная стороны'];
@@ -44,7 +44,7 @@ function studio_reserve(array &$s,array $input): array {
     return ['id'=>$id,'requestId'=>$request,'options'=>$options,'files'=>$files,'title'=>$p['title'],'categoryId'=>$p['categoryId']??'','sourceIds'=>$p['photos'],'sourceRevision'=>$p['revision']];
 }
 function studio_category_rules(string $categoryId): string {
-    if (!in_array($categoryId, ['bjj-belts','judo-belts','karate-belts'], true)) return '';
+    if (!in_array($categoryId, ['bjj-belts','judo-belts','karate-belts','sambo-belts'], true)) return '';
     return 'MARTIAL ARTS BELT — PACKAGING REMOVAL: the product is the textile training/rank belt. Plain external white paper or plastic bands wrapped around the folded belt to hold it together are removable packaging, NOT belt stripes or design details. Remove those packaging bands, adhesive tape, ties and their residue in every output, including when the belt is shown tied on a neutral gi. Reconstruct only the immediately covered belt surface from adjacent visible fabric and stitching. Preserve the actual belt color, woven texture, stitched edges, sewn-on brand patches, size labels, genuine sewn white stripes and black rank panels. Never identify packaging by white color alone. If an element is sewn or woven into the belt, keep it. Do not invent or erase hidden logos. Any supporting gi requested by the owner must be neutral and unbranded; the belt remains the product. ';
 }
 function studio_prompt(array $job): string {

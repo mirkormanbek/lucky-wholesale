@@ -7,7 +7,7 @@
   <title>Lucky — оптовый каталог</title>
   <meta name="description" content="Оптовый каталог спортивных товаров Lucky." />
   <link rel="icon" type="image/svg+xml" href="./clover.svg" />
-  <link rel="stylesheet" href="./styles.css?v=sport-png-20261019" />
+  <link rel="stylesheet" href="./styles.css?v=taxonomy-20261019" />
 </head>
 <body>
   <div class="announcement">
@@ -163,6 +163,7 @@
         </div>
       </div>
 
+      <div class="catalog-browse-modes" role="group" aria-label="Как искать товары"><button id="catalogBrowseSports" type="button" aria-pressed="true">По видам спорта</button><button id="catalogBrowseTypes" type="button" aria-pressed="false">По типу товара</button></div><nav id="productTypeRail" class="sport-rail product-type-rail" aria-label="Типы товаров" hidden></nav>
       <div class="sport-navigation">
         <nav id="sportRail" class="sport-rail" aria-label="Виды спорта"></nav>
         <button id="filtersToggle" class="sport-all" type="button" aria-haspopup="dialog" aria-controls="sportPicker" aria-label="Найти вид спорта"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
@@ -424,6 +425,6 @@
   </dialog>
   <dialog id="productionVideoViewer" class="production-video-viewer" aria-labelledby="productionVideoTitle"><header><h2 id="productionVideoTitle">Видео с производства</h2><button id="productionVideoClose" type="button" aria-label="Закрыть видео">Закрыть ×</button></header><video id="productionVideo" controls playsinline preload="none"></video></dialog>
   <dialog id="reviewMediaViewer" class="review-media-viewer" aria-labelledby="reviewMediaTitle"><header><h2 id="reviewMediaTitle">Фото покупателя</h2><button id="reviewMediaClose" type="button" aria-label="Закрыть фото или видео отзыва">Закрыть ×</button></header><img id="reviewMediaImage" alt="Фото покупателя к отзыву" hidden><video id="reviewMediaVideo" controls playsinline preload="none" hidden></video></dialog>
-  <script type="module" src="./app.js?v=sport-png-20261019"></script>
+  <script type="module" src="./app.js?v=taxonomy-20261019"></script>
 </body>
 </html>

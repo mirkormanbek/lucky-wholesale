@@ -3,7 +3,7 @@
   "imageProcessingEnabled": true,
   "titles": {
     "combat-boxing-mma-gloves": "Боксёрские перчатки",
-    "karate-gloves": "Перчатки для карате",
+    "karate-gloves": "Накладки для карате",
     "judo-gi": "Кимоно для дзюдо",
     "bjj-gi": "Кимоно для джиу-джитсу",
     "karate-gi": "Кимоно для карате",
@@ -19,13 +19,13 @@
     "bjj-rashguards": "Рашгард для джиу-джитсу",
     "bjj-shorts": "Шорты для джиу-джитсу",
     "bjj-spats": "Компрессионные штаны для джиу-джитсу",
-    "combat-boxing-mma-mma-gloves": "Перчатки ММА (черепашки)",
+    "combat-boxing-mma-mma-gloves": "Перчатки ММА",
     "combat-boxing-mma-mouthguards": "Капа для единоборств",
     "combat-boxing-mma-groin": "Защита паха",
     "combat-boxing-mma-pads": "Макивара",
     "combat-boxing-mma-bags": "Боксёрский мешок",
     "combat-boxing-mma-rashguards": "Рашгард для ММА",
-    "combat-boxing-mma-shorts": "Шорты для бокса и ММА",
+    "combat-boxing-mma-shorts": "Шорты для ММА",
     "karate-belts": "Пояс для карате",
     "kickboxing-gloves": "Перчатки для кикбоксинга",
     "kickboxing-shinguards": "Щитки для кикбоксинга",
@@ -82,7 +82,33 @@
     "other-accessories": "Аксессуары",
     "other-bags": "Сумки и рюкзаки",
     "other-workout": "Воркаут",
-    "kickboxing-pants": "Штаны для кикбоксинга"
+    "kickboxing-pants": "Штаны для кикбоксинга",
+    "boxing-shorts": "Форма и шорты — Бокс",
+    "boxing-protection": "Защита — Бокс",
+    "mma-sparring-gloves": "Спарринговые перчатки ММА — ММА",
+    "mma-spats": "Компрессионные штаны — ММА",
+    "mma-shinguards": "Щитки — ММА",
+    "mma-mouthguards": "Капы — ММА",
+    "mma-groin": "Защита паха — ММА",
+    "mma-helmets": "Шлемы — ММА",
+    "mma-wraps": "Бинты — ММА",
+    "kickboxing-feet": "Футы — Кикбоксинг",
+    "kickboxing-elbowguards": "Налокотники — Кикбоксинг",
+    "muay-thai-elbowguards": "Налокотники — Муай-тай",
+    "judo-pants": "Отдельные брюки — Дзюдо",
+    "sambo-jackets": "Куртка для самбо",
+    "sambo-shorts": "Шорты — Самбо",
+    "sambo-shoes": "Самбовки",
+    "sambo-belts": "Пояса — Самбо",
+    "sambo-protection": "Защита — Самбо",
+    "wrestling-singlets": "Трико для борьбы",
+    "wrestling-shoes": "Борцовки",
+    "wrestling-kneepads": "Наколенники — Борьба",
+    "wrestling-earguards": "Защита ушей — Борьба",
+    "fitness-dumbbells": "Гантели и гири — Фитнес-инвентарь",
+    "fitness-ropes": "Скакалки — Фитнес-инвентарь",
+    "gym-mats": "Татами и маты — Оборудование для зала",
+    "gym-mounts": "Крепления для мешков — Оборудование для зала"
   },
   "colors": [
     "Чёрный",
@@ -844,9 +870,292 @@
         "XL",
         "XXL"
       ]
+    },
+    "boxing-shorts": {
+      "materials": [
+        "Полиэстер",
+        "Сатин",
+        "Хлопок",
+        "Хлопок / полиэстер",
+        "Полиэстер / эластан"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ]
+    },
+    "boxing-protection": {
+      "materials": [
+        "Натуральная кожа",
+        "Экокожа",
+        "ПУ",
+        "Текстиль",
+        "Неопрен",
+        "Пластик"
+      ],
+      "sizes": []
+    },
+    "mma-sparring-gloves": {
+      "materials": [
+        "Натуральная кожа",
+        "Экокожа",
+        "ПУ"
+      ],
+      "sizes": [
+        "4 оз",
+        "6 оз",
+        "8 оз",
+        "10 оз",
+        "12 оз",
+        "14 оз",
+        "16 оз"
+      ]
+    },
+    "mma-spats": {
+      "materials": [
+        "Полиэстер / эластан",
+        "Нейлон / эластан"
+      ],
+      "sizes": []
+    },
+    "mma-shinguards": {
+      "materials": [
+        "Натуральная кожа",
+        "Экокожа",
+        "ПУ",
+        "Текстиль",
+        "Неопрен",
+        "Пластик"
+      ],
+      "sizes": []
+    },
+    "mma-mouthguards": {
+      "materials": [
+        "Натуральная кожа",
+        "Экокожа",
+        "ПУ",
+        "Текстиль",
+        "Неопрен",
+        "Пластик"
+      ],
+      "sizes": []
+    },
+    "mma-groin": {
+      "materials": [
+        "Натуральная кожа",
+        "Экокожа",
+        "ПУ",
+        "Текстиль",
+        "Неопрен",
+        "Пластик"
+      ],
+      "sizes": []
+    },
+    "mma-helmets": {
+      "materials": [
+        "Натуральная кожа",
+        "Экокожа",
+        "ПУ",
+        "Текстиль",
+        "Неопрен",
+        "Пластик"
+      ],
+      "sizes": []
+    },
+    "mma-wraps": {
+      "materials": [
+        "Натуральная кожа",
+        "Экокожа",
+        "ПУ",
+        "Текстиль",
+        "Неопрен",
+        "Пластик"
+      ],
+      "sizes": []
+    },
+    "kickboxing-feet": {
+      "materials": [
+        "Натуральная кожа",
+        "Экокожа",
+        "ПУ",
+        "Текстиль",
+        "Неопрен",
+        "Пластик"
+      ],
+      "sizes": []
+    },
+    "kickboxing-elbowguards": {
+      "materials": [
+        "Натуральная кожа",
+        "Экокожа",
+        "ПУ",
+        "Текстиль",
+        "Неопрен",
+        "Пластик"
+      ],
+      "sizes": []
+    },
+    "muay-thai-elbowguards": {
+      "materials": [
+        "Натуральная кожа",
+        "Экокожа",
+        "ПУ",
+        "Текстиль",
+        "Неопрен",
+        "Пластик"
+      ],
+      "sizes": []
+    },
+    "judo-pants": {
+      "materials": [
+        "Полиэстер",
+        "Сатин",
+        "Хлопок",
+        "Хлопок / полиэстер",
+        "Полиэстер / эластан"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ]
+    },
+    "sambo-jackets": {
+      "materials": [
+        "Хлопок",
+        "Полиэстер",
+        "Хлопок / полиэстер"
+      ],
+      "sizes": []
+    },
+    "sambo-shorts": {
+      "materials": [
+        "Полиэстер",
+        "Сатин",
+        "Хлопок",
+        "Хлопок / полиэстер",
+        "Полиэстер / эластан"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ]
+    },
+    "sambo-shoes": {
+      "materials": [
+        "Текстиль",
+        "Синтетическая кожа",
+        "Натуральная кожа",
+        "Текстиль / синтетическая кожа"
+      ],
+      "sizes": []
+    },
+    "sambo-belts": {
+      "materials": [
+        "Хлопок",
+        "Полиэстер",
+        "Хлопок / полиэстер"
+      ],
+      "sizes": []
+    },
+    "sambo-protection": {
+      "materials": [
+        "Натуральная кожа",
+        "Экокожа",
+        "ПУ",
+        "Текстиль",
+        "Неопрен",
+        "Пластик"
+      ],
+      "sizes": []
+    },
+    "wrestling-singlets": {
+      "materials": [
+        "Полиэстер / эластан",
+        "Нейлон / эластан"
+      ],
+      "sizes": []
+    },
+    "wrestling-shoes": {
+      "materials": [
+        "Текстиль",
+        "Синтетическая кожа",
+        "Натуральная кожа",
+        "Текстиль / синтетическая кожа"
+      ],
+      "sizes": []
+    },
+    "wrestling-kneepads": {
+      "materials": [
+        "Натуральная кожа",
+        "Экокожа",
+        "ПУ",
+        "Текстиль",
+        "Неопрен",
+        "Пластик"
+      ],
+      "sizes": []
+    },
+    "wrestling-earguards": {
+      "materials": [
+        "Натуральная кожа",
+        "Экокожа",
+        "ПУ",
+        "Текстиль",
+        "Неопрен",
+        "Пластик"
+      ],
+      "sizes": []
+    },
+    "fitness-dumbbells": {
+      "materials": [],
+      "sizes": []
+    },
+    "fitness-ropes": {
+      "materials": [],
+      "sizes": []
+    },
+    "gym-mats": {
+      "materials": [],
+      "sizes": []
+    },
+    "gym-mounts": {
+      "materials": [],
+      "sizes": []
     }
   },
   "rules": [
+    {
+      "categoryId": "sambo-jackets",
+      "all": [
+        "куртк",
+        "самбо"
+      ]
+    },
+    {
+      "categoryId": "wrestling-singlets",
+      "all": [
+        "трико"
+      ]
+    },
+    {
+      "categoryId": "combat-boxing-mma-mma-gloves",
+      "all": [
+        "перчат",
+        "мма"
+      ]
+    },
     {
       "categoryId": "karate-gloves",
       "all": [

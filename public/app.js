@@ -1,5 +1,5 @@
 const PAGE_SIZE=24;
-const state={page:1,products:[],categories:[],categoryById:new Map(),selectedCategoryId:null,query:"",sort:"default",currency:localStorage.getItem("lucky-wholesale-currency")||"RUB",requestIds:new Set(JSON.parse(localStorage.getItem("lucky-wholesale-request")||"[]"))};
+const state={page:1,products:[],categories:[],categoryById:new Map(),selectedCategoryId:null,selectedProductTypeId:null,query:"",sort:"default",currency:localStorage.getItem("lucky-wholesale-currency")||"RUB",requestIds:new Set(JSON.parse(localStorage.getItem("lucky-wholesale-request")||"[]"))};
 
 const el={
   menuToggle:document.querySelector("#menuToggle"),mobileNav:document.querySelector("#mobileNav"),
@@ -24,10 +24,10 @@ function priceText(p){const v=p.priceFrom?.[state.currency];if(v==null)return nu
 
 function descendants(id){if(!id)return null;const ids=new Set([id]);let changed=true;while(changed){changed=false;for(const c of state.categories){if(c.parentId&&ids.has(c.parentId)&&!ids.has(c.id)){ids.add(c.id);changed=true}}}return ids}
 function productCountForCategory(id){const ids=descendants(id);return state.products.filter(p=>(p.categoryIds||[]).some(x=>ids.has(x))).length}
-function filteredProducts(){const q=normalize(state.query),ids=descendants(state.selectedCategoryId);let p=state.products.filter(x=>{if(ids&&!(x.categoryIds||[]).some(id=>ids.has(id)))return false;if(!q)return true;return normalize([x.title,x.brand,x.article,...(x.colors||[]),...(x.sizes||[])].filter(Boolean).join(" ")).includes(q)});p=[...p];if(state.sort==="default")p.sort((a,b)=>(a.popularityRank??Infinity)-(b.popularityRank??Infinity)||(a.title||"").localeCompare(b.title||"","ru"));if(state.sort==="title")p.sort((a,b)=>(a.title||"").localeCompare(b.title||"","ru"));if(state.sort==="brand")p.sort((a,b)=>(a.brand||"").localeCompare(b.brand||"","ru")||(a.title||"").localeCompare(b.title||"","ru"));if(state.sort==="priceAsc")p.sort((a,b)=>(a.priceFrom?.[state.currency]??Infinity)-(b.priceFrom?.[state.currency]??Infinity));if(state.sort==="priceDesc")p.sort((a,b)=>(b.priceFrom?.[state.currency]??-Infinity)-(a.priceFrom?.[state.currency]??-Infinity));return p}
+function filteredProducts(){const q=normalize(state.query),ids=descendants(state.selectedCategoryId);let p=state.products.filter(x=>{if(state.selectedProductTypeId&&!productTypesFor(x).includes(state.selectedProductTypeId))return false;if(ids&&!(x.categoryIds||[]).some(id=>ids.has(id)))return false;if(!q)return true;return normalize([x.title,x.brand,x.article,...(x.colors||[]),...(x.sizes||[])].filter(Boolean).join(" ")).includes(q)});p=[...p];if(state.sort==="default")p.sort((a,b)=>(a.popularityRank??Infinity)-(b.popularityRank??Infinity)||(a.title||"").localeCompare(b.title||"","ru"));if(state.sort==="title")p.sort((a,b)=>(a.title||"").localeCompare(b.title||"","ru"));if(state.sort==="brand")p.sort((a,b)=>(a.brand||"").localeCompare(b.brand||"","ru")||(a.title||"").localeCompare(b.title||"","ru"));if(state.sort==="priceAsc")p.sort((a,b)=>(a.priceFrom?.[state.currency]??Infinity)-(b.priceFrom?.[state.currency]??Infinity));if(state.sort==="priceDesc")p.sort((a,b)=>(b.priceFrom?.[state.currency]??-Infinity)-(a.priceFrom?.[state.currency]??-Infinity));return p}
 function categoryPath(id){const path=[];let c=state.categoryById.get(id),seen=new Set();while(c&&!seen.has(c.id)){seen.add(c.id);path.unshift(c);c=c.parentId?state.categoryById.get(c.parentId):null}return path}
 function closeSidebar(){el.sidebar.classList.remove("open");document.body.classList.remove("sidebar-open")}
-function selectCategory(id,{scroll=true,updateUrl=true}={}){state.selectedCategoryId=id||null;state.page=1;closeSidebar();if(updateUrl){const url=new URL(window.location.href);if(state.selectedCategoryId)url.searchParams.set("category",state.selectedCategoryId);else url.searchParams.delete("category");history.replaceState({},"",url.pathname+url.search+url.hash)}render();if(scroll)document.querySelector("#catalog")?.scrollIntoView({behavior:"smooth",block:"start"})}
+function selectCategory(id,{scroll=true,updateUrl=true}={}){document.querySelector("#catalogBrowseTypes").setAttribute("aria-pressed","false");state.selectedCategoryId=id||null;state.selectedProductTypeId=null;state.page=1;closeSidebar();if(updateUrl){const url=new URL(window.location.href);url.searchParams.delete("productType");if(state.selectedCategoryId)url.searchParams.set("category",state.selectedCategoryId);else url.searchParams.delete("category");history.replaceState({},"",url.pathname+url.search+url.hash)}render();if(scroll)document.querySelector("#catalog")?.scrollIntoView({behavior:"smooth",block:"start"})}
 
 function childrenOf(parentId){return state.categories.filter(c=>(c.parentId||null)===(parentId||null))}
 function renderCategories(){
@@ -43,13 +43,13 @@ function renderCategories(){
 function topLevelCategories(){return childrenOf(null)}
 // Sport navigation flattens the combat group for buyers; source taxonomy stays unchanged.
 function buyerDirections(){
-  const ids=["judo","bjj","combat-boxing-mma","karate"];
+  const ids=["combat-boxing-mma","mma","kickboxing","muay-thai","judo","bjj","karate","sambo","wrestling"];
   const combat=state.categories.find(c=>c.id==="combat");
   const combatSports=combat?childrenOf(combat.id):[];
   const ordered=[...ids.map(id=>combatSports.find(c=>c.id===id)).filter(Boolean),...combatSports.filter(c=>!ids.includes(c.id)),...topLevelCategories().filter(c=>c.id!=="combat")];
   return ordered.filter(c=>c.active!==false);
 }
-function directionLabel(c){return ({"bjj":"Джиу-джитсу","combat-boxing-mma":"Бокс / ММА","karate":"Карате"})[c.id]||c.name}
+function directionLabel(c){return ({"bjj":"Джиу-джитсу","combat-boxing-mma":"Бокс","karate":"Карате"})[c.id]||c.name}
 function selectedDirection(){const path=categoryPath(state.selectedCategoryId);return buyerDirections().find(c=>path.some(p=>p.id===c.id))}
 function renderSportChoices(){
   const query=normalize(document.querySelector("#sportSearch").value);
@@ -170,6 +170,7 @@ const sportArtworkRules={
     "image": "./images/sports/other.png",
     "mark": "↗"
   }
+  ,"mma":{"image":"./images/sports/mma.png","mark":"ММА"},"sambo":{"image":"./images/sports/sambo.png","mark":"САМБО"},"wrestling":{"image":"./images/sports/wrestling.png","mark":"БОРЬБА"},"fitness":{"image":"./images/sports/other.png","mark":"+"},"gym-equipment":{"image":"./images/sports/other.png","mark":"+"}
 };
 function syncSportsDiscoveryArrows(){
  const rail=document.querySelector("#sportsDiscoveryRail");
@@ -265,8 +266,8 @@ function renderProducts(){
   const f=document.createDocumentFragment();
   for(const x of visible)f.appendChild(renderCard(x));
   el.productGrid.appendChild(f);
-  const pathText=categoryPath(state.selectedCategoryId).map(x=>x.name).join(" / ");
-  el.activeCategoryTitle.textContent=state.categoryById.get(state.selectedCategoryId)?.name||"Все оптовые товары";
+  const pathText=state.selectedProductTypeId?catalogProductTypes[state.selectedProductTypeId]:categoryPath(state.selectedCategoryId).map(x=>x.name).join(" / ");
+  el.activeCategoryTitle.textContent=state.selectedProductTypeId?catalogProductTypes[state.selectedProductTypeId]:(state.categoryById.get(state.selectedCategoryId)?.name||"Все оптовые товары");
   const count=p.length?`${start+1}–${start+visible.length} из ${p.length} товаров`:"0 товаров";
   el.resultsMeta.textContent=pathText?`${pathText} · ${count}`:count;
   renderPagination(p.length);
@@ -353,7 +354,27 @@ function renderShowcase(){
   bind(first,el.showcaseCardOne,el.showcaseImageOne,el.showcaseTitleOne,el.showcaseBrandOne);
   bind(second,el.showcaseCardTwo,el.showcaseImageTwo,el.showcaseTitleTwo,el.showcaseBrandTwo);
 }
-function render(){renderSportsDiscovery();renderCategories();renderQuickCategories();renderProducts();saveRequest()}
+
+const catalogProductTypes={"gloves":"Перчатки","uniforms":"Кимоно и форма","belts":"Пояса","rashguards":"Рашгарды","bottoms":"Шорты и штаны","protection":"Защита","shoes":"Обувь","pads":"Лапы и пады","punching":"Мешки и груши","balls":"Мячи","accessories":"Аксессуары","fitness":"Фитнес-инвентарь","equipment":"Оборудование для зала"};
+function productTypesFor(product){return [...new Set((product.categoryIds||[]).map(id=>state.categoryById.get(id)?.productTypeId).filter(Boolean))];}
+function selectProductType(id){
+ state.selectedProductTypeId=id||null;state.selectedCategoryId=null;state.query="";el.searchInput.value="";state.page=1;closeSidebar();
+ const url=new URL(location.href);url.searchParams.delete("category");if(id)url.searchParams.set("productType",id);else url.searchParams.delete("productType");history.replaceState({},"",url.pathname+url.search+url.hash);
+ render();document.querySelector("#catalog").scrollIntoView({behavior:"smooth",block:"start"});
+}
+function renderProductTypeNavigation(){
+ const rail=document.querySelector("#productTypeRail");rail.replaceChildren();
+ for(const [id,name]of [["","Все товары"],...Object.entries(catalogProductTypes)]){
+  const count=id?state.products.filter(p=>productTypesFor(p).includes(id)).length:state.products.length;
+  if(!count&&id)continue;
+  const button=document.createElement("button");button.type="button";button.className="sport-tab";button.textContent=name;button.setAttribute("aria-pressed",String((state.selectedProductTypeId||"")===id));button.addEventListener("click",()=>selectProductType(id));rail.append(button);
+ }
+ const mode=state.selectedProductTypeId?"types":(document.querySelector("#catalogBrowseTypes").getAttribute("aria-pressed")==="true"?"types":"sports");
+ document.querySelector("#catalogBrowseSports").setAttribute("aria-pressed",String(mode==="sports"));document.querySelector("#catalogBrowseTypes").setAttribute("aria-pressed",String(mode==="types"));
+ document.querySelector(".sport-navigation").hidden=mode!=="sports";rail.hidden=mode!=="types";document.querySelector(".compact-filters .touch-select").hidden=mode==="types";
+}
+
+function render(){renderProductTypeNavigation();renderSportsDiscovery();renderCategories();renderQuickCategories();renderProducts();saveRequest()}
 
 function additionalProductCategory(text,ids){
  const within=root=>ids.some(id=>id===root||id.startsWith(root+"-"));
@@ -387,7 +408,7 @@ function additionalProductCategory(text,ids){
  }
  return null;
 }
-function refinedProductCategories(product){
+function legacyRefinedProductCategories(product){
  const ids=product.categoryIds||[];
  // Only refine imported WB cards. Explicit warehouse category selections remain authoritative.
  if(!/^wb-\d+$/.test(String(product.id||"")))return ids;
@@ -414,7 +435,25 @@ function refinedProductCategories(product){
  const related=id=>id===root||id.startsWith(root+"-")||id.startsWith("combat-boxing-mma")||id.startsWith("bjj-")||id==="sports-unclassified";
  return [...new Set([...ids.filter(id=>!related(id)),leaf])];
 }
-async function init(){try{const [cr,gr]=await Promise.all([fetch("./data/catalog.json",{cache:"no-store"}),fetch("./data/categories.json",{cache:"no-store"})]);if(!cr.ok||!gr.ok)throw new Error("load");const c=await cr.json(),g=await gr.json();state.products=(Array.isArray(c.products)?c.products:[]).filter(p=>!/^wb-[1-9][0-9]*$/.test(p.id));const wbURL=location.hostname.endsWith("github.io")?"https://opt.luckysport.kz/wb-catalog.php":"./wb-catalog.php";const wr=await fetch(wbURL,{cache:"no-store"});if(!wr.ok)throw Error("Каталог ВБ временно недоступен");const wb=await wr.json();if(!Array.isArray(wb.products))throw Error("Каталог ВБ временно недоступен");state.products.push(...wb.products);try{const response=await fetch("./warehouse-catalog.php",{cache:"no-store"});if(response.ok){const warehouse=await response.json();if(Array.isArray(warehouse.products))state.products.push(...warehouse.products);}}catch(e){console.warn("Складской каталог временно недоступен");}try{const fr=await fetch("./data/fx.json",{cache:"no-store"});if(fr.ok){const fx=await fr.json();state.products=convertProductPrices(state.products,fx);el.currencyControl.title="Пересчёт по курсу Национального банка Казахстана"+(fx.effectiveDate?" на "+fx.effectiveDate:"");}}catch(e){console.warn("Курсы валют временно недоступны");}state.products=state.products.map(p=>({...p,categoryIds:refinedProductCategories(p)}));state.categories=Array.isArray(g)?g.map(c=>({...c,name:c.name.replace(/BJJ\s*\/\s*Джиу-джитсу/gi,"Джиу-джитсу").replace(/MMA/g,"ММА")})):[];state.categoryById=new Map(state.categories.map(x=>[x.id,x]));const initialCategory=new URLSearchParams(window.location.search).get("category");if(initialCategory&&state.categoryById.has(initialCategory))state.selectedCategoryId=initialCategory;const top=topLevelCategories().filter(x=>productCountForCategory(x.id)>0).length;if(el.productCount)el.productCount.textContent=state.products.length;if(el.categoryCount)el.categoryCount.textContent=top;el.currencySelect.value=state.currency;const hasPrice=state.products.some(p=>p.priceFrom?.KZT!=null);el.currencyControl.hidden=!hasPrice;if(!hasPrice)[...el.sortSelect.options].forEach(o=>{if(o.value==="priceAsc"||o.value==="priceDesc")o.hidden=true});renderShowcase();render()}catch(e){console.error(e);el.resultsMeta.textContent="Ошибка загрузки каталога";el.productGrid.innerHTML="";el.emptyState.hidden=false}}
+
+function refinedProductCategories(product){
+ const ids=legacyRefinedProductCategories(product);
+ if(!/^wb-\d+$/.test(String(product.id||"")))return ids;
+ const text=String(product.title||"").toLowerCase().replaceAll("ё","е");
+ let leaf=null;
+ if(/самбовк/.test(text))leaf="sambo-shoes";
+ else if(/самбо/.test(text)){const suffix=/пояс/.test(text)?"belts":/шорт/.test(text)?"shorts":/куртк|кимоно/.test(text)?"jackets":/защит/.test(text)?"protection":null;if(suffix)leaf="sambo-"+suffix;}
+ else if(/борцовк/.test(text))leaf="wrestling-shoes";
+ else if(/борьб|борцов/.test(text)){const suffix=/трико/.test(text)?"singlets":/наколен/.test(text)?"kneepads":/защит.*уш/.test(text)?"earguards":null;if(suffix)leaf="wrestling-"+suffix;}
+ else if(/мма|mma|ufc|черепаш/.test(text)){
+  const suffix=/перчат|черепаш/.test(text)?(/спарринг/.test(text)?"mma-sparring-gloves":"combat-boxing-mma-mma-gloves"):/рашгард/.test(text)?"combat-boxing-mma-rashguards":/шорт/.test(text)?"combat-boxing-mma-shorts":/спатс|компрессион.*(?:штан|брюк|леггин)/.test(text)?"mma-spats":/щитк|защит.*голен/.test(text)?"mma-shinguards":/кап[аыу](?:\s|$|[,.])/.test(text)?"mma-mouthguards":/защит.*пах|ракушк/.test(text)?"mma-groin":/шлем/.test(text)?"mma-helmets":null;
+  if(suffix)leaf=suffix;
+ }else if(/бокс/.test(text)&&!/кикбокс/.test(text)&&/шорт|форм/.test(text))leaf="boxing-shorts";
+ if(!leaf)return ids;
+ return [...new Set([...ids.filter(id=>!id.startsWith("combat-boxing-mma")&&!id.startsWith("mma-")&&!id.startsWith("sambo-")&&!id.startsWith("wrestling-")&&id!=="sports-unclassified"),leaf])];
+}
+
+async function init(){try{const [cr,gr]=await Promise.all([fetch("./data/catalog.json",{cache:"no-store"}),fetch("./data/categories.json",{cache:"no-store"})]);if(!cr.ok||!gr.ok)throw new Error("load");const c=await cr.json(),g=await gr.json();state.products=(Array.isArray(c.products)?c.products:[]).filter(p=>!/^wb-[1-9][0-9]*$/.test(p.id));const wbURL=location.hostname.endsWith("github.io")?"https://opt.luckysport.kz/wb-catalog.php":"./wb-catalog.php";const wr=await fetch(wbURL,{cache:"no-store"});if(!wr.ok)throw Error("Каталог ВБ временно недоступен");const wb=await wr.json();if(!Array.isArray(wb.products))throw Error("Каталог ВБ временно недоступен");state.products.push(...wb.products);try{const response=await fetch("./warehouse-catalog.php",{cache:"no-store"});if(response.ok){const warehouse=await response.json();if(Array.isArray(warehouse.products))state.products.push(...warehouse.products);}}catch(e){console.warn("Складской каталог временно недоступен");}try{const fr=await fetch("./data/fx.json",{cache:"no-store"});if(fr.ok){const fx=await fr.json();state.products=convertProductPrices(state.products,fx);el.currencyControl.title="Пересчёт по курсу Национального банка Казахстана"+(fx.effectiveDate?" на "+fx.effectiveDate:"");}}catch(e){console.warn("Курсы валют временно недоступны");}state.products=state.products.map(p=>({...p,categoryIds:refinedProductCategories(p)}));state.categories=Array.isArray(g)?g.map(c=>({...c,name:c.name.replace(/BJJ\s*\/\s*Джиу-джитсу/gi,"Джиу-джитсу").replace(/MMA/g,"ММА")})):[];state.categoryById=new Map(state.categories.map(x=>[x.id,x]));const initialType=new URLSearchParams(window.location.search).get("productType");if(catalogProductTypes[initialType])state.selectedProductTypeId=initialType;const initialCategory=new URLSearchParams(window.location.search).get("category");if(!state.selectedProductTypeId&&initialCategory&&state.categoryById.has(initialCategory))state.selectedCategoryId=initialCategory;const top=topLevelCategories().filter(x=>productCountForCategory(x.id)>0).length;if(el.productCount)el.productCount.textContent=state.products.length;if(el.categoryCount)el.categoryCount.textContent=top;el.currencySelect.value=state.currency;const hasPrice=state.products.some(p=>p.priceFrom?.KZT!=null);el.currencyControl.hidden=!hasPrice;if(!hasPrice)[...el.sortSelect.options].forEach(o=>{if(o.value==="priceAsc"||o.value==="priceDesc")o.hidden=true});renderShowcase();render()}catch(e){console.error(e);el.resultsMeta.textContent="Ошибка загрузки каталога";el.productGrid.innerHTML="";el.emptyState.hidden=false}}
 el.searchInput.addEventListener("input",e=>{state.query=e.target.value;state.page=1;renderProducts()});el.sortSelect.addEventListener("change",e=>{state.sort=e.target.value;state.page=1;renderProducts()});el.currencySelect.addEventListener("change",e=>{state.currency=e.target.value;state.page=1;localStorage.setItem("lucky-wholesale-currency",state.currency);renderProducts()});el.clearCategory.addEventListener("click",()=>selectCategory(null,{scroll:false}));el.filtersToggle.addEventListener("click",openSportPicker);el.sidebarClose.addEventListener("click",closeSidebar);el.dialogClose.addEventListener("click",()=>el.productDialog.close());el.requestDialogClose.addEventListener("click",()=>el.requestDialog.close());el.requestButton.addEventListener("click",openRequest);el.mobileRequestButton.addEventListener("click",openRequest);el.copyRequestButton.addEventListener("click",copyRequest);el.productDialog.addEventListener("click",e=>{if(e.target===el.productDialog)el.productDialog.close()});el.requestDialog.addEventListener("click",e=>{if(e.target===el.requestDialog)el.requestDialog.close()});document.querySelectorAll("[data-scroll-to-catalog]").forEach(b=>b.addEventListener("click",()=>document.querySelector("#catalog")?.scrollIntoView({behavior:"smooth",block:"start"})));document.querySelectorAll("[data-category-shortcut]").forEach(b=>b.addEventListener("click",()=>{const id=b.dataset.categoryShortcut;if(state.categoryById.has(id))selectCategory(id)}));
 if(el.menuToggle&&el.mobileNav){
   el.menuToggle.addEventListener("click",()=>{
@@ -456,3 +495,6 @@ document.querySelector("#sportsDiscoveryAll").addEventListener("click",openSport
 for(const [id,sign] of [["sportsDiscoveryPrev",-1],["sportsDiscoveryNext",1]])document.querySelector("#"+id).addEventListener("click",()=>{const rail=document.querySelector("#sportsDiscoveryRail");rail.scrollBy({left:sign*Math.max(240,rail.clientWidth*.8),behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth"});});
 document.querySelector("#sportsDiscoveryRail").addEventListener("scroll",syncSportsDiscoveryArrows,{passive:true});
 window.addEventListener("resize",syncSportsDiscoveryArrows);
+
+document.querySelector("#catalogBrowseSports").addEventListener("click",()=>{document.querySelector("#catalogBrowseTypes").setAttribute("aria-pressed","false");selectCategory(null,{scroll:false});});
+document.querySelector("#catalogBrowseTypes").addEventListener("click",()=>{document.querySelector("#catalogBrowseTypes").setAttribute("aria-pressed","true");selectProductType("");});

@@ -319,7 +319,7 @@ function additionalProductCategory(text,ids){
  }
  return null;
 }
-function refinedProductCategories(product){
+function legacyRefinedProductCategories(product){
  const ids=product.categoryIds||[];
  // Only refine imported WB cards. Explicit warehouse category selections remain authoritative.
  if(!/^wb-\d+$/.test(String(product.id||"")))return ids;
@@ -346,6 +346,24 @@ function refinedProductCategories(product){
  const related=id=>id===root||id.startsWith(root+"-")||id.startsWith("combat-boxing-mma")||id.startsWith("bjj-")||id==="sports-unclassified";
  return [...new Set([...ids.filter(id=>!related(id)),leaf])];
 }
+
+function refinedProductCategories(product){
+ const ids=legacyRefinedProductCategories(product);
+ if(!/^wb-\d+$/.test(String(product.id||"")))return ids;
+ const text=String(product.title||"").toLowerCase().replaceAll("ё","е");
+ let leaf=null;
+ if(/самбовк/.test(text))leaf="sambo-shoes";
+ else if(/самбо/.test(text)){const suffix=/пояс/.test(text)?"belts":/шорт/.test(text)?"shorts":/куртк|кимоно/.test(text)?"jackets":/защит/.test(text)?"protection":null;if(suffix)leaf="sambo-"+suffix;}
+ else if(/борцовк/.test(text))leaf="wrestling-shoes";
+ else if(/борьб|борцов/.test(text)){const suffix=/трико/.test(text)?"singlets":/наколен/.test(text)?"kneepads":/защит.*уш/.test(text)?"earguards":null;if(suffix)leaf="wrestling-"+suffix;}
+ else if(/мма|mma|ufc|черепаш/.test(text)){
+  const suffix=/перчат|черепаш/.test(text)?(/спарринг/.test(text)?"mma-sparring-gloves":"combat-boxing-mma-mma-gloves"):/рашгард/.test(text)?"combat-boxing-mma-rashguards":/шорт/.test(text)?"combat-boxing-mma-shorts":/спатс|компрессион.*(?:штан|брюк|леггин)/.test(text)?"mma-spats":/щитк|защит.*голен/.test(text)?"mma-shinguards":/кап[аыу](?:\s|$|[,.])/.test(text)?"mma-mouthguards":/защит.*пах|ракушк/.test(text)?"mma-groin":/шлем/.test(text)?"mma-helmets":null;
+  if(suffix)leaf=suffix;
+ }else if(/бокс/.test(text)&&!/кикбокс/.test(text)&&/шорт|форм/.test(text))leaf="boxing-shorts";
+ if(!leaf)return ids;
+ return [...new Set([...ids.filter(id=>!id.startsWith("combat-boxing-mma")&&!id.startsWith("mma-")&&!id.startsWith("sambo-")&&!id.startsWith("wrestling-")&&id!=="sports-unclassified"),leaf])];
+}
+
 function categoryIdsForWb(product) {
   const subjectKey = String(product.subjectID ?? "");
   let ids = [...(categoryMap.subjectMap?.[subjectKey] || ["sports-unclassified"])];
