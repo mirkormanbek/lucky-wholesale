@@ -39,7 +39,7 @@ export function initPhotoStudio(context){
   try{const response=await fetch('./process-studio.php',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json','X-Requested-With':'LuckyWarehouse'},body:JSON.stringify({...options,id,sourceIds,revision:c.current.revision,requestId,confirmed:true})});const data=await response.json();if(!response.ok)throw Error(data.error||'Обработка не завершена.');await context.reload();context.message('Новый вариант сохранён отдельно. Сравните его с исходниками и выберите, какие фото использовать.');$('studioProgress').textContent='Готово. Текущая галерея не заменена.';
   }catch(e){context.message((e.message||'Связь прервалась.')+' Перед повтором обновите карточку. Новый запуск оплачивается отдельно.');$('studioProgress').textContent='Автоматический повтор отключён.';}finally{running=false;context.busy(false);render();}
  }
- $('studioSelectAll').addEventListener('click',()=>{selectedKeys=new Set(context.get().photos.map(key));render();});$('studioSelectNone').addEventListener('click',()=>{selectedKeys=new Set();primaryKey=null;render();});
+ $('studioSelectAll')?.addEventListener('click',()=>{selectedKeys=new Set(context.get().photos.map(key));render();});$('studioSelectNone')?.addEventListener('click',()=>{selectedKeys=new Set();primaryKey=null;render();});
  $('category').addEventListener('change',()=>{mode=preset()?'category':'white';render();});
  $('photoStudio').querySelectorAll('[data-studio-mode]').forEach(b=>b.addEventListener('click',()=>{mode=b.dataset.studioMode;render();}));$('studioView').addEventListener('change',()=>{$('studioViewConfirmed').checked=false;render();});$('studioGenerate').addEventListener('click',generate);
  return {render};
