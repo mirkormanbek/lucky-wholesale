@@ -45,9 +45,12 @@ function studio_reserve(array &$s,array $input): array {
     if (count($p['studioResults']??[])>=8) throw new DomainException('Сначала примите или отклоните сохранённые результаты студии (до 8).',409);
     if (count($p['photos'])<1||count($p['photos'])>8) throw new DomainException('Нужно от 1 до 8 фото одного товара.',400);
     if($options['mode']==='category' && !studio_category_preset($p['categoryId']??'')) throw new DomainException('Для этой категории пока нет шаблона. Выберите белый фон.',400);
-    $files=[];foreach($p['photos'] as $photoId){$photo=$s['photos'][$photoId]??null;$name=$photo?($photo['original']?:$photo['processed']):null;if(!$name)throw new DomainException('Один из исходников недоступен.',409);$files[]=$name;}
+    $sourceIds=array_key_exists('sourceIds',$input)?$input['sourceIds']:$p['photos'];
+    if(!is_array($sourceIds)||count($sourceIds)<1||count($sourceIds)>8||count(array_unique($sourceIds,SORT_REGULAR))!==count($sourceIds))throw new DomainException('Выберите от 1 до 8 разных исходников.',400);
+    foreach($sourceIds as $sourceId)if(!is_string($sourceId)||!in_array($sourceId,$p['photos'],true))throw new DomainException('Выбранный исходник не принадлежит карточке.',403);
+    $files=[];foreach($sourceIds as $photoId){$photo=$s['photos'][$photoId]??null;$name=$photo?($photo['original']?:$photo['processed']):null;if(!$name)throw new DomainException('Один из исходников недоступен.',409);$files[]=$name;}
     $s['products'][$id]['studioRequests'][$request]=['status'=>'pending','at'=>gmdate('c')];
-    return ['id'=>$id,'requestId'=>$request,'options'=>$options,'files'=>$files,'title'=>$p['title'],'categoryId'=>$p['categoryId']??'','sourceIds'=>$p['photos'],'sourceRevision'=>$p['revision']];
+    return ['id'=>$id,'requestId'=>$request,'options'=>$options,'files'=>$files,'title'=>$p['title'],'categoryId'=>$p['categoryId']??'','sourceIds'=>$sourceIds,'sourceRevision'=>$p['revision']];
 }
 function studio_category_rules(string $categoryId): string {
     if (!in_array($categoryId, ['bjj-belts','judo-belts','karate-belts','sambo-belts'], true)) return '';
