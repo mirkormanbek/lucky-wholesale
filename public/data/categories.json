@@ -115,6 +115,15 @@
     "productTypeId": "gloves"
   },
   {
+    "id": "sambo-uniforms",
+    "name": "Комплекты: куртка + шорты",
+    "slug": "sambo-uniforms",
+    "parentId": "sambo",
+    "sort": 10,
+    "active": true,
+    "productTypeId": "uniforms"
+  },
+  {
     "id": "combat-boxing-mma-mma-gloves",
     "name": "Перчатки ММА",
     "slug": "combat-boxing-mma-mma-gloves",
@@ -369,6 +378,15 @@
     "sort": 35,
     "active": true,
     "productTypeId": "bottoms"
+  },
+  {
+    "id": "fitness-harness",
+    "name": "Жгуты",
+    "slug": "fitness-harness",
+    "parentId": "fitness",
+    "sort": 35,
+    "active": true,
+    "productTypeId": "fitness"
   },
   {
     "id": "combat-boxing-mma-mitts",

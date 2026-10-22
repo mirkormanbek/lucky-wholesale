@@ -383,6 +383,7 @@ function additionalProductCategory(text,ids){
  if(/футзалк|обув.*футзал/.test(text))return "football-futsal-shoes";
  if(/вратар.*перчат|перчат.*вратар/.test(text))return "football-goalkeeper-gloves";
  if(/насос.*мяч|игл.*насос/.test(text))return "other-pumps";
+ if(/жгут|борцовск.*резин|резин.*борьб/.test(text))return "fitness-harness";
  if(/эспандер|фитнес.*резин|резин.*фитнес/.test(text))return "other-resistance-bands";
  if(/коврик.*(?:тренир|йог|фитнес)/.test(text))return "other-mats";
  if(/шейкер|спортивн.*бутыл|бутыл.*спорт/.test(text))return "other-bottles";
@@ -442,7 +443,7 @@ function refinedProductCategories(product){
  const text=String(product.title||"").toLowerCase().replaceAll("ё","е");
  let leaf=null;
  if(/самбовк/.test(text))leaf="sambo-shoes";
- else if(/самбо/.test(text)){const suffix=/пояс/.test(text)?"belts":/шорт/.test(text)?"shorts":/куртк|кимоно/.test(text)?"jackets":/защит/.test(text)?"protection":null;if(suffix)leaf="sambo-"+suffix;}
+ else if(/самбо/.test(text)){const suffix=/комплект|набор|кимоно|форма|куртк.*шорт|шорт.*куртк/.test(text)?"uniforms":/пояс/.test(text)?"belts":/шорт/.test(text)?"shorts":/куртк/.test(text)?"jackets":/защит/.test(text)?"protection":null;if(suffix)leaf="sambo-"+suffix;}
  else if(/борцовк/.test(text))leaf="wrestling-shoes";
  else if(/борьб|борцов/.test(text)){const suffix=/трико/.test(text)?"singlets":/наколен/.test(text)?"kneepads":/защит.*уш/.test(text)?"earguards":null;if(suffix)leaf="wrestling-"+suffix;}
  else if(/мма|mma|ufc|черепаш/.test(text)){
