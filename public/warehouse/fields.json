@@ -108,7 +108,9 @@
     "fitness-dumbbells": "Гантели и гири — Фитнес-инвентарь",
     "fitness-ropes": "Скакалки — Фитнес-инвентарь",
     "gym-mats": "Татами и маты — Оборудование для зала",
-    "gym-mounts": "Крепления для мешков — Оборудование для зала"
+    "gym-mounts": "Крепления для мешков — Оборудование для зала",
+    "fitness-harness": "Спортивный жгут",
+    "sambo-uniforms": "Комплект для самбо: куртка и шорты"
   },
   "colors": [
     "Чёрный",
@@ -1133,9 +1135,46 @@
     "gym-mounts": {
       "materials": [],
       "sizes": []
+    },
+    "fitness-harness": {
+      "materials": [
+        "Натуральный латекс",
+        "Латекс",
+        "Резина",
+        "Термопластичный эластомер (TPE)"
+      ],
+      "sizes": []
+    },
+    "sambo-uniforms": {
+      "materials": [
+        "Хлопок",
+        "Полиэстер",
+        "Хлопок / полиэстер"
+      ],
+      "sizes": []
     }
   },
   "rules": [
+    {
+      "categoryId": "fitness-harness",
+      "all": [
+        "жгут"
+      ]
+    },
+    {
+      "categoryId": "sambo-uniforms",
+      "all": [
+        "самбо",
+        "комплект"
+      ]
+    },
+    {
+      "categoryId": "sambo-uniforms",
+      "all": [
+        "самбо",
+        "кимоно"
+      ]
+    },
     {
       "categoryId": "sambo-jackets",
       "all": [

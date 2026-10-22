@@ -1,5 +1,5 @@
 {
-  "version": 5,
+  "version": 6,
   "categories": [
     {
       "id": "combat",
@@ -1100,6 +1100,24 @@
       "sort": 50,
       "active": true,
       "productTypeId": "equipment"
+    },
+    {
+      "id": "fitness-harness",
+      "name": "Жгуты",
+      "slug": "fitness-harness",
+      "parentId": "fitness",
+      "sort": 35,
+      "active": true,
+      "productTypeId": "fitness"
+    },
+    {
+      "id": "sambo-uniforms",
+      "name": "Комплекты: куртка + шорты",
+      "slug": "sambo-uniforms",
+      "parentId": "sambo",
+      "sort": 10,
+      "active": true,
+      "productTypeId": "uniforms"
     }
   ],
   "productTypes": [
