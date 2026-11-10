@@ -98,3 +98,37 @@ function studio_multipart($stream,array $fields,array $images,string $boundary):
     fwrite($stream,"--$boundary--\r\n");rewind($stream);
 }
 
+// Only fixed diagnostic labels leave this process. Never expose provider bodies or credentials.
+function studio_failure(string $stage,int $status,int $curlError,$providerCode): array {
+    $reason=$stage;
+    if($stage==='provider'){
+        if($curlError===28)$reason='timeout';
+        elseif($curlError!==0)$reason='connection';
+        elseif(in_array($providerCode,['insufficient_quota','billing_hard_limit_reached'],true)||$status===402)$reason='quota';
+        elseif($status===401)$reason='authorization';
+        elseif($status===403||$status===404)$reason='model_access';
+        elseif($status===429)$reason='rate_limit';
+        elseif(in_array($providerCode,['content_policy_violation','moderation_blocked'],true))$reason='moderation';
+        elseif($status===400||$status===413||$status===422)$reason='provider_input';
+        elseif($status>=500)$reason='provider_unavailable';
+    }
+    $messages=[
+        'setup'=>'На сервере недоступны расширения для обработки фото. Запрос к Images API не отправлен.',
+        'key'=>'Ключ Images API не настроен на сервере. Запрос не отправлен.',
+        'storage'=>'Закрытое хранилище недоступно. Запрос к Images API не отправлен.',
+        'prepare'=>'Сервер не смог подготовить исходники. Запрос к Images API не отправлен.',
+        'timeout'=>'Images API не ответил вовремя. Статус генерации неизвестен.',
+        'connection'=>'Связь с Images API прервалась. Статус генерации неизвестен.',
+        'quota'=>'Images API отклонил запрос из-за квоты или настроек оплаты.',
+        'authorization'=>'Images API отклонил ключ. Нужно проверить настройки доступа.',
+        'model_access'=>'Images API не предоставил доступ к модели обработки фото.',
+        'rate_limit'=>'Images API временно ограничил частоту запросов.',
+        'moderation'=>'Images API отклонил содержимое запроса. Проверьте выбранные фото и пожелания.',
+        'provider_input'=>'Images API не принял параметры или исходники. Для диагностики нужен код ошибки.',
+        'provider_unavailable'=>'На стороне Images API возникла ошибка.',
+        'provider'=>'Images API не завершил запрос. Для диагностики нужен код ошибки.',
+        'decode'=>'Images API ответил, но результат не удалось прочитать как PNG.',
+        'save'=>'Images API вернул фото, но сервер не смог сохранить результат. Генерация могла быть оплачена.',
+    ];
+    return ['reason'=>$reason,'message'=>$messages[$reason]??$messages['provider']];
+}
