@@ -6,7 +6,7 @@ header('Cache-Control: no-store');header('X-Content-Type-Options: nosniff');
 if(($_SERVER['REMOTE_USER']??'')!==WAREHOUSE_OWNER)warehouse_json(['error'=>'Фотостудия доступна только владельцу.'],403);
 if(($_SERVER['REQUEST_METHOD']??'')!=='POST')warehouse_json(['error'=>'Нужен POST-запрос.'],405);
 if(($_SERVER['HTTP_X_REQUESTED_WITH']??'')!=='LuckyWarehouse'||($_SERVER['HTTP_SEC_FETCH_SITE']??'')==='cross-site')warehouse_json(['error'=>'Недопустимый запрос.'],403);
-$raw=(string)file_get_contents('php://input');$input=strlen($raw)<=16384?json_decode($raw,true):null;
+$raw=isset($_POST['payload'])&&is_string($_POST['payload'])?$_POST['payload']:(string)file_get_contents('php://input');$input=strlen($raw)<=16384?json_decode($raw,true):null;
 if(!is_array($input))warehouse_json(['error'=>'Неверные данные.'],400);
 $reference=bin2hex(random_bytes(6));$stage='setup';$status=0;$curlError=0;$providerCode=null;
 $lock=null;$job=null;$copies=[];$savedFile=null;$committed=false;$body=null;
@@ -15,12 +15,21 @@ try{
  $stage='storage';$private=warehouse_private();$stage='key';$keyFile=$private.'/openai-key.php';$key=is_readable($keyFile)?(require $keyFile):null;
  if(!is_string($key)||strlen(trim($key))<20)throw new RuntimeException('Серверный ключ обработки фото не настроен.');
  $stage='storage';$lock=@fopen($private.'/photo-processing-limit.json','c+');if(!$lock)throw new RuntimeException('Processing lock unavailable');if(!flock($lock,LOCK_EX|LOCK_NB))throw new DomainException('Обработка уже идёт. Дождитесь её окончания.',429);
+ unset($input['fitReferenceValidated']);$fitImage=null;
+ if(isset($_FILES['fitReference'])){
+  $upload=$_FILES['fitReference'];
+  if($upload['error']!==UPLOAD_ERR_OK||!is_uploaded_file($upload['tmp_name'])||$upload['size']>12*1024*1024)throw new DomainException('Фото посадки: нужен JPEG, PNG или WebP до 12 МБ.',400);
+  $mime=(new finfo(FILEINFO_MIME_TYPE))->file($upload['tmp_name']);$dims=@getimagesize($upload['tmp_name']);
+  if(!in_array($mime,['image/jpeg','image/png','image/webp'],true)||!$dims||$dims[0]*$dims[1]>40000000)throw new DomainException('Неверный формат или размер фото посадки.',400);
+  $fitImage=['path'=>$upload['tmp_name'],'mime'=>$mime];$input['fitReferenceValidated']=true;
+ }
  $job=warehouse_state(function(&$s)use($input){return studio_reserve($s,$input);});
  $fields=['model'=>'gpt-image-1.5','prompt'=>studio_prompt($job),'input_fidelity'=>'high','quality'=>'medium','size'=>'1024x1536','background'=>'opaque','output_format'=>'png','n'=>'1'];
  $images=[];foreach($job['files'] as $i=>$name){$file=warehouse_photo_path($name);$mime=is_file($file)?(new finfo(FILEINFO_MIME_TYPE))->file($file):'';$dims=@getimagesize($file);
   if(!in_array($mime,['image/jpeg','image/png','image/webp'],true)||!$dims||filesize($file)>12*1024*1024||$dims[0]*$dims[1]>40000000)throw new DomainException('Один из исходников недоступен или превышает лимит фото.',400);
   $images[]=['path'=>$file,'mime'=>$mime];
  }
+ if(studio_headguard_portrait($job))$images[]=$fitImage;
  $stage='prepare';$requestFile=tempnam($private,'studio-request-');if(!$requestFile)throw new RuntimeException('Не удалось подготовить запрос.');$copies[]=$requestFile;@chmod($requestFile,0600);$body=fopen($requestFile,'w+b');if(!$body)throw new RuntimeException('Не удалось подготовить запрос.');$boundary='LuckyStudio'.bin2hex(random_bytes(16));studio_multipart($body,$fields,$images,$boundary);$length=fstat($body)['size'];
  $stage='provider';$curl=curl_init('https://api.openai.com/v1/images/edits');curl_setopt_array($curl,[CURLOPT_UPLOAD=>true,CURLOPT_CUSTOMREQUEST=>'POST',CURLOPT_INFILE=>$body,CURLOPT_INFILESIZE=>$length,CURLOPT_RETURNTRANSFER=>true,CURLOPT_CONNECTTIMEOUT=>15,CURLOPT_TIMEOUT=>100,CURLOPT_HTTPHEADER=>['Authorization: Bearer '.trim($key),'Content-Type: multipart/form-data; boundary='.$boundary,'Expect:']]);
  $response=curl_exec($curl);$status=(int)curl_getinfo($curl,CURLINFO_HTTP_CODE);$curlError=curl_errno($curl);curl_close($curl);unset($key);
