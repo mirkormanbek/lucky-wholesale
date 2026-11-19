@@ -23,6 +23,10 @@ try{
   if(!in_array($mime,['image/jpeg','image/png','image/webp'],true)||!$dims||$dims[0]*$dims[1]>40000000)throw new DomainException('Неверный формат или размер фото посадки.',400);
   $fitImage=['path'=>$upload['tmp_name'],'mime'=>$mime];$input['fitReferenceValidated']=true;
  }
+ if(!$fitImage){
+  $defaultReference=__DIR__.'/studio-references/headguard-fit.png';
+  if(is_file($defaultReference)&&getimagesize($defaultReference)!==false){$fitImage=['path'=>$defaultReference,'mime'=>'image/png'];$input['fitReferenceValidated']=true;}
+ }
  $job=warehouse_state(function(&$s)use($input){return studio_reserve($s,$input);});
  $fields=['model'=>'gpt-image-1.5','prompt'=>studio_prompt($job),'input_fidelity'=>'high','quality'=>'medium','size'=>'1024x1536','background'=>'opaque','output_format'=>'png','n'=>'1'];
  $images=[];foreach($job['files'] as $i=>$name){$file=warehouse_photo_path($name);$mime=is_file($file)?(new finfo(FILEINFO_MIME_TYPE))->file($file):'';$dims=@getimagesize($file);
