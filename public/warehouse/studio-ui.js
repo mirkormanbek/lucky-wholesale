@@ -13,7 +13,7 @@ export function initPhotoStudio(context){
   const keys=c.photos.map(key);if(selectedKeys===null)selectedKeys=new Set(keys);else{for(const k of keys)if(!knownKeys.has(k))selectedKeys.add(k);for(const k of selectedKeys)if(!keys.includes(k))selectedKeys.delete(k);}knownKeys=new Set(keys);if(!selectedKeys.has(primaryKey))primaryKey=keys.find(k=>selectedKeys.has(k))||null;
   const portrait=preset()==='Шлем: крупный план на модели'&&['category','model'].includes(mode);
   let fitBox=$('studioFitReferenceBox');
-  if(!fitBox){fitBox=document.createElement('label');fitBox.id='studioFitReferenceBox';fitBox.textContent='Другой пример посадки · необязательно. По умолчанию используется пример категории';const input=document.createElement('input');input.type='file';input.accept='image/jpeg,image/png,image/webp';input.id='studioFitReference';input.addEventListener('change',()=>{fitReferenceFile=input.files[0]||null;render();});fitBox.append(input);$('studioSources').before(fitBox);}
+  if(!fitBox){fitBox=document.createElement('label');fitBox.id='studioFitReferenceBox';fitBox.textContent='Фото посадки · необязательно. Конструкция и посадка определяются по исходникам товара';const input=document.createElement('input');input.type='file';input.accept='image/jpeg,image/png,image/webp';input.id='studioFitReference';input.addEventListener('change',()=>{fitReferenceFile=input.files[0]||null;render();});fitBox.append(input);$('studioSources').before(fitBox);}
   fitBox.hidden=!portrait;
   if(portrait)$('studioView').value='front';for(const option of $('studioView').options)option.disabled=portrait&&option.value!=='front';
   const count=selectedKeys.size;const locked=running||c.busy||c.current.studioPending;
@@ -41,7 +41,7 @@ export function initPhotoStudio(context){
   const portrait=preset()==='Шлем: крупный план на модели'&&['category','model'].includes(mode);
 
   const chosen=selectedPhotos(),count=chosen.length;if(!count)return;const indices=chosen.map(p=>context.get().photos.indexOf(p));const options={mode,view:$('studioView').value,model:$('studioModel').value,instructions:$('studioInstructions').value.trim(),viewConfirmed:$('studioViewConfirmed').checked};
-  if(!confirm('Создать 1 кадр «'+(mode==='category'?preset():modeNames[mode])+'», используя выбранные '+count+' фото? Ориентир '+estimate(count+(portrait?1:0))+'. Это платный запуск; оценка не является лимитом списания. Автоматического повтора нет.'))return;
+  if(!confirm('Создать 1 кадр «'+(mode==='category'?preset():modeNames[mode])+'», используя выбранные '+count+' фото? Ориентир '+estimate(count+(portrait&&fitReferenceFile?1:0))+'. Это платный запуск; оценка не является лимитом списания. Автоматического повтора нет.'))return;
   if(!await context.save())return;const c=context.get(),id=c.current.id,requestId=crypto.randomUUID(),sourceIds=indices.map(i=>c.photos[i]?.serverId);if(sourceIds.some(id=>!id)){context.message('Исходники изменились. Выберите фото заново.');return;}selectedKeys=new Set(sourceIds);knownKeys=new Set(c.photos.map(key));primaryKey=sourceIds[0];running=true;context.busy(true);render();$('studioProgress').textContent='Создаём кадр по выбранным исходникам. Не закрывайте страницу. Если связь прервётся, сначала обновите карточку — готовый вариант сохраняется на сервере.';
   const payload={...options,id,sourceIds,revision:c.current.revision,requestId,confirmed:true};
   let requestBody=JSON.stringify(payload),requestHeaders={'Content-Type':'application/json','X-Requested-With':'LuckyWarehouse'};
