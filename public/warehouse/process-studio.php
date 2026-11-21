@@ -54,14 +54,14 @@ try{
  $savedFile=bin2hex(random_bytes(16)).'.png';if(file_put_contents(warehouse_photo_path($savedFile),$bytes)!==strlen($bytes))throw new RuntimeException('Не удалось сохранить результат.');@chmod(warehouse_photo_path($savedFile),0600);
  if($headguard){
   $stage='verification';$candidate=['path'=>warehouse_photo_path($savedFile),'mime'=>'image/png'];
-  $review=studio_review_call($key,array_merge($reviewSources,[$candidate]),true,$job['sourceInventory']);
-  if(!$review['passed'])throw new DomainException('Результат отклонён проверкой: '.studio_review_issues($review).'. Фото не добавлено в карточку. Анализ и генерация могли быть оплачены; автоматического повтора нет.',409);
+  try{$review=studio_review_call($key,array_merge($reviewSources,[$candidate]),true);}
+  catch(Throwable $reviewError){$review=['passed'=>false,'issues'=>['uncertain'],'unavailable'=>true];}
   $job['integrityReview']=$review;
  }
  $stage='save';
  $photoId=bin2hex(random_bytes(16));$usage=[];foreach(['input_tokens','output_tokens','total_tokens']as $name)if(is_numeric($data['usage'][$name]??null))$usage[$name]=(int)$data['usage'][$name];
  warehouse_state(function(&$s)use($job,$photoId,$savedFile,$usage){studio_store_result($s,$job,$photoId,$savedFile,$usage);});$committed=true;
- $result=['ok'=>true,'photoId'=>$photoId,'sourceCount'=>count($job['sourceIds'])];$code=200;
+ $result=['ok'=>true,'photoId'=>$photoId,'sourceCount'=>count($job['sourceIds'])];if($headguard){$result['reviewPassed']=$job['integrityReview']['passed'];$result['reviewMessage']=$job['integrityReview']['passed']?'Автоматическое сравнение пройдено. Сравните детали с оригиналом.':'Вариант сохранён для сравнения, но не может быть принят: '.studio_review_issues($job['integrityReview']).'. Повтор автоматически не запускается.';}$code=200;
 }catch(Throwable $e){
  if($job)try{warehouse_state(function(&$s)use($job){if(isset($s['products'][$job['id']]))$s['products'][$job['id']]['studioRequests'][$job['requestId']]['status']='failed';});}catch(Throwable $ignored){}
  $code=$e instanceof DomainException&&in_array($e->getCode(),[400,404,409,429],true)?$e->getCode():502;

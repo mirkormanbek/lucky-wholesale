@@ -1,11 +1,17 @@
-# Портреты шлемов приостановлены
+# Source-driven headguard fitting v5
 
-Режимы категории, модели и невидимого манекена для категорий шлемов отключены сервером до любых платных API-запросов. Причина: генерация меняет конструкцию, а автоматическое сравнение не даёт достаточной гарантии сохранения товара. Эта проверка не подтверждает физическую посадку.
+The model/category mode is restored in this implementation. White background remains available.
+This does not certify fit or guarantee source fidelity.
 
-Интерфейс автоматически выбирает предметный белый фон, скрывает моделирование и объясняет причину. Старые клиенты и прямые запросы также блокируются. Предметный белый фон остаётся генеративной обработкой: владелец должен сравнивать его с оригиналом. Реальные фото товара можно использовать как раньше. Остальные категории не меняются.
+## Changes
+- Inventory describes source-evidenced parts, contour connections, permitted motion, openings and expected anatomical occlusion. No universal helmet-type template or compulsory reference.
+- Continuous crosspieces cannot be assumed to be chin pads or split into cheeks. A real protector may obscure nose or mouth.
+- gpt-4.1 performs structured inspection and independent comparison; the comparator receives original images and candidate, never the earlier inventory.
+- Each comparison criterion has source evidence, candidate evidence and match/mismatch/uncertain verdict. All criteria must match, even if overall passed says true.
+- One image generation per request. No automatic retries.
+- Rejected/unverified candidates are retained for visual inspection but cannot be accepted. Originals stay unchanged until explicit acceptance.
+- Pre-v5 modeled candidates remain inspect/discard only; no silent reinterpretation of their old reviews.
 
-Ранее сохранённые моделированные варианты не удаляются. Их можно просмотреть или отклонить; replace/append заблокированы, даже если модель проверки выставила passed. Уже принятые фото и опубликованные карточки автоматически не изменяются.
-
-Разработка универсального надевания не завершена. Для возобновления нужен набор реальных исходников и настоящих фото посадки разных конструкций с заранее определёнными критериями сохранения конструкции. Не считать новые формулировки prompt или один удачный кадр доказательством надёжности.
-
-Тесты: tests/studio-headguard-pause.test.php. Локальный PHP/cURL mock подтверждает ноль внешних вызовов для закрытых режимов, доступность белого фона и сохранность данных. Платные генерации не запускались.
+## Validation
+PHP validation and local mock transport exercise control flow and acceptance gates, not image quality.
+A real visual control on the owner's original is required before treating this implementation as visually validated.
