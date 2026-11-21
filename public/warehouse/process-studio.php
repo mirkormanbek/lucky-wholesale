@@ -2,7 +2,6 @@
 declare(strict_types=1);
 require __DIR__.'/storage.php';
 require __DIR__.'/studio-domain.php';
-require __DIR__.'/studio-review.php';
 header('Cache-Control: no-store');header('X-Content-Type-Options: nosniff');
 if(($_SERVER['REMOTE_USER']??'')!==WAREHOUSE_OWNER)warehouse_json(['error'=>'Фотостудия доступна только владельцу.'],403);
 if(($_SERVER['REQUEST_METHOD']??'')!=='POST')warehouse_json(['error'=>'Нужен POST-запрос.'],405);
@@ -16,29 +15,12 @@ try{
  $stage='storage';$private=warehouse_private();$stage='key';$keyFile=$private.'/openai-key.php';$key=is_readable($keyFile)?(require $keyFile):null;
  if(!is_string($key)||strlen(trim($key))<20)throw new RuntimeException('Серверный ключ обработки фото не настроен.');
  $stage='storage';$lock=@fopen($private.'/photo-processing-limit.json','c+');if(!$lock)throw new RuntimeException('Processing lock unavailable');if(!flock($lock,LOCK_EX|LOCK_NB))throw new DomainException('Обработка уже идёт. Дождитесь её окончания.',429);
- unset($input['fitReferenceValidated']);$fitImage=null;
- if(isset($_FILES['fitReference'])){
-  $upload=$_FILES['fitReference'];
-  if($upload['error']!==UPLOAD_ERR_OK||!is_uploaded_file($upload['tmp_name'])||$upload['size']>12*1024*1024)throw new DomainException('Фото посадки: нужен JPEG, PNG или WebP до 12 МБ.',400);
-  $mime=(new finfo(FILEINFO_MIME_TYPE))->file($upload['tmp_name']);$dims=@getimagesize($upload['tmp_name']);
-  if(!in_array($mime,['image/jpeg','image/png','image/webp'],true)||!$dims||$dims[0]*$dims[1]>40000000)throw new DomainException('Неверный формат или размер фото посадки.',400);
-  $fitImage=['path'=>$upload['tmp_name'],'mime'=>$mime];$input['fitReferenceValidated']=true;
- }
  $job=warehouse_state(function(&$s)use($input){return studio_reserve($s,$input);});
  $images=[];foreach($job['files'] as $i=>$name){$file=warehouse_photo_path($name);$mime=is_file($file)?(new finfo(FILEINFO_MIME_TYPE))->file($file):'';$dims=@getimagesize($file);
   if(!in_array($mime,['image/jpeg','image/png','image/webp'],true)||!$dims||filesize($file)>12*1024*1024||$dims[0]*$dims[1]>40000000)throw new DomainException('Один из исходников недоступен или превышает лимит фото.',400);
   $images[]=['path'=>$file,'mime'=>$mime];
  }
- $reviewSources=$images;$headguard=studio_headguard_portrait($job);
- if($headguard){
-  if(($input['integrityConfirmed']??false)!==true)throw new DomainException('Проверка шлема включает анализ исходника, одну генерацию и сравнение результата. Обновите фотостудию и подтвердите этот запуск.',400);
-  if(array_sum(array_map(fn($i)=>filesize($i['path']),$images))>16*1024*1024)throw new DomainException('Для проверки выберите исходники суммарно до 16 МБ.',400);
-  $stage='inspection';$profile=studio_review_call($key,$reviewSources,false);
-  if(!$profile['ready'])throw new DomainException('Конструкция по этим исходникам не подтверждена. Генерация не запускалась; выполнен только платный анализ. Добавьте более ясные фото.',409);
-  $job['sourceInventory']=$profile;
- }
  $fields=['model'=>'gpt-image-1.5','prompt'=>studio_prompt($job),'input_fidelity'=>'high','quality'=>'medium','size'=>'1024x1536','background'=>'opaque','output_format'=>'png','n'=>'1'];
- if($headguard&&$fitImage)$images[]=$fitImage;
  $stage='prepare';$requestFile=tempnam($private,'studio-request-');if(!$requestFile)throw new RuntimeException('Не удалось подготовить запрос.');$copies[]=$requestFile;@chmod($requestFile,0600);$body=fopen($requestFile,'w+b');if(!$body)throw new RuntimeException('Не удалось подготовить запрос.');$boundary='LuckyStudio'.bin2hex(random_bytes(16));studio_multipart($body,$fields,$images,$boundary);$length=fstat($body)['size'];
  $stage='provider';$curl=curl_init('https://api.openai.com/v1/images/edits');curl_setopt_array($curl,[CURLOPT_UPLOAD=>true,CURLOPT_CUSTOMREQUEST=>'POST',CURLOPT_INFILE=>$body,CURLOPT_INFILESIZE=>$length,CURLOPT_RETURNTRANSFER=>true,CURLOPT_CONNECTTIMEOUT=>15,CURLOPT_TIMEOUT=>100,CURLOPT_HTTPHEADER=>['Authorization: Bearer '.trim($key),'Content-Type: multipart/form-data; boundary='.$boundary,'Expect:']]);
  $response=curl_exec($curl);$status=(int)curl_getinfo($curl,CURLINFO_HTTP_CODE);$curlError=curl_errno($curl);curl_close($curl);
@@ -52,12 +34,6 @@ try{
  if(!$bytes||strlen($bytes)>20*1024*1024||substr($bytes,0,8)!=="\x89PNG\r\n\x1a\n"||!@getimagesizefromstring($bytes))throw new RuntimeException('Сервис вернул неверное изображение. Исходники сохранены.');
  $stage='save';$folder=$private.'/warehouse-photos';if(!is_dir($folder)&&!mkdir($folder,0700))throw new RuntimeException('Не удалось сохранить результат.');
  $savedFile=bin2hex(random_bytes(16)).'.png';if(file_put_contents(warehouse_photo_path($savedFile),$bytes)!==strlen($bytes))throw new RuntimeException('Не удалось сохранить результат.');@chmod(warehouse_photo_path($savedFile),0600);
- if($headguard){
-  $stage='verification';$candidate=['path'=>warehouse_photo_path($savedFile),'mime'=>'image/png'];
-  $review=studio_review_call($key,array_merge($reviewSources,[$candidate]),true,$job['sourceInventory']);
-  if(!$review['passed'])throw new DomainException('Результат отклонён проверкой: '.studio_review_issues($review).'. Фото не добавлено в карточку. Анализ и генерация могли быть оплачены; автоматического повтора нет.',409);
-  $job['integrityReview']=$review;
- }
  $stage='save';
  $photoId=bin2hex(random_bytes(16));$usage=[];foreach(['input_tokens','output_tokens','total_tokens']as $name)if(is_numeric($data['usage'][$name]??null))$usage[$name]=(int)$data['usage'][$name];
  warehouse_state(function(&$s)use($job,$photoId,$savedFile,$usage){studio_store_result($s,$job,$photoId,$savedFile,$usage);});$committed=true;

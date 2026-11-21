@@ -1,11 +1,9 @@
-# Портреты шлемов приостановлены
+# Headguard portraits: simple prompt
 
-Режимы категории, модели и невидимого манекена для категорий шлемов отключены сервером до любых платных API-запросов. Причина: генерация меняет конструкцию, а автоматическое сравнение не даёт достаточной гарантии сохранения товара. Эта проверка не подтверждает физическую посадку.
+The category and on-model modes send original product images with the owner-approved prompt in HEADGUARD-PROMPT.txt to one image edit request. There are no preliminary inspection or automated comparison API calls, and no fit-reference upload. Results are stored separately and require explicit owner acceptance. Never label them automatically verified.
 
-Интерфейс автоматически выбирает предметный белый фон, скрывает моделирование и объясняет причину. Старые клиенты и прямые запросы также блокируются. Предметный белый фон остаётся генеративной обработкой: владелец должен сравнивать его с оригиналом. Реальные фото товара можно использовать как раньше. Остальные категории не меняются.
+The approved preview was generated with the built-in image tool, not the production API. Production retains its configured gpt-image-1.5 medium 1024x1536 image-edit path; identical output is not guaranteed across generators.
 
-Ранее сохранённые моделированные варианты не удаляются. Их можно просмотреть или отклонить; replace/append заблокированы, даже если модель проверки выставила passed. Уже принятые фото и опубликованные карточки автоматически не изменяются.
+No automatic retry or publication. Existing owner, CSRF, idempotency and storage controls remain. White background and other categories retain their behavior. Earlier modeled headguard candidates remain preview/discard only; existing accepted photos are not changed.
 
-Разработка универсального надевания не завершена. Для возобновления нужен набор реальных исходников и настоящих фото посадки разных конструкций с заранее определёнными критериями сохранения конструкции. Не считать новые формулировки prompt или один удачный кадр доказательством надёжности.
-
-Тесты: tests/studio-headguard-pause.test.php. Локальный PHP/cURL mock подтверждает ноль внешних вызовов для закрытых режимов, доступность белого фона и сохранность данных. Платные генерации не запускались.
+Verification: PHP/JS syntax, domain mode/acceptance tests, real PHP/cURL against a local mock (one image-edit request, zero Responses requests), desktop/mobile UI using a local mock. No live paid API validation performed for this release.
