@@ -42,6 +42,9 @@ function studio_options(array $input): array {
     return ['mode'=>$mode,'view'=>$view,'model'=>$model,'instructions'=>trim($text)];
 }
 
+function studio_is_headguard_category(string $id): bool {
+ return in_array($id,['combat-boxing-mma-helmets','karate-helmets','kickboxing-helmets','muay-thai-helmets','mma-helmets'],true);
+}
 function studio_headguard_portrait(array $job): bool {
  return in_array($job['options']['mode']??'', ['category','model'],true) && (studio_category_preset($job['categoryId']??'')['id']??'')==='headguard';
 }
@@ -62,6 +65,7 @@ function studio_reserve(array &$s,array $input): array {
     if(!is_string($id)||$id===''||strlen($id)>80)throw new DomainException('Неверная карточка.',400);
     $p=$s['products'][$id]??null;
     if (!$p||$p['status']==='trashed') throw new DomainException('Товар недоступен.',404);
+    if(studio_is_headguard_category($p['categoryId']??'')&&$options['mode']!=='white')throw new DomainException('Моделирование шлемов приостановлено: результат может менять конструкцию товара. Используйте реальные фото или предметный белый фон. Запрос на генерацию не отправлен.',409);
     if (($input['revision']??null)!==$p['revision']) throw new DomainException('Товар изменился. Обновите карточку.',409);
     if (isset($p['studioRequests'][$request])) throw new DomainException('Этот запуск уже зарегистрирован. Обновите карточку: повтор автоматически не выполняется.',409);
     if (count($p['studioResults']??[])>=8) throw new DomainException('Сначала примите или отклоните сохранённые результаты студии (до 8).',409);
@@ -70,6 +74,7 @@ function studio_reserve(array &$s,array $input): array {
     $sourceIds=array_key_exists('sourceIds',$input)?$input['sourceIds']:$p['photos'];
     if(!is_array($sourceIds)||count($sourceIds)<1||count($sourceIds)>8||count(array_unique($sourceIds,SORT_REGULAR))!==count($sourceIds))throw new DomainException('Выберите от 1 до 8 разных исходников.',400);
     foreach($sourceIds as $sourceId)if(!is_string($sourceId)||!in_array($sourceId,$p['photos'],true))throw new DomainException('Выбранный исходник не принадлежит карточке.',403);
+    if(studio_is_headguard_category($p['categoryId']??''))foreach($sourceIds as $photoId)if(in_array($s['photos'][$photoId]['studio']['mode']??'', ['model','ghost','category'],true))throw new DomainException('Снимите выбор с ранее созданного портрета шлема. Для обработки используйте реальное фото товара.',400);
     $portrait=studio_headguard_portrait(['options'=>$options,'categoryId'=>$p['categoryId']??'']);
     if($portrait&&$options['view']!=='front')throw new DomainException('Новый портрет шлема поддерживает вид спереди. Выберите его перед запуском.',400);
     if($portrait)foreach($sourceIds as $photoId)if(empty($s['photos'][$photoId]['original'])||isset($s['photos'][$photoId]['studio']))throw new DomainException('Для портрета шлема нужны оригиналы товара, а не принятые ИИ-результаты. Загрузите оригинал заново.',400);
@@ -110,6 +115,7 @@ function studio_decide(array &$s,array $input): array {
     if(!in_array($decision,['replace','append','discard'],true))throw new DomainException('Неверное действие.',400);
     $photo=$s['photos'][$photoId]??null;if(!$photo||!$photo['processed'])throw new DomainException('Файл результата недоступен.',409);
     if($decision!=='discard'&&($photo['studio']['pipelineVersion']??'')==='headguard-v4'&&($photo['studio']['integrityReview']['passed']??false)!==true)throw new DomainException('Этот результат не прошёл проверку соответствия товару.',409);
+    if($decision!=='discard'&&studio_is_headguard_category($p['categoryId']??'')&&in_array($photo['studio']['mode']??'', ['model','ghost','category'],true))throw new DomainException('Принятие моделированных шлемов приостановлено. Сохранённый вариант можно просмотреть или отклонить; используйте реальные фото товара.',409);
     if($decision==='append'&&count($p['photos'])>=8)throw new DomainException('В карточке уже 8 фото.',409);
     $candidates=[];
     if($decision==='discard')$candidates[]=$photoId;
