@@ -3,13 +3,19 @@ export function initPhotoStudio(context){
  const key=photo=>photo.serverId||photo.id;
  function selectedPhotos(){const photos=context.get().photos.filter(p=>selectedKeys?.has(key(p)));return photos.sort((a,b)=>(key(a)===primaryKey?-1:key(b)===primaryKey?1:0));}
  const categoryPresets={"combat-boxing-mma-helmets":"Шлем: крупный план на модели","karate-helmets":"Шлем: крупный план на модели","kickboxing-helmets":"Шлем: крупный план на модели","muay-thai-helmets":"Шлем: крупный план на модели","mma-helmets":"Шлем: крупный план на модели","boxing-shorts":"Бокс: форма по исходнику","sambo-uniforms":"Самбо: куртка и шорты на манекене","mma-mouthguards":"Капа: крупный план во рту","combat-boxing-mma-mouthguards":"Капа: крупный план во рту","karate-mouthguards":"Капа: крупный план во рту","kickboxing-mouthguards":"Капа: крупный план во рту","muay-thai-mouthguards":"Капа: крупный план во рту","combat-boxing-mma-wraps":"Бинты: рулоны с развёрнутым концом","kickboxing-wraps":"Бинты: рулоны с развёрнутым концом","muay-thai-wraps":"Бинты: рулоны с развёрнутым концом","mma-wraps":"Бинты: рулоны с развёрнутым концом","mma-sparring-gloves":"ММА: лицевая и ладонная стороны","sambo-belts":"Пояс: узел на кимоно","bjj-belts":"Пояс: узел на кимоно","judo-belts":"Пояс: узел на кимоно","karate-belts":"Пояс: узел на кимоно","judo-gi":"Кимоно: невидимый манекен","bjj-gi":"Кимоно: невидимый манекен","karate-gi":"Кимоно: невидимый манекен","sambo-gi":"Кимоно: невидимый манекен","sambo-jackets":"Кимоно: невидимый манекен","bjj-rashguards":"Рашгард: объёмный комплект","combat-boxing-mma-rashguards":"Рашгард: объёмный комплект","combat-boxing-mma-gloves":"Перчатки: лицевая и ладонная стороны","kickboxing-gloves":"Перчатки: лицевая и ладонная стороны","muay-thai-gloves":"Перчатки: лицевая и ладонная стороны","combat-boxing-mma-mma-gloves":"ММА: лицевая и ладонная стороны","karate-gloves":"Каратэ: лицевая и ладонная стороны"};
+ const headguardCategories=new Set(["combat-boxing-mma-helmets","karate-helmets","kickboxing-helmets","muay-thai-helmets","mma-helmets"]);
+ function isHeadguard(){return headguardCategories.has($('category').value);}
  function preset(){return categoryPresets[$('category').value]||'';}
  function estimate(count){return '$'+(Math.ceil((.055+.05*count)*100)/100).toFixed(2)+'–'+(Math.ceil((.055+.08*count)*100)/100).toFixed(2);}
  function render(){
   const c=context.get(),visible=c.role==='owner'&&c.fields?.imageProcessingEnabled&&c.current&&$('entryMode').value!=='batch'&&c.current.status!=='trashed';$('photoStudio').hidden=!visible;if(!visible)return;
   if(lastId!==c.current.id){lastId=c.current.id;fitReferenceFile=null;if($('studioFitReference'))$('studioFitReference').value='';selectedKeys=null;knownKeys=new Set();primaryKey=null;mode=preset()?'category':'white';$('studioInstructions').value='';$('studioView').value='front';$('studioViewConfirmed').checked=false;$('studioProgress').textContent='';}
+  const headguard=isHeadguard();if(headguard)mode='white';
   if(mode==='category'&&!preset())mode='white';
-  $('studioCategoryMode').hidden=!preset();$('studioCategoryName').textContent=preset();
+  let pauseNotice=$('studioHeadguardPause');
+  if(!pauseNotice){pauseNotice=document.createElement('p');pauseNotice.id='studioHeadguardPause';pauseNotice.setAttribute('role','status');$('studioCategoryMode').before(pauseNotice);}
+  pauseNotice.hidden=!headguard;pauseNotice.textContent='Моделирование шлемов приостановлено: ИИ меняет конструкцию. Используйте реальные фото или предметный белый фон. Белый фон также требует сравнения с оригиналом.';
+  $('studioCategoryMode').hidden=headguard||!preset();$('studioCategoryName').textContent=preset();
   const keys=c.photos.map(key);if(selectedKeys===null)selectedKeys=new Set(keys);else{for(const k of keys)if(!knownKeys.has(k))selectedKeys.add(k);for(const k of selectedKeys)if(!keys.includes(k))selectedKeys.delete(k);}knownKeys=new Set(keys);if(!selectedKeys.has(primaryKey))primaryKey=keys.find(k=>selectedKeys.has(k))||null;
   const portrait=preset()==='Шлем: крупный план на модели'&&['category','model'].includes(mode);
   let fitBox=$('studioFitReferenceBox');
@@ -23,11 +29,12 @@ export function initPhotoStudio(context){
   $('studioEstimate').textContent=!count?'Выберите хотя бы одно фото':portrait?'Анализ исходников + 1 генерация + проверка результата · платно':'Ориентир '+estimate(count)+' за кадр';
   $('studioModelField').hidden=mode!=='model';$('studioViewCheck').hidden=!['back','side'].includes($('studioView').value);
   $('photoStudio').querySelectorAll('button,input,select,textarea').forEach(e=>e.disabled=locked);
+  $('photoStudio').querySelectorAll('[data-studio-mode]').forEach(b=>{b.hidden=headguard?b.dataset.studioMode!=='white':b.dataset.studioMode==='category'&&!preset();});
   $('studioGenerate').disabled=locked||!count||(c.current.studioResults||[]).length>=8;
  $('photoStudio').querySelectorAll('[data-studio-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.studioMode===mode)));
   $('studioResults').replaceChildren();
   for(const result of c.current.studioResults||[]){const card=document.createElement('article'),preview=document.createElement('button'),image=document.createElement('img'),label=document.createElement('p'),actions=document.createElement('div');card.className='studio-result';preview.type='button';preview.className='studio-result-preview';preview.setAttribute('aria-label','Открыть результат студии');image.src=result.processed;image.alt='Новый вариант товара';preview.append(image);preview.addEventListener('click',()=>context.open(result,'processed'));label.textContent=(result.studio?.presetLabel||modeNames[result.studio?.mode]||'Вариант')+' · '+(viewNames[result.studio?.view]||'')+' · '+(result.studio?.sourceCount||0)+' исходников'+(result.studio?.integrityReview?.passed?' · проверка пройдена, сравните детали':'')+(result.studio?.fitReferenceUsed?' · с фото посадки':'');
-   actions.className='actions';for(const [decision,title]of [['replace','Принять вместо текущих фото'],['append','Принять и добавить'],['discard','Отклонить вариант']]){const b=document.createElement('button');b.type='button';b.textContent=title;b.disabled=locked;b.addEventListener('click',()=>decide(result,decision));actions.append(b);}card.append(preview,label,actions);$('studioResults').append(card);
+   actions.className='actions';for(const [decision,title]of [['replace','Принять вместо текущих фото'],['append','Принять и добавить'],['discard','Отклонить вариант']]){const b=document.createElement('button');b.type='button';b.textContent=title;b.disabled=locked||(headguard&&decision!=='discard'&&['model','ghost','category'].includes(result.studio?.mode));b.addEventListener('click',()=>decide(result,decision));actions.append(b);}card.append(preview,label,actions);$('studioResults').append(card);
   }
  }
  async function decide(result,decision){

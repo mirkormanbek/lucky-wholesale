@@ -1,4 +1,4 @@
-import {initPhotoStudio} from "./studio-ui.js?v=17";
+import {initPhotoStudio} from "./studio-ui.js?v=18";
 import {normaliseRotation,rotationRequest,rotatedPhotoSource,keepPhotoEdits} from "./photo-tools.js?v=2";
 let warehouseRecords=[];
 const $=id=>document.getElementById(id);
