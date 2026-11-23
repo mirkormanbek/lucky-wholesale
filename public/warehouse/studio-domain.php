@@ -50,17 +50,17 @@ function studio_headguard_portrait(array $job): bool {
 }
 function studio_headguard_prompt(array $job): string {
  return <<<'PROMPT'
-Создай реалистичный крупный спортивный портрет взрослого спортсмена в боксерском шлеме с исходного фото.
+Создай реалистичный спортивный портрет взрослого человека в точном шлеме с приложенного фото.
 
-Используй именно этот товар: сохрани его конструкцию, форму защитных элементов, проёмы, толщину набивки, материал, цвет, швы, крепления, логотипы и надписи на своих местах.
+Сначала определи правильное положение товара при ношении по всей конструкции: лобной части, проёму для лица, накладкам, креплениям и маркировке. На исходнике товар может лежать перевёрнутым, боком или раскрытым. Поверни и надень весь товар как единое изделие; положение на полу не является положением на голове. Поворачивай маркировку вместе с её панелью, не переноси её на другую деталь.
 
-Надень шлем естественно и анатомически правдоподобно. Подстрой размер, положение и наклон головы под конструкцию шлема. Опорная набивка должна прилегать к соответствующим участкам головы, а выступающая защита — сохранять объём и расстояние до лица. Глаза должны находиться напротив предусмотренного проёма. Детали не должны пересекать кожу или висеть отдельно от головы.
+Сохрани именно исходную конструкцию: количество и соединения деталей, открытые участки, толщину набивки, материал, цвет, швы, ремни, логотипы и надписи. Раздельные накладки должны остаться раздельными. Не замыкай открытый участок новой набивкой. Реальную перемычку или защиту лица сохрани на её месте; не заменяй её другим элементом. Ничего не добавляй для получения привычного силуэта шлема.
 
-Сохраняй назначение и соединения каждой детали. Не превращай защитную перемычку в подбородочную накладку, не добавляй решётку и не убирай существующую защиту ради видимости лица. Нос и рот могут быть закрыты настолько, насколько это предполагает исходная конструкция.
+Подстрой размер и положение головы под внутренний объём шлема. Голова находится внутри, опорные накладки естественно прилегают, выступающая защита остаётся перед лицом с зазором. Сохрани естественную видимость лица через реальные проёмы. Допустимы регулировка ремней и естественная деформация мягкой набивки при надевании, без изменения конструкции.
 
-Допускай естественную регулировку ремней и мягкой набивки при надевании. При неоднозначном ракурсе сохраняй близкое положение камеры и видимую геометрию товара.
+Не добавляй отсутствующие на исходнике пряжки, пластиковые застёжки, регуляторы, ремни и шнуровку. Реальные крепления сохраняй по форме и месту крепления на товаре. Покажи обнажённые верхние плечи: не добавляй майку, форму, украшения или другие предметы.
 
-Уверенный напряжённый спортивный взгляд, естественная мимика без крика. Кадр от макушки до плеч, весь шлем виден. Нейтральный фон, выразительное студийное освещение, точная передача цвета. Без добавленных надписей и аксессуаров.
+Крупный план от макушки до плеч, весь шлем виден. Собранный спортивный взгляд без крика, нейтральный фон, выразительный студийный свет и точные цвета. Без добавленных надписей и аксессуаров.
 PROMPT
  .(($job['options']['instructions']??'')!==''?"\nПожелания к кадру, с сохранением конструкции товара: ".$job['options']['instructions']:'');
 }
@@ -111,7 +111,7 @@ function studio_prompt(array $job): string {
 }
 function studio_store_result(array &$s,array $job,string $photoId,string $file,array $usage=[]): void {
     $id=$job['id'];if(!isset($s['products'][$id]))throw new DomainException('Карточка удалена во время обработки.',409);
-    $s['photos'][$photoId]=['owner'=>$s['products'][$id]['owner']??WAREHOUSE_OWNER,'name'=>'studio.png','original'=>null,'processed'=>$file,'approved'=>false,'studio'=>['mode'=>$job['options']['mode'],'presetLabel'=>$job['options']['mode']==='category'?(studio_category_preset($job['categoryId']??'')['label']??''):null,'view'=>$job['options']['view'],'model'=>$job['options']['model'],'pipelineVersion'=>studio_headguard_portrait($job)?'headguard-simple-v1':'standard','manualReviewRequired'=>studio_headguard_portrait($job),'integrityReview'=>$job['integrityReview']??null,'sourceInventory'=>$job['sourceInventory']??null,'fitReferenceUsed'=>!empty($job['fitReferenceUsed']),'outputSize'=>'1024x1536','sourceCount'=>count($job['sourceIds']),'sourceRevision'=>$job['sourceRevision'],'createdAt'=>gmdate('c'),'usage'=>$usage]];
+    $s['photos'][$photoId]=['owner'=>$s['products'][$id]['owner']??WAREHOUSE_OWNER,'name'=>'studio.png','original'=>null,'processed'=>$file,'approved'=>false,'studio'=>['mode'=>$job['options']['mode'],'presetLabel'=>$job['options']['mode']==='category'?(studio_category_preset($job['categoryId']??'')['label']??''):null,'view'=>$job['options']['view'],'model'=>$job['options']['model'],'pipelineVersion'=>studio_headguard_portrait($job)?'headguard-simple-v1':'standard','promptVersion'=>studio_headguard_portrait($job)?'headguard-orientation-v2':null,'manualReviewRequired'=>studio_headguard_portrait($job),'integrityReview'=>$job['integrityReview']??null,'sourceInventory'=>$job['sourceInventory']??null,'fitReferenceUsed'=>!empty($job['fitReferenceUsed']),'outputSize'=>'1024x1536','sourceCount'=>count($job['sourceIds']),'sourceRevision'=>$job['sourceRevision'],'createdAt'=>gmdate('c'),'usage'=>$usage]];
     $s['products'][$id]['studioResults'][]=$photoId;$s['products'][$id]['studioRequests'][$job['requestId']]['status']='complete';$s['products'][$id]['revision']++;$s['products'][$id]['updatedAt']=gmdate('c');
 }
 function studio_decide(array &$s,array $input): array {
