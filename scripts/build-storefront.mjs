@@ -1,0 +1,12 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import {execFileSync} from 'node:child_process';
+const root=process.cwd(),php=process.env.PHP_BIN||'php';
+const server=['index.php','product.php','storefront-data.php','storefront-views.php','site-config.php','site-settings.php','lead-domain.php','leads.php','privacy.php','sitemap.php'];
+for(const file of server)execFileSync(php,['-l',path.join(root,'public',file)],{stdio:'pipe'});
+for(const file of ['app.js','leads.js','lead-phone.js','metrika.js'])execFileSync(process.execPath,['--input-type=module','--check'],{input:await fs.readFile(path.join(root,'public',file),'utf8'),stdio:['pipe','pipe','pipe']});
+const html=await fs.readFile(path.join(root,'public/index.html'),'utf8');
+for(const marker of ['id="leadForm"','id="productGrid"','STOREFRONT_BOOTSTRAP','WHOLESALE_TERMS','LEAD_DIALOG_START','LEAD_DIALOG_END'])if(!html.includes(marker))throw Error('Missing storefront marker: '+marker);
+const png=await fs.readFile(path.join(root,'public/media/og-wholesale.png'));if(png.subarray(0,8).toString('hex')!=='89504e470d0a1a0a')throw Error('OG PNG missing or invalid');
+for(const file of ['index.html','app.js','styles.css','clover.svg','lucky-logo.svg'])await fs.copyFile(path.join(root,'public',file),path.join(root,file));
+console.log('Storefront build passed: PHP syntax, JS syntax, shared form/SSR template, OG image, root preview assets. WB import is a separate build-catalog command requiring its raw source snapshot.');

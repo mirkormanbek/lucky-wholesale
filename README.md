@@ -2,6 +2,18 @@
 
 Оптовый каталог спортивных товаров Lucky.
 
+## Заявки, серверный каталог и SEO
+
+Рабочий хостинг: PHP 7.4+ с cURL, Apache rewrite (Plesk); Node.js 20 нужен для подготовки и тестов. GitHub Pages показывает только статическое превью, PHP там не выполняется.
+
+- Подготовка: `node scripts/build-storefront.mjs` (PHP должен быть в PATH либо задан `PHP_BIN`).
+- Запуск: `php -S 127.0.0.1:4235 -t public scripts/dev-router.php`.
+- Проверки: `php tests/leads-domain.test.php`, затем `node tests/leads-integration.cjs`.
+- Реальная тестовая заявка: `powershell -NoProfile -File scripts/Test-Telegram-Lead.ps1` — скрытый ввод токена, один запрос без повторов.
+- [Настройка Telegram, переменных хостинга, Метрики и проверка](docs/LEADS-AND-SEO.md).
+
+Переменные окружения PHP: `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`, `YANDEX_METRIKA_ID`. Пустой шаблон — `.env.example`; секреты в репозиторий не добавлять. Условия опта меняются в `public/site-config.php`.
+
 ## Что уже умеет проект
 
 - забирает все карточки, размеры, SKU и фото из Wildberries;

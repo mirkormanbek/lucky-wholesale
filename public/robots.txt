@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /warehouse/
+Sitemap: https://opt.luckysport.kz/sitemap.xml
