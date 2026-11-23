@@ -65,7 +65,14 @@ PROMPT
  .(($job['options']['instructions']??'')!==''?"\nПожелания к кадру, с сохранением конструкции товара: ".$job['options']['instructions']:'');
 }
 
+function studio_image_fields(array $job): array {
+ $trial=($job['comparisonTrial']??false)===true;
+ $fields=['model'=>$trial?'gpt-image-2.6-sunburst':'gpt-image-1.5','prompt'=>studio_prompt($job),'quality'=>'medium','size'=>'1024x1536','background'=>'opaque','output_format'=>'png','n'=>'1'];
+ if(!$trial)$fields['input_fidelity']='high';
+ return $fields;
+}
 function studio_reserve(array &$s,array $input): array {
+    $trial=$input['comparisonTrial']??false;if(!is_bool($trial))throw new DomainException('Неверный режим сравнения.',400);
     $options=studio_options($input);$id=$input['id']??'';$request=$input['requestId']??'';
     if (!is_string($request)||!preg_match('/^[a-zA-Z0-9-]{20,80}$/D',$request)) throw new DomainException('Неверный запрос студии.',400);
     if(!is_string($id)||$id===''||strlen($id)>80)throw new DomainException('Неверная карточка.',400);
@@ -84,9 +91,14 @@ function studio_reserve(array &$s,array $input): array {
     $portrait=studio_headguard_portrait(['options'=>$options,'categoryId'=>$p['categoryId']??'']);
     if($portrait&&$options['view']!=='front')throw new DomainException('Новый портрет шлема поддерживает вид спереди. Выберите его перед запуском.',400);
     if($portrait)foreach($sourceIds as $photoId)if(empty($s['photos'][$photoId]['original'])||isset($s['photos'][$photoId]['studio']))throw new DomainException('Для портрета шлема нужны оригиналы товара, а не принятые ИИ-результаты. Загрузите оригинал заново.',400);
+    if($trial){
+     if(!$portrait||count($sourceIds)!==1)throw new DomainException('Для теста выберите один исходник шлема и режим на модели или кадр категории.',400);
+     if(($input['comparisonConfirmed']??false)!==true)throw new DomainException('Подтвердите один платный тест другого генератора.',400);
+     foreach($p['studioRequests']??[] as $previous)if(($previous['comparisonTrial']??false)===true)throw new DomainException('Тест другого генератора для этой карточки уже запускался. Автоматического повтора нет.',409);
+    }
     $files=[];foreach($sourceIds as $photoId){$photo=$s['photos'][$photoId]??null;$name=$photo?($photo['original']?:$photo['processed']):null;if(!$name)throw new DomainException('Один из исходников недоступен.',409);$files[]=$name;}
-    $s['products'][$id]['studioRequests'][$request]=['status'=>'pending','at'=>gmdate('c')];
-    return ['id'=>$id,'requestId'=>$request,'options'=>$options,'files'=>$files,'title'=>$p['title'],'categoryId'=>$p['categoryId']??'','sourceIds'=>$sourceIds,'sourceRevision'=>$p['revision'],'fitReferenceUsed'=>false];
+    $s['products'][$id]['studioRequests'][$request]=['status'=>'pending','at'=>gmdate('c'),'comparisonTrial'=>$trial];
+    return ['id'=>$id,'requestId'=>$request,'options'=>$options,'files'=>$files,'title'=>$p['title'],'categoryId'=>$p['categoryId']??'','sourceIds'=>$sourceIds,'sourceRevision'=>$p['revision'],'fitReferenceUsed'=>false,'comparisonTrial'=>$trial];
 }
 function studio_is_shinguard_category(string $categoryId): bool {
     return in_array($categoryId,['combat-boxing-mma-shinguards','kickboxing-shinguards','muay-thai-shinguards','karate-shinguards','football-shinguards','mma-shinguards'],true);
@@ -111,7 +123,7 @@ function studio_prompt(array $job): string {
 }
 function studio_store_result(array &$s,array $job,string $photoId,string $file,array $usage=[]): void {
     $id=$job['id'];if(!isset($s['products'][$id]))throw new DomainException('Карточка удалена во время обработки.',409);
-    $s['photos'][$photoId]=['owner'=>$s['products'][$id]['owner']??WAREHOUSE_OWNER,'name'=>'studio.png','original'=>null,'processed'=>$file,'approved'=>false,'studio'=>['mode'=>$job['options']['mode'],'presetLabel'=>$job['options']['mode']==='category'?(studio_category_preset($job['categoryId']??'')['label']??''):null,'view'=>$job['options']['view'],'model'=>$job['options']['model'],'pipelineVersion'=>studio_headguard_portrait($job)?'headguard-simple-v1':'standard','promptVersion'=>studio_headguard_portrait($job)?'headguard-source-v3':null,'manualReviewRequired'=>studio_headguard_portrait($job),'integrityReview'=>$job['integrityReview']??null,'sourceInventory'=>$job['sourceInventory']??null,'fitReferenceUsed'=>!empty($job['fitReferenceUsed']),'outputSize'=>'1024x1536','sourceCount'=>count($job['sourceIds']),'sourceRevision'=>$job['sourceRevision'],'createdAt'=>gmdate('c'),'usage'=>$usage]];
+    $s['photos'][$photoId]=['owner'=>$s['products'][$id]['owner']??WAREHOUSE_OWNER,'name'=>'studio.png','original'=>null,'processed'=>$file,'approved'=>false,'studio'=>['mode'=>$job['options']['mode'],'presetLabel'=>$job['options']['mode']==='category'?(studio_category_preset($job['categoryId']??'')['label']??''):null,'view'=>$job['options']['view'],'model'=>$job['options']['model'],'pipelineVersion'=>studio_headguard_portrait($job)?'headguard-simple-v1':'standard','imageModel'=>$job['imageModel']??'gpt-image-1.5','quality'=>$job['imageQuality']??'medium','comparisonTrial'=>($job['comparisonTrial']??false)===true,'promptSha256'=>$job['promptSha256']??null,'sourceFingerprints'=>$job['sourceFingerprints']??[],'promptVersion'=>studio_headguard_portrait($job)?'headguard-source-v3':null,'manualReviewRequired'=>studio_headguard_portrait($job),'integrityReview'=>$job['integrityReview']??null,'sourceInventory'=>$job['sourceInventory']??null,'fitReferenceUsed'=>!empty($job['fitReferenceUsed']),'outputSize'=>'1024x1536','sourceCount'=>count($job['sourceIds']),'sourceRevision'=>$job['sourceRevision'],'createdAt'=>gmdate('c'),'usage'=>$usage]];
     $s['products'][$id]['studioResults'][]=$photoId;$s['products'][$id]['studioRequests'][$job['requestId']]['status']='complete';$s['products'][$id]['revision']++;$s['products'][$id]['updatedAt']=gmdate('c');
 }
 function studio_decide(array &$s,array $input): array {
