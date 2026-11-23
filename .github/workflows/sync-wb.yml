@@ -106,10 +106,22 @@ jobs:
           set net:reconnect-interval-base 5
           set net:timeout 20
           put public/warehouse/studio-domain.php -o opt.luckysport.kz/warehouse/studio-domain.php
-          get opt.luckysport.kz/warehouse/studio-domain.php -o /tmp/lucky-studio-domain.deployed.php
+          get opt.luckysport.kz/warehouse/studio-domain.php -o /tmp/lucky-studio-studio-domain.php
+          put public/warehouse/process-studio.php -o opt.luckysport.kz/warehouse/process-studio.php
+          get opt.luckysport.kz/warehouse/process-studio.php -o /tmp/lucky-studio-process-studio.php
+          put public/warehouse/studio-ui.js -o opt.luckysport.kz/warehouse/studio-ui.js
+          get opt.luckysport.kz/warehouse/studio-ui.js -o /tmp/lucky-studio-studio-ui.js
+          put public/warehouse/warehouse.js -o opt.luckysport.kz/warehouse/warehouse.js
+          get opt.luckysport.kz/warehouse/warehouse.js -o /tmp/lucky-studio-warehouse.js
+          put public/warehouse/index.html -o opt.luckysport.kz/warehouse/index.html
+          get opt.luckysport.kz/warehouse/index.html -o /tmp/lucky-studio-index.html
           bye
           LFTP
-          cmp public/warehouse/studio-domain.php /tmp/lucky-studio-domain.deployed.php
+          cmp public/warehouse/studio-domain.php /tmp/lucky-studio-studio-domain.php
+          cmp public/warehouse/process-studio.php /tmp/lucky-studio-process-studio.php
+          cmp public/warehouse/studio-ui.js /tmp/lucky-studio-studio-ui.js
+          cmp public/warehouse/warehouse.js /tmp/lucky-studio-warehouse.js
+          cmp public/warehouse/index.html /tmp/lucky-studio-index.html
 
       - name: Deploy storefront to Plesk with lftp
         shell: bash

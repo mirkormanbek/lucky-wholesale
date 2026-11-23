@@ -18,9 +18,9 @@ try{
  $job=warehouse_state(function(&$s)use($input){return studio_reserve($s,$input);});
  $images=[];foreach($job['files'] as $i=>$name){$file=warehouse_photo_path($name);$mime=is_file($file)?(new finfo(FILEINFO_MIME_TYPE))->file($file):'';$dims=@getimagesize($file);
   if(!in_array($mime,['image/jpeg','image/png','image/webp'],true)||!$dims||filesize($file)>12*1024*1024||$dims[0]*$dims[1]>40000000)throw new DomainException('Один из исходников недоступен или превышает лимит фото.',400);
-  $images[]=['path'=>$file,'mime'=>$mime];
+  $images[]=['path'=>$file,'mime'=>$mime];$job['sourceFingerprints'][]=['photoId'=>$job['sourceIds'][$i],'sha256'=>hash_file('sha256',$file)];
  }
- $fields=['model'=>'gpt-image-1.5','prompt'=>studio_prompt($job),'input_fidelity'=>'high','quality'=>'medium','size'=>'1024x1536','background'=>'opaque','output_format'=>'png','n'=>'1'];
+ $fields=studio_image_fields($job);$job['imageModel']=$fields['model'];$job['imageQuality']=$fields['quality'];$job['promptSha256']=hash('sha256',$fields['prompt']);
  $stage='prepare';$requestFile=tempnam($private,'studio-request-');if(!$requestFile)throw new RuntimeException('Не удалось подготовить запрос.');$copies[]=$requestFile;@chmod($requestFile,0600);$body=fopen($requestFile,'w+b');if(!$body)throw new RuntimeException('Не удалось подготовить запрос.');$boundary='LuckyStudio'.bin2hex(random_bytes(16));studio_multipart($body,$fields,$images,$boundary);$length=fstat($body)['size'];
  $stage='provider';$curl=curl_init('https://api.openai.com/v1/images/edits');curl_setopt_array($curl,[CURLOPT_UPLOAD=>true,CURLOPT_CUSTOMREQUEST=>'POST',CURLOPT_INFILE=>$body,CURLOPT_INFILESIZE=>$length,CURLOPT_RETURNTRANSFER=>true,CURLOPT_CONNECTTIMEOUT=>15,CURLOPT_TIMEOUT=>100,CURLOPT_HTTPHEADER=>['Authorization: Bearer '.trim($key),'Content-Type: multipart/form-data; boundary='.$boundary,'Expect:']]);
  $response=curl_exec($curl);$status=(int)curl_getinfo($curl,CURLINFO_HTTP_CODE);$curlError=curl_errno($curl);curl_close($curl);
