@@ -38,4 +38,10 @@ jobs:
           (timeout 15 openssl s_client -starttls ftp -connect "$FTP_SERVER:21" -servername "$FTP_SERVER" </dev/null 2>/dev/null | openssl x509 -noout -subject -ext subjectAltName 2>/dev/null) || echo "  no TLS certificate offered"
           try "FTPS, certificate verified (target)" "ftp://$FTP_SERVER" "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:verify-certificate true; set ftp:passive-mode true"
           try "FTPS, certificate NOT verified" "ftp://$FTP_SERVER" "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:verify-certificate false; set ftp:passive-mode true"
+          ip=$(getent ahostsv4 "$FTP_SERVER" | awk 'NR==1{print $1}')
+          rdns=$(getent hosts "$ip" | awk '{print $2}')
+          echo "Server reverse DNS name: ${rdns:-none}"
+          if [[ "$rdns" == *.ps.kz ]]; then
+            try "FTPS verified via $rdns" "ftp://$rdns" "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:verify-certificate true; set ftp:passive-mode true"
+          fi
           try "SFTP port 22" "sftp://$FTP_SERVER" "set sftp:auto-confirm yes"
