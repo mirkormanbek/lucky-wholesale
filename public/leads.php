@@ -15,7 +15,7 @@ try{
  if(!empty($input['website']))lead_reply(['ok'=>true]);
  $p=lead_input($input);$page=parse_url($p['page']);$pageHost=strtolower(($page['host']??'').(isset($page['port'])?':'.$page['port']:''));if($pageHost!==$host)throw new InvalidArgumentException('Неверная страница заявки.');
  $message=lead_message($p);if(preg_match_all('/./us',$message)+preg_match_all('/[\x{10000}-\x{10FFFF}]/u',$message)>4096)throw new InvalidArgumentException('Сократите комментарий или список интересующих товаров.');
- $token=getenv('TELEGRAM_BOT_TOKEN');$chat=getenv('TELEGRAM_CHAT_ID');
+ $token=lead_setting('TELEGRAM_BOT_TOKEN');$chat=lead_setting('TELEGRAM_CHAT_ID');
  if(!is_string($token)||!preg_match('/^[0-9]{5,}:[A-Za-z0-9_-]{20,}$/D',$token)||!is_string($chat)||!preg_match('/^-?[0-9]+$/D',$chat))throw new RuntimeException('Telegram environment not configured');
  $ip=$_SERVER['REMOTE_ADDR']??'';if(!filter_var($ip,FILTER_VALIDATE_IP))throw new RuntimeException('Client IP unavailable');
  $ipKey=hash_hmac('sha256',$ip,$token);$key=hash_hmac('sha256',$ip.'|'.$p['requestId'],$token);

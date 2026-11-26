@@ -1,5 +1,20 @@
 <?php
 declare(strict_types=1);
+function lead_setting(string $name): string {
+ if(!in_array($name,['TELEGRAM_BOT_TOKEN','TELEGRAM_CHAT_ID','YANDEX_METRIKA_ID'],true))throw new RuntimeException('Unknown setting');
+ $env=getenv($name);if(is_string($env)&&$env!=='')return $env;
+ $dir=lead_private();$file=$dir.'/lead-settings.json';
+ if(!is_file($file))return '';
+ $resolved=realpath($file);$root=realpath($_SERVER['DOCUMENT_ROOT']??'');
+ if(!$resolved||dirname($resolved)!==$dir||!$root||strpos(str_replace('\\','/',$resolved),rtrim(str_replace('\\','/',$root),'/').'/')===0)throw new RuntimeException('Private settings location invalid');
+ // Do not accept a configuration readable by other server accounts.
+ $mode=@fileperms($file);if(DIRECTORY_SEPARATOR==='/'&&($mode===false||($mode&0077)!==0))throw new RuntimeException('Private settings permissions required');
+ $raw=@file_get_contents($file,false,null,0,4097);
+ if(!is_string($raw)||strlen($raw)>4096)throw new RuntimeException('Private settings unreadable');
+ $data=json_decode($raw,true);if(!is_array($data)||json_last_error()!==JSON_ERROR_NONE)throw new RuntimeException('Private settings invalid');
+ $value=$data[$name]??'';if(!is_string($value))throw new RuntimeException('Private setting type invalid');
+ return $value;
+}
 function lead_text($value,int $limit): string {
  if(!is_string($value)||!preg_match('//u',$value)||preg_match_all('/./us',$value)>$limit)throw new InvalidArgumentException('Проверьте длину и формат полей заявки.');
  return trim(preg_replace('/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/u','',$value));

@@ -14,6 +14,8 @@
 
 Переменные окружения PHP: `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`, `YANDEX_METRIKA_ID`. Пустой шаблон — `.env.example`; секреты в репозиторий не добавлять. Условия опта меняются в `public/site-config.php`.
 
+На хостинге без настройки окружения согласован закрытый файл `../lucky-wholesale-private/lead-settings.json` относительно document root, права 600. Окружение имеет приоритет; пример без секретов — `config/lead-settings.example.json`. Пошаговая инструкция выше по ссылке. Реальный файл не попадает в Git и деплой.
+
 ## Что уже умеет проект
 
 - забирает все карточки, размеры, SKU и фото из Wildberries;

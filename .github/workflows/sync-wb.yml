@@ -47,7 +47,9 @@ jobs:
         run: |
           node scripts/build-storefront.mjs
           php tests/leads-domain.test.php
+          php tests/lead-settings.test.php
           node tests/leads-integration.cjs
+          LEAD_TEST_CONFIG_FILE=1 node tests/leads-integration.cjs
 
       - name: Pull catalog from Wildberries
         if: github.event_name == 'workflow_dispatch'
