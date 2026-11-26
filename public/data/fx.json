@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-11-23T11:56:07.059Z",
-  "effectiveDate": "23.11.2026",
+  "generatedAt": "2026-11-26T12:18:55.684Z",
+  "effectiveDate": "26.11.2026",
   "source": "National Bank of Kazakhstan",
   "sourceUrl": "https://nationalbank.kz/rss/rates_all.xml",
   "kztPerUnit": {
     "KZT": 1,
-    "RUB": 5.56,
-    "USD": 455
+    "RUB": 5.57,
+    "USD": 458.57
   }
 }
