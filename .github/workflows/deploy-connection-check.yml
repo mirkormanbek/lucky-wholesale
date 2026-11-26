@@ -1,0 +1,41 @@
+name: Deploy connection check
+
+# Temporary, read-only check: which encrypted connection to Plesk works.
+# Lists one directory, uploads nothing, prints no credentials.
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/deploy-connection-check.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Install lftp
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+
+      - name: Check connection modes
+        shell: bash
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          try() {
+            local label="$1" url="$2" settings="$3"
+            if timeout 60 lftp -u "$FTP_USERNAME","$FTP_PASSWORD" "$url" -e "set net:max-retries 1; set net:timeout 15; $settings; cls -1 opt.luckysport.kz >/dev/null; bye" >/dev/null 2>/tmp/err.txt; then
+              echo "PASS  $label"
+            else
+              echo "FAIL  $label: $(grep -v -i pass /tmp/err.txt | tail -1)"
+            fi
+          }
+          echo "Server certificate subject (FTPS, port 21):"
+          (timeout 15 openssl s_client -starttls ftp -connect "$FTP_SERVER:21" -servername "$FTP_SERVER" </dev/null 2>/dev/null | openssl x509 -noout -subject -ext subjectAltName 2>/dev/null) || echo "  no TLS certificate offered"
+          try "FTPS, certificate verified (target)" "ftp://$FTP_SERVER" "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:verify-certificate true; set ftp:passive-mode true"
+          try "FTPS, certificate NOT verified" "ftp://$FTP_SERVER" "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:verify-certificate false; set ftp:passive-mode true"
+          try "SFTP port 22" "sftp://$FTP_SERVER" "set sftp:auto-confirm yes"
