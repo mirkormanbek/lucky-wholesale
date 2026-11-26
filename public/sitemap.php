@@ -1,0 +1,2 @@
+<?php
+declare(strict_types=1);require __DIR__.'/storefront-views.php';header('Content-Type: application/xml; charset=utf-8');$c=require __DIR__.'/site-config.php';echo '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>'.sf_e($c['origin'].'/').'</loc></url>';foreach(storefront_data()['products'] as $p)echo '<url><loc>'.sf_e($c['origin'].storefront_product_url($p)).'</loc></url>';echo '</urlset>';

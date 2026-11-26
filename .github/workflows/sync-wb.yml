@@ -43,6 +43,14 @@ jobs:
         with:
           node-version: "20"
 
+      - name: Validate storefront
+        run: |
+          node scripts/build-storefront.mjs
+          php tests/leads-domain.test.php
+          php tests/lead-settings.test.php
+          node tests/leads-integration.cjs
+          LEAD_TEST_CONFIG_FILE=1 node tests/leads-integration.cjs
+
       - name: Pull catalog from Wildberries
         if: github.event_name == 'workflow_dispatch'
         run: node scripts/sync-wb.mjs
@@ -122,6 +130,86 @@ jobs:
           cmp public/warehouse/studio-ui.js /tmp/lucky-studio-studio-ui.js
           cmp public/warehouse/warehouse.js /tmp/lucky-studio-warehouse.js
           cmp public/warehouse/index.html /tmp/lucky-studio-index.html
+
+      - name: Deploy and verify lead and SEO endpoints
+        timeout-minutes: 4
+        shell: bash
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          lftp -u "$FTP_USERNAME","$FTP_PASSWORD" "ftp://$FTP_SERVER" <<'LFTP'
+          set cmd:fail-exit true
+          set ftp:passive-mode true
+          set ftp:ssl-force false
+          set ftp:ssl-protect-data false
+          set ssl:verify-certificate false
+          set net:max-retries 2
+          set net:timeout 20
+          mkdir -p opt.luckysport.kz/media
+          put public/site-config.php -o opt.luckysport.kz/site-config.php
+          get opt.luckysport.kz/site-config.php -o /tmp/lucky-leads-site-config-php
+          put public/storefront-data.php -o opt.luckysport.kz/storefront-data.php
+          get opt.luckysport.kz/storefront-data.php -o /tmp/lucky-leads-storefront-data-php
+          put public/storefront-views.php -o opt.luckysport.kz/storefront-views.php
+          get opt.luckysport.kz/storefront-views.php -o /tmp/lucky-leads-storefront-views-php
+          put public/lead-domain.php -o opt.luckysport.kz/lead-domain.php
+          get opt.luckysport.kz/lead-domain.php -o /tmp/lucky-leads-lead-domain-php
+          put public/leads.php -o opt.luckysport.kz/leads.php
+          get opt.luckysport.kz/leads.php -o /tmp/lucky-leads-leads-php
+          put public/site-settings.php -o opt.luckysport.kz/site-settings.php
+          get opt.luckysport.kz/site-settings.php -o /tmp/lucky-leads-site-settings-php
+          put public/privacy.php -o opt.luckysport.kz/privacy.php
+          get opt.luckysport.kz/privacy.php -o /tmp/lucky-leads-privacy-php
+          put public/product.php -o opt.luckysport.kz/product.php
+          get opt.luckysport.kz/product.php -o /tmp/lucky-leads-product-php
+          put public/sitemap.php -o opt.luckysport.kz/sitemap.php
+          get opt.luckysport.kz/sitemap.php -o /tmp/lucky-leads-sitemap-php
+          put public/index.php -o opt.luckysport.kz/index.php
+          get opt.luckysport.kz/index.php -o /tmp/lucky-leads-index-php
+          put public/lead-phone.js -o opt.luckysport.kz/lead-phone.js
+          get opt.luckysport.kz/lead-phone.js -o /tmp/lucky-leads-lead-phone-js
+          put public/leads.js -o opt.luckysport.kz/leads.js
+          get opt.luckysport.kz/leads.js -o /tmp/lucky-leads-leads-js
+          put public/leads.css -o opt.luckysport.kz/leads.css
+          get opt.luckysport.kz/leads.css -o /tmp/lucky-leads-leads-css
+          put public/metrika.js -o opt.luckysport.kz/metrika.js
+          get opt.luckysport.kz/metrika.js -o /tmp/lucky-leads-metrika-js
+          put public/media/og-wholesale.png -o opt.luckysport.kz/media/og-wholesale.png
+          get opt.luckysport.kz/media/og-wholesale.png -o /tmp/lucky-leads-media-og-wholesale-png
+          put public/app.js -o opt.luckysport.kz/app.js
+          get opt.luckysport.kz/app.js -o /tmp/lucky-leads-app-js
+          put public/index.html -o opt.luckysport.kz/index.html
+          get opt.luckysport.kz/index.html -o /tmp/lucky-leads-index-html
+          put public/traffic-info.html -o opt.luckysport.kz/traffic-info.html
+          get opt.luckysport.kz/traffic-info.html -o /tmp/lucky-leads-traffic-info-html
+          put public/robots.txt -o opt.luckysport.kz/robots.txt
+          get opt.luckysport.kz/robots.txt -o /tmp/lucky-leads-robots-txt
+          put public/.htaccess -o opt.luckysport.kz/.htaccess
+          get opt.luckysport.kz/.htaccess -o /tmp/lucky-leads--htaccess
+          bye
+          LFTP
+          cmp public/site-config.php /tmp/lucky-leads-site-config-php
+          cmp public/storefront-data.php /tmp/lucky-leads-storefront-data-php
+          cmp public/storefront-views.php /tmp/lucky-leads-storefront-views-php
+          cmp public/lead-domain.php /tmp/lucky-leads-lead-domain-php
+          cmp public/leads.php /tmp/lucky-leads-leads-php
+          cmp public/site-settings.php /tmp/lucky-leads-site-settings-php
+          cmp public/privacy.php /tmp/lucky-leads-privacy-php
+          cmp public/product.php /tmp/lucky-leads-product-php
+          cmp public/sitemap.php /tmp/lucky-leads-sitemap-php
+          cmp public/index.php /tmp/lucky-leads-index-php
+          cmp public/lead-phone.js /tmp/lucky-leads-lead-phone-js
+          cmp public/leads.js /tmp/lucky-leads-leads-js
+          cmp public/leads.css /tmp/lucky-leads-leads-css
+          cmp public/metrika.js /tmp/lucky-leads-metrika-js
+          cmp public/media/og-wholesale.png /tmp/lucky-leads-media-og-wholesale-png
+          cmp public/app.js /tmp/lucky-leads-app-js
+          cmp public/index.html /tmp/lucky-leads-index-html
+          cmp public/traffic-info.html /tmp/lucky-leads-traffic-info-html
+          cmp public/robots.txt /tmp/lucky-leads-robots-txt
+          cmp public/.htaccess /tmp/lucky-leads--htaccess
 
       - name: Deploy storefront to Plesk with lftp
         shell: bash

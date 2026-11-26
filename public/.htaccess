@@ -1,0 +1,7 @@
+DirectoryIndex index.php index.html
+RewriteEngine On
+RewriteRule ^product/([A-Za-z0-9_-]+)/?$ product.php?slug=$1 [END,QSA]
+RewriteRule ^sitemap\.xml$ sitemap.php [END]
+<FilesMatch "^(\.env.*|site-config\.php|lead-domain\.php|storefront-data\.php|storefront-views\.php)$">
+  Require all denied
+</FilesMatch>
