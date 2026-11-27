@@ -8,4 +8,6 @@ return [
  'telegram'=>'https://t.me/kushkop',
  'terms'=>['Минимальный заказ — от 5 шт.','100% предоплата.','Отгрузка со складов в Алматы и Москве.','Доставка СДЭК / карго.'],
  'minimumQuantity'=>5,
+ // Public Yandex Metrika counter ID (visible in every page anyway). YANDEX_METRIKA_ID from the environment or private settings overrides it.
+ 'metrikaId'=>'114719944',
 ];
