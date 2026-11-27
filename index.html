@@ -7,7 +7,7 @@
   <title>Lucky — оптовый каталог</title>
   <meta name="description" content="Оптовый каталог спортивных товаров Lucky." />
   <meta property="og:type" content="website" /><meta property="og:title" content="Lucky — спортивные товары оптом" /><meta property="og:description" content="Экипировка для клубов, магазинов и тренеров Казахстана и России." /><meta property="og:image" content="https://opt.luckysport.kz/media/og-wholesale.png" /><meta property="og:url" content="https://opt.luckysport.kz/" /><link rel="canonical" href="https://opt.luckysport.kz/" />
-  <link rel="stylesheet" href="/leads.css?v=1" />
+  <link rel="stylesheet" href="/leads.css?v=2" />
   <link rel="icon" type="image/svg+xml" href="./clover.svg" />
   <link rel="stylesheet" href="./styles.css?v=taxonomy-20261019" />
 </head>
@@ -374,8 +374,12 @@
   </main>
 
   <button id="mobileRequestButton" class="mobile-request-button" type="button" hidden>
-    <span>Открыть заявку</span><b id="mobileRequestCount">0</b>
+    <span>Оформить заявку</span><b id="mobileRequestCount">0</b>
   </button>
+
+  <div id="requestToast" class="request-toast" role="status" aria-live="polite" hidden>
+    <span id="requestToastText">Добавлено в заявку</span><button id="requestToastOpen" type="button">Оформить заявку</button>
+  </div>
 
   <dialog id="productDialog" class="product-dialog">
     <button id="dialogClose" class="dialog-close" aria-label="Закрыть">×</button>
@@ -383,31 +387,32 @@
   </dialog>
 
   <!-- LEAD_DIALOG_START -->
-  <dialog id="requestDialog" class="request-dialog">
+  <dialog id="requestDialog" class="request-dialog" aria-labelledby="requestDialogTitle">
     <button id="requestDialogClose" class="dialog-close" aria-label="Закрыть">×</button>
     <div class="dialog-section">
       <div class="section-kicker dark">ОПТОВАЯ ЗАЯВКА</div>
-      <h2>Ваша заявка</h2>
+      <h2 id="requestDialogTitle">Ваша заявка</h2>
+      <p class="lead-intro">Оставьте телефон — менеджер пришлёт цены и наличие в WhatsApp или Telegram, обычно в течение часа.</p>
       <div id="requestItems" class="request-items"></div>
-      <div id="requestEmpty" class="empty-state">
-        <strong>Заявка пока пустая</strong><span>Добавьте товары из каталога.</span>
-      </div>
-      <button id="copyRequestButton" class="dialog-primary wide" type="button" hidden>Скопировать список</button>
+      <div class="request-tools"><span id="requestSummary"></span><button id="copyRequestButton" class="request-copy" type="button" hidden>Скопировать список</button></div>
+      <p id="requestEmpty" class="request-empty">Можно добавить товары из каталога кнопкой «В заявку» или просто написать, что нужно.</p>
       <form id="leadForm" class="lead-form" action="/leads.php" method="post">
-        <label>Имя<input name="name" autocomplete="name" maxlength="100" /></label>
-        <label>Телефон *<input name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 747 780 61 82" maxlength="40" required /></label>
-        <label>Город<input name="city" autocomplete="address-level2" maxlength="100" /></label>
-        <label>Страна<select name="country"><option value="KZ">Казахстан</option><option value="RU">Россия</option><option value="OTHER">Другое</option></select></label>
-        <label>Кто вы<select name="role"><option value="">Выберите</option><option value="club">Клуб</option><option value="school">Спортшкола</option><option value="shop">Магазин</option><option value="coach">Тренер</option><option value="other">Другое</option></select></label>
-        <label>Примерное количество<input name="quantity" type="number" min="1" max="1000000" step="1" inputmode="numeric" placeholder="Например, 20" /></label>
-        <label class="lead-wide">Что интересует<textarea name="interest" maxlength="400" placeholder="Товар, размеры или направление"></textarea></label>
-        <label class="lead-wide">Комментарий<textarea name="comment" maxlength="700" placeholder="Пожелания к заказу и доставке"></textarea></label>
+        <label>Телефон *<input name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 900 000 00 00" maxlength="40" required /></label>
+        <label>Имя<input name="name" autocomplete="name" maxlength="100" placeholder="Как к вам обращаться" /></label>
+        <label class="lead-quantity">Сколько штук примерно<input name="quantity" type="number" min="1" max="1000000" step="1" inputmode="numeric" placeholder="Например, 20" /></label>
+        <label class="lead-wide lead-interest">Что нужно<textarea name="interest" maxlength="400" rows="2" placeholder="Товар, модель или направление"></textarea></label>
+        <label class="lead-wide">Комментарий<textarea name="comment" maxlength="700" rows="2" placeholder="Размеры, рост, город доставки — если знаете"></textarea></label>
+        <details class="lead-wide lead-more"><summary>Страна, город и кто вы <span>— необязательно</span></summary><div class="lead-more-fields">
+          <label>Страна<select name="country"><option value="RU">Россия</option><option value="KZ">Казахстан</option><option value="OTHER">Другая страна</option></select></label>
+          <label>Город<input name="city" autocomplete="address-level2" maxlength="100" /></label>
+          <label>Кто вы<select name="role"><option value="">Не указывать</option><option value="club">Клуб</option><option value="school">Спортшкола</option><option value="shop">Магазин</option><option value="coach">Тренер</option><option value="other">Другое</option></select></label>
+        </div></details>
         <label class="lead-honeypot" aria-hidden="true">Ваш сайт<input name="website" type="text" tabindex="-1" autocomplete="off" /></label>
-        <label class="lead-consent"><input name="consent" type="checkbox" required /><span>Согласен на <a href="/privacy.php" target="_blank" rel="noopener">обработку персональных данных</a> для ответа на заявку *</span></label>
-        <button type="submit" class="dialog-primary wide">Отправить заявку</button>
+        <label class="lead-consent"><input name="consent" type="checkbox" required /><span>Согласен на <a href="/privacy.php" target="_blank" rel="noopener">обработку персональных данных</a> для ответа на заявку</span></label>
+        <button type="submit" class="dialog-primary wide lead-submit">Отправить заявку</button>
       </form>
       <p id="leadStatus" class="lead-status" role="status" aria-live="polite" hidden></p>
-      <div class="lead-contacts"><a href="https://wa.me/77477806182" target="_blank" rel="noopener">Написать в WhatsApp</a><a href="https://t.me/kushkop" target="_blank" rel="noopener">Написать в Telegram</a></div>
+      <div class="lead-contacts"><span>Удобнее написать самим?</span><a href="https://wa.me/77477806182" target="_blank" rel="noopener">Написать в WhatsApp</a><a href="https://t.me/kushkop" target="_blank" rel="noopener">Написать в Telegram</a></div>
       <noscript><p>Для формы нужен JavaScript. Вы можете написать менеджеру по ссылкам выше.</p></noscript>
     </div>
   </dialog>
@@ -449,9 +454,9 @@
   <dialog id="productionVideoViewer" class="production-video-viewer" aria-labelledby="productionVideoTitle"><header><h2 id="productionVideoTitle">Видео с производства</h2><button id="productionVideoClose" type="button" aria-label="Закрыть видео">Закрыть ×</button></header><video id="productionVideo" controls playsinline preload="none"></video></dialog>
   <dialog id="reviewMediaViewer" class="review-media-viewer" aria-labelledby="reviewMediaTitle"><header><h2 id="reviewMediaTitle">Фото покупателя</h2><button id="reviewMediaClose" type="button" aria-label="Закрыть фото или видео отзыва">Закрыть ×</button></header><img id="reviewMediaImage" alt="Фото покупателя к отзыву" hidden><video id="reviewMediaVideo" controls playsinline preload="none" hidden></video></dialog>
   <!-- STOREFRONT_BOOTSTRAP -->
-  <script type="module" src="/leads.js?v=1"></script>
+  <script type="module" src="/leads.js?v=2"></script>
   <script type="module" src="/metrika.js?v=1"></script>
-  <script type="module" src="./app.js?v=leads-seo-v1"></script>
-<p style="font-size:12px;text-align:center;color:#82917e">Используем собственную статистику и, при подключении, Яндекс Метрику. <a href="/privacy.php">Обработка данных</a>. Техническое описание: <a href="./traffic-info.html">статистика сайта</a>.</p>
+  <script type="module" src="./app.js?v=lead-ux-v2"></script>
+<p class="site-privacy-note">Используем собственную статистику и Яндекс Метрику. <a href="/privacy.php">Обработка данных</a> · <a href="./traffic-info.html">Как устроена статистика</a></p>
 </body>
 </html>
