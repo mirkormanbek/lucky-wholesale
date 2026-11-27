@@ -3,17 +3,23 @@ declare(strict_types=1);
 function lead_setting(string $name): string {
  if(!in_array($name,['TELEGRAM_BOT_TOKEN','TELEGRAM_CHAT_ID','YANDEX_METRIKA_ID'],true))throw new RuntimeException('Unknown setting');
  $env=getenv($name);if(is_string($env)&&$env!=='')return $env;
- $dir=lead_private();$file=$dir.'/lead-settings.json';
- if(!is_file($file))return '';
+ $data=lead_private_json('lead-settings.json',4096);if($data===null)return '';
+ $value=$data[$name]??'';if(!is_string($value))throw new RuntimeException('Private setting type invalid');
+ return $value;
+}
+// Reads a JSON file from the private folder next to the document root. Null when the file does not exist;
+// an exception for a file in the wrong place, readable by other accounts, oversized or not a JSON object.
+function lead_private_json(string $basename,int $maxBytes): ?array {
+ $dir=lead_private();$file=$dir.'/'.$basename;
+ if(!is_file($file))return null;
  $resolved=realpath($file);$root=realpath($_SERVER['DOCUMENT_ROOT']??'');
  if(!$resolved||dirname($resolved)!==$dir||!$root||strpos(str_replace('\\','/',$resolved),rtrim(str_replace('\\','/',$root),'/').'/')===0)throw new RuntimeException('Private settings location invalid');
  // Do not accept a configuration readable by other server accounts.
  $mode=@fileperms($file);if(DIRECTORY_SEPARATOR==='/'&&($mode===false||($mode&0077)!==0))throw new RuntimeException('Private settings permissions required');
- $raw=@file_get_contents($file,false,null,0,4097);
- if(!is_string($raw)||strlen($raw)>4096)throw new RuntimeException('Private settings unreadable');
+ $raw=@file_get_contents($file,false,null,0,$maxBytes+1);
+ if(!is_string($raw)||strlen($raw)>$maxBytes)throw new RuntimeException('Private settings unreadable');
  $data=json_decode($raw,true);if(!is_array($data)||json_last_error()!==JSON_ERROR_NONE)throw new RuntimeException('Private settings invalid');
- $value=$data[$name]??'';if(!is_string($value))throw new RuntimeException('Private setting type invalid');
- return $value;
+ return $data;
 }
 function lead_text($value,int $limit): string {
  if(!is_string($value)||!preg_match('//u',$value)||preg_match_all('/./us',$value)>$limit)throw new InvalidArgumentException('Проверьте длину и формат полей заявки.');
@@ -28,7 +34,7 @@ function lead_phone(string $raw,string $country=''): string {
 }
 function lead_input(array $input): array {
  $out=[];foreach(['name'=>100,'phone'=>40,'city'=>100,'country'=>10,'role'=>30,'interest'=>400,'quantity'=>10,'comment'=>700,'page'=>300] as $key=>$limit)$out[$key]=lead_text($input[$key]??'',$limit);
- if(!in_array($out['country'],['','KZ','RU','OTHER'],true)||!in_array($out['role'],['','club','school','shop','coach','other'],true))throw new InvalidArgumentException('Проверьте страну и тип клиента.');
+ if(!in_array($out['country'],['','KZ','RU','OTHER'],true)||!in_array($out['role'],['','club','school','shop','coach','other','dealer'],true))throw new InvalidArgumentException('Проверьте страну и тип клиента.');
  if(($input['consent']??false)!==true)throw new InvalidArgumentException('Нужно согласие на обработку персональных данных.');
  $out['phone']=lead_phone($out['phone'],$out['country']);
  if($out['quantity']!==''&&(!ctype_digit($out['quantity'])||(int)$out['quantity']<1||(int)$out['quantity']>1000000))throw new InvalidArgumentException('Укажите примерное количество целым положительным числом.');
@@ -47,9 +53,9 @@ function lead_almaty_time(): DateTimeImmutable {
  return new DateTimeImmutable('now',$zone);
 }
 function lead_message(array $p): string {
- $countries=['KZ'=>'Казахстан','RU'=>'Россия','OTHER'=>'Другое'];$roles=['club'=>'Клуб','school'=>'Спортшкола','shop'=>'Магазин','coach'=>'Тренер','other'=>'Другое'];
+ $countries=['KZ'=>'Казахстан','RU'=>'Россия','OTHER'=>'Другое'];$roles=['club'=>'Клуб','school'=>'Спортшкола','shop'=>'Магазин','coach'=>'Тренер','other'=>'Другое','dealer'=>'Дилер (магазин / от 50 шт.)'];
  $line=fn($v)=>$v!==''?$v:'Не указано';
- $lines=['Новая оптовая заявка Lucky','Дата: '.lead_almaty_time()->format('d.m.Y H:i:s').' (Asia/Almaty, UTC+05:00)',
+ $lines=[...($p['role']==='dealer'?['ДИЛЕР — запрос дилерской цены']:[]),'Новая оптовая заявка Lucky','Дата: '.lead_almaty_time()->format('d.m.Y H:i:s').' (Asia/Almaty, UTC+05:00)',
  'Имя: '.$line($p['name']),'Телефон: '.$p['phone'],'Город: '.$line($p['city']),'Страна: '.($countries[$p['country']]??'Не указано'),'Клиент: '.($roles[$p['role']]??'Не указано'),
  'Интересует: '.$line($p['interest']),'Количество: '.$line($p['quantity']),'Комментарий: '.$line($p['comment']),'Согласие на обработку данных: получено','Страница: '.$p['page']];
  foreach($p['utm'] as $key=>$value)$lines[]=$key.': '.$value;

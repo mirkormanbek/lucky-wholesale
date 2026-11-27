@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 require_once __DIR__ . '/storage.php';
+require_once dirname(__DIR__) . '/club-pricing.php';
 function wb_source(): array {
     $data = json_decode((string)file_get_contents(dirname(__DIR__) . '/data/catalog.json'), true);
     if (!is_array($data) || !isset($data['products'])) throw new RuntimeException('Каталог недоступен.');
@@ -66,11 +67,9 @@ function wb_public_products(): array {
             if (!empty($s['wbDeleted'][$id])) continue;
             $own = $s['wbPrices'][$id] ?? null;
             if ($own ? $own['status'] !== 'published' : !isset($existing[$id])) continue;
-            if ($own && $own['price'] !== null) {
-                $p['priceFromKzt'] = $own['price'];$p['priceFrom'] = ['KZT' => $own['price']];
-                foreach (['RUB', 'USD'] as $currency) { $rate = $fx['kztPerUnit'][$currency] ?? 0;if (is_numeric($rate) && $rate > 0) $p['priceFrom'][$currency] = round($own['price'] / $rate, 2); }
-            }
-            $result[] = $p;
+            // Public club price from the cabinet's base price; the base itself never leaves the server.
+            $base = $own && is_numeric($own['price'] ?? null) ? (float)$own['price'] : (is_numeric($p['priceFromKzt'] ?? null) ? (float)$p['priceFromKzt'] : null);
+            $result[] = club_apply_refined($p, $base, $fx['kztPerUnit'] ?? []);
         }
         return $result;
     });

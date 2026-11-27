@@ -2,7 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 const root=process.cwd(),php=process.env.PHP_BIN||'php';
-const server=['index.php','product.php','storefront-data.php','storefront-views.php','site-config.php','site-settings.php','lead-domain.php','leads.php','privacy.php','sitemap.php'];
+const server=['index.php','product.php','storefront-data.php','storefront-categories.php','club-pricing.php','warehouse-catalog.php','warehouse/wb-pricing.php','storefront-views.php','site-config.php','site-settings.php','lead-domain.php','leads.php','privacy.php','sitemap.php'];
 for(const file of server)execFileSync(php,['-l',path.join(root,'public',file)],{stdio:'pipe'});
 for(const file of ['app.js','leads.js','lead-phone.js','metrika.js'])execFileSync(process.execPath,['--input-type=module','--check'],{input:await fs.readFile(path.join(root,'public',file),'utf8'),stdio:['pipe','pipe','pipe']});
 const html=await fs.readFile(path.join(root,'public/index.html'),'utf8');

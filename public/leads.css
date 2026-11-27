@@ -108,6 +108,19 @@
 .site-privacy-note a{color:#b4bbc1;text-underline-offset:3px}
 .site-privacy-note a:hover{color:#b7de2c}
 
+/* Volume tiers and the dealer request */
+.price-tiers{margin:4px 0 0;font-size:11px;line-height:1.45;color:#a9b0b6}
+.price-tiers[hidden]{display:none}
+.dialog-info .price-tiers,.product-page-tiers{margin:6px 0 0;font-size:14px;color:#c3c9cd}
+.dealer-button{display:block;width:100%;margin-top:8px;padding:8px 2px;border:0;border-top:1px dashed #30363a;background:none;color:#b7de2c;font:inherit;font-size:11px;font-weight:700;line-height:1.35;text-align:left;cursor:pointer}
+.dealer-button:hover{color:#d4f36a}
+.dealer-button[hidden]{display:none}
+.dialog-info .dealer-button{margin-top:12px;font-size:13px;text-align:center;border:1px solid #3a4046;border-radius:999px;padding:12px 16px}
+.product-page-dealer{margin-top:14px;padding:14px 16px;border:1px solid #3a4046;border-radius:14px;font-size:13px;text-align:center}
+.product-page-dealer:hover{border-color:#b7de2c}
+.lead-dealer-note{margin:12px 0 0;padding:12px 14px;border:1px solid #4f6a18;border-radius:12px;background:#1a2410;color:#e6f5c4;font-size:13px;line-height:1.5}
+.lead-dealer-note[hidden],.lead-done .lead-dealer-note{display:none}
+
 @media(max-width:900px){.wholesale-terms{grid-template-columns:1fr;margin:24px 16px 0;padding:20px}.wholesale-terms ul{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:600px){
  .lead-form,.lead-more-fields{grid-template-columns:minmax(0,1fr)}
@@ -130,4 +143,6 @@
  .ssr-product-card .product-title{font-size:15px}
  .product-card .product-bottom{flex-direction:column;align-items:stretch}
  .product-card .add-button{width:100%;justify-content:center}
+ .price-tiers{font-size:10.5px}
+ .dealer-button{font-size:10.5px}
 }

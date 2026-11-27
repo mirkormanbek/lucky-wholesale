@@ -22,7 +22,7 @@
 
 - **Push в `main` = выкладка на рабочий сайт**, если затронуты `public/`, `config/`, `catalog/`, `scripts/` или workflow (изменения только в `docs/` и `CLAUDE.md` не выкладывают). Не сливай PR «чтобы посмотреть». Workflow `.github/workflows/sync-wb.yml` деплоит на Plesk (хостинг PS.kz, сервер `srv-plesk24.ps.kz`) через lftp. Сливать в `main` только проверенное.
 - **Репозиторий публичный.** Никаких секретов, закупочных цен, себестоимости, маржи, условий с партнёром, персональных данных клиентов — ни в коде, ни в docs, ни в коммитах.
-- Секреты: только GitHub Secrets (`FTP_*`, WB API) и на хостинге — переменные окружения или закрытый файл `../lucky-wholesale-private/lead-settings.json` (права 600, вне document root). Пример без секретов — `config/lead-settings.example.json`.
+- Секреты: только GitHub Secrets (`FTP_*`, WB API) и на хостинге — переменные окружения или закрытые файлы в `../lucky-wholesale-private/` (права 600, вне document root): `lead-settings.json` (заявки) и `pricing-settings.json` (наценки для клубов, скидки за объём, надбавка РФ — `docs/PRICING.md`). Примеры без реальных значений — `config/*.example.json`. Базовые цены, наценки и надбавки не должны попадать в HTML, JSON или API сайта.
 - `public/warehouse/` — закрытый кабинет поставщика (вход через защищённую папку Plesk, `REMOTE_USER`). Не ослабляй эту проверку.
 - `data/*.json`, `data/skus.csv` — выгрузка WB, вручную не редактировать. Бизнес-логика — в `config/` и `catalog/`.
 - Не запускай без явного согласия владельца: платную генерацию фото (фотостудия), WB sync, массовые изменения товаров, публикацию фото. Согласие на прошлые прогоны не переносится на новые.
@@ -34,7 +34,7 @@
 
 - Сборка витрины: `node scripts/build-storefront.mjs` (нужен PHP в PATH или `PHP_BIN`).
 - Локальный запуск: `php -S 127.0.0.1:4235 -t public scripts/dev-router.php`.
-- Тесты: `php tests/leads-domain.test.php`, `php tests/lead-settings.test.php`, `node tests/leads-integration.cjs`.
+- Тесты: `php tests/leads-domain.test.php`, `php tests/lead-settings.test.php`, `php tests/club-pricing.test.php`, `node tests/category-refine.test.cjs`, `node tests/club-pricing-integration.cjs`, `node tests/leads-integration.cjs` (браузер: `RUN_BROWSER_TESTS=1`).
 - Условия опта (минимальный заказ, оплата, склады) — `public/site-config.php`.
 
 ## Открытые задачи (на 26.11.2026)

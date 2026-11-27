@@ -7,12 +7,26 @@ if(form){
  function setField(name,value){const field=form.elements[name];value=String(value??'');if(field&&field.value!==value){field.value=value;renew();}}
  function interest(value){setField('interest',value.slice(0,400));}
  // After a confirmed lead the form is hidden behind the success message; opening it again starts a fresh request.
- function fresh(){if(running||!form.dataset.sent)return;form.hidden=false;status.hidden=true;dialog?.classList.remove('lead-done');for(const name of ['interest','comment','quantity'])form.elements[name].value='';renew();}
+ function fresh(){if(running||!form.dataset.sent)return;form.hidden=false;status.hidden=true;dialog?.classList.remove('lead-done');for(const name of ['interest','comment','quantity'])form.elements[name].value='';if(form.elements.role.value==='dealer')form.elements.role.value='';renew();}
+ // Dealer requests: the "dealer price" button marks the lead, and so does a total from the dealer quantity up.
+ // The mark is the "dealer" client type, which the Telegram message puts on its first line. A type the customer
+ // picks by hand wins over the automatic mark.
+ const dealerQty=Number(form.dataset.dealerQuantity)||50,dealerNote=document.querySelector('#leadDealerNote'),title=document.querySelector('#requestDialogTitle');
+ let dealerManual=false,dealerAuto=false,roleByHand=false;
+ function dealer(){
+  const role=form.elements.role,on=(dealerManual||dealerAuto)&&!(roleByHand&&role.value!=='dealer');dialog?.classList.toggle('is-dealer',on);
+  if(title)title.textContent=on?'Дилерская цена':'Ваша заявка';
+  if(dealerNote){dealerNote.hidden=!on;dealerNote.textContent=dealerManual?`Дилерская цена — для магазинов и заказов от ${dealerQty} шт. Менеджер пришлёт условия.`:`От ${dealerQty} шт. — дилерская цена, отметим в заявке.`;}
+  if(roleByHand)return;if(on&&role.value!=='dealer'){role.value='dealer';renew();}else if(!on&&role.value==='dealer'){role.value='';renew();}
+ }
+ function autoDealer(quantity){dealerAuto=Number(quantity)>=dealerQty;dealer();}
  // Items picked in the catalog (app.js) fill "what" and "how many"; without items the customer types them.
- function items(detail){const count=Number(detail?.count)||0;form.classList.toggle('has-items',count>0);if(count>0){interest(String(detail.interest||''));setField('quantity',detail.quantity||'');}}
- function open(title){fresh();if(title){form.classList.remove('has-items');interest(title);}if(dialog&&!dialog.open)dialog.showModal();if(matchMedia('(pointer:fine)').matches)form.elements.phone.focus();}
- document.addEventListener('click',e=>{const button=e.target.closest('[data-request-product]');if(button){e.preventDefault();open(button.dataset.requestTitle||'');}});
- window.addEventListener('lucky:request-open',e=>{fresh();if(e.detail&&'count' in e.detail)items(e.detail);else if(e.detail?.interest)interest(e.detail.interest);});
+ function items(detail){const count=Number(detail?.count)||0;form.classList.toggle('has-items',count>0);if(count>0){interest(String(detail.interest||''));setField('quantity',detail.quantity||'');}autoDealer(form.elements.quantity.value);}
+ function open(title,isDealer=false){fresh();dealerManual=isDealer;roleByHand=false;if(title){form.classList.remove('has-items');interest(title);}autoDealer(form.elements.quantity.value);if(dialog&&!dialog.open)dialog.showModal();if(matchMedia('(pointer:fine)').matches)form.elements.phone.focus();}
+ document.addEventListener('click',e=>{const button=e.target.closest('[data-request-product]');if(button){e.preventDefault();open(button.dataset.requestTitle||'',button.hasAttribute('data-request-dealer'));}});
+ window.addEventListener('lucky:request-open',e=>{fresh();dealerManual=!!e.detail?.dealer;roleByHand=false;if(e.detail&&'count' in e.detail)items(e.detail);else{if(e.detail?.interest)interest(e.detail.interest);autoDealer(form.elements.quantity.value);}});
+ form.elements.quantity.addEventListener('input',()=>{if(!form.classList.contains('has-items'))autoDealer(form.elements.quantity.value);});
+ form.elements.role.addEventListener('change',()=>{roleByHand=true;dealerManual=form.elements.role.value==='dealer';dealerAuto=false;roleByHand=false;dealer();roleByHand=true;});
  window.addEventListener('lucky:request-items',e=>{if(!form.dataset.sent)items(e.detail);});
  document.querySelector('#requestDialogClose')?.addEventListener('click',()=>dialog.close());
  dialog?.addEventListener('click',e=>{if(e.target===dialog)dialog.close();});
