@@ -101,15 +101,17 @@ jobs:
         shell: bash
         env:
           FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          # Plesk's FTP certificate is issued for *.ps.kz, so TLS is verified against the server's own name.
+          FTP_TLS_HOST: ${{ vars.FTP_TLS_HOST || 'srv-plesk24.ps.kz' }}
           FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
         run: |
-          lftp -u "$FTP_USERNAME","$FTP_PASSWORD" "ftp://$FTP_SERVER" <<'LFTP'
+          lftp -u "$FTP_USERNAME","$FTP_PASSWORD" "ftp://$FTP_TLS_HOST" <<'LFTP'
           set cmd:fail-exit true
           set ftp:passive-mode true
-          set ftp:ssl-force false
-          set ftp:ssl-protect-data false
-          set ssl:verify-certificate false
+          set ftp:ssl-force true
+          set ftp:ssl-protect-data true
+          set ssl:verify-certificate true
           set net:max-retries 2
           set net:reconnect-interval-base 5
           set net:timeout 20
@@ -136,15 +138,17 @@ jobs:
         shell: bash
         env:
           FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          # Plesk's FTP certificate is issued for *.ps.kz, so TLS is verified against the server's own name.
+          FTP_TLS_HOST: ${{ vars.FTP_TLS_HOST || 'srv-plesk24.ps.kz' }}
           FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
         run: |
-          lftp -u "$FTP_USERNAME","$FTP_PASSWORD" "ftp://$FTP_SERVER" <<'LFTP'
+          lftp -u "$FTP_USERNAME","$FTP_PASSWORD" "ftp://$FTP_TLS_HOST" <<'LFTP'
           set cmd:fail-exit true
           set ftp:passive-mode true
-          set ftp:ssl-force false
-          set ftp:ssl-protect-data false
-          set ssl:verify-certificate false
+          set ftp:ssl-force true
+          set ftp:ssl-protect-data true
+          set ssl:verify-certificate true
           set net:max-retries 2
           set net:timeout 20
           mkdir -p opt.luckysport.kz/media
@@ -215,14 +219,16 @@ jobs:
         shell: bash
         env:
           FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          # Plesk's FTP certificate is issued for *.ps.kz, so TLS is verified against the server's own name.
+          FTP_TLS_HOST: ${{ vars.FTP_TLS_HOST || 'srv-plesk24.ps.kz' }}
           FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
         run: |
-          lftp -u "$FTP_USERNAME","$FTP_PASSWORD" "ftp://$FTP_SERVER" <<'LFTP'
+          lftp -u "$FTP_USERNAME","$FTP_PASSWORD" "ftp://$FTP_TLS_HOST" <<'LFTP'
           set ftp:passive-mode true
-          set ftp:ssl-force false
-          set ftp:ssl-protect-data false
-          set ssl:verify-certificate false
+          set ftp:ssl-force true
+          set ftp:ssl-protect-data true
+          set ssl:verify-certificate true
           set net:max-retries 5
           set net:reconnect-interval-base 5
           set net:timeout 30
