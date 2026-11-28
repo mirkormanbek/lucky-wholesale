@@ -11,7 +11,7 @@ if($cards==='')$cards='<p>Каталог временно недоступен. 
 $html=str_replace('<div id="productGrid" class="product-grid"></div>','<div id="productGrid" class="product-grid">'.$cards.'</div>',$html);
 $html=str_replace('>Загрузка…</div>','>'.count($all).' товаров в каталоге</div>',$html);
 $pagination='<nav class="ssr-pagination" aria-label="Страницы каталога">';for($i=1;$i<=$pages;$i++)$pagination.='<a href="/?page='.$i.'&amp;currency='.$currency.'#catalog"'.($i===$page?' aria-current="page"':'').'>'.$i.'</a>';$pagination.='</nav>';
-$html=str_replace('<!-- SSR_PAGINATION -->',$pagination,$html);$html=str_replace('<!-- WHOLESALE_TERMS -->',sf_terms(),$html);
+$html=str_replace('<!-- SSR_PAGINATION -->',$pagination,$html);$html=str_replace('<!-- WHOLESALE_TERMS -->','',$html);
 $html=str_replace('<div id="wholesaleTermsMount"></div>','',$html);
 $bootstrap=sf_json(array_merge($data,['currency'=>$currency,'page'=>$page,'pricing'=>['minimumQuantity'=>(int)$config['minimumQuantity'],'dealerQuantity'=>(int)$config['dealerQuantity']]]));$html=sf_dealer_quantity($html);$html=str_replace('<!-- STOREFRONT_BOOTSTRAP -->','<script id="storefrontBootstrap" type="application/json">'.$bootstrap.'</script>',$html);
 echo $html;
