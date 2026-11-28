@@ -48,6 +48,9 @@ jobs:
           node scripts/build-storefront.mjs
           php tests/leads-domain.test.php
           php tests/lead-settings.test.php
+          php tests/club-pricing.test.php
+          node tests/category-refine.test.cjs
+          node tests/club-pricing-integration.cjs
           node tests/leads-integration.cjs
           LEAD_TEST_CONFIG_FILE=1 node tests/leads-integration.cjs
 
@@ -152,14 +155,23 @@ jobs:
           set net:max-retries 2
           set net:timeout 20
           mkdir -p opt.luckysport.kz/media
+          # Pricing dependencies before the pages that require them, so the site never runs new pages on old helpers.
+          put public/lead-domain.php -o opt.luckysport.kz/lead-domain.php
+          get opt.luckysport.kz/lead-domain.php -o /tmp/lucky-leads-lead-domain-php
+          put public/storefront-categories.php -o opt.luckysport.kz/storefront-categories.php
+          get opt.luckysport.kz/storefront-categories.php -o /tmp/lucky-leads-storefront-categories-php
+          put public/club-pricing.php -o opt.luckysport.kz/club-pricing.php
+          get opt.luckysport.kz/club-pricing.php -o /tmp/lucky-leads-club-pricing-php
+          put public/warehouse/wb-pricing.php -o opt.luckysport.kz/warehouse/wb-pricing.php
+          get opt.luckysport.kz/warehouse/wb-pricing.php -o /tmp/lucky-leads-warehouse-wb-pricing-php
+          put public/warehouse-catalog.php -o opt.luckysport.kz/warehouse-catalog.php
+          get opt.luckysport.kz/warehouse-catalog.php -o /tmp/lucky-leads-warehouse-catalog-php
           put public/site-config.php -o opt.luckysport.kz/site-config.php
           get opt.luckysport.kz/site-config.php -o /tmp/lucky-leads-site-config-php
           put public/storefront-data.php -o opt.luckysport.kz/storefront-data.php
           get opt.luckysport.kz/storefront-data.php -o /tmp/lucky-leads-storefront-data-php
           put public/storefront-views.php -o opt.luckysport.kz/storefront-views.php
           get opt.luckysport.kz/storefront-views.php -o /tmp/lucky-leads-storefront-views-php
-          put public/lead-domain.php -o opt.luckysport.kz/lead-domain.php
-          get opt.luckysport.kz/lead-domain.php -o /tmp/lucky-leads-lead-domain-php
           put public/leads.php -o opt.luckysport.kz/leads.php
           get opt.luckysport.kz/leads.php -o /tmp/lucky-leads-leads-php
           put public/site-settings.php -o opt.luckysport.kz/site-settings.php
@@ -194,10 +206,14 @@ jobs:
           get opt.luckysport.kz/.htaccess -o /tmp/lucky-leads--htaccess
           bye
           LFTP
+          cmp public/lead-domain.php /tmp/lucky-leads-lead-domain-php
+          cmp public/storefront-categories.php /tmp/lucky-leads-storefront-categories-php
+          cmp public/club-pricing.php /tmp/lucky-leads-club-pricing-php
+          cmp public/warehouse/wb-pricing.php /tmp/lucky-leads-warehouse-wb-pricing-php
+          cmp public/warehouse-catalog.php /tmp/lucky-leads-warehouse-catalog-php
           cmp public/site-config.php /tmp/lucky-leads-site-config-php
           cmp public/storefront-data.php /tmp/lucky-leads-storefront-data-php
           cmp public/storefront-views.php /tmp/lucky-leads-storefront-views-php
-          cmp public/lead-domain.php /tmp/lucky-leads-lead-domain-php
           cmp public/leads.php /tmp/lucky-leads-leads-php
           cmp public/site-settings.php /tmp/lucky-leads-site-settings-php
           cmp public/privacy.php /tmp/lucky-leads-privacy-php

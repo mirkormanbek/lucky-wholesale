@@ -1,0 +1,13 @@
+{
+  "_note": "Пример без реальных цифр. Настоящий файл: ../lucky-wholesale-private/pricing-settings.json (рядом с lead-settings.json, права 600, не в Git). Подробно — docs/PRICING.md.",
+  "categoryMarkupPercent": {
+    "default": null,
+    "judo-gi": null,
+    "judo-belts": null
+  },
+  "russiaSurchargePercent": 0,
+  "volumeDiscountPercent": {
+    "10": null,
+    "30": null
+  }
+}
